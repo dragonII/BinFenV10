@@ -7,6 +7,9 @@
 //
 
 #import "AppDelegate.h"
+#import "defs.h"
+
+#import "BFPreferenceData.h"
 
 @interface AppDelegate ()
 
@@ -14,9 +17,44 @@
 
 @implementation AppDelegate
 
+- (BOOL)detectFirstLaunch
+{
+    NSString *firstLaunchKey = [BFPreferenceData getFirstLaunchKey];
+    BOOL isFirstLaunch = [[NSUserDefaults standardUserDefaults] boolForKey:firstLaunchKey];
+    if(isFirstLaunch)
+    {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:firstLaunchKey];
+        return YES;
+    }
+    return isFirstLaunch;
+}
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+- (void)clearFirstLaunch
+{
+    NSString *firstLaunchKey = [BFPreferenceData getFirstLaunchKey];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:firstLaunchKey];
+}
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    UIViewController *rootViewController;
+    
+    //[self clearFirstLaunch];
+    
+    if([self detectFirstLaunch])
+    {
+        rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"WizardViewController"];
+    } else {
+        rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"MainTabsViewController"];
+    }
+    
+    self.window.rootViewController = rootViewController;
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 
