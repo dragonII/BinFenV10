@@ -6,13 +6,13 @@
 //  Copyright (c) 2015 Wang Long. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "WizardViewController.h"
 
-@interface ViewController ()
+@interface WizardViewController ()
 
 @end
 
-@implementation ViewController
+@implementation WizardViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

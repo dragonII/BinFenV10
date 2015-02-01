@@ -8,9 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		2F5954B31A7E6857001D5DAD /* BFPreferenceData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F5954B21A7E6857001D5DAD /* BFPreferenceData.m */; };
+		2F5954B61A7E7084001D5DAD /* TabHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F5954B51A7E7084001D5DAD /* TabHomeViewController.m */; };
+		2F5954BB1A7E78BB001D5DAD /* TopCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F5954B91A7E78BB001D5DAD /* TopCollectionViewCell.m */; };
+		2F5954BC1A7E78BB001D5DAD /* TopCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F5954BA1A7E78BB001D5DAD /* TopCollectionViewCell.xib */; };
 		2FEEE85C1A7E5B8E0095D8DB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FEEE85B1A7E5B8E0095D8DB /* main.m */; };
 		2FEEE85F1A7E5B8E0095D8DB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FEEE85E1A7E5B8E0095D8DB /* AppDelegate.m */; };
-		2FEEE8621A7E5B8E0095D8DB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FEEE8611A7E5B8E0095D8DB /* ViewController.m */; };
+		2FEEE8621A7E5B8E0095D8DB /* WizardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FEEE8611A7E5B8E0095D8DB /* WizardViewController.m */; };
 		2FEEE8651A7E5B8F0095D8DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FEEE8631A7E5B8F0095D8DB /* Main.storyboard */; };
 		2FEEE8671A7E5B8F0095D8DB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FEEE8661A7E5B8F0095D8DB /* Images.xcassets */; };
 		2FEEE86A1A7E5B8F0095D8DB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FEEE8681A7E5B8F0095D8DB /* LaunchScreen.xib */; };
@@ -31,13 +34,18 @@
 		2F5954B01A7E6399001D5DAD /* defs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = defs.h; sourceTree = "<group>"; };
 		2F5954B11A7E684D001D5DAD /* BFPreferenceData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BFPreferenceData.h; sourceTree = "<group>"; };
 		2F5954B21A7E6857001D5DAD /* BFPreferenceData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFPreferenceData.m; sourceTree = "<group>"; };
+		2F5954B41A7E7084001D5DAD /* TabHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabHomeViewController.h; sourceTree = "<group>"; };
+		2F5954B51A7E7084001D5DAD /* TabHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabHomeViewController.m; sourceTree = "<group>"; };
+		2F5954B81A7E78BB001D5DAD /* TopCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopCollectionViewCell.h; sourceTree = "<group>"; };
+		2F5954B91A7E78BB001D5DAD /* TopCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopCollectionViewCell.m; sourceTree = "<group>"; };
+		2F5954BA1A7E78BB001D5DAD /* TopCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TopCollectionViewCell.xib; sourceTree = "<group>"; };
 		2FEEE8561A7E5B8E0095D8DB /* BinFenV10.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BinFenV10.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FEEE85A1A7E5B8E0095D8DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2FEEE85B1A7E5B8E0095D8DB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2FEEE85D1A7E5B8E0095D8DB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2FEEE85E1A7E5B8E0095D8DB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		2FEEE8601A7E5B8E0095D8DB /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		2FEEE8611A7E5B8E0095D8DB /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		2FEEE8601A7E5B8E0095D8DB /* WizardViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WizardViewController.h; sourceTree = "<group>"; };
+		2FEEE8611A7E5B8E0095D8DB /* WizardViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WizardViewController.m; sourceTree = "<group>"; };
 		2FEEE8641A7E5B8F0095D8DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2FEEE8661A7E5B8F0095D8DB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		2FEEE8691A7E5B8F0095D8DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -74,9 +82,20 @@
 			name = BFCommon;
 			sourceTree = "<group>";
 		};
+		2F5954B71A7E7826001D5DAD /* CollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				2F5954B81A7E78BB001D5DAD /* TopCollectionViewCell.h */,
+				2F5954B91A7E78BB001D5DAD /* TopCollectionViewCell.m */,
+				2F5954BA1A7E78BB001D5DAD /* TopCollectionViewCell.xib */,
+			);
+			name = CollectionViewCell;
+			sourceTree = "<group>";
+		};
 		2FEEE84D1A7E5B8E0095D8DB = {
 			isa = PBXGroup;
 			children = (
+				2F5954B71A7E7826001D5DAD /* CollectionViewCell */,
 				2F5954AE1A7E6374001D5DAD /* BFCommon */,
 				2FEEE8581A7E5B8E0095D8DB /* BinFenV10 */,
 				2FEEE8721A7E5B8F0095D8DB /* BinFenV10Tests */,
@@ -98,8 +117,10 @@
 			children = (
 				2FEEE85D1A7E5B8E0095D8DB /* AppDelegate.h */,
 				2FEEE85E1A7E5B8E0095D8DB /* AppDelegate.m */,
-				2FEEE8601A7E5B8E0095D8DB /* ViewController.h */,
-				2FEEE8611A7E5B8E0095D8DB /* ViewController.m */,
+				2FEEE8601A7E5B8E0095D8DB /* WizardViewController.h */,
+				2FEEE8611A7E5B8E0095D8DB /* WizardViewController.m */,
+				2F5954B41A7E7084001D5DAD /* TabHomeViewController.h */,
+				2F5954B51A7E7084001D5DAD /* TabHomeViewController.m */,
 				2FEEE8631A7E5B8F0095D8DB /* Main.storyboard */,
 				2FEEE8661A7E5B8F0095D8DB /* Images.xcassets */,
 				2FEEE8681A7E5B8F0095D8DB /* LaunchScreen.xib */,
@@ -215,6 +236,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F5954BC1A7E78BB001D5DAD /* TopCollectionViewCell.xib in Resources */,
 				2FEEE8651A7E5B8F0095D8DB /* Main.storyboard in Resources */,
 				2FEEE86A1A7E5B8F0095D8DB /* LaunchScreen.xib in Resources */,
 				2FEEE8671A7E5B8F0095D8DB /* Images.xcassets in Resources */,
@@ -235,8 +257,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2FEEE8621A7E5B8E0095D8DB /* ViewController.m in Sources */,
+				2F5954BB1A7E78BB001D5DAD /* TopCollectionViewCell.m in Sources */,
+				2FEEE8621A7E5B8E0095D8DB /* WizardViewController.m in Sources */,
 				2FEEE85F1A7E5B8E0095D8DB /* AppDelegate.m in Sources */,
+				2F5954B61A7E7084001D5DAD /* TabHomeViewController.m in Sources */,
 				2F5954B31A7E6857001D5DAD /* BFPreferenceData.m in Sources */,
 				2FEEE85C1A7E5B8E0095D8DB /* main.m in Sources */,
 			);
