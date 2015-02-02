@@ -89,9 +89,19 @@
     }
 }
 
-- (void)animationForTableView{
-    CGFloat offset = self.tableView.contentOffset.y;
+- (void)animationForTableView
+{
+    CGFloat offset = self.tableView.contentOffset.y;    
+    //NSLog(@"Y offset: %f", offset);
     
+    if(offset <= 0)
+    {
+        self.headerImageView.frame = CGRectMake(offset,0, self.frame.size.width+ (-offset) * 2, self.OTCoverHeight + (-offset));
+    } else {
+        self.headerImageView.frame = CGRectMake(0, -offset, self.headerImageView.frame.size.width, self.headerImageView.frame.size.height);
+    }
+    
+    /*
     if (self.tableView.contentOffset.y > 0) {
         
         NSInteger index = offset / 10;
@@ -112,6 +122,8 @@
     else {
         self.headerImageView.frame = CGRectMake(offset,0, self.frame.size.width+ (-offset) * 2, self.OTCoverHeight + (-offset));
     }
+     */
+    
 }
 
 - (void)animationForScrollView{

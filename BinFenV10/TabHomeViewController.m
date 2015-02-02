@@ -79,15 +79,15 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    return 20;
 }
 
 - (void)configureCollectionViewInTopTableCell:(TopTableViewCell *)cell
 {
-    //cell.
+    cell.contentView.backgroundColor = [UIColor lightGrayColor];
     cell.collectionView.delegate = self;
     cell.collectionView.dataSource = self;
-    cell.collectionView.backgroundColor = [UIColor whiteColor];
+    cell.collectionView.backgroundColor = [UIColor clearColor];
     
     [cell.collectionView registerClass:[TopCollectionViewCell class] forCellWithReuseIdentifier:TopCollectionCellIdentifier];
     UINib *nib = [UINib nibWithNibName:@"TopCollectionViewCell" bundle:nil];
@@ -115,8 +115,11 @@
         }
             
         default:
-            return nil;
-            break;
+        {
+            UITableViewCell *cell = [[UITableViewCell alloc] init];
+            return cell;
+        }
+            //return [tableView dequeueReusableCellWithIdentifier:@"Cell"];
     }
 }
 
