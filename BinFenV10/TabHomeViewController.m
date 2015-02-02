@@ -88,6 +88,7 @@
     cell.collectionView.delegate = self;
     cell.collectionView.dataSource = self;
     cell.collectionView.backgroundColor = [UIColor clearColor];
+    cell.collectionView.showsHorizontalScrollIndicator = NO;
     
     [cell.collectionView registerClass:[TopCollectionViewCell class] forCellWithReuseIdentifier:TopCollectionCellIdentifier];
     UINib *nib = [UINib nibWithNibName:@"TopCollectionViewCell" bundle:nil];
