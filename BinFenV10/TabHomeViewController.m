@@ -2,53 +2,52 @@
 //  TabHomeViewController.m
 //  BinFenV10
 //
-//  Created by Wang Long on 2/1/15.
+//  Created by Wang Long on 2/2/15.
 //  Copyright (c) 2015 Wang Long. All rights reserved.
 //
 
 #import "TabHomeViewController.h"
+#import "OTCover.h"
 #import "TopCollectionViewCell.h"
+#import "TopTableViewCell.h"
 
-static NSString *CollecionCellIdentifer = @"TopCollectionCellIdentifier";
-static NSString *MidCollectionCellIdentifier = @"MiddleCellIdentifier";
+#import "defs.h"
 
-static NSInteger TopCollectionTag = 1001;
-static NSInteger MiddileCollectionTag = 1002;
+@interface TabHomeViewController () <UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
-
-@interface TabHomeViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
-
-@property (weak, nonatomic) IBOutlet UICollectionView *topCollectionView;
-@property (weak, nonatomic) IBOutlet UICollectionView *middleCollectionView;
+@property (strong, nonatomic) OTCover *otCoverView;
 
 @property (strong, nonatomic) NSMutableArray *testDataArray;
 
 @end
 
+
+
 @implementation TabHomeViewController
+
+- (void)initTopTableRow
+{
+    [self.otCoverView.tableView registerClass:[TopTableViewCell class] forCellReuseIdentifier:TopTableRowCellIdentifier];
+    UINib *nib = [UINib nibWithNibName:@"TopTableViewCell" bundle:nil];
+    [self.otCoverView.tableView registerNib:nib forCellReuseIdentifier:TopTableRowCellIdentifier];
+}
+
+- (void)initViews
+{
+    self.otCoverView = [[OTCover alloc] initWithTableViewWithHeaderImage:[UIImage imageNamed:@"HeaderPlaceHolder"] withOTCoverHeight:170];
+    
+    self.otCoverView.tableView.delegate = self;
+    self.otCoverView.tableView.dataSource = self;
+    
+    [self initTopTableRow];
+    
+    [self.view addSubview:self.otCoverView];
+}
+
 
 - (void)hideNavigationItem
 {
     self.navigationController.navigationBarHidden = YES;
-}
-
-- (void)configureCollectionView
-{
-    [self.topCollectionView registerClass:[TopCollectionViewCell class] forCellWithReuseIdentifier:CollecionCellIdentifer];
-    self.topCollectionView.dataSource = self;
-    self.topCollectionView.delegate = self;
-    UINib *nib = [UINib nibWithNibName:@"TopCollectionViewCell" bundle:nil];
-    [self.topCollectionView registerNib:nib forCellWithReuseIdentifier:CollecionCellIdentifer];
-    //self.topCollectionView.backgroundColor = [UIColor clearColor];
-    
-    self.middleCollectionView.dataSource = self;
-    self.middleCollectionView.delegate = self;
-    UICollectionViewFlowLayout *middleFlowLayout = (UICollectionViewFlowLayout *)self.middleCollectionView.collectionViewLayout;
-    middleFlowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    
-    UICollectionViewFlowLayout* flowLayout = (UICollectionViewFlowLayout*)self.topCollectionView.collectionViewLayout;
-    flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    flowLayout.itemSize = CGSizeMake(120, 160);
 }
 
 - (void)initTestData
@@ -64,7 +63,8 @@ static NSInteger MiddileCollectionTag = 1002;
     [self hideNavigationItem];
     
     [self initTestData];
-    [self configureCollectionView];
+    
+    [self initViews];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -72,11 +72,72 @@ static NSInteger MiddileCollectionTag = 1002;
     // Dispose of any resources that can be recreated.
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 1;
+}
+
+- (void)configureCollectionViewInTopTableCell:(TopTableViewCell *)cell
+{
+    //cell.
+    cell.collectionView.delegate = self;
+    cell.collectionView.dataSource = self;
+    cell.collectionView.backgroundColor = [UIColor whiteColor];
+    
+    [cell.collectionView registerClass:[TopCollectionViewCell class] forCellWithReuseIdentifier:TopCollectionCellIdentifier];
+    UINib *nib = [UINib nibWithNibName:@"TopCollectionViewCell" bundle:nil];
+    [cell.collectionView registerNib:nib forCellWithReuseIdentifier:TopCollectionCellIdentifier];
+    
+    UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)cell.collectionView.collectionViewLayout;
+    layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    layout.itemSize = CGSizeMake(120, 160);
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSInteger rowNumber = indexPath.row;
+    switch (rowNumber)
+    {
+        case TopTableRowIndex:
+        {
+            TopTableViewCell *cell = (TopTableViewCell *)[tableView dequeueReusableCellWithIdentifier:TopTableRowCellIdentifier];
+            
+            [self configureCollectionViewInTopTableCell:cell];
+            
+            return cell;
+            
+            break;
+        }
+            
+        default:
+            return nil;
+            break;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSInteger rowNumber = indexPath.row;
+    switch (rowNumber)
+    {
+        case TopTableRowIndex:
+            return 184.0f;
+            break;
+            
+        default:
+            return 60.0f;
+            break;
+    }
+}
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    if(collectionView.tag == TopCollectionTag)
-        return [self.testDataArray count];
-    return 30;
+    return [self.testDataArray count];
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -86,27 +147,15 @@ static NSInteger MiddileCollectionTag = 1002;
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(collectionView.tag == TopCollectionTag)
-    {
-        TopCollectionViewCell *cell = (TopCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:CollecionCellIdentifer forIndexPath:indexPath];
+    TopCollectionViewCell *cell = (TopCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:TopCollectionCellIdentifier forIndexPath:indexPath];
     
-        cell.text = [self.testDataArray objectAtIndex:indexPath.row];
-        return cell;
-    }
-    {
-        UICollectionViewCell *cell = (UICollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:MidCollectionCellIdentifier forIndexPath:indexPath];
-        cell.backgroundColor = [UIColor yellowColor];
-        return cell;
-    }
+    cell.text = [self.testDataArray objectAtIndex:indexPath.row];
+    return cell;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(collectionView.tag == TopCollectionTag)
-    {
-        return CGSizeMake(120, 160);
-    }
-    return CGSizeMake(104, 132);
+    return CGSizeMake(120, 160);
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
@@ -120,17 +169,6 @@ static NSInteger MiddileCollectionTag = 1002;
     //水平cell间距
     return 8.0;
 }
-
-/*
- // Seems useless too
-// Layout: Set Edges
-- (UIEdgeInsets)collectionView:
-(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
-{
-    // return UIEdgeInsetsMake(0,8,0,8);  // top, left, bottom, right
-    return UIEdgeInsetsMake(0,0,0,0);  // top, left, bottom, right
-}
- */
 
 
 @end

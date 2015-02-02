@@ -1,5 +1,5 @@
 //
-//  TabHomeViewController.h
+//  TopTableViewCell.h
 //  BinFenV10
 //
 //  Created by Wang Long on 2/2/15.
@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TabHomeViewController : UIViewController
+@interface TopTableViewCell : UITableViewCell
+
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @end

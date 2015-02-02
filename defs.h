@@ -9,5 +9,10 @@
 #ifndef BinFenV10_defs_h
 #define BinFenV10_defs_h
 
+static NSString *TopCollectionCellIdentifier = @"TopCollectionCellIdentifier";
+static NSString *MidCollectionCellIdentifier = @"MiddleCellIdentifier";
+static NSString *TopTableRowCellIdentifier = @"TopTableRowCellIdentifier";
+
+static const NSInteger TopTableRowIndex = 0;
 
 #endif
