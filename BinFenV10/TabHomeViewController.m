@@ -51,6 +51,9 @@
 {
     UINib *nib = [UINib nibWithNibName:@"ThirdTableViewCell" bundle:nil];
     [self.otCoverView.tableView registerNib:nib forCellReuseIdentifier:ThirdTableCellIdentifier];
+    
+    // Batch Index is start from "1"
+    [[NSUserDefaults standardUserDefaults] setObject:@1 forKey:LoadContentBatchIndexKey];
 }
 
 - (void)initViews
@@ -61,6 +64,7 @@
     self.otCoverView.tableView.dataSource = self;
     
     [self.otCoverView.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    //[self.otCoverView.tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
     
     [self initTopTableRow];
     [self initSecondTableRow];
@@ -84,7 +88,7 @@
 - (void)initTestData
 {
     NSMutableArray *array = [NSMutableArray arrayWithCapacity:215];
-    for(int i = 0; i < 215; i++)
+    for(int i = 0; i < 15; i++)
     {
         [array addObject:[NSString stringWithFormat:@"ID: %d", i]];
     }
@@ -204,16 +208,21 @@
             
         case ThirdTableSectionIndex:
         {
+            int batchIndex = [[NSUserDefaults standardUserDefaults] integerForKey:LoadContentBatchIndexKey];
             NSArray *array = [BFPreferenceData loadTestDataArray];
             if(array == nil || [array count] == 0)
             {
                 return 0;
             }
             if([array count] >= 20)
+            {
+                NSLog(@"TotalRows: 10");
                 return 10 * HeightOfItemInThirdTableCell;
+            }
             else // 0 < count < 20
             {
                 int totalRows = ([array count] - 1) / 2 + 1;
+                NSLog(@"TotalRows: %d", totalRows);
                 return totalRows * HeightOfItemInThirdTableCell;
             }
         }
