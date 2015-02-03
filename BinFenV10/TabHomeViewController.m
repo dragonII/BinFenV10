@@ -18,6 +18,8 @@
 
 @property (strong, nonatomic) OTCover *otCoverView;
 
+@property (assign, nonatomic) BOOL hideTopRowCell;
+
 @property (strong, nonatomic) DelegatesForCollection *collectionDelegates;
 
 @end
@@ -59,6 +61,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.hideTopRowCell = NO;
     
     [self hideNavigationItem];
     
@@ -110,6 +114,9 @@
             
             [self configureCollectionViewInTopTableCell:cell];
             
+            if(self.hideTopRowCell == YES)
+               [cell setHidden:YES];
+            
             return cell;
             
             break;
@@ -131,7 +138,10 @@
     switch (rowNumber)
     {
         case TopTableRowIndex:
-            return 184.0f;
+            if(self.hideTopRowCell == YES)
+                return 0.0f;
+            else
+                return 184.0f;
             break;
             
         default:
