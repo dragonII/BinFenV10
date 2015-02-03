@@ -12,6 +12,8 @@
 #import "TopTableViewCell.h"
 #import "DelegatesForCollection.h"
 
+#import "SecondTableViewCell.h"
+
 #import "defs.h"
 
 @interface TabHomeViewController () <UITableViewDataSource, UITableViewDelegate>
@@ -35,6 +37,13 @@
     [self.otCoverView.tableView registerNib:nib forCellReuseIdentifier:TopTableRowCellIdentifier];
 }
 
+- (void)initSecondTableRow
+{
+    [self.otCoverView.tableView registerClass:[SecondTableViewCell class] forCellReuseIdentifier:SecondTableCellIdentifier];
+    UINib *nib = [UINib nibWithNibName:@"SecondTableViewCell" bundle:nil];
+    [self.otCoverView.tableView registerNib:nib forCellReuseIdentifier:SecondTableCellIdentifier];
+}
+
 - (void)initViews
 {
     self.otCoverView = [[OTCover alloc] initWithTableViewWithHeaderImage:[UIImage imageNamed:@"HeaderPlaceHolder"] withOTCoverHeight:170];
@@ -42,7 +51,10 @@
     self.otCoverView.tableView.delegate = self;
     self.otCoverView.tableView.dataSource = self;
     
+    [self.otCoverView.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    
     [self initTopTableRow];
+    [self initSecondTableRow];
     
     [self.view addSubview:self.otCoverView];
 }
@@ -88,7 +100,7 @@
 
 - (void)configureCollectionViewInTopTableCell:(TopTableViewCell *)cell
 {
-    cell.contentView.backgroundColor = [UIColor lightGrayColor];
+    //cell.contentView.backgroundColor = [UIColor lightGrayColor];
     cell.collectionView.delegate = self.collectionDelegates;
     cell.collectionView.dataSource = self.collectionDelegates;
     cell.collectionView.backgroundColor = [UIColor clearColor];
@@ -122,6 +134,12 @@
             break;
         }
             
+        case SecondTableRowIndex:
+        {
+            SecondTableViewCell *cell = (SecondTableViewCell *)[tableView dequeueReusableCellWithIdentifier:SecondTableCellIdentifier];
+            return cell;
+        }
+    
         default:
         {
             UITableViewCell *cell = [[UITableViewCell alloc] init];
@@ -142,7 +160,9 @@
                 return 0.0f;
             else
                 return 184.0f;
-            break;
+            
+        case SecondTableRowIndex:
+            return 214.0f;
             
         default:
             return 60.0f;
