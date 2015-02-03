@@ -10,14 +10,15 @@
 #import "OTCover.h"
 #import "TopCollectionViewCell.h"
 #import "TopTableViewCell.h"
+#import "DelegatesForCollection.h"
 
 #import "defs.h"
 
-@interface TabHomeViewController () <UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@interface TabHomeViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) OTCover *otCoverView;
 
-@property (strong, nonatomic) NSMutableArray *testDataArray;
+@property (strong, nonatomic) DelegatesForCollection *collectionDelegates;
 
 @end
 
@@ -50,11 +51,10 @@
     self.navigationController.navigationBarHidden = YES;
 }
 
-- (void)initTestData
+- (void)initCollectionDelegates
 {
-    self.testDataArray = [[NSMutableArray alloc] init];
-    for(int i = 0; i < 15; i++)
-        [self.testDataArray addObject:[NSString stringWithFormat:@"%d", i]];
+    self.collectionDelegates = [[DelegatesForCollection alloc] init];
+    [self.collectionDelegates initTestData];
 }
 
 - (void)viewDidLoad {
@@ -62,7 +62,7 @@
     
     [self hideNavigationItem];
     
-    [self initTestData];
+    [self initCollectionDelegates];
     
     [self initViews];
 }
@@ -85,8 +85,8 @@
 - (void)configureCollectionViewInTopTableCell:(TopTableViewCell *)cell
 {
     cell.contentView.backgroundColor = [UIColor lightGrayColor];
-    cell.collectionView.delegate = self;
-    cell.collectionView.dataSource = self;
+    cell.collectionView.delegate = self.collectionDelegates;
+    cell.collectionView.dataSource = self.collectionDelegates;
     cell.collectionView.backgroundColor = [UIColor clearColor];
     cell.collectionView.showsHorizontalScrollIndicator = NO;
     
@@ -120,9 +120,10 @@
             UITableViewCell *cell = [[UITableViewCell alloc] init];
             return cell;
         }
-            //return [tableView dequeueReusableCellWithIdentifier:@"Cell"];
     }
 }
+
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -139,40 +140,7 @@
     }
 }
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-{
-    return [self.testDataArray count];
-}
 
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
-{
-    return 1;
-}
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    TopCollectionViewCell *cell = (TopCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:TopCollectionCellIdentifier forIndexPath:indexPath];
-    
-    cell.text = [self.testDataArray objectAtIndex:indexPath.row];
-    return cell;
-}
-
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    return CGSizeMake(120, 160);
-}
-
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
-{
-    // 不清楚设置的为什么的间距，与Apple文档说明不一致
-    return 8.0;
-}
-
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
-{
-    //水平cell间距
-    return 8.0;
-}
 
 
 @end

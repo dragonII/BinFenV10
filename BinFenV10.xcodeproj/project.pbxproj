@@ -10,6 +10,7 @@
 		2F5954B31A7E6857001D5DAD /* BFPreferenceData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F5954B21A7E6857001D5DAD /* BFPreferenceData.m */; };
 		2F5954BB1A7E78BB001D5DAD /* TopCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F5954B91A7E78BB001D5DAD /* TopCollectionViewCell.m */; };
 		2F5954BC1A7E78BB001D5DAD /* TopCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F5954BA1A7E78BB001D5DAD /* TopCollectionViewCell.xib */; };
+		2F6EFEA11A80705A001F9DE7 /* DelegatesForCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6EFEA01A80705A001F9DE7 /* DelegatesForCollection.m */; };
 		2FC5A2981A7F1BB900DD0E63 /* OTCover.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5A2971A7F1BB900DD0E63 /* OTCover.m */; };
 		2FC5A29B1A7F1CB200DD0E63 /* TabHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5A29A1A7F1CB200DD0E63 /* TabHomeViewController.m */; };
 		2FC5A2A01A7F23BA00DD0E63 /* TopTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5A29E1A7F23B900DD0E63 /* TopTableViewCell.m */; };
@@ -40,6 +41,8 @@
 		2F5954B81A7E78BB001D5DAD /* TopCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopCollectionViewCell.h; sourceTree = "<group>"; };
 		2F5954B91A7E78BB001D5DAD /* TopCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopCollectionViewCell.m; sourceTree = "<group>"; };
 		2F5954BA1A7E78BB001D5DAD /* TopCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TopCollectionViewCell.xib; sourceTree = "<group>"; };
+		2F6EFE9F1A80705A001F9DE7 /* DelegatesForCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DelegatesForCollection.h; sourceTree = "<group>"; };
+		2F6EFEA01A80705A001F9DE7 /* DelegatesForCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DelegatesForCollection.m; sourceTree = "<group>"; };
 		2FC5A2961A7F1BB900DD0E63 /* OTCover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTCover.h; sourceTree = "<group>"; };
 		2FC5A2971A7F1BB900DD0E63 /* OTCover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTCover.m; sourceTree = "<group>"; };
 		2FC5A2991A7F1CB200DD0E63 /* TabHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabHomeViewController.h; sourceTree = "<group>"; };
@@ -100,6 +103,15 @@
 			name = CollectionViewCell;
 			sourceTree = "<group>";
 		};
+		2F6EFE9B1A806E03001F9DE7 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				2F6EFE9F1A80705A001F9DE7 /* DelegatesForCollection.h */,
+				2F6EFEA01A80705A001F9DE7 /* DelegatesForCollection.m */,
+			);
+			name = Delegates;
+			sourceTree = "<group>";
+		};
 		2FC5A2951A7F1BB900DD0E63 /* OTCover */ = {
 			isa = PBXGroup;
 			children = (
@@ -122,6 +134,7 @@
 		2FEEE84D1A7E5B8E0095D8DB = {
 			isa = PBXGroup;
 			children = (
+				2F6EFE9B1A806E03001F9DE7 /* Delegates */,
 				2FC5A29C1A7F238200DD0E63 /* TopTableRowCell */,
 				2FC5A2951A7F1BB900DD0E63 /* OTCover */,
 				2F5954B71A7E7826001D5DAD /* CollectionViewCell */,
@@ -294,6 +307,7 @@
 				2FC5A2A01A7F23BA00DD0E63 /* TopTableViewCell.m in Sources */,
 				2FC5A2981A7F1BB900DD0E63 /* OTCover.m in Sources */,
 				2F5954B31A7E6857001D5DAD /* BFPreferenceData.m in Sources */,
+				2F6EFEA11A80705A001F9DE7 /* DelegatesForCollection.m in Sources */,
 				2FEEE85C1A7E5B8E0095D8DB /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
