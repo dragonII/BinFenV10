@@ -67,4 +67,24 @@ static NSString *GlobalPreferenceFileName = @"preference.plist";
     return [NSString stringWithFormat:@"firstLaunch_%@", [self getShortVersionString]];
 }
 
++ (void)saveTestDataArray:(NSArray *)array
+{
+    NSString *filePath = [self getFilePathWithName:@"testDataArray.plist"];
+    [array writeToFile:filePath atomically:YES];
+}
+
++ (NSArray *)loadTestDataArray
+{
+    NSString *filePath = [self getFilePathWithName:@"testDataArray.plist"];
+    NSArray *array;
+    
+    if([[NSFileManager defaultManager] fileExistsAtPath:filePath])
+    {
+        array = [NSArray arrayWithContentsOfFile:filePath];
+    } else {
+        array = [[NSArray alloc] init];
+    }
+    return array;
+}
+
 @end

@@ -13,6 +13,9 @@
 #import "DelegatesForCollection.h"
 
 #import "SecondTableViewCell.h"
+#import "ThirdTableViewCell.h"
+
+#import "BFPreferenceData.h"
 
 #import "defs.h"
 
@@ -32,16 +35,22 @@
 
 - (void)initTopTableRow
 {
-    [self.otCoverView.tableView registerClass:[TopTableViewCell class] forCellReuseIdentifier:TopTableRowCellIdentifier];
+    //[self.otCoverView.tableView registerClass:[TopTableViewCell class] forCellReuseIdentifier:TopTableRowCellIdentifier];
     UINib *nib = [UINib nibWithNibName:@"TopTableViewCell" bundle:nil];
     [self.otCoverView.tableView registerNib:nib forCellReuseIdentifier:TopTableRowCellIdentifier];
 }
 
 - (void)initSecondTableRow
 {
-    [self.otCoverView.tableView registerClass:[SecondTableViewCell class] forCellReuseIdentifier:SecondTableCellIdentifier];
+    //[self.otCoverView.tableView registerClass:[SecondTableViewCell class] forCellReuseIdentifier:SecondTableCellIdentifier];
     UINib *nib = [UINib nibWithNibName:@"SecondTableViewCell" bundle:nil];
     [self.otCoverView.tableView registerNib:nib forCellReuseIdentifier:SecondTableCellIdentifier];
+}
+
+- (void)initThirdTableRow
+{
+    UINib *nib = [UINib nibWithNibName:@"ThirdTableViewCell" bundle:nil];
+    [self.otCoverView.tableView registerNib:nib forCellReuseIdentifier:ThirdTableCellIdentifier];
 }
 
 - (void)initViews
@@ -55,6 +64,7 @@
     
     [self initTopTableRow];
     [self initSecondTableRow];
+    [self initThirdTableRow];
     
     [self.view addSubview:self.otCoverView];
 }
@@ -71,8 +81,21 @@
     [self.collectionDelegates initTestData];
 }
 
+- (void)initTestData
+{
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:215];
+    for(int i = 0; i < 215; i++)
+    {
+        [array addObject:[NSString stringWithFormat:@"ID: %d", i]];
+    }
+    
+    [BFPreferenceData saveTestDataArray:array];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self initTestData];
     
     self.hideTopRowCell = NO;
     
@@ -90,12 +113,12 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 20;
+    return 1;
 }
 
 - (void)configureCollectionViewInTopTableCell:(TopTableViewCell *)cell
@@ -117,10 +140,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSInteger rowNumber = indexPath.row;
-    switch (rowNumber)
+    //NSInteger rowNumber = indexPath.row;
+    NSInteger sectionNumber = indexPath.section;
+    switch (sectionNumber)
     {
-        case TopTableRowIndex:
+        case TopTableSectionIndex:
         {
             TopTableViewCell *cell = (TopTableViewCell *)[tableView dequeueReusableCellWithIdentifier:TopTableRowCellIdentifier];
             
@@ -134,15 +158,29 @@
             break;
         }
             
-        case SecondTableRowIndex:
+        case SecondTableSectionIndex:
         {
             SecondTableViewCell *cell = (SecondTableViewCell *)[tableView dequeueReusableCellWithIdentifier:SecondTableCellIdentifier];
+            return cell;
+        }
+            
+        case ThirdTableSectionIndex:
+        {
+            ThirdTableViewCell *cell = (ThirdTableViewCell *)[tableView dequeueReusableCellWithIdentifier:ThirdTableCellIdentifier];
+            return cell;
+        }
+            
+        case RefreshSectionIndex:
+        {
+            UITableViewCell *cell = [[UITableViewCell alloc] init];
+            cell.textLabel.text = @"Click to Refresh";
             return cell;
         }
     
         default:
         {
             UITableViewCell *cell = [[UITableViewCell alloc] init];
+            cell.textLabel.text = @"Left Cells";
             return cell;
         }
     }
@@ -152,17 +190,34 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSInteger rowNumber = indexPath.row;
-    switch (rowNumber)
+    NSInteger sectionNumber = indexPath.section;
+    switch (sectionNumber)
     {
-        case TopTableRowIndex:
+        case TopTableSectionIndex:
             if(self.hideTopRowCell == YES)
                 return 0.0f;
             else
                 return 184.0f;
             
-        case SecondTableRowIndex:
+        case SecondTableSectionIndex:
             return 214.0f;
+            
+        case ThirdTableSectionIndex:
+        {
+            NSArray *array = [BFPreferenceData loadTestDataArray];
+            if(array == nil || [array count] == 0)
+            {
+                return 0;
+            }
+            if([array count] >= 20)
+                return 10 * HeightOfItemInThirdTableCell;
+            else // 0 < count < 20
+            {
+                int totalRows = ([array count] - 1) / 2 + 1;
+                return totalRows * HeightOfItemInThirdTableCell;
+            }
+        }
+            //return 5000;
             
         default:
             return 60.0f;
@@ -170,7 +225,19 @@
     }
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 36)];
+    imageView.backgroundColor = [UIColor lightGrayColor];
+    return imageView;
+}
 
-
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if(section == ThirdTableSectionIndex)
+        return 36.0f;
+    else
+        return 0;
+}
 
 @end

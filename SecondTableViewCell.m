@@ -73,25 +73,6 @@
         //http://stackoverflow.com/questions/9907100/issues-with-setting-some-different-font-for-uilabel
         label.font = [UIFont fontWithName:@"STHeitiSC-Light" size:10];
         
-        /*
-        if(row == 0)
-        {
-            imageView.frame = CGRectMake(x + 18, row * itemHeight + 12, imageViewWidth, imageViewHeight);
-            labelFrame = CGRectMake(x + 18, row * itemHeight + 12 + imageViewHeight + 1, itemWidth, itemHeight - imageViewHeight - 2);
-            label = [[UILabel alloc] initWithFrame:labelFrame];
-            //label.frame = imageView.frame;
-            label.text = @"Label";
-        }
-        if(row == 1)
-        {
-            imageView.frame = CGRectMake(x + 18, row * itemHeight, imageViewWidth, imageViewHeight);
-            labelFrame = CGRectMake(x + 18, row * itemHeight + imageViewHeight + 1, itemWidth, itemHeight - imageViewHeight - 2);
-            label = [[UILabel alloc] initWithFrame:labelFrame];
-            //label.frame = imageView.frame;
-            label.text = @"Label";
-        }
-         */
-        
         imageView.image = [UIImage imageNamed:@"ImagePlaceHolder44x44"];
         //imageView.contentMode = UIViewContentModeScaleAspectFill;
         imageView.layer.cornerRadius = 22.0f;
@@ -128,7 +109,7 @@
     self.pageControl.numberOfPages = numPages;
     self.pageControl.currentPage = 0;
     
-    NSLog(@"ContentSize: %f, %f", self.scrollView.contentSize.width, self.scrollView.contentSize.height);
+    //NSLog(@"ContentSize: %f, %f", self.scrollView.contentSize.width, self.scrollView.contentSize.height);
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

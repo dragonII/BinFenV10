@@ -14,4 +14,7 @@
 
 + (NSString *)getFirstLaunchKey;
 
++ (void)saveTestDataArray:(NSArray *)array;
++ (NSArray *)loadTestDataArray;
+
 @end

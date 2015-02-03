@@ -22,7 +22,8 @@
 
 - (OTCover*)initWithTableViewWithHeaderImage:(UIImage*)headerImage withOTCoverHeight:(CGFloat)height{
     
-    CGRect bounds = [[UIScreen mainScreen] bounds];
+    CGRect originBounds = [[UIScreen mainScreen] bounds];
+    CGRect bounds = CGRectMake(originBounds.origin.x, originBounds.origin.y, originBounds.size.width, originBounds.size.height - 49);
     self = [[OTCover alloc] initWithFrame:bounds];
     
     self.headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, bounds.size.width, height)];

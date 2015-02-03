@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F0475061A813D1B00196F0B /* ThirdTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F0475041A813D1B00196F0B /* ThirdTableViewCell.m */; };
+		2F0475071A813D1B00196F0B /* ThirdTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F0475051A813D1B00196F0B /* ThirdTableViewCell.xib */; };
 		2F5954B31A7E6857001D5DAD /* BFPreferenceData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F5954B21A7E6857001D5DAD /* BFPreferenceData.m */; };
 		2F5954BB1A7E78BB001D5DAD /* TopCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F5954B91A7E78BB001D5DAD /* TopCollectionViewCell.m */; };
 		2F5954BC1A7E78BB001D5DAD /* TopCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F5954BA1A7E78BB001D5DAD /* TopCollectionViewCell.xib */; };
@@ -38,6 +40,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2F0475031A813D1B00196F0B /* ThirdTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThirdTableViewCell.h; sourceTree = "<group>"; };
+		2F0475041A813D1B00196F0B /* ThirdTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThirdTableViewCell.m; sourceTree = "<group>"; };
+		2F0475051A813D1B00196F0B /* ThirdTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ThirdTableViewCell.xib; sourceTree = "<group>"; };
 		2F5954B01A7E6399001D5DAD /* defs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = defs.h; sourceTree = "<group>"; };
 		2F5954B11A7E684D001D5DAD /* BFPreferenceData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BFPreferenceData.h; sourceTree = "<group>"; };
 		2F5954B21A7E6857001D5DAD /* BFPreferenceData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFPreferenceData.m; sourceTree = "<group>"; };
@@ -91,6 +96,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2F0475021A813CF000196F0B /* ThirdTableCell */ = {
+			isa = PBXGroup;
+			children = (
+				2F0475031A813D1B00196F0B /* ThirdTableViewCell.h */,
+				2F0475041A813D1B00196F0B /* ThirdTableViewCell.m */,
+				2F0475051A813D1B00196F0B /* ThirdTableViewCell.xib */,
+			);
+			name = ThirdTableCell;
+			sourceTree = "<group>";
+		};
 		2F5954AE1A7E6374001D5DAD /* BFCommon */ = {
 			isa = PBXGroup;
 			children = (
@@ -165,6 +180,7 @@
 				2F6EFE9B1A806E03001F9DE7 /* Delegates */,
 				2FC5A29C1A7F238200DD0E63 /* TopTableRowCell */,
 				2F6EFEA21A8074B8001F9DE7 /* SecondTableCell */,
+				2F0475021A813CF000196F0B /* ThirdTableCell */,
 				2FC5A2951A7F1BB900DD0E63 /* OTCover */,
 				2F5954B71A7E7826001D5DAD /* CollectionViewCell */,
 				2F5954AE1A7E6374001D5DAD /* BFCommon */,
@@ -309,6 +325,7 @@
 			files = (
 				2F5954BC1A7E78BB001D5DAD /* TopCollectionViewCell.xib in Resources */,
 				2FEEE8651A7E5B8F0095D8DB /* Main.storyboard in Resources */,
+				2F0475071A813D1B00196F0B /* ThirdTableViewCell.xib in Resources */,
 				2F6EFEA71A8074E1001F9DE7 /* SecondTableViewCell.xib in Resources */,
 				2FC5A2A11A7F23BA00DD0E63 /* TopTableViewCell.xib in Resources */,
 				2FEEE86A1A7E5B8F0095D8DB /* LaunchScreen.xib in Resources */,
@@ -335,6 +352,7 @@
 				2FEEE8621A7E5B8E0095D8DB /* WizardViewController.m in Sources */,
 				2FEEE85F1A7E5B8E0095D8DB /* AppDelegate.m in Sources */,
 				2F6EFEBC1A808806001F9DE7 /* UIImage+ImageEffects.m in Sources */,
+				2F0475061A813D1B00196F0B /* ThirdTableViewCell.m in Sources */,
 				2FC5A2A01A7F23BA00DD0E63 /* TopTableViewCell.m in Sources */,
 				2FC5A2981A7F1BB900DD0E63 /* OTCover.m in Sources */,
 				2F6EFEA61A8074E1001F9DE7 /* SecondTableViewCell.m in Sources */,
