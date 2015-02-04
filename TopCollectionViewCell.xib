@@ -13,7 +13,7 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="120" height="160"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="CellPlaceHolder" translatesAutoresizingMaskIntoConstraints="NO" id="04c-Lj-qTd">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="04c-Lj-qTd">
                         <rect key="frame" x="0.0" y="0.0" width="120" height="160"/>
                         <color key="backgroundColor" red="0.93573794160000001" green="0.90939251409999999" blue="0.3382860305" alpha="1" colorSpace="calibratedRGB"/>
                     </imageView>
@@ -32,7 +32,4 @@
             </connections>
         </collectionViewCell>
     </objects>
-    <resources>
-        <image name="CellPlaceHolder" width="120" height="160"/>
-    </resources>
 </document>

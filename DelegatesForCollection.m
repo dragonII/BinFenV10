@@ -13,7 +13,7 @@
 @interface DelegatesForCollection() 
 
 @property (strong, nonatomic) NSMutableArray *testDataArray;
-
+@property (strong, nonatomic) NSMutableArray *indexPathArray;
 @end
 
 @implementation DelegatesForCollection
@@ -23,6 +23,7 @@
     self.testDataArray = [[NSMutableArray alloc] init];
     for(int i = 0; i < 15; i++)
         [self.testDataArray addObject:[NSString stringWithFormat:@"%d", i]];
+    self.indexPathArray = [[NSMutableArray alloc] init];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -38,7 +39,12 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     TopCollectionViewCell *cell = (TopCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:TopCollectionCellIdentifier forIndexPath:indexPath];
-    
+    if([self.indexPathArray containsObject:indexPath])
+    {
+        cell.imageView.image = [UIImage imageNamed:@"120x160_2"];
+    } else {
+        cell.imageView.image = [UIImage imageNamed:@"CellPlaceHolder"];
+    }
     cell.text = [self.testDataArray objectAtIndex:indexPath.row];
     return cell;
 }
@@ -58,6 +64,19 @@
 {
     //水平cell间距
     return 8.0;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    TopCollectionViewCell *cell = (TopCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    if([self.indexPathArray containsObject:indexPath])
+    {
+        //cell.imageView.image = [UIImage imageNamed:@"CellPlaceHolder"];
+    } else {
+        [self.indexPathArray addObject:indexPath];
+        cell.imageView.image = [UIImage imageNamed:@"120x160_2"];
+    }
+    //NSLog(@"indexArray: %@", self.indexPathArray);
 }
 
 @end

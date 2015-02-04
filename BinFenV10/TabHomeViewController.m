@@ -133,7 +133,7 @@
     cell.collectionView.backgroundColor = [UIColor clearColor];
     cell.collectionView.showsHorizontalScrollIndicator = NO;
     
-    [cell.collectionView registerClass:[TopCollectionViewCell class] forCellWithReuseIdentifier:TopCollectionCellIdentifier];
+    //[cell.collectionView registerClass:[TopCollectionViewCell class] forCellWithReuseIdentifier:TopCollectionCellIdentifier];
     UINib *nib = [UINib nibWithNibName:@"TopCollectionViewCell" bundle:nil];
     [cell.collectionView registerNib:nib forCellWithReuseIdentifier:TopCollectionCellIdentifier];
     
@@ -248,5 +248,6 @@
     else
         return 0;
 }
+
 
 @end

@@ -10,8 +10,9 @@
 
 @implementation TopCollectionViewCell
 
-- (void)awakeFromNib {
-    // Initialization code
+- (void)awakeFromNib
+{
+    self.imageView.image = [UIImage imageNamed:@"CellPlaceHolder"];
 }
 
 - (void)setText:(NSString *)text
@@ -23,5 +24,6 @@
         _textLabel.text = _text;
     }
 }
+
 
 @end
