@@ -18,6 +18,11 @@
     [self initItems];
 }
 
+- (void)itemClicked:(UITapGestureRecognizer*)sender
+{
+    UIView *view = sender.view;
+    NSLog(@"%d", view.tag);
+}
 
 - (void)initItems
 {
@@ -36,6 +41,7 @@
     CGFloat imageViewWidth = 142.0f;
     CGFloat imageViewHeight = 142.0f;
     
+    int index = 2000;
     int maxIndex = 0;
     int row = 0;
     int column = 0;
@@ -50,6 +56,12 @@
         UIView *itemView = [[UIView alloc] init];
         itemView.frame = CGRectMake(column * (itemWidth + 12) + 12, y, itemWidth, itemHeight);
         itemView.backgroundColor = [UIColor yellowColor];
+        itemView.tag = index;
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(itemClicked:)];
+        //tapGesture.delegate = self;
+        tapGesture.numberOfTapsRequired = 1;
+        tapGesture.numberOfTouchesRequired = 1;
+        [itemView addGestureRecognizer:tapGesture];
         
         UIImageView *imageView = [[UIImageView alloc] init];
         UILabel *label = [[UILabel alloc] init];
@@ -69,6 +81,7 @@
         [itemView addSubview:label];
         [self.contentView addSubview:itemView];
         
+        index++;
         column++;
         if(column == 2)
         {

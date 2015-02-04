@@ -60,7 +60,7 @@
     CGFloat imageViewWidth = 44.0f;
     CGFloat imageViewHeight = 44.0f;
     
-    int index = 10;
+    int index = 1000;
     int row = 0;
     int column = 0;
     
