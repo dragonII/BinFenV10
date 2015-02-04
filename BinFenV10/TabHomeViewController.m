@@ -156,6 +156,11 @@
         {
             TopTableViewCell *cell = (TopTableViewCell *)[tableView dequeueReusableCellWithIdentifier:TopTableRowCellIdentifier];
             
+            if(cell == nil)
+            {
+                cell = [[TopTableViewCell alloc] init];
+            }
+            
             [self configureCollectionViewInTopTableCell:cell];
             
             if(self.hideTopRowCell == YES)
@@ -169,12 +174,21 @@
         case SecondTableSectionIndex:
         {
             SecondTableViewCell *cell = (SecondTableViewCell *)[tableView dequeueReusableCellWithIdentifier:SecondTableCellIdentifier];
+            if(cell == nil)
+            {
+                cell = [[SecondTableViewCell alloc] init];
+            }
             return cell;
         }
             
         case ThirdTableSectionIndex:
         {
             ThirdTableViewCell *cell = (ThirdTableViewCell *)[tableView dequeueReusableCellWithIdentifier:ThirdTableCellIdentifier];
+            if(cell == nil)
+            {
+                cell = [[ThirdTableViewCell alloc] init];
+            }
+            
             [cell initItems];
             
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -264,10 +278,23 @@
     }
 }
 
+- (void)thirdSectionClicked:(UITapGestureRecognizer*)sender
+{
+    NSLog(@"ThirdSection Clicked");
+    //UIView *view = sender.view;
+    //NSLog(@"%d", view.tag);
+}
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 36)];
     imageView.backgroundColor = [UIColor lightGrayColor];
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(thirdSectionClicked:)];
+    tapGesture.numberOfTapsRequired = 1;
+    tapGesture.numberOfTouchesRequired = 1;
+    [imageView addGestureRecognizer:tapGesture];
+    
     return imageView;
 }
 

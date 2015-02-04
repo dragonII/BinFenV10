@@ -9,6 +9,8 @@
 #ifndef BinFenV10_defs_h
 #define BinFenV10_defs_h
 
+static NSInteger SearchViewTag = 4000;
+
 static NSString *TopCollectionCellIdentifier = @"TopCollectionCellIdentifier";
 //static NSString *MidCollectionCellIdentifier = @"MiddleCellIdentifier";
 static NSString *TopTableRowCellIdentifier = @"TopTableRowCellIdentifier";

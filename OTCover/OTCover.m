@@ -10,13 +10,15 @@
 #import <QuartzCore/QuartzCore.h>
 #import <Accelerate/Accelerate.h>
 
+#import "defs.h"
+
 @interface OTCover()
 
 @property (nonatomic, strong) NSMutableArray *blurImages;
 @property (nonatomic, assign) CGFloat OTCoverHeight;
 @property (nonatomic, strong) UIView* scrollHeaderView;
 @property (nonatomic, strong) UIView *parentView;
-@property (nonatomic, strong) UIImageView *searchView;
+@property (nonatomic, strong) UIButton *searchViewButton;
 
 @property BOOL searchViewHideDone;
 @property BOOL searchViewShowDone;
@@ -25,6 +27,40 @@
 @end
 
 @implementation OTCover
+
+- (void)searchClicked:(UITapGestureRecognizer*)sender
+{
+    NSLog(@"SearchView Clicked");
+}
+
+- (void)searchButtonClicked:(UIButton*)button
+{
+    NSLog(@"Button clicked");
+}
+
+- (void)initSearchView
+{
+    //self.searchView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, 64)];
+    //self.searchView.image = [UIImage imageNamed:@"SearchBarInHome"];
+    //self.searchView.backgroundColor = [UIColor orangeColor];
+    
+    self.searchViewButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, 64)];
+    [self.searchViewButton setImage:[UIImage imageNamed:@"SearchBarInHome"] forState:UIControlStateNormal];
+    [self.searchViewButton setImage:[UIImage imageNamed:@"SearchBarInHome"] forState:UIControlStateSelected];
+    [self.searchViewButton setBackgroundImage:[UIImage imageNamed:@"SearchBarInHome"] forState:(UIControlStateNormal | UIControlStateSelected | UIControlStateHighlighted)];
+    [self.searchViewButton addTarget:self action:@selector(searchButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    
+    //[self.searchView addSubview:button];
+    
+    //self.searchView.tag = SearchViewTag;
+    
+    [self.searchViewButton setHidden:YES];
+    self.searchViewHideDone = YES;
+    self.searchViewShowDone = NO;
+    self.searchViewContentsInsetsDone = NO;
+    
+    [self addSubview:self.searchViewButton];
+}
 
 - (OTCover*)initWithTableViewWithHeaderImage:(UIImage*)headerImage withOTCoverHeight:(CGFloat)height
 {
@@ -51,6 +87,9 @@
     self.blurImages = [[NSMutableArray alloc] init];
     [self prepareForBlurImages];
     
+    [self initSearchView];
+    
+    /*
     self.searchView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, 64)];
     self.searchView.image = [UIImage imageNamed:@"SearchBarInHome"];
     
@@ -59,40 +98,17 @@
     self.searchViewShowDone = NO;
     self.searchViewContentsInsetsDone = NO;
     
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(searchClicked:)];
+    tapGesture.numberOfTapsRequired = 1;
+    tapGesture.numberOfTouchesRequired = 1;
+    [self.searchView addGestureRecognizer:tapGesture];
+     
     [self addSubview:self.searchView];
+     */
     
     return self;
 }
 
-/*
-- (OTCover*)initWithScrollViewWithHeaderImage:(UIImage*)headerImage withOTCoverHeight:(CGFloat)height withScrollContentViewHeight:(CGFloat)ContentViewheight{
-    
-    CGRect bounds = [[UIScreen mainScreen] bounds];
-    self = [[OTCover alloc] initWithFrame:bounds];
-    
-    self.headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, bounds.size.width, height)];
-    [self.headerImageView setImage:headerImage];
-    [self addSubview:self.headerImageView];
-    
-    self.OTCoverHeight = height;
-    
-    self.scrollView = [[UIScrollView alloc] initWithFrame:self.frame];
-    self.scrollView.backgroundColor = [UIColor clearColor];
-    [self addSubview:self.scrollView];
-    
-    self.scrollContentView = [[UIView alloc] initWithFrame:CGRectMake(0, height, bounds.size.width, ContentViewheight)];
-    self.scrollContentView.backgroundColor = [UIColor whiteColor];
-    self.scrollView.contentSize = self.scrollContentView.frame.size;
-    [self.scrollView addSubview:self.scrollContentView];
-    
-    [self.scrollView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
-    
-    self.blurImages = [[NSMutableArray alloc] init];
-    [self prepareForBlurImages];
-    
-    return self;
-}
- */
 
 - (void)setHeaderImage:(UIImage *)headerImage{
     [self.headerImageView setImage:headerImage];
@@ -118,8 +134,8 @@
         self.searchViewHideDone = YES;
         self.searchViewShowDone = NO;
         
-        self.searchView.alpha = 0.0f;
-        [self.searchView setHidden:YES];
+        self.searchViewButton.alpha = 0.0f;
+        [self.searchViewButton setHidden:YES];
         
         self.searchViewContentsInsetsDone = NO;
         self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
@@ -133,20 +149,22 @@
         self.searchViewShowDone = YES;
         self.searchViewHideDone = NO;
         
-        [self.searchView setHidden:NO];
+        [self.searchViewButton setHidden:NO];
     }
 }
 
 - (void)setTableContentsInsets
 {
-    self.searchView.alpha = 1.0f;
+    self.searchViewButton.alpha = 1.0f;
     
     if(self.searchViewContentsInsetsDone == NO)
     {
         self.searchViewContentsInsetsDone = YES;
         
+        self.searchViewButton.frame = CGRectMake(0, 0, self.bounds.size.width, 64);
+        
         UIEdgeInsets insets = self.tableView.contentInset;
-        insets.top = self.searchView.bounds.size.height;
+        insets.top = self.searchViewButton.bounds.size.height;
         [self.tableView setContentInset:insets];
     }
 }
@@ -197,8 +215,8 @@
              */
             
             CGFloat delta = offset - 64; // 0 <= delta <= 50
-            self.searchView.frame = CGRectMake((delta - 50) / 2.0f, 0, 320 + (50 - delta), 64);
-            self.searchView.alpha = delta / 50;
+            self.searchViewButton.frame = CGRectMake((delta - 50) / 2.0f, 0, 320 + (50 - delta), 64);
+            self.searchViewButton.alpha = delta / 50;
         }
         if(offset > 114)
         {
