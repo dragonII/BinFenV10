@@ -27,6 +27,8 @@
 
 @property (strong, nonatomic) DelegatesForCollection *collectionDelegates;
 
+//@property (strong, nonatomic) UIImageView *searchView;
+
 @end
 
 
@@ -56,6 +58,7 @@
     [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:LoadContentBatchIndexKey];
     //[[NSUserDefaults standardUserDefaults] setBool:YES forKey:CanBeRefreshedKey];
 }
+
 
 - (void)initViews
 {

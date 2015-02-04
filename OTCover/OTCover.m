@@ -15,13 +15,15 @@
 @property (nonatomic, strong) NSMutableArray *blurImages;
 @property (nonatomic, assign) CGFloat OTCoverHeight;
 @property (nonatomic, strong) UIView* scrollHeaderView;
+@property (nonatomic, strong) UIView *parentView;
+@property (nonatomic, strong) UIImageView *searchView;
 
 @end
 
 @implementation OTCover
 
-- (OTCover*)initWithTableViewWithHeaderImage:(UIImage*)headerImage withOTCoverHeight:(CGFloat)height{
-    
+- (OTCover*)initWithTableViewWithHeaderImage:(UIImage*)headerImage withOTCoverHeight:(CGFloat)height
+{
     CGRect originBounds = [[UIScreen mainScreen] bounds];
     CGRect bounds = CGRectMake(originBounds.origin.x, originBounds.origin.y, originBounds.size.width, originBounds.size.height - 49);
     self = [[OTCover alloc] initWithFrame:bounds];
@@ -33,6 +35,7 @@
     self.OTCoverHeight = height;
     
     self.tableView = [[UITableView alloc] initWithFrame:self.frame];
+    self.tableView.bounces = YES;
     self.tableView.tableHeaderView.backgroundColor = [UIColor clearColor];
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, bounds.size.width, height)];
     self.tableView.backgroundColor = [UIColor clearColor];
@@ -44,9 +47,15 @@
     self.blurImages = [[NSMutableArray alloc] init];
     [self prepareForBlurImages];
     
+    self.searchView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, 64)];
+    self.searchView.image = [UIImage imageNamed:@"SearchBarInHome"];
+    [self.searchView setHidden:YES];
+    [self addSubview:self.searchView];
+    
     return self;
 }
 
+/*
 - (OTCover*)initWithScrollViewWithHeaderImage:(UIImage*)headerImage withOTCoverHeight:(CGFloat)height withScrollContentViewHeight:(CGFloat)ContentViewheight{
     
     CGRect bounds = [[UIScreen mainScreen] bounds];
@@ -74,6 +83,7 @@
     
     return self;
 }
+ */
 
 - (void)setHeaderImage:(UIImage *)headerImage{
     [self.headerImageView setImage:headerImage];
@@ -85,49 +95,61 @@
 {
     CGFloat factor = 0.1;
     [self.blurImages addObject:self.headerImageView.image];
-    for (NSUInteger i = 0; i < self.OTCoverHeight/10; i++) {
+    for (NSUInteger i = 0; i < self.OTCoverHeight/10; i++)
+    {
         [self.blurImages addObject:[self.headerImageView.image boxblurImageWithBlur:factor]];
         factor+=0.04;
     }
 }
 
+- (void)presentSearchView
+{
+    [self.searchView setHidden:NO];
+    UIEdgeInsets insets = self.tableView.contentInset;
+    insets.top = self.searchView.bounds.size.height;
+    [self.tableView setContentInset:insets];
+}
+
 - (void)animationForTableView
 {
     CGFloat offset = self.tableView.contentOffset.y;    
-    //NSLog(@"Y offset: %f", offset);
+    NSLog(@"Y offset: %f", offset);
     
-    if(offset <= 0)
+    if(offset < 0)
     {
+        // 拉伸效果
         self.headerImageView.frame = CGRectMake(offset,0, self.frame.size.width+ (-offset) * 2, self.OTCoverHeight + (-offset));
-    } else {
+    }
+    if(offset > 0)
+    {
+        // 将headerImageView向屏幕上方推出
         self.headerImageView.frame = CGRectMake(0, -offset, self.headerImageView.frame.size.width, self.headerImageView.frame.size.height);
-    }
-    
-    /*
-    if (self.tableView.contentOffset.y > 0) {
         
-        NSInteger index = offset / 10;
-        if (index < 0) {
-            index = 0;
+        if(offset < 64)
+        {
+            self.searchView.alpha = 0.0f;
         }
-        else if(index >= self.blurImages.count) {
-            index = self.blurImages.count - 1;
+        if(offset >= 64 && offset <= 114)
+        {
+            [self.searchView setHidden:NO];
+            CGFloat delta = offset - 64; // 0 <= delta <= 50
+            //NSLog(@"delta = %f", delta);
+            self.searchView.frame = CGRectMake((delta - 50) / 2.0f, 0, 320 + (50 - delta), 64);
+            self.searchView.alpha = delta / 50;
         }
-        UIImage *image = self.blurImages[index];
-        if (self.headerImageView.image != image) {
-            [self.headerImageView setImage:image];
-            
+        if(offset > 114)
+        {
+            self.searchView.alpha = 1.0f;
+            UIEdgeInsets insets = self.tableView.contentInset;
+            insets.top = self.searchView.bounds.size.height;
+            [self.tableView setContentInset:insets];
         }
-        self.tableView.backgroundColor = [UIColor clearColor];
+        
         
     }
-    else {
-        self.headerImageView.frame = CGRectMake(offset,0, self.frame.size.width+ (-offset) * 2, self.OTCoverHeight + (-offset));
-    }
-     */
-    
 }
 
+/*
 - (void)animationForScrollView{
     CGFloat offset = self.scrollView.contentOffset.y;
     
@@ -152,6 +174,7 @@
         self.headerImageView.frame = CGRectMake(offset,0, self.frame.size.width + (-offset) * 2, self.OTCoverHeight + (-offset));
     }
 }
+ */
 
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -159,9 +182,11 @@
     if (self.tableView) {
         [self animationForTableView];
     }
+    /*
     else{
         [self animationForScrollView];
     }
+     */
 }
 
 - (void)removeFromSuperview
@@ -169,9 +194,11 @@
     if (self.tableView) {
         [self.tableView removeObserver:self forKeyPath:@"contentOffset"];
     }
+    /*
     else{
         [self.scrollView removeObserver:self forKeyPath:@"contentOffset"];
     }
+     */
     [super removeFromSuperview];
 }
 
@@ -180,9 +207,11 @@
     if (self.tableView) {
         [self.tableView removeObserver:self forKeyPath:@"contentOffset"];
     }
+    /*
     else{
         [self.scrollView removeObserver:self forKeyPath:@"contentOffset"];
     }
+     */
 }
 
 @end

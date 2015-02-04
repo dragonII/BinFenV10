@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		2F0475061A813D1B00196F0B /* ThirdTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F0475041A813D1B00196F0B /* ThirdTableViewCell.m */; };
 		2F0475071A813D1B00196F0B /* ThirdTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F0475051A813D1B00196F0B /* ThirdTableViewCell.xib */; };
-		2F4F0A611A81EE83008B6EF9 /* UIScrollView+DXRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4F0A601A81EE83008B6EF9 /* UIScrollView+DXRefresh.m */; };
 		2F5954B31A7E6857001D5DAD /* BFPreferenceData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F5954B21A7E6857001D5DAD /* BFPreferenceData.m */; };
 		2F5954BB1A7E78BB001D5DAD /* TopCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F5954B91A7E78BB001D5DAD /* TopCollectionViewCell.m */; };
 		2F5954BC1A7E78BB001D5DAD /* TopCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F5954BA1A7E78BB001D5DAD /* TopCollectionViewCell.xib */; };
@@ -44,8 +43,6 @@
 		2F0475031A813D1B00196F0B /* ThirdTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThirdTableViewCell.h; sourceTree = "<group>"; };
 		2F0475041A813D1B00196F0B /* ThirdTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThirdTableViewCell.m; sourceTree = "<group>"; };
 		2F0475051A813D1B00196F0B /* ThirdTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ThirdTableViewCell.xib; sourceTree = "<group>"; };
-		2F4F0A5F1A81EE83008B6EF9 /* UIScrollView+DXRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+DXRefresh.h"; sourceTree = "<group>"; };
-		2F4F0A601A81EE83008B6EF9 /* UIScrollView+DXRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+DXRefresh.m"; sourceTree = "<group>"; };
 		2F5954B01A7E6399001D5DAD /* defs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = defs.h; sourceTree = "<group>"; };
 		2F5954B11A7E684D001D5DAD /* BFPreferenceData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BFPreferenceData.h; sourceTree = "<group>"; };
 		2F5954B21A7E6857001D5DAD /* BFPreferenceData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFPreferenceData.m; sourceTree = "<group>"; };
@@ -153,8 +150,6 @@
 			children = (
 				2F6EFEBA1A808806001F9DE7 /* UIImage+ImageEffects.h */,
 				2F6EFEBB1A808806001F9DE7 /* UIImage+ImageEffects.m */,
-				2F4F0A5F1A81EE83008B6EF9 /* UIScrollView+DXRefresh.h */,
-				2F4F0A601A81EE83008B6EF9 /* UIScrollView+DXRefresh.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -353,7 +348,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F5954BB1A7E78BB001D5DAD /* TopCollectionViewCell.m in Sources */,
-				2F4F0A611A81EE83008B6EF9 /* UIScrollView+DXRefresh.m in Sources */,
 				2FC5A29B1A7F1CB200DD0E63 /* TabHomeViewController.m in Sources */,
 				2FEEE8621A7E5B8E0095D8DB /* WizardViewController.m in Sources */,
 				2FEEE85F1A7E5B8E0095D8DB /* AppDelegate.m in Sources */,
