@@ -53,7 +53,8 @@
     [self.otCoverView.tableView registerNib:nib forCellReuseIdentifier:ThirdTableCellIdentifier];
     
     // Batch Index is start from "1"
-    [[NSUserDefaults standardUserDefaults] setObject:@1 forKey:LoadContentBatchIndexKey];
+    [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:LoadContentBatchIndexKey];
+    //[[NSUserDefaults standardUserDefaults] setBool:YES forKey:CanBeRefreshedKey];
 }
 
 - (void)initViews
@@ -88,7 +89,7 @@
 - (void)initTestData
 {
     NSMutableArray *array = [NSMutableArray arrayWithCapacity:215];
-    for(int i = 0; i < 15; i++)
+    for(int i = 0; i < 51; i++)
     {
         [array addObject:[NSString stringWithFormat:@"ID: %d", i]];
     }
@@ -171,6 +172,10 @@
         case ThirdTableSectionIndex:
         {
             ThirdTableViewCell *cell = (ThirdTableViewCell *)[tableView dequeueReusableCellWithIdentifier:ThirdTableCellIdentifier];
+            [cell initItems];
+            
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
             return cell;
         }
             
@@ -214,23 +219,45 @@
             {
                 return 0;
             }
-            if([array count] >= 20)
+            if([array count] >= batchIndex * TotalItemsPerBatch)
             {
-                NSLog(@"TotalRows: 10");
-                return 10 * HeightOfItemInThirdTableCell;
+                NSLog(@"TotalRows: %d", batchIndex * TotalRowsPerBatch);
+                return batchIndex * TotalRowsPerBatch * HeightOfItemInThirdTableCell;
             }
-            else // 0 < count < 20
+            else // 0 < count < batchIndex * TotalItemsPerBatch
             {
                 int totalRows = ([array count] - 1) / 2 + 1;
                 NSLog(@"TotalRows: %d", totalRows);
                 return totalRows * HeightOfItemInThirdTableCell;
             }
         }
-            //return 5000;
             
         default:
             return 60.0f;
             break;
+    }
+}
+
+- (void)loadNextBatchProducts
+{
+    NSArray *array = [BFPreferenceData loadTestDataArray];
+    int batchIndex = [[NSUserDefaults standardUserDefaults] integerForKey:LoadContentBatchIndexKey];
+
+    if(batchIndex * TotalItemsPerBatch < [array count])
+    {
+        batchIndex++;
+        [[NSUserDefaults standardUserDefaults] setInteger:batchIndex forKey:LoadContentBatchIndexKey];
+        NSLog(@"batchIndex in load...: %d", batchIndex);
+        [self.otCoverView.tableView reloadData];
+    }
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.section == RefreshSectionIndex)
+    {
+        [self loadNextBatchProducts];
     }
 }
 

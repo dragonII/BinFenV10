@@ -10,4 +10,6 @@
 
 @interface ThirdTableViewCell : UITableViewCell
 
+- (void)initItems;
+
 @end

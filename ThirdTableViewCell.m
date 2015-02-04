@@ -30,7 +30,7 @@
     
     NSArray *array = [BFPreferenceData loadTestDataArray];
     int batchIndex = [[NSUserDefaults standardUserDefaults] integerForKey:LoadContentBatchIndexKey];
-    NSLog(@"batchIndex: %d", batchIndex);
+    NSLog(@"batchIndex#: %d", batchIndex);
     
     CGFloat itemWidth = 142.0f;
     CGFloat itemHeight = 208.0f;
@@ -46,8 +46,8 @@
     int row = 0;
     int column = 0;
     
-    if([array count] >= batchIndex * TotalPerBatch)
-        maxIndex = batchIndex * TotalPerBatch;
+    if([array count] >= batchIndex * TotalItemsPerBatch)
+        maxIndex = batchIndex * TotalItemsPerBatch;
     else
         maxIndex = [array count];
     

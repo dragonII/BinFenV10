@@ -16,7 +16,10 @@ static NSString *SecondTableCellIdentifier = @"SecondTableCellIdentifier";
 static NSString *ThirdTableCellIdentifier = @"ThirdTableViewCellIdentifier";
 
 static NSString *LoadContentBatchIndexKey = @"loadBatchIndex";
-static int TotalPerBatch = 20;
+static NSString *CanBeRefreshedKey = @"refresh";
+
+static int TotalItemsPerBatch = 20;
+static int TotalRowsPerBatch = 10;
 
 static const NSInteger TopTableRowIndex = 0;
 static const NSInteger SecondTableRowIndex = 1;
