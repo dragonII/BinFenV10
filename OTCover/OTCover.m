@@ -18,7 +18,9 @@
 @property (nonatomic, strong) UIView *parentView;
 @property (nonatomic, strong) UIImageView *searchView;
 
-@property BOOL searchViewVisible;
+@property BOOL searchViewHideDone;
+@property BOOL searchViewShowDone;
+@property BOOL searchViewContentsInsetsDone;
 
 @end
 
@@ -51,8 +53,12 @@
     
     self.searchView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, 64)];
     self.searchView.image = [UIImage imageNamed:@"SearchBarInHome"];
+    
     [self.searchView setHidden:YES];
-    self.searchViewVisible = NO;
+    self.searchViewHideDone = YES;
+    self.searchViewShowDone = NO;
+    self.searchViewContentsInsetsDone = NO;
+    
     [self addSubview:self.searchView];
     
     return self;
@@ -105,18 +111,50 @@
     }
 }
 
-- (void)presentSearchView
+- (void)hideSearchView
 {
-    [self.searchView setHidden:NO];
-    UIEdgeInsets insets = self.tableView.contentInset;
-    insets.top = self.searchView.bounds.size.height;
-    [self.tableView setContentInset:insets];
+    if(self.searchViewHideDone == NO)
+    {
+        self.searchViewHideDone = YES;
+        self.searchViewShowDone = NO;
+        
+        self.searchView.alpha = 0.0f;
+        [self.searchView setHidden:YES];
+        
+        self.searchViewContentsInsetsDone = NO;
+        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    }
+}
+
+- (void)showSearchView
+{
+    if(self.searchViewShowDone == NO)
+    {
+        self.searchViewShowDone = YES;
+        self.searchViewHideDone = NO;
+        
+        [self.searchView setHidden:NO];
+    }
+}
+
+- (void)setTableContentsInsets
+{
+    self.searchView.alpha = 1.0f;
+    
+    if(self.searchViewContentsInsetsDone == NO)
+    {
+        self.searchViewContentsInsetsDone = YES;
+        
+        UIEdgeInsets insets = self.tableView.contentInset;
+        insets.top = self.searchView.bounds.size.height;
+        [self.tableView setContentInset:insets];
+    }
 }
 
 - (void)animationForTableView
 {
     CGFloat offset = self.tableView.contentOffset.y;    
-    NSLog(@"Y offset: %f", offset);
+    //NSLog(@"Y offset: %f", offset);
     
     if(offset < 0)
     {
@@ -130,35 +168,54 @@
         
         if(offset < 64)
         {
-            //if(self.searchViewVisible == NO)
+            [self hideSearchView];
+            /*
+            if(self.searchViewHideDone == NO)
+            {
+                self.searchViewHideDone = YES;
+                self.searchViewShowDone = NO;
                 
-            self.searchView.alpha = 0.0f;
-            [self.searchView setHidden:YES];
+                self.searchView.alpha = 0.0f;
+                [self.searchView setHidden:YES];
+                self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+                NSLog(@"1");
+            }
+             */
         }
         if(offset >= 64 && offset <= 114)
         {
-            if(self.searchViewVisible == NO)
+            [self showSearchView];
+            /*
+            if(self.searchViewShowDone == NO)
             {
+                self.searchViewShowDone = YES;
+                self.searchViewHideDone = NO;
+                
                 [self.searchView setHidden:NO];
-                self.searchViewVisible = YES;
+                NSLog(@"2");
             }
+             */
+            
             CGFloat delta = offset - 64; // 0 <= delta <= 50
-            //NSLog(@"delta = %f", delta);
             self.searchView.frame = CGRectMake((delta - 50) / 2.0f, 0, 320 + (50 - delta), 64);
             self.searchView.alpha = delta / 50;
         }
         if(offset > 114)
         {
-            if(self.searchViewVisible == NO)
+            [self setTableContentsInsets];
+            /*
+            if(self.searchViewContentsInsets == NO)
             {
-                self.searchView.alpha = 1.0f;
+                self.searchViewContentsInsets = YES;
+                
                 UIEdgeInsets insets = self.tableView.contentInset;
                 insets.top = self.searchView.bounds.size.height;
                 [self.tableView setContentInset:insets];
+                [self.searchView setAlpha:1.0f];
+                NSLog(@"3");
             }
+             */
         }
-        
-        
     }
 }
 
