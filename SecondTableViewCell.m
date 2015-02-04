@@ -31,6 +31,13 @@
     self.pageControl.currentPage = currentPage;
 }
 
+
+- (void)itemClicked:(UITapGestureRecognizer*)sender
+{
+    UIView *view = sender.view;
+    NSLog(@"%d", view.tag);
+}
+
 - (void)initItems
 {
 #warning 目前只涵盖屏幕宽度为320，其他宽度的屏幕尺寸待完成
@@ -53,17 +60,26 @@
     CGFloat imageViewWidth = 44.0f;
     CGFloat imageViewHeight = 44.0f;
     
-    //int index = 0;
+    int index = 10;
     int row = 0;
     int column = 0;
     
     for(NSString *itemString in array)
     {
         UIView *itemView = [[UIView alloc] init];
+        itemView.tag = index;
         itemView.frame = CGRectMake(x, row * itemHeight, itemWidth, itemHeight);
+        
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(itemClicked:)];
+        //tapGesture.delegate = self;
+        tapGesture.numberOfTapsRequired = 1;
+        tapGesture.numberOfTouchesRequired = 1;
+        [itemView addGestureRecognizer:tapGesture];
+         
         
         UIImageView *imageView = [[UIImageView alloc] init];
         UILabel *label = [[UILabel alloc] init];
+        
         
         imageView.frame = CGRectMake(itemView.bounds.origin.x + 18, itemView.bounds.origin.y + 12, imageViewWidth, imageViewHeight);
         label.frame = CGRectMake(itemView.bounds.origin.x, itemView.bounds.origin.y + 12 + imageViewHeight, itemView.bounds.size.width, itemHeight - imageViewHeight);
@@ -80,13 +96,13 @@
         imageView.layer.borderColor = [UIColor whiteColor].CGColor;
         imageView.clipsToBounds = YES;
         imageView.alpha = 0.8f;
-        
+
         
         [itemView addSubview:imageView];
         [itemView addSubview:label];
         [self.scrollView addSubview:itemView];
         
-        //index++;
+        index++;
         row++;
         if(row == 2)
         {
