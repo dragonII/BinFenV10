@@ -18,6 +18,8 @@
 @property (nonatomic, strong) UIView *parentView;
 @property (nonatomic, strong) UIImageView *searchView;
 
+@property BOOL searchViewVisible;
+
 @end
 
 @implementation OTCover
@@ -50,6 +52,7 @@
     self.searchView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, 64)];
     self.searchView.image = [UIImage imageNamed:@"SearchBarInHome"];
     [self.searchView setHidden:YES];
+    self.searchViewVisible = NO;
     [self addSubview:self.searchView];
     
     return self;
@@ -127,11 +130,18 @@
         
         if(offset < 64)
         {
+            //if(self.searchViewVisible == NO)
+                
             self.searchView.alpha = 0.0f;
+            [self.searchView setHidden:YES];
         }
         if(offset >= 64 && offset <= 114)
         {
-            [self.searchView setHidden:NO];
+            if(self.searchViewVisible == NO)
+            {
+                [self.searchView setHidden:NO];
+                self.searchViewVisible = YES;
+            }
             CGFloat delta = offset - 64; // 0 <= delta <= 50
             //NSLog(@"delta = %f", delta);
             self.searchView.frame = CGRectMake((delta - 50) / 2.0f, 0, 320 + (50 - delta), 64);
@@ -139,10 +149,13 @@
         }
         if(offset > 114)
         {
-            self.searchView.alpha = 1.0f;
-            UIEdgeInsets insets = self.tableView.contentInset;
-            insets.top = self.searchView.bounds.size.height;
-            [self.tableView setContentInset:insets];
+            if(self.searchViewVisible == NO)
+            {
+                self.searchView.alpha = 1.0f;
+                UIEdgeInsets insets = self.tableView.contentInset;
+                insets.top = self.searchView.bounds.size.height;
+                [self.tableView setContentInset:insets];
+            }
         }
         
         
