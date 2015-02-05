@@ -17,9 +17,11 @@
 
 #import "BFPreferenceData.h"
 
+#import "MLKMenuPopover.h"
+
 #import "defs.h"
 
-@interface TabHomeViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface TabHomeViewController () <UITableViewDataSource, UITableViewDelegate, MLKMenuPopoverDelegate>
 
 @property (strong, nonatomic) OTCover *otCoverView;
 
@@ -27,7 +29,7 @@
 
 @property (strong, nonatomic) DelegatesForCollection *collectionDelegates;
 
-//@property (strong, nonatomic) UIImageView *searchView;
+@property (strong, nonatomic) MLKMenuPopover *categoryPopover;
 
 @end
 
@@ -285,9 +287,27 @@
     //NSLog(@"%d", view.tag);
 }
 
+- (void)menuPopover:(MLKMenuPopover *)menuPopover didSelectMenuItemAtIndex:(NSInteger)selectedIndex
+{
+    [self.categoryPopover dismissMenuPopover];
+    NSLog(@"Category selected");
+}
+
 - (void)button1Clicked:(UIButton *)sender
 {
     NSLog(@"button one");
+
+    NSArray *menuItems = @[@"Category one", @"Category Two"];
+    
+    // Hide already showing popover
+    if(self.categoryPopover)
+    {
+        [self.categoryPopover dismissMenuPopover];
+    }
+    
+    self.categoryPopover = [[MLKMenuPopover alloc] initWithFrame:CGRectMake(sender.frame.origin.x, sender.frame.origin.y + 36, self.view.bounds.size.width, 44 * [menuItems count]) menuItems:menuItems];
+    self.categoryPopover.menuPopoverDelegate = self;
+    [self.categoryPopover showInView:self.view];
 }
 
 - (void)button2Clicked:(UIButton *)sender
