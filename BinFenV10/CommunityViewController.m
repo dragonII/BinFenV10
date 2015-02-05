@@ -15,6 +15,10 @@
 NSString *CommunityCellIdentifier = @"CommunityCellIdentifier";
 NSString *ProductCellIdentifier = @"ProductCellIdentifier";
 
+static const int SectionCategory = 0;
+static const int SectionCommunity = 1;
+static const int SectionLoadMore = 2;
+
 @interface CommunityViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -28,24 +32,19 @@ NSString *ProductCellIdentifier = @"ProductCellIdentifier";
 {
     [super viewDidLoad];
     
-    NSLog(@"%f", self.navigationController.navigationBar.frame.size.height);
     CGRect mainBounds = [[UIScreen mainScreen] bounds];
     CGFloat navigationBarHeight = self.navigationController.navigationBar.frame.size.height;
     CGFloat statusBarHeight = 20;
-    //CGRect tableFrame = CGRectMake(mainBounds.origin.x, mainBounds.origin.y + navigationBarHeight + statusBarHeight, mainBounds.size.width, mainBounds.size.height - 150.0f);//- navigationBarHeight - statusBarHeight);
-    //self.tableView.frame = tableFrame;
-    //self.tableView.frame = CGRectMake(0, 64, 320, 480 - 64 - 49);
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, 320, 480 - 64-49)];
-    [self.view addSubview:self.tableView];
-    //self.tableView.frame = mainBounds;
+    self.tableView = [[UITableView alloc] initWithFrame:mainBounds];
+    UIEdgeInsets insets = self.tableView.contentInset;
+    insets.top = navigationBarHeight + statusBarHeight;
+    self.tableView.contentInset = insets;
     
-    //UIEdgeInsets contentInsets = self.tableView.contentInset;
-    //contentInsets.bottom = 49.0f;
-    //self.tableView.contentInset = contentInsets;
+    [self.view addSubview:self.tableView];
     
     [self initTableRowWithScroll];
     
-    self.navigationItem.title = @"TEST";
+    self.navigationItem.title = @"社区";
     self.hidesBottomBarWhenPushed = YES;
 }
 
@@ -78,8 +77,6 @@ NSString *ProductCellIdentifier = @"ProductCellIdentifier";
     if(![_categoriesListArray isEqualToArray:categoriesListArray])
     {
         _categoriesListArray = [NSArray arrayWithArray:categoriesListArray];
-        //[self initItems];
-        //[self initTestItems];
     }
 }
 
@@ -101,7 +98,7 @@ NSString *ProductCellIdentifier = @"ProductCellIdentifier";
     NSInteger sectionNumber = indexPath.section;
     switch (sectionNumber)
     {
-        case 0:
+        case SectionCategory:
         {
             SecondTableViewCell *cell = (SecondTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CommunityCellIdentifier];
             if(cell == nil)
@@ -114,7 +111,7 @@ NSString *ProductCellIdentifier = @"ProductCellIdentifier";
             return cell;
         }
             
-        case 1:
+        case SectionCommunity:
         {
             ThirdTableViewCell *cell = (ThirdTableViewCell *)[tableView dequeueReusableCellWithIdentifier:ProductCellIdentifier];
             if(cell == nil)
@@ -129,7 +126,7 @@ NSString *ProductCellIdentifier = @"ProductCellIdentifier";
             return cell;
         }
             
-        case 2:
+        case SectionLoadMore:
         {
             UITableViewCell *cell = [[UITableViewCell alloc] init];
             cell.textLabel.text = @"Click to Refresh";
@@ -141,15 +138,23 @@ NSString *ProductCellIdentifier = @"ProductCellIdentifier";
     }
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.section == 2)
+    {
+        //[self loadNextBatchProducts];
+    }
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSInteger sectionNumber = indexPath.section;
     switch (sectionNumber)
     {
-        case 0:
+        case SectionCategory:
             return 214.0f;
             break;
-        case 1:
+        case SectionCommunity:
         {
             NSInteger batchIndex = [[NSUserDefaults standardUserDefaults] integerForKey:LoadContentBatchIndexKey];
             NSArray *array = [BFPreferenceData loadTestDataArray];
@@ -169,7 +174,7 @@ NSString *ProductCellIdentifier = @"ProductCellIdentifier";
                 return totalRows * HeightOfItemInThirdTableCell;
             }
         }
-        case 2:
+        case SectionLoadMore:
             return 60.0f;
         default:
             return 60.0f;
