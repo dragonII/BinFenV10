@@ -10,18 +10,21 @@
 #import "CategoryTableViewCell.h"
 #import "ProductTableViewCell.h"
 #import "BFPreferenceData.h"
+#import "MLKMenuPopover.h"
 #import "defs.h"
 
 NSString *CategoryCellIdentifier = @"CategoryCellIdentifier";
 NSString *ProductCellIdentifier = @"ProductCellIdentifier";
 
 static const int SectionCategory = 0;
-static const int SectionCommunity = 1;
+static const int SectionProduct = 1;
 static const int SectionLoadMore = 2;
 
-@interface CommunityViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface CommunityViewController () <UITableViewDataSource, UITableViewDelegate, MLKMenuPopoverDelegate>
 
 @property (strong, nonatomic) UITableView *tableView;
+@property (strong, nonatomic) MLKMenuPopover *categoryPopover;
+
 
 @end
 
@@ -52,10 +55,6 @@ static const int SectionLoadMore = 2;
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    NSLog(@"Width: %f", self.tableView.bounds.size.width);
-    NSLog(@"Width: %f", [UIScreen mainScreen].bounds.size.width);
-    NSLog(@"Height: %f", self.tableView.bounds.size.height);
 }
 
 - (void)initTableRowWithScroll
@@ -112,7 +111,7 @@ static const int SectionLoadMore = 2;
             return cell;
         }
             
-        case SectionCommunity:
+        case SectionProduct:
         {
             ProductTableViewCell *cell = (ProductTableViewCell *)[tableView dequeueReusableCellWithIdentifier:ProductCellIdentifier];
             if(cell == nil)
@@ -139,11 +138,25 @@ static const int SectionLoadMore = 2;
     }
 }
 
+- (void)loadNextBatchProducts
+{
+    NSArray *array = [BFPreferenceData loadTestDataArray];
+    NSInteger batchIndex = [[NSUserDefaults standardUserDefaults] integerForKey:LoadContentBatchIndexKey];
+    
+    if(batchIndex * TotalItemsPerBatch < [array count])
+    {
+        batchIndex++;
+        [[NSUserDefaults standardUserDefaults] setInteger:batchIndex forKey:LoadContentBatchIndexKey];
+        NSLog(@"batchIndex in load...: %ld", (long)batchIndex);
+        [self.tableView reloadData];
+    }
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(indexPath.section == 2)
     {
-        //[self loadNextBatchProducts];
+        [self loadNextBatchProducts];
     }
 }
 
@@ -155,7 +168,7 @@ static const int SectionLoadMore = 2;
         case SectionCategory:
             return 214.0f;
             break;
-        case SectionCommunity:
+        case SectionProduct:
         {
             NSInteger batchIndex = [[NSUserDefaults standardUserDefaults] integerForKey:LoadContentBatchIndexKey];
             NSArray *array = [BFPreferenceData loadTestDataArray];
@@ -180,6 +193,97 @@ static const int SectionLoadMore = 2;
         default:
             return 60.0f;
     }
+}
+
+- (void)menuPopover:(MLKMenuPopover *)menuPopover didSelectMenuItemAtIndex:(NSInteger)selectedIndex
+{
+    [self.categoryPopover dismissMenuPopover];
+    NSLog(@"Category selected");
+}
+
+
+- (void)scrollToTopOfProductSection
+{
+    // 检测ProductSection的Header是否已经被置顶
+    if(self.tableView.contentOffset.y < 150)
+    {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:SectionProduct];
+        [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    }
+}
+
+- (void)showCategoryPopover:(id)sender
+{
+    CGRect popoverFrame = CGRectMake(5, 36 + 64, self.view.bounds.size.width - 10, 44 * 7);// Only display 7 lines most
+    // Hide already showing popover
+    if(self.categoryPopover)
+    {
+        [self.categoryPopover dismissMenuPopover];
+    }
+    
+    self.categoryPopover = [[MLKMenuPopover alloc] initWithFrame:popoverFrame menuItems:self.categoriesListArray];
+    self.categoryPopover.menuPopoverDelegate = self;
+    [self.categoryPopover showInView:self.view];
+}
+
+- (void)button1Clicked:(UIButton *)sender
+{
+    //NSLog(@"Contentoffset: %f", self.tableView.contentOffset.y);
+    [self scrollToTopOfProductSection];
+    
+    [NSTimer scheduledTimerWithTimeInterval:0.3f target:self selector:@selector(showCategoryPopover:) userInfo:nil repeats:NO];
+}
+
+- (void)button2Clicked:(UIButton *)sender
+{
+    NSLog(@"button two");
+}
+
+- (void)button3Clicked:(UIButton *)sender
+{
+    NSLog(@"button three");
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    CGFloat buttonWidth = 106.0f;
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 36)];
+    //imageView.backgroundColor = [UIColor lightGrayColor];
+    
+    [imageView setUserInteractionEnabled:YES];
+    
+    UIButton *button1 = [[UIButton alloc] initWithFrame:CGRectMake(imageView.frame.origin.x,
+                                                                   imageView.frame.origin.y,
+                                                                   buttonWidth, 36)];
+    button1.backgroundColor = [UIColor lightGrayColor];
+    [button1 addTarget:self action:@selector(button1Clicked:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *button2 = [[UIButton alloc] initWithFrame:CGRectMake(imageView.frame.origin.x + buttonWidth + 1,
+                                                                   imageView.frame.origin.y,
+                                                                   buttonWidth, 36)];
+    button2.backgroundColor = [UIColor lightGrayColor];
+    
+    [button2 addTarget:self action:@selector(button2Clicked:) forControlEvents:UIControlEventTouchUpInside];
+    UIButton *button3 = [[UIButton alloc] initWithFrame:CGRectMake(imageView.frame.origin.x + (buttonWidth + 1) * 2,
+                                                                   imageView.frame.origin.y,
+                                                                   buttonWidth, 36)];
+    button3.backgroundColor = [UIColor lightGrayColor];
+    [button3 addTarget:self action:@selector(button3Clicked:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [imageView addSubview:button1];
+    [imageView addSubview:button2];
+    [imageView addSubview:button3];
+    
+    return imageView;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if(section == SectionProduct)
+        return 36.0f;
+    else
+        return 0;
 }
 
 @end

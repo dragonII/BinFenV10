@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CommunityViewController : UIViewController
+@interface CommunityViewController : UIViewController 
 
 @property (strong, nonatomic) NSArray *categoriesListArray;
 
