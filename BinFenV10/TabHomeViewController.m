@@ -10,7 +10,6 @@
 #import "OTCover.h"
 #import "TopCollectionViewCell.h"
 #import "TopTableViewCell.h"
-//#import "DelegatesForCollection.h"
 
 #import "SecondTableViewCell.h"
 #import "ThirdTableViewCell.h"
@@ -18,6 +17,8 @@
 #import "BFPreferenceData.h"
 
 #import "MLKMenuPopover.h"
+
+#import "CommunityViewController.h"
 
 #import "defs.h"
 
@@ -81,6 +82,13 @@
     [BFPreferenceData saveTestDataArray:array];
 }
 
+- (void)loadAllData
+{
+    [self initCommunitiesData];
+    [self initCategoriesData];
+    [self initProductsData];
+}
+
 - (void)initTopTableRow
 {
     //[self.otCoverView.tableView registerClass:[TopTableViewCell class] forCellReuseIdentifier:TopTableRowCellIdentifier];
@@ -126,36 +134,39 @@
 
 - (void)hideNavigationItem
 {
+    //self.navigationController.title = @"首页";
+    self.navigationItem.title = @"首页";
     self.navigationController.navigationBarHidden = YES;
 }
 
-/*
-- (void)initTestData
+- (void)showNavigationItem
 {
-    NSMutableArray *array = [NSMutableArray arrayWithCapacity:215];
-    for(int i = 0; i < 51; i++)
-    {
-        [array addObject:[NSString stringWithFormat:@"ID: %d", i]];
-    }
-    
-    [BFPreferenceData saveTestDataArray:array];
+    self.navigationController.navigationBarHidden = NO;
 }
- */
+
+- (void)hideTabBar
+{
+    self.tabBarController.hidesBottomBarWhenPushed = YES;
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self initProductsData];
-    [self initCommunitiesData];
-    [self initCategoriesData];
+    [self loadAllData];
     
     self.hideTopRowCell = NO;
     
     [self hideNavigationItem];
     
-    //[self initCollectionDelegates];
-    
     [self initViews];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self hideNavigationItem];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -214,7 +225,8 @@
         [self.communitiyIndexArray addObject:indexPath];
         cell.imageView.image = [UIImage imageNamed:@"120x160_2"];
     }
-    //NSLog(@"indexArray: %@", self.indexPathArray);
+    
+    [self performSegueWithIdentifier:@"ShowCommunitySegue" sender:self];
 }
 
 
@@ -480,5 +492,14 @@
         return 0;
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([segue.identifier isEqualToString:@"ShowCommunitySegue"])
+    {
+        CommunityViewController *communityVC = (CommunityViewController *)segue.destinationViewController;
+        communityVC.hidesBottomBarWhenPushed = YES;
+        [self showNavigationItem];
+    }
+}
 
 @end
