@@ -11,7 +11,7 @@
 #import "TopCollectionViewCell.h"
 #import "TopTableViewCell.h"
 
-#import "SecondTableViewCell.h"
+#import "CommunityTableViewCell.h"
 #import "ThirdTableViewCell.h"
 
 #import "BFPreferenceData.h"
@@ -21,6 +21,20 @@
 #import "CommunityViewController.h"
 
 #import "defs.h"
+
+
+
+static NSString *TopTableRowCellIdentifier = @"TopTableRowCellIdentifier";
+static NSString *CommunityTableCellIdentifier = @"CommunityTableCellIdentifier";
+static NSString *ThirdTableCellIdentifier = @"ThirdTableViewCellIdentifier";
+
+static const NSInteger TopTableSectionIndex = 0;
+static const NSInteger CommunityTableSectionIndex = 1;
+static const NSInteger ThirdTableSectionIndex = 2;
+static const NSInteger RefreshSectionIndex = 3;
+
+
+
 
 @interface TabHomeViewController () <UITableViewDataSource, UITableViewDelegate, MLKMenuPopoverDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
@@ -91,16 +105,14 @@
 
 - (void)initTopTableRow
 {
-    //[self.otCoverView.tableView registerClass:[TopTableViewCell class] forCellReuseIdentifier:TopTableRowCellIdentifier];
     UINib *nib = [UINib nibWithNibName:@"TopTableViewCell" bundle:nil];
     [self.otCoverView.tableView registerNib:nib forCellReuseIdentifier:TopTableRowCellIdentifier];
 }
 
-- (void)initSecondTableRow
+- (void)initCommunityTableRow
 {
-    //[self.otCoverView.tableView registerClass:[SecondTableViewCell class] forCellReuseIdentifier:SecondTableCellIdentifier];
-    UINib *nib = [UINib nibWithNibName:@"SecondTableViewCell" bundle:nil];
-    [self.otCoverView.tableView registerNib:nib forCellReuseIdentifier:SecondTableCellIdentifier];
+    UINib *nib = [UINib nibWithNibName:@"CommunityTableViewCell" bundle:nil];
+    [self.otCoverView.tableView registerNib:nib forCellReuseIdentifier:CommunityTableCellIdentifier];
 }
 
 - (void)initThirdTableRow
@@ -110,7 +122,6 @@
     
     // Batch Index is start from "1"
     [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:LoadContentBatchIndexKey];
-    //[[NSUserDefaults standardUserDefaults] setBool:YES forKey:CanBeRefreshedKey];
 }
 
 
@@ -125,7 +136,7 @@
     //[self.otCoverView.tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
     
     [self initTopTableRow];
-    [self initSecondTableRow];
+    [self initCommunityTableRow];
     [self initThirdTableRow];
     
     [self.view addSubview:self.otCoverView];
@@ -284,12 +295,12 @@
             break;
         }
             
-        case SecondTableSectionIndex:
+        case CommunityTableSectionIndex:
         {
-            SecondTableViewCell *cell = (SecondTableViewCell *)[tableView dequeueReusableCellWithIdentifier:SecondTableCellIdentifier];
+            CommunityTableViewCell *cell = (CommunityTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CommunityTableCellIdentifier];
             if(cell == nil)
             {
-                cell = [[SecondTableViewCell alloc] init];
+                cell = [[CommunityTableViewCell alloc] init];
             }
             
             cell.categoriesListArray = self.categoriesDataList;
@@ -341,7 +352,7 @@
             else
                 return 184.0f;
             
-        case SecondTableSectionIndex:
+        case CommunityTableSectionIndex:
             return 214.0f;
             
         case ThirdTableSectionIndex:

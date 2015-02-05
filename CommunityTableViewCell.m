@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 Wang Long. All rights reserved.
 //
 
-#import "SecondTableViewCell.h"
+#import "CommunityTableViewCell.h"
 
-@implementation SecondTableViewCell
+@implementation CommunityTableViewCell
 
 - (void)awakeFromNib
 {

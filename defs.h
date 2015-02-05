@@ -12,10 +12,6 @@
 static NSInteger SearchViewTag = 4000;
 
 static NSString *TopCollectionCellIdentifier = @"TopCollectionCellIdentifier";
-//static NSString *MidCollectionCellIdentifier = @"MiddleCellIdentifier";
-static NSString *TopTableRowCellIdentifier = @"TopTableRowCellIdentifier";
-static NSString *SecondTableCellIdentifier = @"SecondTableCellIdentifier";
-static NSString *ThirdTableCellIdentifier = @"ThirdTableViewCellIdentifier";
 
 static NSString *LoadContentBatchIndexKey = @"loadBatchIndex";
 static NSString *CanBeRefreshedKey = @"refresh";
@@ -23,14 +19,7 @@ static NSString *CanBeRefreshedKey = @"refresh";
 static int TotalItemsPerBatch = 20;
 static int TotalRowsPerBatch = 10;
 
-static const NSInteger TopTableRowIndex = 0;
-static const NSInteger SecondTableRowIndex = 1;
 
-static const NSInteger TopTableSectionIndex = 0;
-static const NSInteger SecondTableSectionIndex = 1;
-static const NSInteger ThirdTableSectionIndex = 2;
-static const NSInteger RefreshSectionIndex = 3;
-
-static const CGFloat HeightOfItemInThirdTableCell = 208 + 10;
+static const CGFloat HeightOfItemInThirdTableCell = 208 + 10; //item + spacing
 
 #endif

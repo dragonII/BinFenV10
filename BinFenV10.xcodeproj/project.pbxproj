@@ -16,8 +16,8 @@
 		2F5954B31A7E6857001D5DAD /* BFPreferenceData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F5954B21A7E6857001D5DAD /* BFPreferenceData.m */; };
 		2F5954BB1A7E78BB001D5DAD /* TopCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F5954B91A7E78BB001D5DAD /* TopCollectionViewCell.m */; };
 		2F5954BC1A7E78BB001D5DAD /* TopCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F5954BA1A7E78BB001D5DAD /* TopCollectionViewCell.xib */; };
-		2F6EFEA61A8074E1001F9DE7 /* SecondTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6EFEA41A8074E1001F9DE7 /* SecondTableViewCell.m */; };
-		2F6EFEA71A8074E1001F9DE7 /* SecondTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F6EFEA51A8074E1001F9DE7 /* SecondTableViewCell.xib */; };
+		2F6EFEA61A8074E1001F9DE7 /* CommunityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6EFEA41A8074E1001F9DE7 /* CommunityTableViewCell.m */; };
+		2F6EFEA71A8074E1001F9DE7 /* CommunityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F6EFEA51A8074E1001F9DE7 /* CommunityTableViewCell.xib */; };
 		2F6EFEBC1A808806001F9DE7 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6EFEBB1A808806001F9DE7 /* UIImage+ImageEffects.m */; };
 		2FC5A2981A7F1BB900DD0E63 /* OTCover.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5A2971A7F1BB900DD0E63 /* OTCover.m */; };
 		2FC5A29B1A7F1CB200DD0E63 /* TabHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5A29A1A7F1CB200DD0E63 /* TabHomeViewController.m */; };
@@ -58,9 +58,9 @@
 		2F5954B81A7E78BB001D5DAD /* TopCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopCollectionViewCell.h; sourceTree = "<group>"; };
 		2F5954B91A7E78BB001D5DAD /* TopCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopCollectionViewCell.m; sourceTree = "<group>"; };
 		2F5954BA1A7E78BB001D5DAD /* TopCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TopCollectionViewCell.xib; sourceTree = "<group>"; };
-		2F6EFEA31A8074E1001F9DE7 /* SecondTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondTableViewCell.h; sourceTree = "<group>"; };
-		2F6EFEA41A8074E1001F9DE7 /* SecondTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondTableViewCell.m; sourceTree = "<group>"; };
-		2F6EFEA51A8074E1001F9DE7 /* SecondTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SecondTableViewCell.xib; sourceTree = "<group>"; };
+		2F6EFEA31A8074E1001F9DE7 /* CommunityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommunityTableViewCell.h; sourceTree = "<group>"; };
+		2F6EFEA41A8074E1001F9DE7 /* CommunityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommunityTableViewCell.m; sourceTree = "<group>"; };
+		2F6EFEA51A8074E1001F9DE7 /* CommunityTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommunityTableViewCell.xib; sourceTree = "<group>"; };
 		2F6EFEBA1A808806001F9DE7 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+ImageEffects.h"; path = "BinFenV10/UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		2F6EFEBB1A808806001F9DE7 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+ImageEffects.m"; path = "BinFenV10/UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		2FC5A2961A7F1BB900DD0E63 /* OTCover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTCover.h; sourceTree = "<group>"; };
@@ -143,15 +143,15 @@
 			name = CollectionViewCell;
 			sourceTree = "<group>";
 		};
-		2F6EFEA21A8074B8001F9DE7 /* SecondTableCell */ = {
+		2F6EFEA21A8074B8001F9DE7 /* CommunityTableCell */ = {
 			isa = PBXGroup;
 			children = (
-				2F6EFEA31A8074E1001F9DE7 /* SecondTableViewCell.h */,
-				2F6EFEA41A8074E1001F9DE7 /* SecondTableViewCell.m */,
-				2F6EFEA51A8074E1001F9DE7 /* SecondTableViewCell.xib */,
+				2F6EFEA31A8074E1001F9DE7 /* CommunityTableViewCell.h */,
+				2F6EFEA41A8074E1001F9DE7 /* CommunityTableViewCell.m */,
+				2F6EFEA51A8074E1001F9DE7 /* CommunityTableViewCell.xib */,
 				2F2B87E01A83650C00FE8F20 /* ComminutyCell.xib */,
 			);
-			name = SecondTableCell;
+			name = CommunityTableCell;
 			sourceTree = "<group>";
 		};
 		2F6EFEBD1A80883C001F9DE7 /* Categories */ = {
@@ -188,7 +188,7 @@
 				2F2B87D91A832A5A00FE8F20 /* MenuPopOver */,
 				2F6EFEBD1A80883C001F9DE7 /* Categories */,
 				2FC5A29C1A7F238200DD0E63 /* TopTableRowCell */,
-				2F6EFEA21A8074B8001F9DE7 /* SecondTableCell */,
+				2F6EFEA21A8074B8001F9DE7 /* CommunityTableCell */,
 				2F0475021A813CF000196F0B /* ThirdTableCell */,
 				2FC5A2951A7F1BB900DD0E63 /* OTCover */,
 				2F5954B71A7E7826001D5DAD /* CollectionViewCell */,
@@ -338,7 +338,7 @@
 				2F5954BC1A7E78BB001D5DAD /* TopCollectionViewCell.xib in Resources */,
 				2FEEE8651A7E5B8F0095D8DB /* Main.storyboard in Resources */,
 				2F0475071A813D1B00196F0B /* ThirdTableViewCell.xib in Resources */,
-				2F6EFEA71A8074E1001F9DE7 /* SecondTableViewCell.xib in Resources */,
+				2F6EFEA71A8074E1001F9DE7 /* CommunityTableViewCell.xib in Resources */,
 				2FC5A2A11A7F23BA00DD0E63 /* TopTableViewCell.xib in Resources */,
 				2FEEE86A1A7E5B8F0095D8DB /* LaunchScreen.xib in Resources */,
 				2FEEE8671A7E5B8F0095D8DB /* Images.xcassets in Resources */,
@@ -368,7 +368,7 @@
 				2F0475061A813D1B00196F0B /* ThirdTableViewCell.m in Sources */,
 				2FC5A2A01A7F23BA00DD0E63 /* TopTableViewCell.m in Sources */,
 				2FC5A2981A7F1BB900DD0E63 /* OTCover.m in Sources */,
-				2F6EFEA61A8074E1001F9DE7 /* SecondTableViewCell.m in Sources */,
+				2F6EFEA61A8074E1001F9DE7 /* CommunityTableViewCell.m in Sources */,
 				2F5954B31A7E6857001D5DAD /* BFPreferenceData.m in Sources */,
 				2F2B87DF1A833F4800FE8F20 /* CommunityViewController.m in Sources */,
 				2F2B87DC1A832A7100FE8F20 /* MLKMenuPopover.m in Sources */,

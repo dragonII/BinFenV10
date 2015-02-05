@@ -7,7 +7,7 @@
 //
 
 #import "CommunityViewController.h"
-#import "SecondTableViewCell.h"
+#import "CommunityTableViewCell.h"
 #import "ThirdTableViewCell.h"
 #import "BFPreferenceData.h"
 #import "defs.h"
@@ -100,10 +100,10 @@ static const int SectionLoadMore = 2;
     {
         case SectionCategory:
         {
-            SecondTableViewCell *cell = (SecondTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CommunityCellIdentifier];
+            CommunityTableViewCell *cell = (CommunityTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CommunityCellIdentifier];
             if(cell == nil)
             {
-                cell = [[SecondTableViewCell alloc] init];
+                cell = [[CommunityTableViewCell alloc] init];
             }
             
             cell.categoriesListArray = self.categoriesListArray;
