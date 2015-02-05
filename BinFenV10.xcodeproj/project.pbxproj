@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2F0475061A813D1B00196F0B /* ThirdTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F0475041A813D1B00196F0B /* ThirdTableViewCell.m */; };
-		2F0475071A813D1B00196F0B /* ThirdTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F0475051A813D1B00196F0B /* ThirdTableViewCell.xib */; };
+		2F0475061A813D1B00196F0B /* ProductTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F0475041A813D1B00196F0B /* ProductTableViewCell.m */; };
+		2F0475071A813D1B00196F0B /* ProductTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F0475051A813D1B00196F0B /* ProductTableViewCell.xib */; };
 		2F2B87DC1A832A7100FE8F20 /* MLKMenuPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2B87DB1A832A7100FE8F20 /* MLKMenuPopover.m */; };
 		2F2B87DF1A833F4800FE8F20 /* CommunityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2B87DE1A833F4800FE8F20 /* CommunityViewController.m */; };
 		2F2B87E11A83650C00FE8F20 /* CategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F2B87E01A83650C00FE8F20 /* CategoryCell.xib */; };
@@ -43,9 +43,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2F0475031A813D1B00196F0B /* ThirdTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThirdTableViewCell.h; sourceTree = "<group>"; };
-		2F0475041A813D1B00196F0B /* ThirdTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThirdTableViewCell.m; sourceTree = "<group>"; };
-		2F0475051A813D1B00196F0B /* ThirdTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ThirdTableViewCell.xib; sourceTree = "<group>"; };
+		2F0475031A813D1B00196F0B /* ProductTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductTableViewCell.h; sourceTree = "<group>"; };
+		2F0475041A813D1B00196F0B /* ProductTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductTableViewCell.m; sourceTree = "<group>"; };
+		2F0475051A813D1B00196F0B /* ProductTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductTableViewCell.xib; sourceTree = "<group>"; };
 		2F2B87DA1A832A7100FE8F20 /* MLKMenuPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLKMenuPopover.h; sourceTree = "<group>"; };
 		2F2B87DB1A832A7100FE8F20 /* MLKMenuPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLKMenuPopover.m; sourceTree = "<group>"; };
 		2F2B87DD1A833F4800FE8F20 /* CommunityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommunityViewController.h; sourceTree = "<group>"; };
@@ -106,9 +106,9 @@
 		2F0475021A813CF000196F0B /* ThirdTableCell */ = {
 			isa = PBXGroup;
 			children = (
-				2F0475031A813D1B00196F0B /* ThirdTableViewCell.h */,
-				2F0475041A813D1B00196F0B /* ThirdTableViewCell.m */,
-				2F0475051A813D1B00196F0B /* ThirdTableViewCell.xib */,
+				2F0475031A813D1B00196F0B /* ProductTableViewCell.h */,
+				2F0475041A813D1B00196F0B /* ProductTableViewCell.m */,
+				2F0475051A813D1B00196F0B /* ProductTableViewCell.xib */,
 				2F2B87E21A83670600FE8F20 /* ProductCell.xib */,
 			);
 			name = ThirdTableCell;
@@ -337,7 +337,7 @@
 				2F2B87E31A83670600FE8F20 /* ProductCell.xib in Resources */,
 				2F5954BC1A7E78BB001D5DAD /* CommunityCollectionViewCell.xib in Resources */,
 				2FEEE8651A7E5B8F0095D8DB /* Main.storyboard in Resources */,
-				2F0475071A813D1B00196F0B /* ThirdTableViewCell.xib in Resources */,
+				2F0475071A813D1B00196F0B /* ProductTableViewCell.xib in Resources */,
 				2F6EFEA71A8074E1001F9DE7 /* CategoryTableViewCell.xib in Resources */,
 				2FC5A2A11A7F23BA00DD0E63 /* CommunityTableViewCell.xib in Resources */,
 				2FEEE86A1A7E5B8F0095D8DB /* LaunchScreen.xib in Resources */,
@@ -365,7 +365,7 @@
 				2FEEE8621A7E5B8E0095D8DB /* WizardViewController.m in Sources */,
 				2FEEE85F1A7E5B8E0095D8DB /* AppDelegate.m in Sources */,
 				2F6EFEBC1A808806001F9DE7 /* UIImage+ImageEffects.m in Sources */,
-				2F0475061A813D1B00196F0B /* ThirdTableViewCell.m in Sources */,
+				2F0475061A813D1B00196F0B /* ProductTableViewCell.m in Sources */,
 				2FC5A2A01A7F23BA00DD0E63 /* CommunityTableViewCell.m in Sources */,
 				2FC5A2981A7F1BB900DD0E63 /* OTCover.m in Sources */,
 				2F6EFEA61A8074E1001F9DE7 /* CategoryTableViewCell.m in Sources */,

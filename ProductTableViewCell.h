@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ThirdTableViewCell : UITableViewCell
+@interface ProductTableViewCell : UITableViewCell
 
 - (void)initItems;
 

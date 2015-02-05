@@ -18,6 +18,6 @@ static int TotalItemsPerBatch = 20;
 static int TotalRowsPerBatch = 10;
 
 
-static const CGFloat HeightOfItemInThirdTableCell = 208 + 10; //item + spacing
+static const CGFloat HeightOfItemInProductTableCell = 208 + 10; //item + spacing
 
 #endif

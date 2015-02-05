@@ -8,7 +8,7 @@
 
 #import "CommunityViewController.h"
 #import "CategoryTableViewCell.h"
-#import "ThirdTableViewCell.h"
+#import "ProductTableViewCell.h"
 #import "BFPreferenceData.h"
 #import "defs.h"
 
@@ -114,10 +114,10 @@ static const int SectionLoadMore = 2;
             
         case SectionCommunity:
         {
-            ThirdTableViewCell *cell = (ThirdTableViewCell *)[tableView dequeueReusableCellWithIdentifier:ProductCellIdentifier];
+            ProductTableViewCell *cell = (ProductTableViewCell *)[tableView dequeueReusableCellWithIdentifier:ProductCellIdentifier];
             if(cell == nil)
             {
-                cell = [[ThirdTableViewCell alloc] init];
+                cell = [[ProductTableViewCell alloc] init];
             }
             
             [cell initItems];
@@ -166,13 +166,13 @@ static const int SectionLoadMore = 2;
             if([array count] >= batchIndex * TotalItemsPerBatch)
             {
                 NSLog(@"TotalRows: %d", batchIndex * TotalRowsPerBatch);
-                return batchIndex * TotalRowsPerBatch * HeightOfItemInThirdTableCell;
+                return batchIndex * TotalRowsPerBatch * HeightOfItemInProductTableCell;
             }
             else // 0 < count < batchIndex * TotalItemsPerBatch
             {
                 NSInteger totalRows = ([array count] - 1) / 2 + 1;
                 NSLog(@"TotalRows: %ld", (long)totalRows);
-                return totalRows * HeightOfItemInThirdTableCell;
+                return totalRows * HeightOfItemInProductTableCell;
             }
         }
         case SectionLoadMore:

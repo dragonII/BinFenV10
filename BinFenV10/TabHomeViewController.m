@@ -12,7 +12,7 @@
 #import "CommunityTableViewCell.h"
 
 #import "CategoryTableViewCell.h"
-#import "ThirdTableViewCell.h"
+#import "ProductTableViewCell.h"
 
 #import "BFPreferenceData.h"
 
@@ -26,13 +26,13 @@
 
 static NSString *CommunityTableRowCellIdentifier = @"CommunityTableRowCellIdentifier";
 static NSString *CategoryTableCellIdentifier = @"CategoryTableCellIdentifier";
-static NSString *ThirdTableCellIdentifier = @"ThirdTableViewCellIdentifier";
+static NSString *ProductTableCellIdentifier = @"ProductTableViewCellIdentifier";
 
 static NSString *CommunityCollectionCellIdentifier = @"CommunityCollectionCellIdentifier";
 
 static const NSInteger CommunityTableSectionIndex = 0;
 static const NSInteger CategoryTableSectionIndex = 1;
-static const NSInteger ThirdTableSectionIndex = 2;
+static const NSInteger ProductTableSectionIndex = 2;
 static const NSInteger RefreshSectionIndex = 3;
 
 
@@ -117,10 +117,10 @@ static const NSInteger RefreshSectionIndex = 3;
     [self.otCoverView.tableView registerNib:nib forCellReuseIdentifier:CategoryTableCellIdentifier];
 }
 
-- (void)initThirdTableRow
+- (void)initProductTableRow
 {
-    UINib *nib = [UINib nibWithNibName:@"ThirdTableViewCell" bundle:nil];
-    [self.otCoverView.tableView registerNib:nib forCellReuseIdentifier:ThirdTableCellIdentifier];
+    UINib *nib = [UINib nibWithNibName:@"ProductTableViewCell" bundle:nil];
+    [self.otCoverView.tableView registerNib:nib forCellReuseIdentifier:ProductTableCellIdentifier];
     
     // Batch Index is start from "1"
     [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:LoadContentBatchIndexKey];
@@ -139,7 +139,7 @@ static const NSInteger RefreshSectionIndex = 3;
     
     [self initCommunityTableRow];
     [self initCategoryTableRow];
-    [self initThirdTableRow];
+    [self initProductTableRow];
     
     [self.view addSubview:self.otCoverView];
 }
@@ -309,12 +309,12 @@ static const NSInteger RefreshSectionIndex = 3;
             return cell;
         }
             
-        case ThirdTableSectionIndex:
+        case ProductTableSectionIndex:
         {
-            ThirdTableViewCell *cell = (ThirdTableViewCell *)[tableView dequeueReusableCellWithIdentifier:ThirdTableCellIdentifier];
+            ProductTableViewCell *cell = (ProductTableViewCell *)[tableView dequeueReusableCellWithIdentifier:ProductTableCellIdentifier];
             if(cell == nil)
             {
-                cell = [[ThirdTableViewCell alloc] init];
+                cell = [[ProductTableViewCell alloc] init];
             }
             
             [cell initItems];
@@ -356,7 +356,7 @@ static const NSInteger RefreshSectionIndex = 3;
         case CategoryTableSectionIndex:
             return 214.0f;
             
-        case ThirdTableSectionIndex:
+        case ProductTableSectionIndex:
         {
             NSInteger batchIndex = [[NSUserDefaults standardUserDefaults] integerForKey:LoadContentBatchIndexKey];
             NSArray *array = [BFPreferenceData loadTestDataArray];
@@ -367,13 +367,13 @@ static const NSInteger RefreshSectionIndex = 3;
             if([array count] >= batchIndex * TotalItemsPerBatch)
             {
                 NSLog(@"TotalRows: %d", batchIndex * TotalRowsPerBatch);
-                return batchIndex * TotalRowsPerBatch * HeightOfItemInThirdTableCell;
+                return batchIndex * TotalRowsPerBatch * HeightOfItemInProductTableCell;
             }
             else // 0 < count < batchIndex * TotalItemsPerBatch
             {
                 NSInteger totalRows = ([array count] - 1) / 2 + 1;
                 NSLog(@"TotalRows: %ld", (long)totalRows);
-                return totalRows * HeightOfItemInThirdTableCell;
+                return totalRows * HeightOfItemInProductTableCell;
             }
         }
             
@@ -406,12 +406,6 @@ static const NSInteger RefreshSectionIndex = 3;
     }
 }
 
-- (void)thirdSectionClicked:(UITapGestureRecognizer*)sender
-{
-    NSLog(@"ThirdSection Clicked");
-    //UIView *view = sender.view;
-    //NSLog(@"%d", view.tag);
-}
 
 - (void)menuPopover:(MLKMenuPopover *)menuPopover didSelectMenuItemAtIndex:(NSInteger)selectedIndex
 {
@@ -419,12 +413,12 @@ static const NSInteger RefreshSectionIndex = 3;
     NSLog(@"Category selected");
 }
 
-- (void)scrollToTopThirdSection
+- (void)scrollToTopOfProductSection
 {
-    // 检测ThirdSection的Header是否已经被置顶
+    // 检测ProductSection的Header是否已经被置顶
     if(self.otCoverView.tableView.contentOffset.y < 504)
     {
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:ThirdTableSectionIndex];
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:ProductTableSectionIndex];
         [self.otCoverView.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
     }
 }
@@ -446,7 +440,7 @@ static const NSInteger RefreshSectionIndex = 3;
 
 - (void)button1Clicked:(UIButton *)sender
 {
-    [self scrollToTopThirdSection];
+    [self scrollToTopOfProductSection];
     
     [NSTimer scheduledTimerWithTimeInterval:0.3f target:self selector:@selector(showCategoryPopover:) userInfo:nil repeats:NO];
 }
@@ -498,7 +492,7 @@ static const NSInteger RefreshSectionIndex = 3;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if(section == ThirdTableSectionIndex)
+    if(section == ProductTableSectionIndex)
         return 36.0f;
     else
         return 0;
