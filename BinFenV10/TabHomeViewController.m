@@ -203,9 +203,9 @@ static const NSInteger RefreshSectionIndex = 3;
     CommunityCollectionViewCell *cell = (CommunityCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:CommunityCollectionCellIdentifier forIndexPath:indexPath];
     if([self.communitiyIndexArray containsObject:indexPath])
     {
-        cell.imageView.image = [UIImage imageNamed:@"120x160_2"];
+        //cell.imageView.image = [UIImage imageNamed:@"120x160_2"];
     } else {
-        cell.imageView.image = [UIImage imageNamed:@"CellPlaceHolder"];
+        //cell.imageView.image = [UIImage imageNamed:@"CellPlaceHolder"];
     }
     cell.text = [self.communitiesDataList objectAtIndex:indexPath.row];
     return cell;

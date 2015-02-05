@@ -13,7 +13,27 @@
 
 - (void)awakeFromNib
 {
-    self.imageView.image = [UIImage imageNamed:@"CellPlaceHolder"];
+    //self.imageView.image = [UIImage imageNamed:@"CellPlaceHolder"];
+    //self.imageView.image = [UIImage imageNamed:@"ios1"];
+    
+    
+    // Array of images
+    NSMutableArray *arrImages = [NSMutableArray array];
+    for (int i = 1; i <= 6; i++)
+    {
+        [arrImages addObject:[UIImage imageNamed:[NSString stringWithFormat:@"ios%d", i]]];
+    }
+    
+    
+    // LAAnimatedGrid
+    LAAnimatedGrid *laag = [[LAAnimatedGrid alloc] initWithFrame:self.contentView.bounds];
+    [laag setArrImages:arrImages];
+    [laag setLaagOrientation:LAAGOrientationHorizontal];
+    // [laag setLaagOrientation:LAAGOrientationVertical];
+    // [laag setLaagBorderColor:[UIColor blackColor]];
+    // [laag setLaagBackGroundColor:[UIColor whiteColor]];
+    [self.contentView addSubview:laag];
+    
 }
 
 - (void)setText:(NSString *)text
