@@ -10,4 +10,6 @@
 
 @interface CommunityViewController : UIViewController
 
+@property (strong, nonatomic) NSArray *categoriesListArray;
+
 @end

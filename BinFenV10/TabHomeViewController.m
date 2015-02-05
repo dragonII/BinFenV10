@@ -354,7 +354,7 @@
             }
             if([array count] >= batchIndex * TotalItemsPerBatch)
             {
-                NSLog(@"TotalRows: %ld", batchIndex * TotalRowsPerBatch);
+                NSLog(@"TotalRows: %d", batchIndex * TotalRowsPerBatch);
                 return batchIndex * TotalRowsPerBatch * HeightOfItemInThirdTableCell;
             }
             else // 0 < count < batchIndex * TotalItemsPerBatch
@@ -374,13 +374,13 @@
 - (void)loadNextBatchProducts
 {
     NSArray *array = [BFPreferenceData loadTestDataArray];
-    int batchIndex = [[NSUserDefaults standardUserDefaults] integerForKey:LoadContentBatchIndexKey];
+    NSInteger batchIndex = [[NSUserDefaults standardUserDefaults] integerForKey:LoadContentBatchIndexKey];
 
     if(batchIndex * TotalItemsPerBatch < [array count])
     {
         batchIndex++;
         [[NSUserDefaults standardUserDefaults] setInteger:batchIndex forKey:LoadContentBatchIndexKey];
-        NSLog(@"batchIndex in load...: %d", batchIndex);
+        NSLog(@"batchIndex in load...: %ld", (long)batchIndex);
         [self.otCoverView.tableView reloadData];
     }
 }
@@ -498,6 +498,7 @@
     {
         CommunityViewController *communityVC = (CommunityViewController *)segue.destinationViewController;
         communityVC.hidesBottomBarWhenPushed = YES;
+        communityVC.categoriesListArray = self.categoriesDataList;
         [self showNavigationItem];
     }
 }
