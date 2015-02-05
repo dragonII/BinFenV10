@@ -293,21 +293,38 @@
     NSLog(@"Category selected");
 }
 
-- (void)button1Clicked:(UIButton *)sender
+- (void)scrollToTopThirdSection
 {
-    NSLog(@"button one");
+    // 检测ThirdSection的Header是否已经被置顶
+    if(self.otCoverView.tableView.contentOffset.y < 504)
+    {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:ThirdTableSectionIndex];
+        [self.otCoverView.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    }
+}
 
+
+- (void)showCategoryPopover:(id)sender
+{
     NSArray *menuItems = @[@"Category one", @"Category Two"];
     
+    CGRect popoverFrame = CGRectMake(5, 36 + 64, self.view.bounds.size.width - 10, 44 * [menuItems count]);
     // Hide already showing popover
     if(self.categoryPopover)
     {
         [self.categoryPopover dismissMenuPopover];
     }
     
-    self.categoryPopover = [[MLKMenuPopover alloc] initWithFrame:CGRectMake(sender.frame.origin.x, sender.frame.origin.y + 36, self.view.bounds.size.width, 44 * [menuItems count]) menuItems:menuItems];
+    self.categoryPopover = [[MLKMenuPopover alloc] initWithFrame:popoverFrame menuItems:menuItems];
     self.categoryPopover.menuPopoverDelegate = self;
     [self.categoryPopover showInView:self.view];
+}
+
+- (void)button1Clicked:(UIButton *)sender
+{
+    [self scrollToTopThirdSection];
+    
+    [NSTimer scheduledTimerWithTimeInterval:0.3f target:self selector:@selector(showCategoryPopover:) userInfo:nil repeats:NO];
 }
 
 - (void)button2Clicked:(UIButton *)sender
