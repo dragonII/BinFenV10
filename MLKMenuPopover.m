@@ -71,7 +71,7 @@
         menuItemsTableView.dataSource = self;
         menuItemsTableView.delegate = self;
         menuItemsTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        menuItemsTableView.scrollEnabled = NO;
+        menuItemsTableView.scrollEnabled = YES;
         menuItemsTableView.backgroundColor = [UIColor clearColor];
         menuItemsTableView.tag = MENU_TABLE_VIEW_TAG;
         

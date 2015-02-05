@@ -13,6 +13,8 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 
-@property (strong, nonatomic) UIView *selectedItemView;
+//@property (strong, nonatomic) UIView *selectedItemView;
+
+@property (strong, nonatomic) NSArray *categoriesListArray;
 
 @end

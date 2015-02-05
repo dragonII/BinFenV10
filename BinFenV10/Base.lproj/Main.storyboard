@@ -24,6 +24,23 @@
             </objects>
             <point key="canvasLocation" x="67" y="-77"/>
         </scene>
+        <!--Community View Controller-->
+        <scene sceneID="SGl-uo-wOQ">
+            <objects>
+                <viewController id="nuf-EP-vNP" customClass="CommunityViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uYU-yt-vQQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="Qh5-oo-Cgm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="UyL-c6-poQ">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cb5-JC-zbk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="957" y="-1473"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="IuO-xU-FLh">
             <objects>
@@ -94,6 +111,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="0wZ-RD-vEn"/>
+                    <connections>
+                        <segue destination="nuf-EP-vNP" kind="show" identifier="ShowCommunitySegue" id="cCj-5z-a9i"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DHC-aL-dEd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

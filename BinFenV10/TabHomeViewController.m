@@ -10,7 +10,7 @@
 #import "OTCover.h"
 #import "TopCollectionViewCell.h"
 #import "TopTableViewCell.h"
-#import "DelegatesForCollection.h"
+//#import "DelegatesForCollection.h"
 
 #import "SecondTableViewCell.h"
 #import "ThirdTableViewCell.h"
@@ -21,21 +21,65 @@
 
 #import "defs.h"
 
-@interface TabHomeViewController () <UITableViewDataSource, UITableViewDelegate, MLKMenuPopoverDelegate>
+@interface TabHomeViewController () <UITableViewDataSource, UITableViewDelegate, MLKMenuPopoverDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (strong, nonatomic) OTCover *otCoverView;
 
 @property (assign, nonatomic) BOOL hideTopRowCell;
 
-@property (strong, nonatomic) DelegatesForCollection *collectionDelegates;
+//@property (strong, nonatomic) DelegatesForCollection *collectionDelegates;
 
 @property (strong, nonatomic) MLKMenuPopover *categoryPopover;
+
+@property (strong, nonatomic) NSArray *communitiesDataList;
+@property (strong, nonatomic) NSMutableArray *communitiyIndexArray; //用来记录哪个CollectionCell被选择
+@property (strong, nonatomic) NSArray *categoriesDataList;
+@property (strong, nonatomic) NSArray *productsDataList;
 
 @end
 
 
 
 @implementation TabHomeViewController
+
+- (void)initCommunitiesData
+{
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    //self.testDataArray = [[NSMutableArray alloc] init];
+    for(int i = 0; i < 15; i++)
+    {
+        [array addObject:[NSString stringWithFormat:@"%d", i]];
+    }
+    self.communitiesDataList = [NSArray arrayWithArray:array];
+    self.communitiyIndexArray = [[NSMutableArray alloc] init];
+}
+
+- (void)initCategoriesData
+{
+    self.categoriesDataList = @[@"Cate01",
+                                @"Cate02",
+                                @"Cate03",
+                                @"Cate04",
+                                @"Cate05",
+                                @"Cate06",
+                                @"Cate07",
+                                @"Cate08",
+                                @"Cate09",
+                                @"Cate10",
+                                @"Cate11"];
+}
+
+- (void)initProductsData
+{
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    for(int i = 0; i < 51; i++)
+    {
+        [array addObject:[NSString stringWithFormat:@"ID: %d", i]];
+    }
+    
+    self.productsDataList = [NSArray arrayWithArray:array];
+    [BFPreferenceData saveTestDataArray:array];
+}
 
 - (void)initTopTableRow
 {
@@ -85,12 +129,7 @@
     self.navigationController.navigationBarHidden = YES;
 }
 
-- (void)initCollectionDelegates
-{
-    self.collectionDelegates = [[DelegatesForCollection alloc] init];
-    [self.collectionDelegates initTestData];
-}
-
+/*
 - (void)initTestData
 {
     NSMutableArray *array = [NSMutableArray arrayWithCapacity:215];
@@ -101,17 +140,20 @@
     
     [BFPreferenceData saveTestDataArray:array];
 }
+ */
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self initTestData];
+    [self initProductsData];
+    [self initCommunitiesData];
+    [self initCategoriesData];
     
     self.hideTopRowCell = NO;
     
     [self hideNavigationItem];
     
-    [self initCollectionDelegates];
+    //[self initCollectionDelegates];
     
     [self initViews];
 }
@@ -120,6 +162,63 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma UICollectionDelegate, DataSource and Flow
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return [self.communitiesDataList count];
+}
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 1;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    TopCollectionViewCell *cell = (TopCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:TopCollectionCellIdentifier forIndexPath:indexPath];
+    if([self.communitiyIndexArray containsObject:indexPath])
+    {
+        cell.imageView.image = [UIImage imageNamed:@"120x160_2"];
+    } else {
+        cell.imageView.image = [UIImage imageNamed:@"CellPlaceHolder"];
+    }
+    cell.text = [self.communitiesDataList objectAtIndex:indexPath.row];
+    return cell;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return CGSizeMake(120, 160);
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    // 不清楚设置的为什么的间距，与Apple文档说明不一致
+    return 8.0;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    //水平cell间距
+    return 8.0;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    TopCollectionViewCell *cell = (TopCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    if([self.communitiyIndexArray containsObject:indexPath])
+    {
+        //cell.imageView.image = [UIImage imageNamed:@"CellPlaceHolder"];
+    } else {
+        [self.communitiyIndexArray addObject:indexPath];
+        cell.imageView.image = [UIImage imageNamed:@"120x160_2"];
+    }
+    //NSLog(@"indexArray: %@", self.indexPathArray);
+}
+
+
+#pragma TableView delegate, DataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -134,8 +233,8 @@
 - (void)configureCollectionViewInTopTableCell:(TopTableViewCell *)cell
 {
     //cell.contentView.backgroundColor = [UIColor lightGrayColor];
-    cell.collectionView.delegate = self.collectionDelegates;
-    cell.collectionView.dataSource = self.collectionDelegates;
+    cell.collectionView.delegate = self;//.collectionDelegates;
+    cell.collectionView.dataSource = self;//.collectionDelegates;
     cell.collectionView.backgroundColor = [UIColor clearColor];
     cell.collectionView.showsHorizontalScrollIndicator = NO;
     
@@ -180,6 +279,9 @@
             {
                 cell = [[SecondTableViewCell alloc] init];
             }
+            
+            cell.categoriesListArray = self.categoriesDataList;
+            
             return cell;
         }
             
@@ -306,16 +408,14 @@
 
 - (void)showCategoryPopover:(id)sender
 {
-    NSArray *menuItems = @[@"Category one", @"Category Two"];
-    
-    CGRect popoverFrame = CGRectMake(5, 36 + 64, self.view.bounds.size.width - 10, 44 * [menuItems count]);
+    CGRect popoverFrame = CGRectMake(5, 36 + 64, self.view.bounds.size.width - 10, 44 * 7);// Only display 7 lines most
     // Hide already showing popover
     if(self.categoryPopover)
     {
         [self.categoryPopover dismissMenuPopover];
     }
     
-    self.categoryPopover = [[MLKMenuPopover alloc] initWithFrame:popoverFrame menuItems:menuItems];
+    self.categoryPopover = [[MLKMenuPopover alloc] initWithFrame:popoverFrame menuItems:self.categoriesDataList];
     self.categoryPopover.menuPopoverDelegate = self;
     [self.categoryPopover showInView:self.view];
 }
