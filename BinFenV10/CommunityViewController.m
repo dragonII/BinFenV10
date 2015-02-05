@@ -7,12 +7,12 @@
 //
 
 #import "CommunityViewController.h"
-#import "CommunityTableViewCell.h"
+#import "CategoryTableViewCell.h"
 #import "ThirdTableViewCell.h"
 #import "BFPreferenceData.h"
 #import "defs.h"
 
-NSString *CommunityCellIdentifier = @"CommunityCellIdentifier";
+NSString *CategoryCellIdentifier = @"CategoryCellIdentifier";
 NSString *ProductCellIdentifier = @"ProductCellIdentifier";
 
 static const int SectionCategory = 0;
@@ -21,7 +21,8 @@ static const int SectionLoadMore = 2;
 
 @interface CommunityViewController () <UITableViewDataSource, UITableViewDelegate>
 
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) UITableView *tableView;
+
 @end
 
 @implementation CommunityViewController
@@ -59,8 +60,8 @@ static const int SectionLoadMore = 2;
 
 - (void)initTableRowWithScroll
 {
-    UINib *nib = [UINib nibWithNibName:@"ComminutyCell" bundle:nil];
-    [self.tableView registerNib:nib forCellReuseIdentifier:CommunityCellIdentifier];
+    UINib *nib = [UINib nibWithNibName:@"CategoryCell" bundle:nil];
+    [self.tableView registerNib:nib forCellReuseIdentifier:CategoryCellIdentifier];
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -100,10 +101,10 @@ static const int SectionLoadMore = 2;
     {
         case SectionCategory:
         {
-            CommunityTableViewCell *cell = (CommunityTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CommunityCellIdentifier];
+            CategoryTableViewCell *cell = (CategoryTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CategoryCellIdentifier];
             if(cell == nil)
             {
-                cell = [[CommunityTableViewCell alloc] init];
+                cell = [[CategoryTableViewCell alloc] init];
             }
             
             cell.categoriesListArray = self.categoriesListArray;

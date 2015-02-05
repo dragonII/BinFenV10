@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 Wang Long. All rights reserved.
 //
 
-#import "CommunityTableViewCell.h"
+#import "CategoryTableViewCell.h"
 
-@implementation CommunityTableViewCell
+@implementation CategoryTableViewCell
 
 - (void)awakeFromNib
 {

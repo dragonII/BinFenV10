@@ -11,7 +11,7 @@
 #import "TopCollectionViewCell.h"
 #import "TopTableViewCell.h"
 
-#import "CommunityTableViewCell.h"
+#import "CategoryTableViewCell.h"
 #import "ThirdTableViewCell.h"
 
 #import "BFPreferenceData.h"
@@ -25,11 +25,11 @@
 
 
 static NSString *TopTableRowCellIdentifier = @"TopTableRowCellIdentifier";
-static NSString *CommunityTableCellIdentifier = @"CommunityTableCellIdentifier";
+static NSString *CategoryTableCellIdentifier = @"CategoryTableCellIdentifier";
 static NSString *ThirdTableCellIdentifier = @"ThirdTableViewCellIdentifier";
 
 static const NSInteger TopTableSectionIndex = 0;
-static const NSInteger CommunityTableSectionIndex = 1;
+static const NSInteger CategoryTableSectionIndex = 1;
 static const NSInteger ThirdTableSectionIndex = 2;
 static const NSInteger RefreshSectionIndex = 3;
 
@@ -109,10 +109,10 @@ static const NSInteger RefreshSectionIndex = 3;
     [self.otCoverView.tableView registerNib:nib forCellReuseIdentifier:TopTableRowCellIdentifier];
 }
 
-- (void)initCommunityTableRow
+- (void)initCategoryTableRow
 {
-    UINib *nib = [UINib nibWithNibName:@"CommunityTableViewCell" bundle:nil];
-    [self.otCoverView.tableView registerNib:nib forCellReuseIdentifier:CommunityTableCellIdentifier];
+    UINib *nib = [UINib nibWithNibName:@"CategoryTableViewCell" bundle:nil];
+    [self.otCoverView.tableView registerNib:nib forCellReuseIdentifier:CategoryTableCellIdentifier];
 }
 
 - (void)initThirdTableRow
@@ -136,7 +136,7 @@ static const NSInteger RefreshSectionIndex = 3;
     //[self.otCoverView.tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
     
     [self initTopTableRow];
-    [self initCommunityTableRow];
+    [self initCategoryTableRow];
     [self initThirdTableRow];
     
     [self.view addSubview:self.otCoverView];
@@ -295,12 +295,12 @@ static const NSInteger RefreshSectionIndex = 3;
             break;
         }
             
-        case CommunityTableSectionIndex:
+        case CategoryTableSectionIndex:
         {
-            CommunityTableViewCell *cell = (CommunityTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CommunityTableCellIdentifier];
+            CategoryTableViewCell *cell = (CategoryTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CategoryTableCellIdentifier];
             if(cell == nil)
             {
-                cell = [[CommunityTableViewCell alloc] init];
+                cell = [[CategoryTableViewCell alloc] init];
             }
             
             cell.categoriesListArray = self.categoriesDataList;
@@ -352,7 +352,7 @@ static const NSInteger RefreshSectionIndex = 3;
             else
                 return 184.0f;
             
-        case CommunityTableSectionIndex:
+        case CategoryTableSectionIndex:
             return 214.0f;
             
         case ThirdTableSectionIndex:

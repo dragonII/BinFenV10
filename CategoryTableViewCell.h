@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CommunityTableViewCell : UITableViewCell <UIScrollViewDelegate>
+@interface CategoryTableViewCell : UITableViewCell <UIScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
