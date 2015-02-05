@@ -236,7 +236,7 @@ static const NSInteger RefreshSectionIndex = 3;
         //cell.imageView.image = [UIImage imageNamed:@"CellPlaceHolder"];
     } else {
         [self.communitiyIndexArray addObject:indexPath];
-        cell.imageView.image = [UIImage imageNamed:@"120x160_2"];
+        //cell.imageView.image = [UIImage imageNamed:@"120x160_2"];
     }
     
     [self performSegueWithIdentifier:@"ShowCommunitySegue" sender:self];

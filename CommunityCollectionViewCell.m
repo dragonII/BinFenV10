@@ -7,6 +7,7 @@
 //
 
 #import "CommunityCollectionViewCell.h"
+#import "LAAnimatedGrid.h"
 
 @implementation CommunityCollectionViewCell
 
