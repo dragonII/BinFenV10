@@ -285,15 +285,52 @@
     //NSLog(@"%d", view.tag);
 }
 
+- (void)button1Clicked:(UIButton *)sender
+{
+    NSLog(@"button one");
+}
+
+- (void)button2Clicked:(UIButton *)sender
+{
+    NSLog(@"button two");
+}
+
+- (void)button3Clicked:(UIButton *)sender
+{
+    NSLog(@"button three");
+}
+
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 36)];
-    imageView.backgroundColor = [UIColor lightGrayColor];
+    CGFloat buttonWidth = 106.0f;
     
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(thirdSectionClicked:)];
-    tapGesture.numberOfTapsRequired = 1;
-    tapGesture.numberOfTouchesRequired = 1;
-    [imageView addGestureRecognizer:tapGesture];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 36)];
+    //imageView.backgroundColor = [UIColor lightGrayColor];
+    
+    [imageView setUserInteractionEnabled:YES];
+    
+    UIButton *button1 = [[UIButton alloc] initWithFrame:CGRectMake(imageView.frame.origin.x,
+                                                                 imageView.frame.origin.y,
+                                                                  buttonWidth, 36)];
+    button1.backgroundColor = [UIColor lightGrayColor];
+    [button1 addTarget:self action:@selector(button1Clicked:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *button2 = [[UIButton alloc] initWithFrame:CGRectMake(imageView.frame.origin.x + buttonWidth + 1,
+                                                                  imageView.frame.origin.y,
+                                                                   buttonWidth, 36)];
+    button2.backgroundColor = [UIColor lightGrayColor];
+    
+    [button2 addTarget:self action:@selector(button2Clicked:) forControlEvents:UIControlEventTouchUpInside];
+    UIButton *button3 = [[UIButton alloc] initWithFrame:CGRectMake(imageView.frame.origin.x + (buttonWidth + 1) * 2,
+                                                                  imageView.frame.origin.y,
+                                                                   buttonWidth, 36)];
+    button3.backgroundColor = [UIColor lightGrayColor];
+    [button3 addTarget:self action:@selector(button3Clicked:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [imageView addSubview:button1];
+    [imageView addSubview:button2];
+    [imageView addSubview:button3];
     
     return imageView;
 }
