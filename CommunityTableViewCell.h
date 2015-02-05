@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TopTableViewCell : UITableViewCell
+@interface CommunityTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 

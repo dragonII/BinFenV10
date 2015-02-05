@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 Wang Long. All rights reserved.
 //
 
-#import "TopCollectionViewCell.h"
+#import "CommunityCollectionViewCell.h"
 
-@implementation TopCollectionViewCell
+@implementation CommunityCollectionViewCell
 
 - (void)awakeFromNib
 {

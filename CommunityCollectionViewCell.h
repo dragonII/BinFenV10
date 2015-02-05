@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TopCollectionViewCell : UICollectionViewCell <UIGestureRecognizerDelegate>
+@interface CommunityCollectionViewCell : UICollectionViewCell <UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UILabel *textLabel;

@@ -8,8 +8,8 @@
 
 #import "TabHomeViewController.h"
 #import "OTCover.h"
-#import "TopCollectionViewCell.h"
-#import "TopTableViewCell.h"
+#import "CommunityCollectionViewCell.h"
+#import "CommunityTableViewCell.h"
 
 #import "CategoryTableViewCell.h"
 #import "ThirdTableViewCell.h"
@@ -24,11 +24,13 @@
 
 
 
-static NSString *TopTableRowCellIdentifier = @"TopTableRowCellIdentifier";
+static NSString *CommunityTableRowCellIdentifier = @"CommunityTableRowCellIdentifier";
 static NSString *CategoryTableCellIdentifier = @"CategoryTableCellIdentifier";
 static NSString *ThirdTableCellIdentifier = @"ThirdTableViewCellIdentifier";
 
-static const NSInteger TopTableSectionIndex = 0;
+static NSString *CommunityCollectionCellIdentifier = @"CommunityCollectionCellIdentifier";
+
+static const NSInteger CommunityTableSectionIndex = 0;
 static const NSInteger CategoryTableSectionIndex = 1;
 static const NSInteger ThirdTableSectionIndex = 2;
 static const NSInteger RefreshSectionIndex = 3;
@@ -40,7 +42,7 @@ static const NSInteger RefreshSectionIndex = 3;
 
 @property (strong, nonatomic) OTCover *otCoverView;
 
-@property (assign, nonatomic) BOOL hideTopRowCell;
+@property (assign, nonatomic) BOOL hideCommunityRowCell;
 
 //@property (strong, nonatomic) DelegatesForCollection *collectionDelegates;
 
@@ -103,10 +105,10 @@ static const NSInteger RefreshSectionIndex = 3;
     [self initProductsData];
 }
 
-- (void)initTopTableRow
+- (void)initCommunityTableRow
 {
-    UINib *nib = [UINib nibWithNibName:@"TopTableViewCell" bundle:nil];
-    [self.otCoverView.tableView registerNib:nib forCellReuseIdentifier:TopTableRowCellIdentifier];
+    UINib *nib = [UINib nibWithNibName:@"CommunityTableViewCell" bundle:nil];
+    [self.otCoverView.tableView registerNib:nib forCellReuseIdentifier:CommunityTableRowCellIdentifier];
 }
 
 - (void)initCategoryTableRow
@@ -135,7 +137,7 @@ static const NSInteger RefreshSectionIndex = 3;
     [self.otCoverView.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     //[self.otCoverView.tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
     
-    [self initTopTableRow];
+    [self initCommunityTableRow];
     [self initCategoryTableRow];
     [self initThirdTableRow];
     
@@ -166,7 +168,7 @@ static const NSInteger RefreshSectionIndex = 3;
     
     [self loadAllData];
     
-    self.hideTopRowCell = NO;
+    self.hideCommunityRowCell = NO;
     
     [self hideNavigationItem];
     
@@ -198,7 +200,7 @@ static const NSInteger RefreshSectionIndex = 3;
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    TopCollectionViewCell *cell = (TopCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:TopCollectionCellIdentifier forIndexPath:indexPath];
+    CommunityCollectionViewCell *cell = (CommunityCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:CommunityCollectionCellIdentifier forIndexPath:indexPath];
     if([self.communitiyIndexArray containsObject:indexPath])
     {
         cell.imageView.image = [UIImage imageNamed:@"120x160_2"];
@@ -228,7 +230,7 @@ static const NSInteger RefreshSectionIndex = 3;
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    TopCollectionViewCell *cell = (TopCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    CommunityCollectionViewCell *cell = (CommunityCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     if([self.communitiyIndexArray containsObject:indexPath])
     {
         //cell.imageView.image = [UIImage imageNamed:@"CellPlaceHolder"];
@@ -253,7 +255,7 @@ static const NSInteger RefreshSectionIndex = 3;
     return 1;
 }
 
-- (void)configureCollectionViewInTopTableCell:(TopTableViewCell *)cell
+- (void)configureCollectionViewInCommunityTableCell:(CommunityTableViewCell *)cell
 {
     //cell.contentView.backgroundColor = [UIColor lightGrayColor];
     cell.collectionView.delegate = self;//.collectionDelegates;
@@ -261,9 +263,8 @@ static const NSInteger RefreshSectionIndex = 3;
     cell.collectionView.backgroundColor = [UIColor clearColor];
     cell.collectionView.showsHorizontalScrollIndicator = NO;
     
-    //[cell.collectionView registerClass:[TopCollectionViewCell class] forCellWithReuseIdentifier:TopCollectionCellIdentifier];
-    UINib *nib = [UINib nibWithNibName:@"TopCollectionViewCell" bundle:nil];
-    [cell.collectionView registerNib:nib forCellWithReuseIdentifier:TopCollectionCellIdentifier];
+    UINib *nib = [UINib nibWithNibName:@"CommunityCollectionViewCell" bundle:nil];
+    [cell.collectionView registerNib:nib forCellWithReuseIdentifier:CommunityCollectionCellIdentifier];
     
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)cell.collectionView.collectionViewLayout;
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
@@ -276,18 +277,18 @@ static const NSInteger RefreshSectionIndex = 3;
     NSInteger sectionNumber = indexPath.section;
     switch (sectionNumber)
     {
-        case TopTableSectionIndex:
+        case CommunityTableSectionIndex:
         {
-            TopTableViewCell *cell = (TopTableViewCell *)[tableView dequeueReusableCellWithIdentifier:TopTableRowCellIdentifier];
+            CommunityTableViewCell *cell = (CommunityTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CommunityTableRowCellIdentifier];
             
             if(cell == nil)
             {
-                cell = [[TopTableViewCell alloc] init];
+                cell = [[CommunityTableViewCell alloc] init];
             }
             
-            [self configureCollectionViewInTopTableCell:cell];
+            [self configureCollectionViewInCommunityTableCell:cell];
             
-            if(self.hideTopRowCell == YES)
+            if(self.hideCommunityRowCell == YES)
                [cell setHidden:YES];
             
             return cell;
@@ -346,8 +347,8 @@ static const NSInteger RefreshSectionIndex = 3;
     NSInteger sectionNumber = indexPath.section;
     switch (sectionNumber)
     {
-        case TopTableSectionIndex:
-            if(self.hideTopRowCell == YES)
+        case CommunityTableSectionIndex:
+            if(self.hideCommunityRowCell == YES)
                 return 0.0f;
             else
                 return 184.0f;

@@ -11,8 +11,6 @@
 
 static NSInteger SearchViewTag = 4000;
 
-static NSString *TopCollectionCellIdentifier = @"TopCollectionCellIdentifier";
-
 static NSString *LoadContentBatchIndexKey = @"loadBatchIndex";
 static NSString *CanBeRefreshedKey = @"refresh";
 

@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 Wang Long. All rights reserved.
 //
 
-#import "TopTableViewCell.h"
+#import "CommunityTableViewCell.h"
 
-@implementation TopTableViewCell
+@implementation CommunityTableViewCell
 
 - (void)awakeFromNib {
     // Initialization code
