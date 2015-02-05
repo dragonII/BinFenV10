@@ -21,7 +21,7 @@
 - (void)itemClicked:(UITapGestureRecognizer*)sender
 {
     UIView *view = sender.view;
-    NSLog(@"%d", view.tag);
+    NSLog(@"%ld", (long)view.tag);
 }
 
 - (void)initItems
@@ -29,8 +29,8 @@
 #warning 目前只涵盖屏幕宽度为320，其他宽度的屏幕尺寸待完成
     
     NSArray *array = [BFPreferenceData loadTestDataArray];
-    int batchIndex = [[NSUserDefaults standardUserDefaults] integerForKey:LoadContentBatchIndexKey];
-    NSLog(@"batchIndex#: %d", batchIndex);
+    NSInteger batchIndex = [[NSUserDefaults standardUserDefaults] integerForKey:LoadContentBatchIndexKey];
+    NSLog(@"batchIndex#: %ld", (long)batchIndex);
     
     CGFloat itemWidth = 142.0f;
     CGFloat itemHeight = 208.0f;
@@ -42,7 +42,7 @@
     CGFloat imageViewHeight = 142.0f;
     
     int index = 2000;
-    int maxIndex = 0;
+    NSInteger maxIndex = 0;
     int row = 0;
     int column = 0;
     

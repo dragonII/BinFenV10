@@ -346,7 +346,7 @@
             
         case ThirdTableSectionIndex:
         {
-            int batchIndex = [[NSUserDefaults standardUserDefaults] integerForKey:LoadContentBatchIndexKey];
+            NSInteger batchIndex = [[NSUserDefaults standardUserDefaults] integerForKey:LoadContentBatchIndexKey];
             NSArray *array = [BFPreferenceData loadTestDataArray];
             if(array == nil || [array count] == 0)
             {
@@ -354,13 +354,13 @@
             }
             if([array count] >= batchIndex * TotalItemsPerBatch)
             {
-                NSLog(@"TotalRows: %d", batchIndex * TotalRowsPerBatch);
+                NSLog(@"TotalRows: %ld", batchIndex * TotalRowsPerBatch);
                 return batchIndex * TotalRowsPerBatch * HeightOfItemInThirdTableCell;
             }
             else // 0 < count < batchIndex * TotalItemsPerBatch
             {
-                int totalRows = ([array count] - 1) / 2 + 1;
-                NSLog(@"TotalRows: %d", totalRows);
+                NSInteger totalRows = ([array count] - 1) / 2 + 1;
+                NSLog(@"TotalRows: %ld", (long)totalRows);
                 return totalRows * HeightOfItemInThirdTableCell;
             }
         }

@@ -39,7 +39,7 @@
 - (void)itemClicked:(UITapGestureRecognizer*)sender
 {
     UIView *view = sender.view;
-    NSLog(@"%d", view.tag);
+    NSLog(@"%ld", (long)view.tag);
 }
 
 - (void)initItems
