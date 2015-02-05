@@ -17,8 +17,9 @@
 @property (nonatomic, strong) NSMutableArray *blurImages;
 @property (nonatomic, assign) CGFloat OTCoverHeight;
 @property (nonatomic, strong) UIView* scrollHeaderView;
-@property (nonatomic, strong) UIView *parentView;
-@property (nonatomic, strong) UIButton *searchViewButton;
+//@property (nonatomic, strong) UIView *parentView;
+@property (nonatomic, strong) UIImageView *searchView;
+//@property (nonatomic, strong) UIButton *searchButton;
 
 @property BOOL searchViewHideDone;
 @property BOOL searchViewShowDone;
@@ -28,38 +29,28 @@
 
 @implementation OTCover
 
-- (void)searchClicked:(UITapGestureRecognizer*)sender
-{
-    NSLog(@"SearchView Clicked");
-}
 
-- (void)searchButtonClicked:(UIButton*)button
+-(void)tapDetected
 {
-    NSLog(@"Button clicked");
+    NSLog(@"single Tap on imageview");
 }
 
 - (void)initSearchView
 {
-    //self.searchView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, 64)];
-    //self.searchView.image = [UIImage imageNamed:@"SearchBarInHome"];
-    //self.searchView.backgroundColor = [UIColor orangeColor];
+    self.searchView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, 64)];
+    self.searchView.image = [UIImage imageNamed:@"SearchBarInHome"];
     
-    self.searchViewButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, 64)];
-    [self.searchViewButton setImage:[UIImage imageNamed:@"SearchBarInHome"] forState:UIControlStateNormal];
-    [self.searchViewButton setImage:[UIImage imageNamed:@"SearchBarInHome"] forState:UIControlStateSelected];
-    [self.searchViewButton setBackgroundImage:[UIImage imageNamed:@"SearchBarInHome"] forState:(UIControlStateNormal | UIControlStateSelected | UIControlStateHighlighted)];
-    [self.searchViewButton addTarget:self action:@selector(searchButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDetected)];
+    singleTap.numberOfTapsRequired = 1;
+    [self.searchView setUserInteractionEnabled:YES];
+    [self.searchView addGestureRecognizer:singleTap];
     
-    //[self.searchView addSubview:button];
-    
-    //self.searchView.tag = SearchViewTag;
-    
-    [self.searchViewButton setHidden:YES];
+    [self.searchView setHidden:YES];
     self.searchViewHideDone = YES;
     self.searchViewShowDone = NO;
     self.searchViewContentsInsetsDone = NO;
     
-    [self addSubview:self.searchViewButton];
+    [self addSubview:self.searchView];
 }
 
 - (OTCover*)initWithTableViewWithHeaderImage:(UIImage*)headerImage withOTCoverHeight:(CGFloat)height
@@ -89,23 +80,6 @@
     
     [self initSearchView];
     
-    /*
-    self.searchView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, 64)];
-    self.searchView.image = [UIImage imageNamed:@"SearchBarInHome"];
-    
-    [self.searchView setHidden:YES];
-    self.searchViewHideDone = YES;
-    self.searchViewShowDone = NO;
-    self.searchViewContentsInsetsDone = NO;
-    
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(searchClicked:)];
-    tapGesture.numberOfTapsRequired = 1;
-    tapGesture.numberOfTouchesRequired = 1;
-    [self.searchView addGestureRecognizer:tapGesture];
-     
-    [self addSubview:self.searchView];
-     */
-    
     return self;
 }
 
@@ -134,8 +108,8 @@
         self.searchViewHideDone = YES;
         self.searchViewShowDone = NO;
         
-        self.searchViewButton.alpha = 0.0f;
-        [self.searchViewButton setHidden:YES];
+        self.searchView.alpha = 0.0f;
+        [self.searchView setHidden:YES];
         
         self.searchViewContentsInsetsDone = NO;
         self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
@@ -149,22 +123,22 @@
         self.searchViewShowDone = YES;
         self.searchViewHideDone = NO;
         
-        [self.searchViewButton setHidden:NO];
+        [self.searchView setHidden:NO];
     }
 }
 
 - (void)setTableContentsInsets
 {
-    self.searchViewButton.alpha = 1.0f;
+    self.searchView.alpha = 1.0f;
     
     if(self.searchViewContentsInsetsDone == NO)
     {
         self.searchViewContentsInsetsDone = YES;
         
-        self.searchViewButton.frame = CGRectMake(0, 0, self.bounds.size.width, 64);
+        self.searchView.frame = CGRectMake(0, 0, self.bounds.size.width, 64);
         
         UIEdgeInsets insets = self.tableView.contentInset;
-        insets.top = self.searchViewButton.bounds.size.height;
+        insets.top = self.searchView.bounds.size.height;
         [self.tableView setContentInset:insets];
     }
 }
@@ -187,82 +161,21 @@
         if(offset < 64)
         {
             [self hideSearchView];
-            /*
-            if(self.searchViewHideDone == NO)
-            {
-                self.searchViewHideDone = YES;
-                self.searchViewShowDone = NO;
-                
-                self.searchView.alpha = 0.0f;
-                [self.searchView setHidden:YES];
-                self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
-                NSLog(@"1");
-            }
-             */
         }
         if(offset >= 64 && offset <= 114)
         {
             [self showSearchView];
-            /*
-            if(self.searchViewShowDone == NO)
-            {
-                self.searchViewShowDone = YES;
-                self.searchViewHideDone = NO;
-                
-                [self.searchView setHidden:NO];
-                NSLog(@"2");
-            }
-             */
             
             CGFloat delta = offset - 64; // 0 <= delta <= 50
-            self.searchViewButton.frame = CGRectMake((delta - 50) / 2.0f, 0, 320 + (50 - delta), 64);
-            self.searchViewButton.alpha = delta / 50;
+            self.searchView.frame = CGRectMake((delta - 50) / 2.0f, 0, 320 + (50 - delta), 64);
+            self.searchView.alpha = delta / 50;
         }
         if(offset > 114)
         {
             [self setTableContentsInsets];
-            /*
-            if(self.searchViewContentsInsets == NO)
-            {
-                self.searchViewContentsInsets = YES;
-                
-                UIEdgeInsets insets = self.tableView.contentInset;
-                insets.top = self.searchView.bounds.size.height;
-                [self.tableView setContentInset:insets];
-                [self.searchView setAlpha:1.0f];
-                NSLog(@"3");
-            }
-             */
         }
     }
 }
-
-/*
-- (void)animationForScrollView{
-    CGFloat offset = self.scrollView.contentOffset.y;
-    
-    if (self.scrollView.contentOffset.y > 0) {
-        
-        NSInteger index = offset / 10;
-        if (index < 0) {
-            index = 0;
-        }
-        else if(index >= self.blurImages.count) {
-            index = self.blurImages.count - 1;
-        }
-        UIImage *image = self.blurImages[index];
-        if (self.headerImageView.image != image) {
-            [self.headerImageView setImage:image];
-            
-        }
-        self.scrollView.backgroundColor = [UIColor clearColor];
-        
-    }
-    else {
-        self.headerImageView.frame = CGRectMake(offset,0, self.frame.size.width + (-offset) * 2, self.OTCoverHeight + (-offset));
-    }
-}
- */
 
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -270,11 +183,6 @@
     if (self.tableView) {
         [self animationForTableView];
     }
-    /*
-    else{
-        [self animationForScrollView];
-    }
-     */
 }
 
 - (void)removeFromSuperview
@@ -282,11 +190,6 @@
     if (self.tableView) {
         [self.tableView removeObserver:self forKeyPath:@"contentOffset"];
     }
-    /*
-    else{
-        [self.scrollView removeObserver:self forKeyPath:@"contentOffset"];
-    }
-     */
     [super removeFromSuperview];
 }
 
@@ -295,11 +198,6 @@
     if (self.tableView) {
         [self.tableView removeObserver:self forKeyPath:@"contentOffset"];
     }
-    /*
-    else{
-        [self.scrollView removeObserver:self forKeyPath:@"contentOffset"];
-    }
-     */
 }
 
 @end
@@ -400,7 +298,3 @@
 }
 
 @end
-
-// Copyright belongs to original author
-// http://code4app.net (en) http://code4app.com (cn)
-// From the most professional code share website: Code4App.net
