@@ -21,6 +21,7 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
+    NSLog(@"scrollViewDidScroll");
     CGFloat width = self.scrollView.bounds.size.width;
     int currentPage = (self.scrollView.contentOffset.x + width) / width - 1;
     self.pageControl.currentPage = currentPage;
@@ -88,7 +89,7 @@
         
         imageView.image = [UIImage imageNamed:@"ImagePlaceHolder44x44"];
         //imageView.contentMode = UIViewContentModeScaleAspectFill;
-        imageView.layer.cornerRadius = 22.0f;
+        //imageView.layer.cornerRadius = 22.0f;
         imageView.layer.borderWidth = 1.0f;
         imageView.layer.borderColor = [UIColor whiteColor].CGColor;
         imageView.clipsToBounds = YES;
