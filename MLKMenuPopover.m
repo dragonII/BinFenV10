@@ -22,7 +22,7 @@
 
 #define ZERO                    0.0f
 #define ONE                     1.0f
-#define ANIMATION_DURATION      0.5f
+#define ANIMATION_DURATION      0.2f
 
 #define MENU_POINTER_TAG        1011
 #define MENU_TABLE_VIEW_TAG     1012
@@ -47,7 +47,10 @@
 
 - (id)initWithFrame:(CGRect)frame menuItems:(NSArray *)aMenuItems
 {
-    self = [super initWithFrame:frame];
+    CGRect mainFrame = [UIScreen mainScreen].bounds;
+    CGRect popFrame = CGRectMake(mainFrame.origin.x + 5, frame.origin.y, mainFrame.size.width - 10, frame.size.height);
+    //self = [super initWithFrame:frame];
+    self = [super initWithFrame:popFrame];
     
     if (self)
     {

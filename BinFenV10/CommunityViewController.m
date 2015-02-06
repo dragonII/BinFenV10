@@ -25,6 +25,7 @@ static const int SectionLoadMore = 2;
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) MLKMenuPopover *categoryPopover;
 
+@property (assign, nonatomic) NSInteger categoryButtonIndex;
 
 @end
 
@@ -214,7 +215,15 @@ static const int SectionLoadMore = 2;
 
 - (void)showCategoryPopover:(id)sender
 {
-    CGRect popoverFrame = CGRectMake(5, 36 + 64, self.view.bounds.size.width - 10, 44 * 7);// Only display 7 lines most
+    CGFloat buttonHeight = 36.0f;
+    CGFloat topImageViewHeight = 64.0f;
+    CGFloat buttonWidth = 106.0f;
+    
+    CGRect popoverFrame = CGRectMake(5 + (buttonWidth * self.categoryButtonIndex),
+                                     topImageViewHeight + buttonHeight,
+                                     self.view.bounds.size.width - 10,
+                                     44 * 7);// Only display 7 lines most
+    
     // Hide already showing popover
     if(self.categoryPopover)
     {
@@ -226,22 +235,13 @@ static const int SectionLoadMore = 2;
     [self.categoryPopover showInView:self.view];
 }
 
-- (void)button1Clicked:(UIButton *)sender
+
+- (void)categoryButtonClicked:(UIButton *)sender
 {
-    //NSLog(@"Contentoffset: %f", self.tableView.contentOffset.y);
+    self.categoryButtonIndex = sender.tag - 201;
     [self scrollToTopOfProductSection];
     
-    [NSTimer scheduledTimerWithTimeInterval:0.3f target:self selector:@selector(showCategoryPopover:) userInfo:nil repeats:NO];
-}
-
-- (void)button2Clicked:(UIButton *)sender
-{
-    NSLog(@"button two");
-}
-
-- (void)button3Clicked:(UIButton *)sender
-{
-    NSLog(@"button three");
+    [NSTimer scheduledTimerWithTimeInterval:0.2f target:self selector:@selector(showCategoryPopover:) userInfo:nil repeats:NO];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -256,20 +256,23 @@ static const int SectionLoadMore = 2;
     UIButton *button1 = [[UIButton alloc] initWithFrame:CGRectMake(imageView.frame.origin.x,
                                                                    imageView.frame.origin.y,
                                                                    buttonWidth, 36)];
+    button1.tag = 201;
     button1.backgroundColor = [UIColor lightGrayColor];
-    [button1 addTarget:self action:@selector(button1Clicked:) forControlEvents:UIControlEventTouchUpInside];
+    [button1 addTarget:self action:@selector(categoryButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *button2 = [[UIButton alloc] initWithFrame:CGRectMake(imageView.frame.origin.x + buttonWidth + 1,
                                                                    imageView.frame.origin.y,
                                                                    buttonWidth, 36)];
+    button2.tag = 202;
     button2.backgroundColor = [UIColor lightGrayColor];
     
-    [button2 addTarget:self action:@selector(button2Clicked:) forControlEvents:UIControlEventTouchUpInside];
+    [button2 addTarget:self action:@selector(categoryButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     UIButton *button3 = [[UIButton alloc] initWithFrame:CGRectMake(imageView.frame.origin.x + (buttonWidth + 1) * 2,
                                                                    imageView.frame.origin.y,
                                                                    buttonWidth, 36)];
+    button3.tag = 203;
     button3.backgroundColor = [UIColor lightGrayColor];
-    [button3 addTarget:self action:@selector(button3Clicked:) forControlEvents:UIControlEventTouchUpInside];
+    [button3 addTarget:self action:@selector(categoryButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     [imageView addSubview:button1];
     [imageView addSubview:button2];
