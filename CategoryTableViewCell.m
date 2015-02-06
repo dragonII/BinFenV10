@@ -89,7 +89,14 @@
         
         imageView.image = [UIImage imageNamed:@"ImagePlaceHolder44x44"];
         //imageView.contentMode = UIViewContentModeScaleAspectFill;
-        //imageView.layer.cornerRadius = 22.0f;
+        /////
+        // Performance
+        imageView.layer.cornerRadius = 22.0f;
+        imageView.layer.masksToBounds = NO;
+        imageView.layer.shouldRasterize = YES;
+        imageView.layer.rasterizationScale = [UIScreen mainScreen].scale;
+        
+        /////
         imageView.layer.borderWidth = 1.0f;
         imageView.layer.borderColor = [UIColor whiteColor].CGColor;
         imageView.clipsToBounds = YES;
