@@ -263,7 +263,7 @@
 			name = CollectionViewCell;
 			sourceTree = "<group>";
 		};
-		2F6EFEA21A8074B8001F9DE7 /* CommunityTableCell */ = {
+		2F6EFEA21A8074B8001F9DE7 /* CategoryTableCell */ = {
 			isa = PBXGroup;
 			children = (
 				2F6EFEA31A8074E1001F9DE7 /* CategoryTableViewCell.h */,
@@ -271,7 +271,7 @@
 				2F6EFEA51A8074E1001F9DE7 /* CategoryTableViewCell.xib */,
 				2F2B87E01A83650C00FE8F20 /* CategoryCell.xib */,
 			);
-			name = CommunityTableCell;
+			name = CategoryTableCell;
 			sourceTree = "<group>";
 		};
 		2F6EFEBD1A80883C001F9DE7 /* Categories */ = {
@@ -292,14 +292,14 @@
 			path = OTCover;
 			sourceTree = "<group>";
 		};
-		2FC5A29C1A7F238200DD0E63 /* TopTableRowCell */ = {
+		2FC5A29C1A7F238200DD0E63 /* CommunityTableRowCell */ = {
 			isa = PBXGroup;
 			children = (
 				2FC5A29D1A7F23B900DD0E63 /* CommunityTableViewCell.h */,
 				2FC5A29E1A7F23B900DD0E63 /* CommunityTableViewCell.m */,
 				2FC5A29F1A7F23B900DD0E63 /* CommunityTableViewCell.xib */,
 			);
-			name = TopTableRowCell;
+			name = CommunityTableRowCell;
 			sourceTree = "<group>";
 		};
 		2FEEE84D1A7E5B8E0095D8DB = {
@@ -310,8 +310,8 @@
 				2F31B2061A83D74000A2BB86 /* AFNetworking */,
 				2F2B87D91A832A5A00FE8F20 /* MenuPopOver */,
 				2F6EFEBD1A80883C001F9DE7 /* Categories */,
-				2FC5A29C1A7F238200DD0E63 /* TopTableRowCell */,
-				2F6EFEA21A8074B8001F9DE7 /* CommunityTableCell */,
+				2FC5A29C1A7F238200DD0E63 /* CommunityTableRowCell */,
+				2F6EFEA21A8074B8001F9DE7 /* CategoryTableCell */,
 				2F0475021A813CF000196F0B /* ThirdTableCell */,
 				2FC5A2951A7F1BB900DD0E63 /* OTCover */,
 				2F5954B71A7E7826001D5DAD /* CollectionViewCell */,

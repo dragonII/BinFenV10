@@ -12,24 +12,9 @@
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="120" height="160"/>
-                <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="04c-Lj-qTd">
-                        <rect key="frame" x="0.0" y="0.0" width="120" height="160"/>
-                        <color key="backgroundColor" red="0.93573794160000001" green="0.90939251409999999" blue="0.3382860305" alpha="1" colorSpace="calibratedRGB"/>
-                    </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R8L-KQ-cy8">
-                        <rect key="frame" x="39" y="128" width="42" height="21"/>
-                        <fontDescription key="fontDescription" name="STHeitiSC-Light" family="Heiti SC" pointSize="17"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-            <connections>
-                <outlet property="imageView" destination="04c-Lj-qTd" id="LSW-ph-vV1"/>
-                <outlet property="textLabel" destination="R8L-KQ-cy8" id="ar6-L9-iV3"/>
-            </connections>
         </collectionViewCell>
     </objects>
 </document>

@@ -34,6 +34,15 @@
     // [laag setLaagBackGroundColor:[UIColor whiteColor]];
     [self.contentView addSubview:laag];
     
+    self.textLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.contentView.bounds.origin.x,
+                                                              self.contentView.bounds.origin.y + 128,
+                                                              self.contentView.bounds.size.width,
+                                                               21)];
+    //label.text = @"Label";
+    self.textLabel.textAlignment = NSTextAlignmentCenter;
+    self.textLabel.font = [UIFont fontWithName:@"STHeitiSC-Light" size:10];
+    [self.contentView addSubview:self.textLabel];
+    
 }
 
 - (void)setText:(NSString *)text

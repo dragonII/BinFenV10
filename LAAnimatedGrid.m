@@ -66,7 +66,6 @@ typedef enum
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        NSLog(@"Frame: %f, %f, %f, %f", frame.origin.x, frame.origin.y, frame.size.width, frame.size.height);
         _laagOrientation = LAAGOrientationHorizontal;
         _margin = MARGIN;
         animation = LAAGAnimationMove3;
@@ -203,7 +202,6 @@ typedef enum
 - (void)setupHorizontal
 {
     CGRect mainFrame = self.frame;
-    NSLog(@"%f, %f, %f, %f", mainFrame.origin.x, mainFrame.origin.y, mainFrame.size.width, mainFrame.size.height);
     mainFrame.size.width -= _margin;
     mainFrame.size.height -= _margin;
     
