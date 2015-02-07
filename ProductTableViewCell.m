@@ -15,13 +15,15 @@
 
 - (void)awakeFromNib
 {
-    [self initItems];
+    [self initItems]; 
 }
 
 - (void)itemClicked:(UITapGestureRecognizer*)sender
 {
-    UIView *view = sender.view;
-    NSLog(@"%ld", (long)view.tag);
+    if([self.segueDelegate respondsToSelector:@selector(itemClickedInCell:)])
+    {
+        [self.segueDelegate performSelector:@selector(itemClickedInCell:) withObject:self];
+    }
 }
 
 - (void)initItems

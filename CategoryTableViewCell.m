@@ -21,7 +21,7 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    NSLog(@"scrollViewDidScroll");
+    //NSLog(@"scrollViewDidScroll");
     CGFloat width = self.scrollView.bounds.size.width;
     int currentPage = (self.scrollView.contentOffset.x + width) / width - 1;
     self.pageControl.currentPage = currentPage;

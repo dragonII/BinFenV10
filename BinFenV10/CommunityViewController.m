@@ -20,7 +20,7 @@ static const int SectionCategory = 0;
 static const int SectionProduct = 1;
 static const int SectionLoadMore = 2;
 
-@interface CommunityViewController () <UITableViewDataSource, UITableViewDelegate, MLKMenuPopoverDelegate>
+@interface CommunityViewController () <UITableViewDataSource, UITableViewDelegate, MLKMenuPopoverDelegate, ProductCellSegueDelegate>
 
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) MLKMenuPopover *categoryPopover;
@@ -122,6 +122,7 @@ static const int SectionLoadMore = 2;
             
             [cell initItems];
             
+            cell.segueDelegate = self;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
             return cell;
@@ -179,7 +180,7 @@ static const int SectionLoadMore = 2;
             }
             if([array count] >= batchIndex * TotalItemsPerBatch)
             {
-                NSLog(@"TotalRows: %d", batchIndex * TotalRowsPerBatch);
+                NSLog(@"TotalRows: %ld", batchIndex * TotalRowsPerBatch);
                 return batchIndex * TotalRowsPerBatch * HeightOfItemInProductTableCell;
             }
             else // 0 < count < batchIndex * TotalItemsPerBatch
@@ -287,6 +288,11 @@ static const int SectionLoadMore = 2;
         return 36.0f;
     else
         return 0;
+}
+
+- (void)itemClickedInCell:(ProductTableViewCell *)cell
+{
+    [self performSegueWithIdentifier:@"ShowProductDetailSegue" sender:self];
 }
 
 @end

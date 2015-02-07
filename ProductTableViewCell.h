@@ -8,8 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+@class ProductTableViewCell;
+
+@protocol ProductCellSegueDelegate <NSObject>
+
+- (void)itemClickedInCell:(ProductTableViewCell *)cell;
+
+@end
+
 @interface ProductTableViewCell : UITableViewCell
 
 - (void)initItems;
+
+@property (weak, nonatomic) id<ProductCellSegueDelegate> segueDelegate;
 
 @end

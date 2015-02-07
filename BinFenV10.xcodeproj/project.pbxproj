@@ -32,6 +32,7 @@
 		2F31B23C1A83D74D00A2BB86 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F31B2341A83D74D00A2BB86 /* UIWebView+AFNetworking.m */; };
 		2F31B2421A83D77E00A2BB86 /* LAAnimatedGrid.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F31B23F1A83D77E00A2BB86 /* LAAnimatedGrid.m */; };
 		2F31B2431A83D77E00A2BB86 /* LAAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F31B2411A83D77E00A2BB86 /* LAAnimatedView.m */; };
+		2F480A911A864BB60034CA65 /* ProductDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F480A901A864BB60034CA65 /* ProductDetailViewController.m */; };
 		2F5954B31A7E6857001D5DAD /* BFPreferenceData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F5954B21A7E6857001D5DAD /* BFPreferenceData.m */; };
 		2F5954BB1A7E78BB001D5DAD /* CommunityCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F5954B91A7E78BB001D5DAD /* CommunityCollectionViewCell.m */; };
 		2F5954BC1A7E78BB001D5DAD /* CommunityCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F5954BA1A7E78BB001D5DAD /* CommunityCollectionViewCell.xib */; };
@@ -111,6 +112,8 @@
 		2F31B23F1A83D77E00A2BB86 /* LAAnimatedGrid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAAnimatedGrid.m; sourceTree = "<group>"; };
 		2F31B2401A83D77E00A2BB86 /* LAAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAAnimatedView.h; sourceTree = "<group>"; };
 		2F31B2411A83D77E00A2BB86 /* LAAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAAnimatedView.m; sourceTree = "<group>"; };
+		2F480A8F1A864BB60034CA65 /* ProductDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductDetailViewController.h; sourceTree = "<group>"; };
+		2F480A901A864BB60034CA65 /* ProductDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductDetailViewController.m; sourceTree = "<group>"; };
 		2F5954B01A7E6399001D5DAD /* defs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = defs.h; sourceTree = "<group>"; };
 		2F5954B11A7E684D001D5DAD /* BFPreferenceData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BFPreferenceData.h; sourceTree = "<group>"; };
 		2F5954B21A7E6857001D5DAD /* BFPreferenceData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFPreferenceData.m; sourceTree = "<group>"; };
@@ -162,7 +165,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2F0475021A813CF000196F0B /* ThirdTableCell */ = {
+		2F0475021A813CF000196F0B /* ProductTableCell */ = {
 			isa = PBXGroup;
 			children = (
 				2F0475031A813D1B00196F0B /* ProductTableViewCell.h */,
@@ -170,7 +173,7 @@
 				2F0475051A813D1B00196F0B /* ProductTableViewCell.xib */,
 				2F2B87E21A83670600FE8F20 /* ProductCell.xib */,
 			);
-			name = ThirdTableCell;
+			name = ProductTableCell;
 			sourceTree = "<group>";
 		};
 		2F2B87D91A832A5A00FE8F20 /* MenuPopOver */ = {
@@ -312,7 +315,7 @@
 				2F6EFEBD1A80883C001F9DE7 /* Categories */,
 				2FC5A29C1A7F238200DD0E63 /* CommunityTableRowCell */,
 				2F6EFEA21A8074B8001F9DE7 /* CategoryTableCell */,
-				2F0475021A813CF000196F0B /* ThirdTableCell */,
+				2F0475021A813CF000196F0B /* ProductTableCell */,
 				2FC5A2951A7F1BB900DD0E63 /* OTCover */,
 				2F5954B71A7E7826001D5DAD /* CollectionViewCell */,
 				2F5954AE1A7E6374001D5DAD /* BFCommon */,
@@ -342,6 +345,8 @@
 				2FC5A29A1A7F1CB200DD0E63 /* TabHomeViewController.m */,
 				2F2B87DD1A833F4800FE8F20 /* CommunityViewController.h */,
 				2F2B87DE1A833F4800FE8F20 /* CommunityViewController.m */,
+				2F480A8F1A864BB60034CA65 /* ProductDetailViewController.h */,
+				2F480A901A864BB60034CA65 /* ProductDetailViewController.m */,
 				2FEEE8631A7E5B8F0095D8DB /* Main.storyboard */,
 				2FEEE8661A7E5B8F0095D8DB /* Images.xcassets */,
 				2FEEE8681A7E5B8F0095D8DB /* LaunchScreen.xib */,
@@ -489,6 +494,7 @@
 				2F5954BB1A7E78BB001D5DAD /* CommunityCollectionViewCell.m in Sources */,
 				2FC5A29B1A7F1CB200DD0E63 /* TabHomeViewController.m in Sources */,
 				2F31B21B1A83D74000A2BB86 /* AFHTTPRequestOperationManager.m in Sources */,
+				2F480A911A864BB60034CA65 /* ProductDetailViewController.m in Sources */,
 				2FEEE8621A7E5B8E0095D8DB /* WizardViewController.m in Sources */,
 				2F31B21F1A83D74000A2BB86 /* AFURLConnectionOperation.m in Sources */,
 				2FEEE85F1A7E5B8E0095D8DB /* AppDelegate.m in Sources */,
