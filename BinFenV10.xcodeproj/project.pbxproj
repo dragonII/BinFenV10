@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F01E7BB1A87B694006BDDAB /* ProductImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F01E7B91A87B694006BDDAB /* ProductImageCell.m */; };
+		2F01E7BC1A87B694006BDDAB /* ProductImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F01E7BA1A87B694006BDDAB /* ProductImageCell.xib */; };
+		2F01E7C01A87C075006BDDAB /* PriceTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F01E7BE1A87C075006BDDAB /* PriceTableCell.m */; };
+		2F01E7C11A87C075006BDDAB /* PriceTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F01E7BF1A87C075006BDDAB /* PriceTableCell.xib */; };
+		2F01E7C51A87C2B3006BDDAB /* DescriptionTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F01E7C31A87C2B3006BDDAB /* DescriptionTableCell.m */; };
+		2F01E7C61A87C2B3006BDDAB /* DescriptionTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F01E7C41A87C2B3006BDDAB /* DescriptionTableCell.xib */; };
+		2F01E7CD1A87C54C006BDDAB /* SeperatorTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F01E7CB1A87C54C006BDDAB /* SeperatorTableCell.m */; };
+		2F01E7CE1A87C54C006BDDAB /* SeperatorTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F01E7CC1A87C54C006BDDAB /* SeperatorTableCell.xib */; };
 		2F0475061A813D1B00196F0B /* ProductTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F0475041A813D1B00196F0B /* ProductTableViewCell.m */; };
 		2F0475071A813D1B00196F0B /* ProductTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F0475051A813D1B00196F0B /* ProductTableViewCell.xib */; };
 		2F2B87DC1A832A7100FE8F20 /* MLKMenuPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2B87DB1A832A7100FE8F20 /* MLKMenuPopover.m */; };
@@ -63,6 +71,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2F01E7B81A87B694006BDDAB /* ProductImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductImageCell.h; sourceTree = "<group>"; };
+		2F01E7B91A87B694006BDDAB /* ProductImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductImageCell.m; sourceTree = "<group>"; };
+		2F01E7BA1A87B694006BDDAB /* ProductImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductImageCell.xib; sourceTree = "<group>"; };
+		2F01E7BD1A87C075006BDDAB /* PriceTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceTableCell.h; sourceTree = "<group>"; };
+		2F01E7BE1A87C075006BDDAB /* PriceTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceTableCell.m; sourceTree = "<group>"; };
+		2F01E7BF1A87C075006BDDAB /* PriceTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PriceTableCell.xib; sourceTree = "<group>"; };
+		2F01E7C21A87C2B3006BDDAB /* DescriptionTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DescriptionTableCell.h; sourceTree = "<group>"; };
+		2F01E7C31A87C2B3006BDDAB /* DescriptionTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DescriptionTableCell.m; sourceTree = "<group>"; };
+		2F01E7C41A87C2B3006BDDAB /* DescriptionTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DescriptionTableCell.xib; sourceTree = "<group>"; };
+		2F01E7CA1A87C54C006BDDAB /* SeperatorTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeperatorTableCell.h; sourceTree = "<group>"; };
+		2F01E7CB1A87C54C006BDDAB /* SeperatorTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeperatorTableCell.m; sourceTree = "<group>"; };
+		2F01E7CC1A87C54C006BDDAB /* SeperatorTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SeperatorTableCell.xib; sourceTree = "<group>"; };
 		2F0475031A813D1B00196F0B /* ProductTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductTableViewCell.h; sourceTree = "<group>"; };
 		2F0475041A813D1B00196F0B /* ProductTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductTableViewCell.m; sourceTree = "<group>"; };
 		2F0475051A813D1B00196F0B /* ProductTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductTableViewCell.xib; sourceTree = "<group>"; };
@@ -165,6 +185,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2F01E7B71A87B66F006BDDAB /* ProductTableCells */ = {
+			isa = PBXGroup;
+			children = (
+				2F01E7B81A87B694006BDDAB /* ProductImageCell.h */,
+				2F01E7B91A87B694006BDDAB /* ProductImageCell.m */,
+				2F01E7BA1A87B694006BDDAB /* ProductImageCell.xib */,
+				2F01E7BD1A87C075006BDDAB /* PriceTableCell.h */,
+				2F01E7BE1A87C075006BDDAB /* PriceTableCell.m */,
+				2F01E7BF1A87C075006BDDAB /* PriceTableCell.xib */,
+				2F01E7C21A87C2B3006BDDAB /* DescriptionTableCell.h */,
+				2F01E7C31A87C2B3006BDDAB /* DescriptionTableCell.m */,
+				2F01E7C41A87C2B3006BDDAB /* DescriptionTableCell.xib */,
+				2F01E7CA1A87C54C006BDDAB /* SeperatorTableCell.h */,
+				2F01E7CB1A87C54C006BDDAB /* SeperatorTableCell.m */,
+				2F01E7CC1A87C54C006BDDAB /* SeperatorTableCell.xib */,
+			);
+			name = ProductTableCells;
+			sourceTree = "<group>";
+		};
 		2F0475021A813CF000196F0B /* ProductTableCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -308,6 +347,7 @@
 		2FEEE84D1A7E5B8E0095D8DB = {
 			isa = PBXGroup;
 			children = (
+				2F01E7B71A87B66F006BDDAB /* ProductTableCells */,
 				2F31B23D1A83D76800A2BB86 /* LAAnimatedGrid */,
 				2F31B2231A83D74D00A2BB86 /* UIKit+AFNetworking */,
 				2F31B2061A83D74000A2BB86 /* AFNetworking */,
@@ -463,8 +503,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F2B87E31A83670600FE8F20 /* ProductCell.xib in Resources */,
+				2F01E7C11A87C075006BDDAB /* PriceTableCell.xib in Resources */,
 				2F5954BC1A7E78BB001D5DAD /* CommunityCollectionViewCell.xib in Resources */,
 				2FEEE8651A7E5B8F0095D8DB /* Main.storyboard in Resources */,
+				2F01E7BC1A87B694006BDDAB /* ProductImageCell.xib in Resources */,
+				2F01E7C61A87C2B3006BDDAB /* DescriptionTableCell.xib in Resources */,
+				2F01E7CE1A87C54C006BDDAB /* SeperatorTableCell.xib in Resources */,
 				2F0475071A813D1B00196F0B /* ProductTableViewCell.xib in Resources */,
 				2F6EFEA71A8074E1001F9DE7 /* CategoryTableViewCell.xib in Resources */,
 				2FC5A2A11A7F23BA00DD0E63 /* CommunityTableViewCell.xib in Resources */,
@@ -489,6 +533,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F31B23A1A83D74D00A2BB86 /* UIProgressView+AFNetworking.m in Sources */,
+				2F01E7C51A87C2B3006BDDAB /* DescriptionTableCell.m in Sources */,
 				2F31B23B1A83D74D00A2BB86 /* UIRefreshControl+AFNetworking.m in Sources */,
 				2F31B23C1A83D74D00A2BB86 /* UIWebView+AFNetworking.m in Sources */,
 				2F5954BB1A7E78BB001D5DAD /* CommunityCollectionViewCell.m in Sources */,
@@ -501,6 +546,7 @@
 				2F31B2361A83D74D00A2BB86 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				2F6EFEBC1A808806001F9DE7 /* UIImage+ImageEffects.m in Sources */,
 				2F31B2201A83D74000A2BB86 /* AFURLRequestSerialization.m in Sources */,
+				2F01E7C01A87C075006BDDAB /* PriceTableCell.m in Sources */,
 				2F0475061A813D1B00196F0B /* ProductTableViewCell.m in Sources */,
 				2F31B21C1A83D74000A2BB86 /* AFHTTPSessionManager.m in Sources */,
 				2F31B21A1A83D74000A2BB86 /* AFHTTPRequestOperation.m in Sources */,
@@ -511,8 +557,10 @@
 				2FC5A2981A7F1BB900DD0E63 /* OTCover.m in Sources */,
 				2F31B2391A83D74D00A2BB86 /* UIImageView+AFNetworking.m in Sources */,
 				2F31B21D1A83D74000A2BB86 /* AFNetworkReachabilityManager.m in Sources */,
+				2F01E7CD1A87C54C006BDDAB /* SeperatorTableCell.m in Sources */,
 				2F31B2431A83D77E00A2BB86 /* LAAnimatedView.m in Sources */,
 				2F31B2221A83D74000A2BB86 /* AFURLSessionManager.m in Sources */,
+				2F01E7BB1A87B694006BDDAB /* ProductImageCell.m in Sources */,
 				2F6EFEA61A8074E1001F9DE7 /* CategoryTableViewCell.m in Sources */,
 				2F31B2371A83D74D00A2BB86 /* UIAlertView+AFNetworking.m in Sources */,
 				2F5954B31A7E6857001D5DAD /* BFPreferenceData.m in Sources */,
