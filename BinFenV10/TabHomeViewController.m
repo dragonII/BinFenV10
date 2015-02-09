@@ -38,7 +38,7 @@ static const NSInteger RefreshSectionIndex = 3;
 
 
 
-@interface TabHomeViewController () <UITableViewDataSource, UITableViewDelegate, MLKMenuPopoverDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@interface TabHomeViewController () <UITableViewDataSource, UITableViewDelegate, MLKMenuPopoverDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, OTCoverSegueDelegate>
 
 @property (strong, nonatomic) OTCover *otCoverView;
 
@@ -135,6 +135,7 @@ static const NSInteger RefreshSectionIndex = 3;
     
     self.otCoverView.tableView.delegate = self;
     self.otCoverView.tableView.dataSource = self;
+    self.otCoverView.segueDelegate = self;
     
     [self.otCoverView.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     //[self.otCoverView.tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
@@ -510,6 +511,20 @@ static const NSInteger RefreshSectionIndex = 3;
         communityVC.categoriesListArray = self.categoriesDataList;
         [self showNavigationItem];
     }
+}
+
+#pragma OTCoverSegueDelegate
+
+- (void)searchClickedInView:(OTCover *)view
+{
+    [self performSegueWithIdentifier:@"SelectCommunitySegue" sender:self];
+}
+
+#pragma unwind segue
+
+- (IBAction)unwindToTabHome:(UIStoryboardSegue *)segue
+{
+    
 }
 
 @end

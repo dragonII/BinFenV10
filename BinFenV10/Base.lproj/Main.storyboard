@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--周边-->
@@ -23,6 +24,109 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bYE-Dq-f1N" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="67" y="-77"/>
+        </scene>
+        <!--Community Selection View Controller-->
+        <scene sceneID="vsc-hM-AVY">
+            <objects>
+                <viewController id="Zbh-th-tAl" customClass="CommunitySelectionViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7KC-xf-8Tr"/>
+                        <viewControllerLayoutGuide type="bottom" id="ERK-Y9-eZo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="o8d-kG-pTf">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bAy-Hs-n9m">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="cg4-Wu-XD7"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem id="7wU-0w-ygw">
+                                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="ndp-sa-v0l">
+                                            <connections>
+                                                <segue destination="kUm-fG-GeK" kind="unwind" unwindAction="unwindToTabHome:" id="CYS-Uh-a1M"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="cg4-Wu-XD7"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="cg4-Wu-XD7"/>
+                                    </mask>
+                                </variation>
+                            </navigationBar>
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="输入城市社区名称查询" translatesAutoresizingMaskIntoConstraints="NO" id="2MY-wP-jaj">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="DVf-j7-zGb"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="DVf-j7-zGb"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="DVf-j7-zGb"/>
+                                    </mask>
+                                </variation>
+                            </searchBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="2MY-wP-jaj" firstAttribute="trailing" secondItem="o8d-kG-pTf" secondAttribute="trailingMargin" id="Pfs-aD-e3f"/>
+                            <constraint firstItem="2MY-wP-jaj" firstAttribute="leading" secondItem="o8d-kG-pTf" secondAttribute="leadingMargin" constant="52" id="QNR-cl-MWc"/>
+                            <constraint firstItem="bAy-Hs-n9m" firstAttribute="top" secondItem="7KC-xf-8Tr" secondAttribute="bottom" id="ZUJ-zW-zUE"/>
+                            <constraint firstItem="2MY-wP-jaj" firstAttribute="top" secondItem="7KC-xf-8Tr" secondAttribute="bottom" id="k2K-i9-bXr"/>
+                            <constraint firstItem="bAy-Hs-n9m" firstAttribute="leading" secondItem="o8d-kG-pTf" secondAttribute="leadingMargin" constant="-16" id="o35-qC-ete"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="bAy-Hs-n9m" secondAttribute="trailing" constant="-16" id="prb-Za-IiO"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="bAy-Hs-n9m"/>
+                                <exclude reference="2MY-wP-jaj"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="ZUJ-zW-zUE"/>
+                                <exclude reference="o35-qC-ete"/>
+                                <exclude reference="prb-Za-IiO"/>
+                                <exclude reference="Pfs-aD-e3f"/>
+                                <exclude reference="QNR-cl-MWc"/>
+                                <exclude reference="k2K-i9-bXr"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="bAy-Hs-n9m"/>
+                                <include reference="2MY-wP-jaj"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="ZUJ-zW-zUE"/>
+                                <include reference="o35-qC-ete"/>
+                                <include reference="prb-Za-IiO"/>
+                                <include reference="Pfs-aD-e3f"/>
+                                <include reference="QNR-cl-MWc"/>
+                                <include reference="k2K-i9-bXr"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="navigationBar" destination="bAy-Hs-n9m" id="8Sm-gq-7Hr"/>
+                        <outlet property="searchBar" destination="2MY-wP-jaj" id="ICS-4Z-UJs"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GvQ-Qn-Igg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="kUm-fG-GeK" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="201" y="-1473"/>
         </scene>
         <!--Community View Controller-->
         <scene sceneID="SGl-uo-wOQ">
@@ -77,6 +181,7 @@
                         <viewControllerLayoutGuide type="bottom" id="mQ8-Y2-i9R"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="mbR-9x-BOO">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -122,11 +227,11 @@
             </objects>
             <point key="canvasLocation" x="-753" y="315"/>
         </scene>
-        <!--首页-->
+        <!--缤纷-->
         <scene sceneID="spv-18-tLo">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="u3q-zj-azl" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="首页" id="f1l-pG-U5a"/>
+                    <tabBarItem key="tabBarItem" title="缤纷" image="Home" id="f1l-pG-U5a"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="eed-CB-BuI">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -157,6 +262,7 @@
                     <navigationItem key="navigationItem" id="0wZ-RD-vEn"/>
                     <connections>
                         <segue destination="nuf-EP-vNP" kind="show" identifier="ShowCommunitySegue" id="cCj-5z-a9i"/>
+                        <segue destination="Zbh-th-tAl" kind="presentation" identifier="SelectCommunitySegue" id="DCd-Ke-7JW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DHC-aL-dEd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -165,6 +271,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Home" width="30" height="30"/>
         <image name="Nearby" width="30" height="30"/>
     </resources>
 </document>

@@ -17,9 +17,7 @@
 @property (nonatomic, strong) NSMutableArray *blurImages;
 @property (nonatomic, assign) CGFloat OTCoverHeight;
 @property (nonatomic, strong) UIView* scrollHeaderView;
-//@property (nonatomic, strong) UIView *parentView;
 @property (nonatomic, strong) UIImageView *searchView;
-//@property (nonatomic, strong) UIButton *searchButton;
 
 @property BOOL searchViewHideDone;
 @property BOOL searchViewShowDone;
@@ -33,6 +31,10 @@
 -(void)tapDetected
 {
     NSLog(@"single Tap on imageview");
+    if([self.segueDelegate respondsToSelector:@selector(searchClickedInView:)])
+    {
+        [self.segueDelegate performSelector:@selector(searchClickedInView:) withObject:self];
+    }
 }
 
 - (void)initSearchView
@@ -296,5 +298,6 @@
     
     return returnImage;
 }
+
 
 @end
