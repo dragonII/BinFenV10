@@ -52,6 +52,12 @@
         rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"MainTabsViewController"];
     }
     
+    /*
+    self.window.tintColor = [UIColor colorWithRed:253/255.0f
+                                            green:150/255.0f
+                                             blue:93/255.0f
+                                            alpha:1.0f];
+     */
     self.window.rootViewController = rootViewController;
     [self.window makeKeyAndVisible];
     

@@ -33,6 +33,10 @@ static const NSInteger SeperatorCellIndex = 3;
 @property (weak, nonatomic) IBOutlet UITextView *descriptionTextView;
 
 @property (strong, nonatomic) UITableView *tableView;
+@property (strong, nonatomic) UIButton *addToCartButton;
+@property (strong, nonatomic) UILabel *quantityInCartLabel;
+@property (strong, nonatomic) UIButton *shareButton;
+@property (strong, nonatomic) UIButton *orderButton;
 
 @property (strong, nonatomic) NSArray *commentArray;
 
@@ -40,12 +44,62 @@ static const NSInteger SeperatorCellIndex = 3;
 
 @implementation ProductDetailViewController
 
+- (IBAction)addToCartClicked:(UIButton *)sender
+{
+    UIButton *button = sender;
+    [button setSelected:YES];
+    [self performSelector:@selector(addingToCart:) withObject:button afterDelay:0.2f];
+}
+
+- (void)addingToCart:(UIButton *)button
+{
+    int quantity = [self.quantityInCartLabel.text intValue];
+    quantity++;
+    [self.quantityInCartLabel setText:[NSString stringWithFormat:@"%d", quantity]];
+    [button setSelected:NO];
+}
+
+- (IBAction)orderClicked:(UIButton *)sender
+{
+    [self performSegueWithIdentifier:@"ShowOrderDetailSegue" sender:self];
+}
+
 - (void)initBottomView
 {
     CGRect mainFrame = self.view.bounds;
     UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, mainFrame.size.height - 44, mainFrame.size.width, 44)];
-    bottomView.backgroundColor = [UIColor yellowColor];
+    bottomView.backgroundColor = [UIColor whiteColor];
+    
+    self.addToCartButton = [[UIButton alloc] initWithFrame:CGRectMake(16, 7, 34, 30)];
+    [self.addToCartButton setBackgroundImage:[UIImage imageNamed:@"AddToCart"] forState:UIControlStateNormal];
+    [self.addToCartButton setBackgroundImage:[UIImage imageNamed:@"AddToCartSelected"] forState:UIControlStateSelected];
+    [self.addToCartButton addTarget:self action:@selector(addToCartClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [bottomView addSubview:self.addToCartButton];
+    
+    self.quantityInCartLabel = [[UILabel alloc] initWithFrame:CGRectMake(60, 16, 35, 12)];
+    UIFont *font = [UIFont fontWithName:@"STHeitiSC-Light" size:12];
+    self.quantityInCartLabel.font = font;
+    self.quantityInCartLabel.textColor = [UIColor redColor];
+    self.quantityInCartLabel.text = @"0";
+    [bottomView addSubview:self.quantityInCartLabel];
+    
+    self.shareButton = [[UIButton alloc] initWithFrame:CGRectMake(98, 12, 20, 20)];
+    [self.shareButton setBackgroundImage:[UIImage imageNamed:@"Share"] forState:UIControlStateNormal];
+    [bottomView addSubview:self.shareButton];
+    
+    CGFloat orderButtonWidth = 80.0f;
+    CGFloat orderButtonHeight = 30.0f;
+    CGRect orderButtonFrame = CGRectMake(bottomView.bounds.size.width - orderButtonWidth - 16,
+                                         7,
+                                         orderButtonWidth, orderButtonHeight);
+    self.orderButton = [[UIButton alloc] initWithFrame:orderButtonFrame];
+    [self.orderButton setTitle:@"去下单" forState:UIControlStateNormal];
+    self.orderButton.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"OrderButtonBG"]];
+    [self.orderButton addTarget:self action:@selector(orderClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [bottomView addSubview:self.orderButton];
+    
     [self.view addSubview:bottomView];
+    
 }
 
 - (void)initTableView
@@ -95,7 +149,7 @@ static const NSInteger SeperatorCellIndex = 3;
 {
     [super viewDidLoad];
     
-    self.navigationItem.title = @"产品";
+    self.navigationItem.title = @"商品详情";
     //self.productImageView.image = [UIImage imageNamed:@"Image-320x200"];
     
     [self initTableView];
@@ -127,7 +181,7 @@ static const NSInteger SeperatorCellIndex = 3;
     //具体评论信息数目根据来自服务器的信息为准，从0到N
     if(section == SectionComments)
     {
-        NSLog(@"Comment count: %d", [self.commentArray count]);
+        //NSLog(@"Comment count: %d", [self.commentArray count]);
         return [self.commentArray count];
     }
     else
@@ -219,7 +273,7 @@ static const NSInteger SeperatorCellIndex = 3;
         NSString *commentText = [[self.commentArray objectAtIndex:indexPath.row] objectForKey:@"comment"];
         CGSize textSize = [CommentTableViewCell sizeOfTextViewForText:commentText];
 
-        NSLog(@"Height: %f, width: %f", textSize.height + 40, textSize.width);
+        //NSLog(@"Height: %f, width: %f", textSize.height + 40, textSize.width);
         return textSize.height + 40;
     }
 }

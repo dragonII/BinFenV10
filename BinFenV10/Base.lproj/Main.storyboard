@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
-        <!--Item 2-->
+        <!--周边-->
         <scene sceneID="Hto-jQ-zw5">
             <objects>
                 <viewController id="mOW-KQ-J2r" sceneMemberID="viewController">
@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="EZs-dz-PHy"/>
+                    <tabBarItem key="tabBarItem" title="周边" image="Nearby" id="EZs-dz-PHy"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bYE-Dq-f1N" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -60,10 +60,30 @@
                     </view>
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <segue destination="Xmm-IW-YpS" kind="show" identifier="ShowOrderDetailSegue" id="RvF-dV-8Mx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5W7-Dk-S8H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1770" y="-1473"/>
+        </scene>
+        <!--Order Detail View Controller-->
+        <scene sceneID="XHw-Qj-rhc">
+            <objects>
+                <viewController id="Xmm-IW-YpS" customClass="OrderDetailViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="EUv-vh-lIA"/>
+                        <viewControllerLayoutGuide type="bottom" id="mQ8-Y2-i9R"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mbR-9x-BOO">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dlQ-FT-A8C" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2796" y="-1473"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="IuO-xU-FLh">
@@ -144,4 +164,7 @@
             <point key="canvasLocation" x="957" y="-739.5"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Nearby" width="30" height="30"/>
+    </resources>
 </document>
