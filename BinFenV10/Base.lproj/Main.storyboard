@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -34,6 +35,7 @@
                         <viewControllerLayoutGuide type="bottom" id="ERK-Y9-eZo"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="o8d-kG-pTf">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bAy-Hs-n9m">
@@ -43,13 +45,7 @@
                                     <constraint firstAttribute="height" constant="44" id="cg4-Wu-XD7"/>
                                 </constraints>
                                 <items>
-                                    <navigationItem id="7wU-0w-ygw">
-                                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="ndp-sa-v0l">
-                                            <connections>
-                                                <segue destination="kUm-fG-GeK" kind="unwind" unwindAction="unwindToTabHome:" id="CYS-Uh-a1M"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
+                                    <navigationItem id="7wU-0w-ygw"/>
                                 </items>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -62,65 +58,100 @@
                                     </mask>
                                 </variation>
                             </navigationBar>
-                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="输入城市社区名称查询" translatesAutoresizingMaskIntoConstraints="NO" id="2MY-wP-jaj">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yTS-6b-gcH">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="DVf-j7-zGb"/>
+                                    <constraint firstAttribute="width" constant="18" id="0xH-Si-tNf"/>
+                                    <constraint firstAttribute="height" constant="18" id="8fo-3F-cGb"/>
                                 </constraints>
-                                <textInputTraits key="textInputTraits"/>
+                                <state key="normal" image="Close">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="DVf-j7-zGb"/>
+                                        <exclude reference="0xH-Si-tNf"/>
+                                        <exclude reference="8fo-3F-cGb"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
-                                        <include reference="DVf-j7-zGb"/>
+                                        <include reference="0xH-Si-tNf"/>
+                                        <include reference="8fo-3F-cGb"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <segue destination="kUm-fG-GeK" kind="unwind" unwindAction="unwindToTabHome:" id="VfK-3H-U5T"/>
+                                </connections>
+                            </button>
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="输入城市社区名称查询" translatesAutoresizingMaskIntoConstraints="NO" id="Cm1-2N-CuZ">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="rlI-eh-Jyz"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="rlI-eh-Jyz"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="rlI-eh-Jyz"/>
                                     </mask>
                                 </variation>
                             </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="2MY-wP-jaj" firstAttribute="trailing" secondItem="o8d-kG-pTf" secondAttribute="trailingMargin" id="Pfs-aD-e3f"/>
-                            <constraint firstItem="2MY-wP-jaj" firstAttribute="leading" secondItem="o8d-kG-pTf" secondAttribute="leadingMargin" constant="52" id="QNR-cl-MWc"/>
+                            <constraint firstItem="yTS-6b-gcH" firstAttribute="top" secondItem="7KC-xf-8Tr" secondAttribute="bottom" constant="12" id="2FV-09-rFS"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Cm1-2N-CuZ" secondAttribute="trailing" constant="12" id="3Ao-7d-eRW"/>
+                            <constraint firstItem="Cm1-2N-CuZ" firstAttribute="top" secondItem="7KC-xf-8Tr" secondAttribute="bottom" id="GCG-7W-g8w"/>
                             <constraint firstItem="bAy-Hs-n9m" firstAttribute="top" secondItem="7KC-xf-8Tr" secondAttribute="bottom" id="ZUJ-zW-zUE"/>
-                            <constraint firstItem="2MY-wP-jaj" firstAttribute="top" secondItem="7KC-xf-8Tr" secondAttribute="bottom" id="k2K-i9-bXr"/>
+                            <constraint firstItem="Cm1-2N-CuZ" firstAttribute="leading" secondItem="yTS-6b-gcH" secondAttribute="trailing" constant="18" id="cMq-0c-4aa"/>
+                            <constraint firstItem="yTS-6b-gcH" firstAttribute="leading" secondItem="o8d-kG-pTf" secondAttribute="leadingMargin" id="e80-Zc-VVh">
+                                <variation key="heightClass=regular-widthClass=compact" constant="10"/>
+                            </constraint>
                             <constraint firstItem="bAy-Hs-n9m" firstAttribute="leading" secondItem="o8d-kG-pTf" secondAttribute="leadingMargin" constant="-16" id="o35-qC-ete"/>
                             <constraint firstAttribute="trailingMargin" secondItem="bAy-Hs-n9m" secondAttribute="trailing" constant="-16" id="prb-Za-IiO"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="bAy-Hs-n9m"/>
-                                <exclude reference="2MY-wP-jaj"/>
+                                <exclude reference="yTS-6b-gcH"/>
+                                <exclude reference="Cm1-2N-CuZ"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="ZUJ-zW-zUE"/>
                                 <exclude reference="o35-qC-ete"/>
                                 <exclude reference="prb-Za-IiO"/>
-                                <exclude reference="Pfs-aD-e3f"/>
-                                <exclude reference="QNR-cl-MWc"/>
-                                <exclude reference="k2K-i9-bXr"/>
+                                <exclude reference="2FV-09-rFS"/>
+                                <exclude reference="e80-Zc-VVh"/>
+                                <exclude reference="3Ao-7d-eRW"/>
+                                <exclude reference="GCG-7W-g8w"/>
+                                <exclude reference="cMq-0c-4aa"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
                                 <include reference="bAy-Hs-n9m"/>
-                                <include reference="2MY-wP-jaj"/>
+                                <include reference="yTS-6b-gcH"/>
+                                <include reference="Cm1-2N-CuZ"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="ZUJ-zW-zUE"/>
                                 <include reference="o35-qC-ete"/>
                                 <include reference="prb-Za-IiO"/>
-                                <include reference="Pfs-aD-e3f"/>
-                                <include reference="QNR-cl-MWc"/>
-                                <include reference="k2K-i9-bXr"/>
+                                <include reference="2FV-09-rFS"/>
+                                <include reference="e80-Zc-VVh"/>
+                                <include reference="3Ao-7d-eRW"/>
+                                <include reference="GCG-7W-g8w"/>
+                                <include reference="cMq-0c-4aa"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
                         <outlet property="navigationBar" destination="bAy-Hs-n9m" id="8Sm-gq-7Hr"/>
-                        <outlet property="searchBar" destination="2MY-wP-jaj" id="ICS-4Z-UJs"/>
+                        <outlet property="searchBar" destination="Cm1-2N-CuZ" id="Wfh-Np-PLc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GvQ-Qn-Igg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -271,6 +302,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Close" width="18" height="18"/>
         <image name="Home" width="30" height="30"/>
         <image name="Nearby" width="30" height="30"/>
     </resources>

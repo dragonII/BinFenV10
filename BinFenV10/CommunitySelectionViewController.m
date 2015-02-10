@@ -12,14 +12,14 @@
 static const NSInteger SectionCurrentIndex = 0;
 static const NSInteger SectionHistoryIndex = 1;
 
-@interface CommunitySelectionViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface CommunitySelectionViewController () <UITableViewDataSource, UITableViewDelegate, DeleteHistoryCommunityDelegate>
 
 @property (weak, nonatomic) IBOutlet UINavigationBar *navigationBar;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @property (strong, nonatomic) UITableView *tableView;
 
-@property (strong, nonatomic) NSArray *communityHistoryList;
+@property (strong, nonatomic) NSMutableArray *communityHistoryList;
 @property (copy, nonatomic) NSString *currentCommunity;
 
 @end
@@ -33,7 +33,9 @@ static const NSInteger SectionHistoryIndex = 1;
 
 - (void)loadCommunityByHistory
 {
-    self.communityHistoryList = @[@"岗夏村", @"长平商务大厦"];
+    self.communityHistoryList = [[NSMutableArray alloc] init];
+    [self.communityHistoryList addObject:@"岗夏村"];
+    [self.communityHistoryList addObject:@"长平商务大厦"];
 }
 
 - (void)viewDidLoad
@@ -116,6 +118,7 @@ static const NSInteger SectionHistoryIndex = 1;
         default:
             break;
     }
+    cell.deleteHistoryDelegate = self;
     return cell;
 }
 
@@ -153,6 +156,16 @@ static const NSInteger SectionHistoryIndex = 1;
 {
     [self.searchBar resignFirstResponder];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+#pragma DeleteHistoryCommunityDelegate
+
+- (void)deleteClickedInCell:(CommunityForSelectionCell *)cell
+{
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    NSLog(@"section: %d, row: %d", indexPath.section, indexPath.row);
+    [self.communityHistoryList removeObjectAtIndex:indexPath.row];
+    [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
 }
 
 @end

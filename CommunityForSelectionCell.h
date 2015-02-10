@@ -14,11 +14,20 @@ typedef enum
     CommunityCellTypeHistory
 } CommunityCellType;
 
+@class CommunityForSelectionCell;
+@protocol DeleteHistoryCommunityDelegate <NSObject>
+
+- (void)deleteClickedInCell:(CommunityForSelectionCell *)cell;
+
+@end
+
 @interface CommunityForSelectionCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sourceLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *operationImage;
+
+@property (weak, nonatomic) id<DeleteHistoryCommunityDelegate> deleteHistoryDelegate;
 
 @property (nonatomic) CommunityCellType cellType;
 
