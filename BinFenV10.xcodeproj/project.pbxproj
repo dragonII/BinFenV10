@@ -17,6 +17,10 @@
 		2F01E7CE1A87C54C006BDDAB /* SeperatorTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F01E7CC1A87C54C006BDDAB /* SeperatorTableCell.xib */; };
 		2F0475061A813D1B00196F0B /* ProductTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F0475041A813D1B00196F0B /* ProductTableViewCell.m */; };
 		2F0475071A813D1B00196F0B /* ProductTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F0475051A813D1B00196F0B /* ProductTableViewCell.xib */; };
+		2F28A0071A89BC6500C296D6 /* NearbyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F28A0061A89BC6500C296D6 /* NearbyViewController.m */; };
+		2F28A00C1A89CFB700C296D6 /* NearbyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F28A00A1A89CFB700C296D6 /* NearbyTableViewCell.m */; };
+		2F28A00D1A89CFB700C296D6 /* NearbyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F28A00B1A89CFB700C296D6 /* NearbyTableViewCell.xib */; };
+		2F28A0101A89D60E00C296D6 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F28A00F1A89D60E00C296D6 /* MessageViewController.m */; };
 		2F2B87DC1A832A7100FE8F20 /* MLKMenuPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2B87DB1A832A7100FE8F20 /* MLKMenuPopover.m */; };
 		2F2B87DF1A833F4800FE8F20 /* CommunityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2B87DE1A833F4800FE8F20 /* CommunityViewController.m */; };
 		2F2B87E11A83650C00FE8F20 /* CategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F2B87E01A83650C00FE8F20 /* CategoryCell.xib */; };
@@ -91,6 +95,13 @@
 		2F0475031A813D1B00196F0B /* ProductTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductTableViewCell.h; sourceTree = "<group>"; };
 		2F0475041A813D1B00196F0B /* ProductTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductTableViewCell.m; sourceTree = "<group>"; };
 		2F0475051A813D1B00196F0B /* ProductTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductTableViewCell.xib; sourceTree = "<group>"; };
+		2F28A0051A89BC6500C296D6 /* NearbyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearbyViewController.h; sourceTree = "<group>"; };
+		2F28A0061A89BC6500C296D6 /* NearbyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearbyViewController.m; sourceTree = "<group>"; };
+		2F28A0091A89CFB700C296D6 /* NearbyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearbyTableViewCell.h; sourceTree = "<group>"; };
+		2F28A00A1A89CFB700C296D6 /* NearbyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearbyTableViewCell.m; sourceTree = "<group>"; };
+		2F28A00B1A89CFB700C296D6 /* NearbyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NearbyTableViewCell.xib; sourceTree = "<group>"; };
+		2F28A00E1A89D60E00C296D6 /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
+		2F28A00F1A89D60E00C296D6 /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
 		2F2B87DA1A832A7100FE8F20 /* MLKMenuPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLKMenuPopover.h; sourceTree = "<group>"; };
 		2F2B87DB1A832A7100FE8F20 /* MLKMenuPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLKMenuPopover.m; sourceTree = "<group>"; };
 		2F2B87DD1A833F4800FE8F20 /* CommunityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommunityViewController.h; sourceTree = "<group>"; };
@@ -231,6 +242,16 @@
 			name = ProductTableCell;
 			sourceTree = "<group>";
 		};
+		2F28A0081A89CF9A00C296D6 /* NearbyTableCell */ = {
+			isa = PBXGroup;
+			children = (
+				2F28A0091A89CFB700C296D6 /* NearbyTableViewCell.h */,
+				2F28A00A1A89CFB700C296D6 /* NearbyTableViewCell.m */,
+				2F28A00B1A89CFB700C296D6 /* NearbyTableViewCell.xib */,
+			);
+			name = NearbyTableCell;
+			sourceTree = "<group>";
+		};
 		2F2B87D91A832A5A00FE8F20 /* MenuPopOver */ = {
 			isa = PBXGroup;
 			children = (
@@ -366,6 +387,7 @@
 		2FEEE84D1A7E5B8E0095D8DB = {
 			isa = PBXGroup;
 			children = (
+				2F28A0081A89CF9A00C296D6 /* NearbyTableCell */,
 				2F01E7B71A87B66F006BDDAB /* ProductTableCells */,
 				2F31B23D1A83D76800A2BB86 /* LAAnimatedGrid */,
 				2F31B2231A83D74D00A2BB86 /* UIKit+AFNetworking */,
@@ -410,6 +432,10 @@
 				2F480A901A864BB60034CA65 /* ProductDetailViewController.m */,
 				2F34CEF21A88AC35000AD896 /* OrderDetailViewController.h */,
 				2F34CEF31A88AC35000AD896 /* OrderDetailViewController.m */,
+				2F28A0051A89BC6500C296D6 /* NearbyViewController.h */,
+				2F28A0061A89BC6500C296D6 /* NearbyViewController.m */,
+				2F28A00E1A89D60E00C296D6 /* MessageViewController.h */,
+				2F28A00F1A89D60E00C296D6 /* MessageViewController.m */,
 				2FEEE8631A7E5B8F0095D8DB /* Main.storyboard */,
 				2FEEE8661A7E5B8F0095D8DB /* Images.xcassets */,
 				2FEEE8681A7E5B8F0095D8DB /* LaunchScreen.xib */,
@@ -527,6 +553,7 @@
 			files = (
 				2F2B87E31A83670600FE8F20 /* ProductCell.xib in Resources */,
 				2F01E7C11A87C075006BDDAB /* PriceTableCell.xib in Resources */,
+				2F28A00D1A89CFB700C296D6 /* NearbyTableViewCell.xib in Resources */,
 				2F5954BC1A7E78BB001D5DAD /* CommunityCollectionViewCell.xib in Resources */,
 				2FEEE8651A7E5B8F0095D8DB /* Main.storyboard in Resources */,
 				2F01E7BC1A87B694006BDDAB /* ProductImageCell.xib in Resources */,
@@ -577,17 +604,20 @@
 				2F31B21A1A83D74000A2BB86 /* AFHTTPRequestOperation.m in Sources */,
 				2FC5A2A01A7F23BA00DD0E63 /* CommunityTableViewCell.m in Sources */,
 				2F31B2351A83D74D00A2BB86 /* AFNetworkActivityIndicatorManager.m in Sources */,
+				2F28A00C1A89CFB700C296D6 /* NearbyTableViewCell.m in Sources */,
 				2F4A63AE1A890D5300B30986 /* CommunityForSelectionCell.m in Sources */,
 				2F31B21E1A83D74000A2BB86 /* AFSecurityPolicy.m in Sources */,
 				2F31B2421A83D77E00A2BB86 /* LAAnimatedGrid.m in Sources */,
 				2FC5A2981A7F1BB900DD0E63 /* OTCover.m in Sources */,
 				2F31B2391A83D74D00A2BB86 /* UIImageView+AFNetworking.m in Sources */,
 				2F31B21D1A83D74000A2BB86 /* AFNetworkReachabilityManager.m in Sources */,
+				2F28A0071A89BC6500C296D6 /* NearbyViewController.m in Sources */,
 				2F01E7CD1A87C54C006BDDAB /* SeperatorTableCell.m in Sources */,
 				2F31B2431A83D77E00A2BB86 /* LAAnimatedView.m in Sources */,
 				2F31B2221A83D74000A2BB86 /* AFURLSessionManager.m in Sources */,
 				2F01E7BB1A87B694006BDDAB /* ProductImageCell.m in Sources */,
 				2F6EFEA61A8074E1001F9DE7 /* CategoryTableViewCell.m in Sources */,
+				2F28A0101A89D60E00C296D6 /* MessageViewController.m in Sources */,
 				2F34CEF41A88AC35000AD896 /* OrderDetailViewController.m in Sources */,
 				2F31B2371A83D74D00A2BB86 /* UIAlertView+AFNetworking.m in Sources */,
 				2F5954B31A7E6857001D5DAD /* BFPreferenceData.m in Sources */,
