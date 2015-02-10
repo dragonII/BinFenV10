@@ -21,6 +21,7 @@
 		2F28A00C1A89CFB700C296D6 /* NearbyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F28A00A1A89CFB700C296D6 /* NearbyTableViewCell.m */; };
 		2F28A00D1A89CFB700C296D6 /* NearbyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F28A00B1A89CFB700C296D6 /* NearbyTableViewCell.xib */; };
 		2F28A0101A89D60E00C296D6 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F28A00F1A89D60E00C296D6 /* MessageViewController.m */; };
+		2F28A0161A89E36F00C296D6 /* DeviceHardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F28A0151A89E36F00C296D6 /* DeviceHardware.m */; };
 		2F2B87DC1A832A7100FE8F20 /* MLKMenuPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2B87DB1A832A7100FE8F20 /* MLKMenuPopover.m */; };
 		2F2B87DF1A833F4800FE8F20 /* CommunityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2B87DE1A833F4800FE8F20 /* CommunityViewController.m */; };
 		2F2B87E11A83650C00FE8F20 /* CategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F2B87E01A83650C00FE8F20 /* CategoryCell.xib */; };
@@ -102,6 +103,8 @@
 		2F28A00B1A89CFB700C296D6 /* NearbyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NearbyTableViewCell.xib; sourceTree = "<group>"; };
 		2F28A00E1A89D60E00C296D6 /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
 		2F28A00F1A89D60E00C296D6 /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
+		2F28A0141A89E36F00C296D6 /* DeviceHardware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceHardware.h; sourceTree = "<group>"; };
+		2F28A0151A89E36F00C296D6 /* DeviceHardware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceHardware.m; sourceTree = "<group>"; };
 		2F2B87DA1A832A7100FE8F20 /* MLKMenuPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLKMenuPopover.h; sourceTree = "<group>"; };
 		2F2B87DB1A832A7100FE8F20 /* MLKMenuPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLKMenuPopover.m; sourceTree = "<group>"; };
 		2F2B87DD1A833F4800FE8F20 /* CommunityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommunityViewController.h; sourceTree = "<group>"; };
@@ -418,6 +421,8 @@
 		2FEEE8581A7E5B8E0095D8DB /* BinFenV10 */ = {
 			isa = PBXGroup;
 			children = (
+				2F28A0141A89E36F00C296D6 /* DeviceHardware.h */,
+				2F28A0151A89E36F00C296D6 /* DeviceHardware.m */,
 				2FEEE85D1A7E5B8E0095D8DB /* AppDelegate.h */,
 				2FEEE85E1A7E5B8E0095D8DB /* AppDelegate.m */,
 				2FEEE8601A7E5B8E0095D8DB /* WizardViewController.h */,
@@ -616,6 +621,7 @@
 				2F31B2431A83D77E00A2BB86 /* LAAnimatedView.m in Sources */,
 				2F31B2221A83D74000A2BB86 /* AFURLSessionManager.m in Sources */,
 				2F01E7BB1A87B694006BDDAB /* ProductImageCell.m in Sources */,
+				2F28A0161A89E36F00C296D6 /* DeviceHardware.m in Sources */,
 				2F6EFEA61A8074E1001F9DE7 /* CategoryTableViewCell.m in Sources */,
 				2F28A0101A89D60E00C296D6 /* MessageViewController.m in Sources */,
 				2F34CEF41A88AC35000AD896 /* OrderDetailViewController.m in Sources */,

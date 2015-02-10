@@ -13,6 +13,8 @@
 #import "MLKMenuPopover.h"
 #import "defs.h"
 
+#import "DeviceHardware.h"
+
 NSString *CategoryCellIdentifier = @"CategoryCellIdentifier";
 NSString *ProductCellIdentifier = @"ProductCellIdentifier";
 
@@ -31,21 +33,55 @@ static const int SectionLoadMore = 2;
 
 @implementation CommunityViewController
 
+- (void)initTableView
+{    
+    CGRect tableViewFrame;
+    
+    DeviceHardwareGeneralPlatform generalPlatform = [DeviceHardware generalPlatform];
+    NSLog(@"generalPlatform: %d", generalPlatform);
+    
+    switch (generalPlatform)
+    {
+        case DeviceHardwareGeneralPlatform_iPhone_4:
+        case DeviceHardwareGeneralPlatform_iPhone_4S:
+        {
+            NSLog(@"iphone 4, 4S");
+            CGFloat navigationBarHeight = self.navigationController.navigationBar.frame.size.height;
+            CGFloat statusBarHeight = 20;
+            tableViewFrame = CGRectMake(0, navigationBarHeight + statusBarHeight,
+                                        self.view.bounds.size.width,
+                                        self.view.bounds.size.height - navigationBarHeight - statusBarHeight);
+            break;
+        }
+        case DeviceHardwareGeneralPlatform_iPhone_5:
+        case DeviceHardwareGeneralPlatform_iPhone_5C:
+        case DeviceHardwareGeneralPlatform_iPhone_5S:
+        case DeviceHardwareGeneralPlatform_iPhone_6:
+        case DeviceHardwareGeneralPlatform_iPhone_6_Plus:
+        {
+            NSLog(@"iphone 5, 6");
+            tableViewFrame = CGRectMake(0, 0,
+                                        self.view.bounds.size.width,
+                                        self.view.bounds.size.height);
+            break;
+        }
+            
+        default:
+            tableViewFrame = CGRectZero;
+            break;
+    }
+     
 
+    self.tableView = [[UITableView alloc] initWithFrame:tableViewFrame];
+    
+    [self.view addSubview:self.tableView];
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    CGRect mainBounds = [[UIScreen mainScreen] bounds];
-    CGFloat navigationBarHeight = self.navigationController.navigationBar.frame.size.height;
-    CGFloat statusBarHeight = 20;
-    self.tableView = [[UITableView alloc] initWithFrame:mainBounds];
-    UIEdgeInsets insets = self.tableView.contentInset;
-    insets.top = navigationBarHeight + statusBarHeight;
-    self.tableView.contentInset = insets;
-    
-    [self.view addSubview:self.tableView];
+    [self initTableView];
     
     [self initTableRowWithScroll];
     

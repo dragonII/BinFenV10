@@ -13,6 +13,8 @@
 #import "SeperatorTableCell.h"
 #import "CommentTableViewCell.h"
 
+#import "DeviceHardware.h"
+
 static NSString *ProductImageCellIdentifier = @"ProductImageCell";
 static NSString *ProductPriceCellIdentifier = @"ProductPriceCell";
 static NSString *ProductDescriptionIdentifier = @"ProductDescription";
@@ -67,7 +69,8 @@ static const NSInteger SeperatorCellIndex = 3;
 - (void)initBottomView
 {
     CGRect mainFrame = self.view.bounds;
-    UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, mainFrame.size.height - 44, mainFrame.size.width, 44)];
+    CGFloat bottomViewHeight = 44;
+    UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, mainFrame.size.height - bottomViewHeight, mainFrame.size.width, 44)];
     bottomView.backgroundColor = [UIColor whiteColor];
     
     self.addToCartButton = [[UIButton alloc] initWithFrame:CGRectMake(16, 7, 34, 30)];
@@ -104,12 +107,56 @@ static const NSInteger SeperatorCellIndex = 3;
 
 - (void)initTableView
 {
-    CGFloat navigationBarHeight = self.navigationController.navigationBar.frame.size.height;
+    CGRect tableViewFrame;
+    CGFloat bottomViewHeight = 44.0f;
+    
+    DeviceHardwareGeneralPlatform generalPlatform = [DeviceHardware generalPlatform];
+    NSLog(@"generalPlatform: %d", generalPlatform);
+    
+    switch (generalPlatform)
+    {
+        case DeviceHardwareGeneralPlatform_iPhone_4:
+        case DeviceHardwareGeneralPlatform_iPhone_4S:
+        {
+            NSLog(@"iphone 4, 4S");
+            CGFloat navigationBarHeight = self.navigationController.navigationBar.frame.size.height;
+            CGFloat statusBarHeight = 20;
+            tableViewFrame = CGRectMake(0, navigationBarHeight + statusBarHeight,
+                                        self.view.bounds.size.width,
+                                        self.view.bounds.size.height - navigationBarHeight - statusBarHeight - bottomViewHeight);
+            break;
+        }
+        case DeviceHardwareGeneralPlatform_iPhone_5:
+        case DeviceHardwareGeneralPlatform_iPhone_5C:
+        case DeviceHardwareGeneralPlatform_iPhone_5S:
+        case DeviceHardwareGeneralPlatform_iPhone_6:
+        case DeviceHardwareGeneralPlatform_iPhone_6_Plus:
+        {
+            NSLog(@"iphone 5, 6");
+            tableViewFrame = CGRectMake(0, 0,
+                                        self.view.bounds.size.width,
+                                        self.view.bounds.size.height - bottomViewHeight);
+            break;
+        }
+            
+        default:
+            tableViewFrame = CGRectZero;
+            break;
+    }
+    
+    //CGFloat navigationBarHeight = self.navigationController.navigationBar.frame.size.height;
+    
+    /*
     CGRect mainFrame = self.view.bounds;
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(mainFrame.origin.x,
                                                                   mainFrame.origin.y + navigationBarHeight,
                                                                   mainFrame.size.width,
                                                                    mainFrame.size.height - navigationBarHeight - 44)];
+     */
+    
+    //self.tableView = [[UITableView alloc] initWithFrame:self.view.frame];
+    self.tableView = [[UITableView alloc] initWithFrame:tableViewFrame];
+    
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
@@ -127,9 +174,11 @@ static const NSInteger SeperatorCellIndex = 3;
     
     [self.tableView registerClass:[CommentTableViewCell class] forCellReuseIdentifier:CommentCellIdentifier];
     
+    /*
     UIEdgeInsets insets = self.tableView.contentInset;
     insets.top = 20;
     [self.tableView setContentInset:insets];
+     */
      
     [self.view addSubview:self.tableView];
 }

@@ -39,9 +39,7 @@ static NSString *NearbyCellIdentifier = @"NearbyCellIdentifier";
     CGFloat tabBarHeight = self.tabBarController.tabBar.frame.size.height;
     //NSLog(@"tabBarHeight: %f", tabBarHeight);
     //NSLog(@"naviBarHeight: %f", navigationBarHeight);
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0,
-                                                                   //navigationBarHeight,
-                                                                   0,
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0,
                                                                   self.view.bounds.size.width,
                                                                    self.view.bounds.size.height - navigationBarHeight - tabBarHeight)];
     //NSLog(@"view: %f, %f, %f", self.view.frame.origin.x, self.view.frame.origin.y, self.view.bounds.size.height);

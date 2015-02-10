@@ -23,7 +23,6 @@
 #import "defs.h"
 
 
-
 static NSString *CommunityTableRowCellIdentifier = @"CommunityTableRowCellIdentifier";
 static NSString *CategoryTableCellIdentifier = @"CategoryTableCellIdentifier";
 static NSString *ProductTableCellIdentifier = @"ProductTableViewCellIdentifier";
