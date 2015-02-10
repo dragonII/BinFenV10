@@ -22,6 +22,7 @@
 		2F28A00D1A89CFB700C296D6 /* NearbyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F28A00B1A89CFB700C296D6 /* NearbyTableViewCell.xib */; };
 		2F28A0101A89D60E00C296D6 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F28A00F1A89D60E00C296D6 /* MessageViewController.m */; };
 		2F28A0161A89E36F00C296D6 /* DeviceHardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F28A0151A89E36F00C296D6 /* DeviceHardware.m */; };
+		2F28A0191A8A057300C296D6 /* AboutMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F28A0181A8A057300C296D6 /* AboutMeViewController.m */; };
 		2F2B87DC1A832A7100FE8F20 /* MLKMenuPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2B87DB1A832A7100FE8F20 /* MLKMenuPopover.m */; };
 		2F2B87DF1A833F4800FE8F20 /* CommunityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2B87DE1A833F4800FE8F20 /* CommunityViewController.m */; };
 		2F2B87E11A83650C00FE8F20 /* CategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F2B87E01A83650C00FE8F20 /* CategoryCell.xib */; };
@@ -105,6 +106,8 @@
 		2F28A00F1A89D60E00C296D6 /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
 		2F28A0141A89E36F00C296D6 /* DeviceHardware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceHardware.h; sourceTree = "<group>"; };
 		2F28A0151A89E36F00C296D6 /* DeviceHardware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceHardware.m; sourceTree = "<group>"; };
+		2F28A0171A8A057300C296D6 /* AboutMeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutMeViewController.h; sourceTree = "<group>"; };
+		2F28A0181A8A057300C296D6 /* AboutMeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutMeViewController.m; sourceTree = "<group>"; };
 		2F2B87DA1A832A7100FE8F20 /* MLKMenuPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLKMenuPopover.h; sourceTree = "<group>"; };
 		2F2B87DB1A832A7100FE8F20 /* MLKMenuPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLKMenuPopover.m; sourceTree = "<group>"; };
 		2F2B87DD1A833F4800FE8F20 /* CommunityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommunityViewController.h; sourceTree = "<group>"; };
@@ -441,6 +444,8 @@
 				2F28A0061A89BC6500C296D6 /* NearbyViewController.m */,
 				2F28A00E1A89D60E00C296D6 /* MessageViewController.h */,
 				2F28A00F1A89D60E00C296D6 /* MessageViewController.m */,
+				2F28A0171A8A057300C296D6 /* AboutMeViewController.h */,
+				2F28A0181A8A057300C296D6 /* AboutMeViewController.m */,
 				2FEEE8631A7E5B8F0095D8DB /* Main.storyboard */,
 				2FEEE8661A7E5B8F0095D8DB /* Images.xcassets */,
 				2FEEE8681A7E5B8F0095D8DB /* LaunchScreen.xib */,
@@ -630,6 +635,7 @@
 				2F2B87DF1A833F4800FE8F20 /* CommunityViewController.m in Sources */,
 				2F2B87DC1A832A7100FE8F20 /* MLKMenuPopover.m in Sources */,
 				2F31B2211A83D74000A2BB86 /* AFURLResponseSerialization.m in Sources */,
+				2F28A0191A8A057300C296D6 /* AboutMeViewController.m in Sources */,
 				2F34CEE81A8878ED000AD896 /* CommentTableViewCell.m in Sources */,
 				2F31B2381A83D74D00A2BB86 /* UIButton+AFNetworking.m in Sources */,
 				2FEEE85C1A7E5B8E0095D8DB /* main.m in Sources */,
