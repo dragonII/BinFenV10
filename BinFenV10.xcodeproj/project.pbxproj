@@ -58,6 +58,10 @@
 		2F6EFEA61A8074E1001F9DE7 /* CategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6EFEA41A8074E1001F9DE7 /* CategoryTableViewCell.m */; };
 		2F6EFEA71A8074E1001F9DE7 /* CategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F6EFEA51A8074E1001F9DE7 /* CategoryTableViewCell.xib */; };
 		2F6EFEBC1A808806001F9DE7 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6EFEBB1A808806001F9DE7 /* UIImage+ImageEffects.m */; };
+		2F7B75BC1A8AF9AC00720650 /* UserInforTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F7B75BA1A8AF9AC00720650 /* UserInforTableViewCell.m */; };
+		2F7B75BD1A8AF9AC00720650 /* UserInforTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F7B75BB1A8AF9AC00720650 /* UserInforTableViewCell.xib */; };
+		2F7B75C11A8AFBFE00720650 /* BasicSettingTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F7B75BF1A8AFBFE00720650 /* BasicSettingTableCell.m */; };
+		2F7B75C21A8AFBFE00720650 /* BasicSettingTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F7B75C01A8AFBFE00720650 /* BasicSettingTableCell.xib */; };
 		2FC5A2981A7F1BB900DD0E63 /* OTCover.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5A2971A7F1BB900DD0E63 /* OTCover.m */; };
 		2FC5A29B1A7F1CB200DD0E63 /* TabHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5A29A1A7F1CB200DD0E63 /* TabHomeViewController.m */; };
 		2FC5A2A01A7F23BA00DD0E63 /* CommunityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5A29E1A7F23B900DD0E63 /* CommunityTableViewCell.m */; };
@@ -176,6 +180,12 @@
 		2F6EFEA51A8074E1001F9DE7 /* CategoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CategoryTableViewCell.xib; sourceTree = "<group>"; };
 		2F6EFEBA1A808806001F9DE7 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+ImageEffects.h"; path = "BinFenV10/UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		2F6EFEBB1A808806001F9DE7 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+ImageEffects.m"; path = "BinFenV10/UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		2F7B75B91A8AF9AC00720650 /* UserInforTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInforTableViewCell.h; sourceTree = "<group>"; };
+		2F7B75BA1A8AF9AC00720650 /* UserInforTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInforTableViewCell.m; sourceTree = "<group>"; };
+		2F7B75BB1A8AF9AC00720650 /* UserInforTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserInforTableViewCell.xib; sourceTree = "<group>"; };
+		2F7B75BE1A8AFBFE00720650 /* BasicSettingTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicSettingTableCell.h; sourceTree = "<group>"; };
+		2F7B75BF1A8AFBFE00720650 /* BasicSettingTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicSettingTableCell.m; sourceTree = "<group>"; };
+		2F7B75C01A8AFBFE00720650 /* BasicSettingTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BasicSettingTableCell.xib; sourceTree = "<group>"; };
 		2FC5A2961A7F1BB900DD0E63 /* OTCover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTCover.h; sourceTree = "<group>"; };
 		2FC5A2971A7F1BB900DD0E63 /* OTCover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTCover.m; sourceTree = "<group>"; };
 		2FC5A2991A7F1CB200DD0E63 /* TabHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabHomeViewController.h; sourceTree = "<group>"; };
@@ -368,6 +378,19 @@
 			name = Categories;
 			sourceTree = "<group>";
 		};
+		2F7B75B81A8AF96800720650 /* MyselfTableCells */ = {
+			isa = PBXGroup;
+			children = (
+				2F7B75B91A8AF9AC00720650 /* UserInforTableViewCell.h */,
+				2F7B75BA1A8AF9AC00720650 /* UserInforTableViewCell.m */,
+				2F7B75BB1A8AF9AC00720650 /* UserInforTableViewCell.xib */,
+				2F7B75BE1A8AFBFE00720650 /* BasicSettingTableCell.h */,
+				2F7B75BF1A8AFBFE00720650 /* BasicSettingTableCell.m */,
+				2F7B75C01A8AFBFE00720650 /* BasicSettingTableCell.xib */,
+			);
+			name = MyselfTableCells;
+			sourceTree = "<group>";
+		};
 		2FC5A2951A7F1BB900DD0E63 /* OTCover */ = {
 			isa = PBXGroup;
 			children = (
@@ -393,6 +416,7 @@
 		2FEEE84D1A7E5B8E0095D8DB = {
 			isa = PBXGroup;
 			children = (
+				2F7B75B81A8AF96800720650 /* MyselfTableCells */,
 				2F28A0081A89CF9A00C296D6 /* NearbyTableCell */,
 				2F01E7B71A87B66F006BDDAB /* ProductTableCells */,
 				2F31B23D1A83D76800A2BB86 /* LAAnimatedGrid */,
@@ -568,10 +592,12 @@
 				2FEEE8651A7E5B8F0095D8DB /* Main.storyboard in Resources */,
 				2F01E7BC1A87B694006BDDAB /* ProductImageCell.xib in Resources */,
 				2F01E7C61A87C2B3006BDDAB /* DescriptionTableCell.xib in Resources */,
+				2F7B75C21A8AFBFE00720650 /* BasicSettingTableCell.xib in Resources */,
 				2F01E7CE1A87C54C006BDDAB /* SeperatorTableCell.xib in Resources */,
 				2F0475071A813D1B00196F0B /* ProductTableViewCell.xib in Resources */,
 				2F6EFEA71A8074E1001F9DE7 /* CategoryTableViewCell.xib in Resources */,
 				2FC5A2A11A7F23BA00DD0E63 /* CommunityTableViewCell.xib in Resources */,
+				2F7B75BD1A8AF9AC00720650 /* UserInforTableViewCell.xib in Resources */,
 				2FEEE86A1A7E5B8F0095D8DB /* LaunchScreen.xib in Resources */,
 				2FEEE8671A7E5B8F0095D8DB /* Images.xcassets in Resources */,
 				2F4A63AF1A890D5300B30986 /* CommunityForSelectionCell.xib in Resources */,
@@ -616,6 +642,7 @@
 				2F31B2351A83D74D00A2BB86 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				2F28A00C1A89CFB700C296D6 /* NearbyTableViewCell.m in Sources */,
 				2F4A63AE1A890D5300B30986 /* CommunityForSelectionCell.m in Sources */,
+				2F7B75BC1A8AF9AC00720650 /* UserInforTableViewCell.m in Sources */,
 				2F31B21E1A83D74000A2BB86 /* AFSecurityPolicy.m in Sources */,
 				2F31B2421A83D77E00A2BB86 /* LAAnimatedGrid.m in Sources */,
 				2FC5A2981A7F1BB900DD0E63 /* OTCover.m in Sources */,
@@ -634,6 +661,7 @@
 				2F5954B31A7E6857001D5DAD /* BFPreferenceData.m in Sources */,
 				2F2B87DF1A833F4800FE8F20 /* CommunityViewController.m in Sources */,
 				2F2B87DC1A832A7100FE8F20 /* MLKMenuPopover.m in Sources */,
+				2F7B75C11A8AFBFE00720650 /* BasicSettingTableCell.m in Sources */,
 				2F31B2211A83D74000A2BB86 /* AFURLResponseSerialization.m in Sources */,
 				2F28A0191A8A057300C296D6 /* AboutMeViewController.m in Sources */,
 				2F34CEE81A8878ED000AD896 /* CommentTableViewCell.m in Sources */,
