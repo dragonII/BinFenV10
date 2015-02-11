@@ -9,6 +9,7 @@
 #import "AboutMeViewController.h"
 #import "UserInforTableViewCell.h"
 #import "BasicSettingTableCell.h"
+#import "AboutProductViewController.h"
 
 static NSString *UserInfoCellIdentifier = @"UserInfoCell";
 static NSString *BasicSettingCellIdentifier = @"BasicSettingCell";
@@ -193,9 +194,36 @@ typedef enum
     return 12.0f;
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([segue.identifier isEqualToString:@"ShowAboutProductSegue"])
+    {
+        AboutProductViewController *aboutVC = (AboutProductViewController *)segue.destinationViewController;
+        aboutVC.hidesBottomBarWhenPushed = YES;
+        //aboutVC.categoriesListArray = self.categoriesDataList;
+        //[self showNavigationItem];
+    }
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    switch (indexPath.section)
+    {
+        case SectionIndexUser:
+        case SectionIndexAddr:
+        case SectionIndexOthers:
+            return;
+        
+        case SectionIndexAbout:
+        {
+            [self performSegueWithIdentifier:@"ShowAboutProductSegue" sender:self];
+        }
+            break;
+            
+        default:
+            break;
+    }
 }
 
 @end

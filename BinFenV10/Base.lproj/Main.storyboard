@@ -121,14 +121,14 @@
                                 <exclude reference="Cm1-2N-CuZ"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="ZUJ-zW-zUE"/>
-                                <exclude reference="o35-qC-ete"/>
-                                <exclude reference="prb-Za-IiO"/>
                                 <exclude reference="2FV-09-rFS"/>
                                 <exclude reference="e80-Zc-VVh"/>
                                 <exclude reference="3Ao-7d-eRW"/>
                                 <exclude reference="GCG-7W-g8w"/>
                                 <exclude reference="cMq-0c-4aa"/>
+                                <exclude reference="ZUJ-zW-zUE"/>
+                                <exclude reference="o35-qC-ete"/>
+                                <exclude reference="prb-Za-IiO"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -138,14 +138,14 @@
                                 <include reference="Cm1-2N-CuZ"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="ZUJ-zW-zUE"/>
-                                <include reference="o35-qC-ete"/>
-                                <include reference="prb-Za-IiO"/>
                                 <include reference="2FV-09-rFS"/>
                                 <include reference="e80-Zc-VVh"/>
                                 <include reference="3Ao-7d-eRW"/>
                                 <include reference="GCG-7W-g8w"/>
                                 <include reference="cMq-0c-4aa"/>
+                                <include reference="ZUJ-zW-zUE"/>
+                                <include reference="o35-qC-ete"/>
+                                <include reference="prb-Za-IiO"/>
                             </mask>
                         </variation>
                     </view>
@@ -269,6 +269,7 @@
                         <viewControllerLayoutGuide type="bottom" id="lIC-6d-P5q"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="VJZ-Ft-OUY">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -367,14 +368,126 @@
                         <viewControllerLayoutGuide type="bottom" id="KR7-Pb-JYR"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="uo8-03-aeb">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="jc5-7p-Y9Z"/>
+                    <connections>
+                        <segue destination="Be2-FI-Lik" kind="show" identifier="ShowAboutProductSegue" id="g7w-hL-WIS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vdk-uU-gO1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="957" y="1327.5"/>
+        </scene>
+        <!--About Product View Controller-->
+        <scene sceneID="Vlu-SR-kCO">
+            <objects>
+                <viewController id="Be2-FI-Lik" customClass="AboutProductViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5HJ-1U-rJB"/>
+                        <viewControllerLayoutGuide type="bottom" id="EOP-NQ-Ma4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="i3D-Ad-NUW">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AboutLogo" translatesAutoresizingMaskIntoConstraints="NO" id="BoY-zl-oiW">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="77N-vL-H68"/>
+                                    <constraint firstAttribute="height" constant="120" id="OOV-7B-6ZB"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="77N-vL-H68"/>
+                                        <exclude reference="OOV-7B-6ZB"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="77N-vL-H68"/>
+                                        <include reference="OOV-7B-6ZB"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="版本号" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yPd-bW-pjj">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="191" id="UYv-dj-mnp"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="STHeitiSC-Light" family="Heiti SC" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="UYv-dj-mnp"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="UYv-dj-mnp"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3ta-Da-ffQ">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" red="0.88235294117647056" green="0.88235294117647056" blue="0.88235294117647056" alpha="1" colorSpace="calibratedRGB"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="yPd-bW-pjj" secondAttribute="centerX" id="5mC-Eu-Qta"/>
+                            <constraint firstItem="BoY-zl-oiW" firstAttribute="top" secondItem="5HJ-1U-rJB" secondAttribute="bottom" constant="50" id="KJa-9a-218"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="3ta-Da-ffQ" secondAttribute="trailing" constant="-16" id="TLG-B1-Och"/>
+                            <constraint firstItem="3ta-Da-ffQ" firstAttribute="top" secondItem="yPd-bW-pjj" secondAttribute="bottom" constant="29" id="Tab-xu-sqW"/>
+                            <constraint firstItem="3ta-Da-ffQ" firstAttribute="bottom" secondItem="i3D-Ad-NUW" secondAttribute="bottomMargin" id="YVj-uS-JOY"/>
+                            <constraint firstItem="yPd-bW-pjj" firstAttribute="top" secondItem="BoY-zl-oiW" secondAttribute="bottom" constant="14" id="co2-Ry-Ujv"/>
+                            <constraint firstItem="3ta-Da-ffQ" firstAttribute="leading" secondItem="i3D-Ad-NUW" secondAttribute="leadingMargin" constant="-16" id="edZ-9o-w9h"/>
+                            <constraint firstAttribute="centerX" secondItem="BoY-zl-oiW" secondAttribute="centerX" id="lvA-iO-j2h"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="BoY-zl-oiW"/>
+                                <exclude reference="yPd-bW-pjj"/>
+                                <exclude reference="3ta-Da-ffQ"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="KJa-9a-218"/>
+                                <exclude reference="lvA-iO-j2h"/>
+                                <exclude reference="5mC-Eu-Qta"/>
+                                <exclude reference="co2-Ry-Ujv"/>
+                                <exclude reference="TLG-B1-Och"/>
+                                <exclude reference="Tab-xu-sqW"/>
+                                <exclude reference="YVj-uS-JOY"/>
+                                <exclude reference="edZ-9o-w9h"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="BoY-zl-oiW"/>
+                                <include reference="yPd-bW-pjj"/>
+                                <include reference="3ta-Da-ffQ"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="KJa-9a-218"/>
+                                <include reference="lvA-iO-j2h"/>
+                                <include reference="5mC-Eu-Qta"/>
+                                <include reference="co2-Ry-Ujv"/>
+                                <include reference="TLG-B1-Och"/>
+                                <include reference="Tab-xu-sqW"/>
+                                <include reference="YVj-uS-JOY"/>
+                                <include reference="edZ-9o-w9h"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hYL-2t-q0O" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1752" y="1252.5"/>
         </scene>
         <!--关于-->
         <scene sceneID="swh-uj-m7M">
@@ -397,6 +510,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="AboutLogo" width="120" height="120"/>
         <image name="Close" width="18" height="18"/>
         <image name="Home" width="30" height="30"/>
         <image name="Message" width="30" height="30"/>
