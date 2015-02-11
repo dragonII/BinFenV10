@@ -55,7 +55,7 @@ typedef enum
                                                      green:225/255.0f
                                                       blue:225/255.0f
                                                      alpha:1.0f];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    //self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     
     UINib *nib = [UINib nibWithNibName:@"UserInforTableViewCell" bundle:nil];

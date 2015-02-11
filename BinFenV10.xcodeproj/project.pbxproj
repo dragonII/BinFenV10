@@ -69,6 +69,8 @@
 		2F7B75D11A8B265A00720650 /* AddNewAddrCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F7B75CF1A8B265A00720650 /* AddNewAddrCell.m */; };
 		2F7B75D21A8B265A00720650 /* AddNewAddrCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F7B75D01A8B265A00720650 /* AddNewAddrCell.xib */; };
 		2F7B75D51A8B29BD00720650 /* ComposeAddrViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F7B75D41A8B29BD00720650 /* ComposeAddrViewController.m */; };
+		2F7B75D91A8B2DB800720650 /* EditInforCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F7B75D71A8B2DB800720650 /* EditInforCell.m */; };
+		2F7B75DA1A8B2DB800720650 /* EditInforCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F7B75D81A8B2DB800720650 /* EditInforCell.xib */; };
 		2FC5A2981A7F1BB900DD0E63 /* OTCover.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5A2971A7F1BB900DD0E63 /* OTCover.m */; };
 		2FC5A29B1A7F1CB200DD0E63 /* TabHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5A29A1A7F1CB200DD0E63 /* TabHomeViewController.m */; };
 		2FC5A2A01A7F23BA00DD0E63 /* CommunityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5A29E1A7F23B900DD0E63 /* CommunityTableViewCell.m */; };
@@ -205,6 +207,9 @@
 		2F7B75D01A8B265A00720650 /* AddNewAddrCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddNewAddrCell.xib; sourceTree = "<group>"; };
 		2F7B75D31A8B29BD00720650 /* ComposeAddrViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComposeAddrViewController.h; sourceTree = "<group>"; };
 		2F7B75D41A8B29BD00720650 /* ComposeAddrViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComposeAddrViewController.m; sourceTree = "<group>"; };
+		2F7B75D61A8B2DB800720650 /* EditInforCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditInforCell.h; sourceTree = "<group>"; };
+		2F7B75D71A8B2DB800720650 /* EditInforCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditInforCell.m; sourceTree = "<group>"; };
+		2F7B75D81A8B2DB800720650 /* EditInforCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditInforCell.xib; sourceTree = "<group>"; };
 		2FC5A2961A7F1BB900DD0E63 /* OTCover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTCover.h; sourceTree = "<group>"; };
 		2FC5A2971A7F1BB900DD0E63 /* OTCover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTCover.m; sourceTree = "<group>"; };
 		2FC5A2991A7F1CB200DD0E63 /* TabHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabHomeViewController.h; sourceTree = "<group>"; };
@@ -412,6 +417,9 @@
 				2F7B75CE1A8B265A00720650 /* AddNewAddrCell.h */,
 				2F7B75CF1A8B265A00720650 /* AddNewAddrCell.m */,
 				2F7B75D01A8B265A00720650 /* AddNewAddrCell.xib */,
+				2F7B75D61A8B2DB800720650 /* EditInforCell.h */,
+				2F7B75D71A8B2DB800720650 /* EditInforCell.m */,
+				2F7B75D81A8B2DB800720650 /* EditInforCell.xib */,
 			);
 			name = MyselfTableCells;
 			sourceTree = "<group>";
@@ -634,6 +642,7 @@
 				2FEEE86A1A7E5B8F0095D8DB /* LaunchScreen.xib in Resources */,
 				2FEEE8671A7E5B8F0095D8DB /* Images.xcassets in Resources */,
 				2F4A63AF1A890D5300B30986 /* CommunityForSelectionCell.xib in Resources */,
+				2F7B75DA1A8B2DB800720650 /* EditInforCell.xib in Resources */,
 				2F2B87E11A83650C00FE8F20 /* CategoryCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -668,6 +677,7 @@
 				2F31B2361A83D74D00A2BB86 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				2F6EFEBC1A808806001F9DE7 /* UIImage+ImageEffects.m in Sources */,
 				2F31B2201A83D74000A2BB86 /* AFURLRequestSerialization.m in Sources */,
+				2F7B75D91A8B2DB800720650 /* EditInforCell.m in Sources */,
 				2F01E7C01A87C075006BDDAB /* PriceTableCell.m in Sources */,
 				2F0475061A813D1B00196F0B /* ProductTableViewCell.m in Sources */,
 				2F7B75D51A8B29BD00720650 /* ComposeAddrViewController.m in Sources */,

@@ -37,7 +37,7 @@ typedef enum
                                                green:150/255.0f
                                                 blue:93/255.0f
                                                alpha:1.0f];
-    self.navigationItem.title = @"送货地址列表";
+    self.navigationItem.title = @"地址列表";
     [self.navigationController.navigationBar setBarTintColor:backgroundColor];
     [self.navigationController.navigationBar setTranslucent:NO];
 }

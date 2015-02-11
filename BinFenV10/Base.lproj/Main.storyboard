@@ -412,7 +412,58 @@
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="uYf-HQ-ziB">
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QQL-Vg-DA9">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="288" id="bBc-5I-s3U"/>
+                                    <constraint firstAttribute="height" constant="36" id="ivi-J1-72S"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="STHeitiSC-Light" family="Heiti SC" pointSize="17"/>
+                                <state key="normal" title="保存" backgroundImage="SaveButtonBG">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="bBc-5I-s3U"/>
+                                        <exclude reference="ivi-J1-72S"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="bBc-5I-s3U"/>
+                                        <include reference="ivi-J1-72S"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="saveClicked:" destination="9IV-vG-SG2" eventType="touchUpInside" id="6Gv-iQ-QZe"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.88235294117647056" green="0.88235294117647056" blue="0.88235294117647056" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="QQL-Vg-DA9" firstAttribute="top" secondItem="dMh-PJ-Vva" secondAttribute="bottom" constant="120" id="CLr-S8-XYR"/>
+                            <constraint firstAttribute="centerX" secondItem="QQL-Vg-DA9" secondAttribute="centerX" id="oGu-cJ-k8m"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="QQL-Vg-DA9"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="CLr-S8-XYR"/>
+                                <exclude reference="oGu-cJ-k8m"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="QQL-Vg-DA9"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="CLr-S8-XYR"/>
+                                <include reference="oGu-cJ-k8m"/>
+                            </mask>
+                        </variation>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TY2-CJ-05f" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -556,5 +607,6 @@
         <image name="Message" width="30" height="30"/>
         <image name="Myself" width="30" height="30"/>
         <image name="Nearby" width="30" height="30"/>
+        <image name="SaveButtonBG" width="288" height="36"/>
     </resources>
 </document>
