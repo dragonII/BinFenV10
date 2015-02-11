@@ -10,4 +10,6 @@
 
 @interface ComposeAddrViewController : UIViewController
 
+@property int selectedIndexForEdit;
+
 @end

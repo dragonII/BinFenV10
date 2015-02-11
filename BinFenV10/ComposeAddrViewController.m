@@ -15,7 +15,8 @@ static NSString *EditInfoCellIdentifier = @"EditInfoCell";
 @interface ComposeAddrViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) UITableView *tableView;
-//@property (strong, nonatomic) UIButton *confirmButton;
+
+@property (strong, nonatomic) NSMutableArray *addrArray;
 
 @end
 
@@ -53,9 +54,13 @@ static NSString *EditInfoCellIdentifier = @"EditInfoCell";
     [self.view addSubview:self.tableView];
 }
 
-- (void)initConfirmButton
+- (void)initAddrArray
 {
-    //self.confirmButton = [UIButton alloc] initWithFrame:<#(CGRect)#>
+    self.addrArray = [NSMutableArray arrayWithArray:[AppDataHandling loadDataArray]];
+    if(self.addrArray == nil)
+        self.addrArray = [[NSMutableArray alloc] init];
+    
+    //self.selectedIndexForEdit = -1;
 }
 
 - (void)viewDidLoad
@@ -64,8 +69,11 @@ static NSString *EditInfoCellIdentifier = @"EditInfoCell";
     
     [self initNavigationItem];
     
+    [self initAddrArray];
+    
     [self initTableView];
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -108,13 +116,22 @@ static NSString *EditInfoCellIdentifier = @"EditInfoCell";
     {
         cell = [[EditInforCell alloc] init];
     }
+    NSLog(@"selectedIndexForEdit: %d", self.selectedIndexForEdit);
     switch (indexPath.row)
     {
         case 0:
             cell.cellType = AddressInAddr;
+            if(self.selectedIndexForEdit >= 0)
+            {
+                cell.detailEdit.text = [[self.addrArray objectAtIndex:self.selectedIndexForEdit] objectForKey:DictAddrInAddrKey];
+            }
             return cell;
         case 1:
             cell.cellType = PhoneInAddr;
+            if(self.selectedIndexForEdit >= 0)
+            {
+                cell.detailEdit.text = [[self.addrArray objectAtIndex:self.selectedIndexForEdit] objectForKey:DictPhoneInAddrKey];
+            }
             return cell;
         default:
             return [[UITableViewCell alloc] init];
@@ -131,12 +148,6 @@ static NSString *EditInfoCellIdentifier = @"EditInfoCell";
 
 - (IBAction)saveClicked:(id)sender
 {
-    NSMutableArray *array = [NSMutableArray arrayWithArray:[AppDataHandling loadDataArray]];
-    if(array == nil)
-        array = [[NSMutableArray alloc] init];
-    
-    NSLog(@"array: %@", array);
-    
     EditInforCell *cell;
     NSIndexPath *indexPath;
     
@@ -162,12 +173,13 @@ static NSString *EditInfoCellIdentifier = @"EditInfoCell";
     NSDictionary *dict = @{DictPhoneInAddrKey: phone,
                            DictAddrInAddrKey: addr};
     
-    [array addObject:dict];
+    [self.addrArray addObject:dict];
     
-    [AppDataHandling saveDataArray:array];
+    [AppDataHandling saveDataArray:self.addrArray];
     
     [self.navigationController popViewControllerAnimated:YES];
 }
+
 
 
 @end

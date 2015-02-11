@@ -10,6 +10,7 @@
 #import "AddrsTableViewCell.h"
 #import "AddNewAddrCell.h"
 #import "AppDataHandling.h"
+#import "ComposeAddrViewController.h"
 
 static NSString *AddrCellIdentifier = @"AddrTableCell";
 static NSString *AddNewAddrCellIdentifier = @"AddNewAddrCell";
@@ -27,6 +28,7 @@ typedef enum
 
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *addrArray;
+@property int selectedAddrIndex;
 
 @end
 
@@ -78,7 +80,7 @@ typedef enum
 - (void)initAddrData
 {
     self.addrArray = [NSMutableArray arrayWithArray:[AppDataHandling loadDataArray]];
-    NSLog(@"initarray: %@", self.addrArray);
+    //NSLog(@"initarray: %@", self.addrArray);
 }
 
 - (void)viewDidLoad
@@ -191,7 +193,21 @@ typedef enum
     
     if(indexPath.section == SectionIndexAddAddr && indexPath.row == 0)
     {
+        NSLog(@"set selectedAddrIndex: -1");
+        self.selectedAddrIndex = -1;
         [self performSegueWithIdentifier:@"ComposeAddrSegue" sender:self];
+    }
+}
+
+#pragma Segue
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([segue.identifier isEqualToString:@"ComposeAddrSegue"])
+    {
+        ComposeAddrViewController *composeVC = (ComposeAddrViewController *)segue.destinationViewController;
+        NSLog(@"set selectedAddrIndex: %d", self.selectedAddrIndex);
+        composeVC.selectedIndexForEdit = self.selectedAddrIndex;
     }
 }
 
@@ -200,6 +216,11 @@ typedef enum
 - (void)editClicked:(AddrsTableViewCell *)cell
 {
     NSLog(@"edit cell row: %d", [self.tableView indexPathForCell:cell].row);
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    
+    self.selectedAddrIndex = indexPath.row;
+    
+    [self performSegueWithIdentifier:@"ComposeAddrSegue" sender:self];
 }
 
 - (void)deleteClicked:(AddrsTableViewCell *)cell
