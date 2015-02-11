@@ -17,6 +17,8 @@
 		2F01E7CE1A87C54C006BDDAB /* SeperatorTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F01E7CC1A87C54C006BDDAB /* SeperatorTableCell.xib */; };
 		2F0475061A813D1B00196F0B /* ProductTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F0475041A813D1B00196F0B /* ProductTableViewCell.m */; };
 		2F0475071A813D1B00196F0B /* ProductTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F0475051A813D1B00196F0B /* ProductTableViewCell.xib */; };
+		2F14CD701A8BA50E004125F6 /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F14CD6F1A8BA50E004125F6 /* UserInfoViewController.m */; };
+		2F14CD731A8BAE7C004125F6 /* EditUserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F14CD721A8BAE7C004125F6 /* EditUserInfoViewController.m */; };
 		2F28A0071A89BC6500C296D6 /* NearbyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F28A0061A89BC6500C296D6 /* NearbyViewController.m */; };
 		2F28A00C1A89CFB700C296D6 /* NearbyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F28A00A1A89CFB700C296D6 /* NearbyTableViewCell.m */; };
 		2F28A00D1A89CFB700C296D6 /* NearbyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F28A00B1A89CFB700C296D6 /* NearbyTableViewCell.xib */; };
@@ -71,7 +73,7 @@
 		2F7B75D51A8B29BD00720650 /* ComposeAddrViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F7B75D41A8B29BD00720650 /* ComposeAddrViewController.m */; };
 		2F7B75D91A8B2DB800720650 /* EditInforCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F7B75D71A8B2DB800720650 /* EditInforCell.m */; };
 		2F7B75DA1A8B2DB800720650 /* EditInforCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F7B75D81A8B2DB800720650 /* EditInforCell.xib */; };
-		2F7B75E01A8B430B00720650 /* AppDataHandling.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F7B75DF1A8B430B00720650 /* AppDataHandling.m */; };
+		2F7B75E01A8B430B00720650 /* AppData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F7B75DF1A8B430B00720650 /* AppData.m */; };
 		2FC5A2981A7F1BB900DD0E63 /* OTCover.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5A2971A7F1BB900DD0E63 /* OTCover.m */; };
 		2FC5A29B1A7F1CB200DD0E63 /* TabHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5A29A1A7F1CB200DD0E63 /* TabHomeViewController.m */; };
 		2FC5A2A01A7F23BA00DD0E63 /* CommunityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5A29E1A7F23B900DD0E63 /* CommunityTableViewCell.m */; };
@@ -111,6 +113,10 @@
 		2F0475031A813D1B00196F0B /* ProductTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductTableViewCell.h; sourceTree = "<group>"; };
 		2F0475041A813D1B00196F0B /* ProductTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductTableViewCell.m; sourceTree = "<group>"; };
 		2F0475051A813D1B00196F0B /* ProductTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductTableViewCell.xib; sourceTree = "<group>"; };
+		2F14CD6E1A8BA50E004125F6 /* UserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoViewController.h; sourceTree = "<group>"; };
+		2F14CD6F1A8BA50E004125F6 /* UserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoViewController.m; sourceTree = "<group>"; };
+		2F14CD711A8BAE7C004125F6 /* EditUserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditUserInfoViewController.h; sourceTree = "<group>"; };
+		2F14CD721A8BAE7C004125F6 /* EditUserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditUserInfoViewController.m; sourceTree = "<group>"; };
 		2F28A0051A89BC6500C296D6 /* NearbyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearbyViewController.h; sourceTree = "<group>"; };
 		2F28A0061A89BC6500C296D6 /* NearbyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearbyViewController.m; sourceTree = "<group>"; };
 		2F28A0091A89CFB700C296D6 /* NearbyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearbyTableViewCell.h; sourceTree = "<group>"; };
@@ -211,8 +217,8 @@
 		2F7B75D61A8B2DB800720650 /* EditInforCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditInforCell.h; sourceTree = "<group>"; };
 		2F7B75D71A8B2DB800720650 /* EditInforCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditInforCell.m; sourceTree = "<group>"; };
 		2F7B75D81A8B2DB800720650 /* EditInforCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditInforCell.xib; sourceTree = "<group>"; };
-		2F7B75DE1A8B430B00720650 /* AppDataHandling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDataHandling.h; sourceTree = "<group>"; };
-		2F7B75DF1A8B430B00720650 /* AppDataHandling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDataHandling.m; sourceTree = "<group>"; };
+		2F7B75DE1A8B430B00720650 /* AppData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppData.h; sourceTree = "<group>"; };
+		2F7B75DF1A8B430B00720650 /* AppData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppData.m; sourceTree = "<group>"; };
 		2FC5A2961A7F1BB900DD0E63 /* OTCover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTCover.h; sourceTree = "<group>"; };
 		2FC5A2971A7F1BB900DD0E63 /* OTCover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTCover.m; sourceTree = "<group>"; };
 		2FC5A2991A7F1CB200DD0E63 /* TabHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabHomeViewController.h; sourceTree = "<group>"; };
@@ -484,8 +490,8 @@
 		2FEEE8581A7E5B8E0095D8DB /* BinFenV10 */ = {
 			isa = PBXGroup;
 			children = (
-				2F7B75DE1A8B430B00720650 /* AppDataHandling.h */,
-				2F7B75DF1A8B430B00720650 /* AppDataHandling.m */,
+				2F7B75DE1A8B430B00720650 /* AppData.h */,
+				2F7B75DF1A8B430B00720650 /* AppData.m */,
 				2F28A0141A89E36F00C296D6 /* DeviceHardware.h */,
 				2F28A0151A89E36F00C296D6 /* DeviceHardware.m */,
 				2FEEE85D1A7E5B8E0095D8DB /* AppDelegate.h */,
@@ -514,6 +520,10 @@
 				2F7B75C71A8B210100720650 /* AddrListViewController.m */,
 				2F7B75D31A8B29BD00720650 /* ComposeAddrViewController.h */,
 				2F7B75D41A8B29BD00720650 /* ComposeAddrViewController.m */,
+				2F14CD6E1A8BA50E004125F6 /* UserInfoViewController.h */,
+				2F14CD6F1A8BA50E004125F6 /* UserInfoViewController.m */,
+				2F14CD711A8BAE7C004125F6 /* EditUserInfoViewController.h */,
+				2F14CD721A8BAE7C004125F6 /* EditUserInfoViewController.m */,
 				2FEEE8631A7E5B8F0095D8DB /* Main.storyboard */,
 				2FEEE8661A7E5B8F0095D8DB /* Images.xcassets */,
 				2FEEE8681A7E5B8F0095D8DB /* LaunchScreen.xib */,
@@ -671,6 +681,7 @@
 				2F7B75C51A8B043D00720650 /* AboutProductViewController.m in Sources */,
 				2F31B23B1A83D74D00A2BB86 /* UIRefreshControl+AFNetworking.m in Sources */,
 				2F4A63AA1A89049D00B30986 /* CommunitySelectionViewController.m in Sources */,
+				2F14CD701A8BA50E004125F6 /* UserInfoViewController.m in Sources */,
 				2F31B23C1A83D74D00A2BB86 /* UIWebView+AFNetworking.m in Sources */,
 				2F5954BB1A7E78BB001D5DAD /* CommunityCollectionViewCell.m in Sources */,
 				2FC5A29B1A7F1CB200DD0E63 /* TabHomeViewController.m in Sources */,
@@ -690,7 +701,7 @@
 				2F31B21A1A83D74000A2BB86 /* AFHTTPRequestOperation.m in Sources */,
 				2FC5A2A01A7F23BA00DD0E63 /* CommunityTableViewCell.m in Sources */,
 				2F31B2351A83D74D00A2BB86 /* AFNetworkActivityIndicatorManager.m in Sources */,
-				2F7B75E01A8B430B00720650 /* AppDataHandling.m in Sources */,
+				2F7B75E01A8B430B00720650 /* AppData.m in Sources */,
 				2F28A00C1A89CFB700C296D6 /* NearbyTableViewCell.m in Sources */,
 				2F4A63AE1A890D5300B30986 /* CommunityForSelectionCell.m in Sources */,
 				2F7B75BC1A8AF9AC00720650 /* UserInforTableViewCell.m in Sources */,
@@ -717,6 +728,7 @@
 				2F2B87DC1A832A7100FE8F20 /* MLKMenuPopover.m in Sources */,
 				2F7B75C11A8AFBFE00720650 /* BasicSettingTableCell.m in Sources */,
 				2F31B2211A83D74000A2BB86 /* AFURLResponseSerialization.m in Sources */,
+				2F14CD731A8BAE7C004125F6 /* EditUserInfoViewController.m in Sources */,
 				2F28A0191A8A057300C296D6 /* AboutMeViewController.m in Sources */,
 				2F34CEE81A8878ED000AD896 /* CommentTableViewCell.m in Sources */,
 				2F31B2381A83D74D00A2BB86 /* UIButton+AFNetworking.m in Sources */,

@@ -71,7 +71,7 @@
         case PasswordInAccount:
         {
             self.titleLabel.text = @"修改密码";
-            [self disableDetailEditWithText:@""];
+            [self disableDetailEditWithText:@"xxxxxx"];
             break;
         }
             

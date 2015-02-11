@@ -199,13 +199,6 @@ typedef enum
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    /*
-    if([segue.identifier isEqualToString:@"ShowAboutProductSegue"])
-    {
-        AboutProductViewController *aboutVC = (AboutProductViewController *)segue.destinationViewController;
-        aboutVC.hidesBottomBarWhenPushed = YES;
-    }
-     */
     UIViewController *vc = (UIViewController *)segue.destinationViewController;
     vc.hidesBottomBarWhenPushed = YES;
 }
@@ -216,7 +209,10 @@ typedef enum
     switch (indexPath.section)
     {
         case SectionIndexUser:
+        {
+            [self performSegueWithIdentifier:@"ShowUserInfoSegue" sender:self];
             break;
+        }
         case SectionIndexAddr:
         {
             [self performSegueWithIdentifier:@"ShowAddrEditSegue" sender:self];

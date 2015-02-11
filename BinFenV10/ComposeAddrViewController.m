@@ -8,7 +8,7 @@
 
 #import "ComposeAddrViewController.h"
 #import "EditInforCell.h"
-#import "AppDataHandling.h"
+#import "AppData.h"
 
 static NSString *EditInfoCellIdentifier = @"EditInfoCell";
 
@@ -56,7 +56,7 @@ static NSString *EditInfoCellIdentifier = @"EditInfoCell";
 
 - (void)initAddrArray
 {
-    self.addrArray = [NSMutableArray arrayWithArray:[AppDataHandling loadDataArray]];
+    self.addrArray = [NSMutableArray arrayWithArray:[AppData loadAddrDataArray]];
     if(self.addrArray == nil)
         self.addrArray = [[NSMutableArray alloc] init];
     
@@ -175,7 +175,7 @@ static NSString *EditInfoCellIdentifier = @"EditInfoCell";
     
     [self.addrArray addObject:dict];
     
-    [AppDataHandling saveDataArray:self.addrArray];
+    [AppData saveAddrDataArray:self.addrArray];
     
     [self.navigationController popViewControllerAnimated:YES];
 }

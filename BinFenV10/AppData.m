@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 Wang Long. All rights reserved.
 //
 
-#import "AppDataHandling.h"
+#import "AppData.h"
 
-@implementation AppDataHandling
+@implementation AppData
 
 + (NSString *)filePath
 {
@@ -18,7 +18,7 @@
     return path;
 }
 
-+ (NSArray *)loadDataArray
++ (NSArray *)loadAddrDataArray
 {
     NSArray *array;
     
@@ -32,10 +32,30 @@
     return array;
 }
 
-+ (void)saveDataArray:(NSArray *)array
++ (void)saveAddrDataArray:(NSArray *)array
 {
     NSString *filePath = [self filePath];
     [array writeToFile:filePath atomically:YES];
+}
+
++ (NSDictionary *)loadUserInfoDict
+{
+    NSDictionary *dict;
+    
+    NSString *filePath = [self filePath];
+    if([[NSFileManager defaultManager] fileExistsAtPath:filePath])
+    {
+        dict = [NSDictionary dictionaryWithContentsOfFile:filePath];
+    } else {
+        dict = nil;
+    }
+    return dict;
+}
+
++ (void)saveUserInfoDict:(NSDictionary *)dict
+{
+    NSString *filePath = [self filePath];
+    [dict writeToFile:filePath atomically:YES];
 }
 
 @end

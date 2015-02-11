@@ -9,7 +9,7 @@
 #import "AddrListViewController.h"
 #import "AddrsTableViewCell.h"
 #import "AddNewAddrCell.h"
-#import "AppDataHandling.h"
+#import "AppData.h"
 #import "ComposeAddrViewController.h"
 
 static NSString *AddrCellIdentifier = @"AddrTableCell";
@@ -79,7 +79,7 @@ typedef enum
 
 - (void)initAddrData
 {
-    self.addrArray = [NSMutableArray arrayWithArray:[AppDataHandling loadDataArray]];
+    self.addrArray = [NSMutableArray arrayWithArray:[AppData loadAddrDataArray]];
     //NSLog(@"initarray: %@", self.addrArray);
 }
 
@@ -229,7 +229,7 @@ typedef enum
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
 
     [self.addrArray removeObjectAtIndex:indexPath.row];
-    [AppDataHandling saveDataArray:self.addrArray];
+    [AppData saveAddrDataArray:self.addrArray];
     
     [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
