@@ -193,7 +193,7 @@ typedef enum
     
     if(indexPath.section == SectionIndexAddAddr && indexPath.row == 0)
     {
-        NSLog(@"set selectedAddrIndex: -1");
+        //NSLog(@"set selectedAddrIndex: -1");
         self.selectedAddrIndex = -1;
         [self performSegueWithIdentifier:@"ComposeAddrSegue" sender:self];
     }
@@ -206,7 +206,7 @@ typedef enum
     if([segue.identifier isEqualToString:@"ComposeAddrSegue"])
     {
         ComposeAddrViewController *composeVC = (ComposeAddrViewController *)segue.destinationViewController;
-        NSLog(@"set selectedAddrIndex: %d", self.selectedAddrIndex);
+        //NSLog(@"set selectedAddrIndex: %d", self.selectedAddrIndex);
         composeVC.selectedIndexForEdit = self.selectedAddrIndex;
     }
 }
@@ -215,7 +215,7 @@ typedef enum
 
 - (void)editClicked:(AddrsTableViewCell *)cell
 {
-    NSLog(@"edit cell row: %d", [self.tableView indexPathForCell:cell].row);
+    //NSLog(@"edit cell row: %d", [self.tableView indexPathForCell:cell].row);
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     
     self.selectedAddrIndex = indexPath.row;
@@ -225,7 +225,7 @@ typedef enum
 
 - (void)deleteClicked:(AddrsTableViewCell *)cell
 {
-    NSLog(@"delete cell row: %d", [self.tableView indexPathForCell:cell].row);
+    //NSLog(@"delete cell row: %d", [self.tableView indexPathForCell:cell].row);
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
 
     [self.addrArray removeObjectAtIndex:indexPath.row];

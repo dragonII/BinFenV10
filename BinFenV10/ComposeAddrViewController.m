@@ -116,7 +116,7 @@ static NSString *EditInfoCellIdentifier = @"EditInfoCell";
     {
         cell = [[EditInforCell alloc] init];
     }
-    NSLog(@"selectedIndexForEdit: %d", self.selectedIndexForEdit);
+    //NSLog(@"selectedIndexForEdit: %d", self.selectedIndexForEdit);
     switch (indexPath.row)
     {
         case 0:
@@ -153,11 +153,11 @@ static NSString *EditInfoCellIdentifier = @"EditInfoCell";
     
     indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     cell = (EditInforCell *)[self.tableView cellForRowAtIndexPath:indexPath];
-    NSString *phone = cell.detailEdit.text;
+    NSString *addr = cell.detailEdit.text;
     
     indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
     cell = (EditInforCell *)[self.tableView cellForRowAtIndexPath:indexPath];
-    NSString *addr = cell.detailEdit.text;
+    NSString *phone = cell.detailEdit.text;
     
     if([phone length] == 0 || [addr length] == 0)
     {
