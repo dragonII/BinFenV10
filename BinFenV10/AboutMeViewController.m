@@ -55,7 +55,10 @@ typedef enum
                                                      green:225/255.0f
                                                       blue:225/255.0f
                                                      alpha:1.0f];
-    //self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    // Remove the separator lines for emtpy cells
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.tableView.tableFooterView = footerView;
     
     
     UINib *nib = [UINib nibWithNibName:@"UserInforTableViewCell" bundle:nil];

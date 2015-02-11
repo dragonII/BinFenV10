@@ -8,6 +8,7 @@
 
 #import "ComposeAddrViewController.h"
 #import "EditInforCell.h"
+#import "AppDataHandling.h"
 
 static NSString *EditInfoCellIdentifier = @"EditInfoCell";
 
@@ -130,6 +131,41 @@ static NSString *EditInfoCellIdentifier = @"EditInfoCell";
 
 - (IBAction)saveClicked:(id)sender
 {
+    NSMutableArray *array = [NSMutableArray arrayWithArray:[AppDataHandling loadDataArray]];
+    if(array == nil)
+        array = [[NSMutableArray alloc] init];
+    
+    NSLog(@"array: %@", array);
+    
+    EditInforCell *cell;
+    NSIndexPath *indexPath;
+    
+    indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    cell = (EditInforCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+    NSString *phone = cell.detailEdit.text;
+    
+    indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+    cell = (EditInforCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+    NSString *addr = cell.detailEdit.text;
+    
+    if([phone length] == 0 || [addr length] == 0)
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"请重新输入"
+                                                            message:@"字段不能为空"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"确定"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+        return;
+    }
+    
+    NSDictionary *dict = @{DictPhoneInAddrKey: phone,
+                           DictAddrInAddrKey: addr};
+    
+    [array addObject:dict];
+    
+    [AppDataHandling saveDataArray:array];
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 

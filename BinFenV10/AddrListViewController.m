@@ -9,6 +9,7 @@
 #import "AddrListViewController.h"
 #import "AddrsTableViewCell.h"
 #import "AddNewAddrCell.h"
+#import "AppDataHandling.h"
 
 static NSString *AddrCellIdentifier = @"AddrTableCell";
 static NSString *AddNewAddrCellIdentifier = @"AddNewAddrCell";
@@ -22,7 +23,7 @@ typedef enum
     SectionIndexAddAddr
 } SectionIndexType;
 
-@interface AddrListViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface AddrListViewController () <UITableViewDataSource, UITableViewDelegate, EditDeleteDelegate>
 
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *addrArray;
@@ -45,7 +46,7 @@ typedef enum
 - (void)initTableView
 {
     CGFloat navigationBarHeight = self.navigationController.navigationBar.frame.size.height;
-    CGFloat tabBarHeight = self.tabBarController.tabBar.frame.size.height;
+    //CGFloat tabBarHeight = self.tabBarController.tabBar.frame.size.height;
     
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0,
                                                                    self.view.bounds.size.width,
@@ -55,7 +56,11 @@ typedef enum
                                                      green:225/255.0f
                                                       blue:225/255.0f
                                                      alpha:1.0f];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+
+    
+    // Remove the separator lines for emtpy cells
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.tableView.tableFooterView = footerView;
     
     
     UINib *nib = [UINib nibWithNibName:@"AddrsTableViewCell" bundle:nil];
@@ -72,7 +77,8 @@ typedef enum
 
 - (void)initAddrData
 {
-    self.addrArray = [[NSMutableArray alloc] init];
+    self.addrArray = [NSMutableArray arrayWithArray:[AppDataHandling loadDataArray]];
+    NSLog(@"initarray: %@", self.addrArray);
 }
 
 - (void)viewDidLoad
@@ -84,6 +90,15 @@ typedef enum
     [self initNavigationItem];
     
     [self initTableView];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self initAddrData];
+    
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -149,8 +164,9 @@ typedef enum
             {
                 cell = [[AddrsTableViewCell alloc] init];
             }
-            cell.phoneLabel.text = [[self.addrArray objectAtIndex:indexPath.row] objectForKey:PhoneKey];
-            cell.addrLabel.text = [[self.addrArray objectAtIndex:indexPath.row] objectForKey:AddrKey];
+            cell.phoneLabel.text = [[self.addrArray objectAtIndex:indexPath.row] objectForKey:DictPhoneInAddrKey];
+            cell.addrLabel.text = [[self.addrArray objectAtIndex:indexPath.row] objectForKey:DictAddrInAddrKey];
+            cell.editDeleteDelegate = self;
             
             return cell;
         }
@@ -171,11 +187,30 @@ typedef enum
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     if(indexPath.section == SectionIndexAddAddr && indexPath.row == 0)
     {
         [self performSegueWithIdentifier:@"ComposeAddrSegue" sender:self];
     }
 }
 
+#pragma EditDeleteDelegate
+
+- (void)editClicked:(AddrsTableViewCell *)cell
+{
+    NSLog(@"edit cell row: %d", [self.tableView indexPathForCell:cell].row);
+}
+
+- (void)deleteClicked:(AddrsTableViewCell *)cell
+{
+    NSLog(@"delete cell row: %d", [self.tableView indexPathForCell:cell].row);
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+
+    [self.addrArray removeObjectAtIndex:indexPath.row];
+    [AppDataHandling saveDataArray:self.addrArray];
+    
+    [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+}
 
 @end

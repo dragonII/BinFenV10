@@ -71,6 +71,7 @@
 		2F7B75D51A8B29BD00720650 /* ComposeAddrViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F7B75D41A8B29BD00720650 /* ComposeAddrViewController.m */; };
 		2F7B75D91A8B2DB800720650 /* EditInforCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F7B75D71A8B2DB800720650 /* EditInforCell.m */; };
 		2F7B75DA1A8B2DB800720650 /* EditInforCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F7B75D81A8B2DB800720650 /* EditInforCell.xib */; };
+		2F7B75E01A8B430B00720650 /* AppDataHandling.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F7B75DF1A8B430B00720650 /* AppDataHandling.m */; };
 		2FC5A2981A7F1BB900DD0E63 /* OTCover.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5A2971A7F1BB900DD0E63 /* OTCover.m */; };
 		2FC5A29B1A7F1CB200DD0E63 /* TabHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5A29A1A7F1CB200DD0E63 /* TabHomeViewController.m */; };
 		2FC5A2A01A7F23BA00DD0E63 /* CommunityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5A29E1A7F23B900DD0E63 /* CommunityTableViewCell.m */; };
@@ -210,6 +211,8 @@
 		2F7B75D61A8B2DB800720650 /* EditInforCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditInforCell.h; sourceTree = "<group>"; };
 		2F7B75D71A8B2DB800720650 /* EditInforCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditInforCell.m; sourceTree = "<group>"; };
 		2F7B75D81A8B2DB800720650 /* EditInforCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditInforCell.xib; sourceTree = "<group>"; };
+		2F7B75DE1A8B430B00720650 /* AppDataHandling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDataHandling.h; sourceTree = "<group>"; };
+		2F7B75DF1A8B430B00720650 /* AppDataHandling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDataHandling.m; sourceTree = "<group>"; };
 		2FC5A2961A7F1BB900DD0E63 /* OTCover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTCover.h; sourceTree = "<group>"; };
 		2FC5A2971A7F1BB900DD0E63 /* OTCover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTCover.m; sourceTree = "<group>"; };
 		2FC5A2991A7F1CB200DD0E63 /* TabHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabHomeViewController.h; sourceTree = "<group>"; };
@@ -481,6 +484,8 @@
 		2FEEE8581A7E5B8E0095D8DB /* BinFenV10 */ = {
 			isa = PBXGroup;
 			children = (
+				2F7B75DE1A8B430B00720650 /* AppDataHandling.h */,
+				2F7B75DF1A8B430B00720650 /* AppDataHandling.m */,
 				2F28A0141A89E36F00C296D6 /* DeviceHardware.h */,
 				2F28A0151A89E36F00C296D6 /* DeviceHardware.m */,
 				2FEEE85D1A7E5B8E0095D8DB /* AppDelegate.h */,
@@ -685,6 +690,7 @@
 				2F31B21A1A83D74000A2BB86 /* AFHTTPRequestOperation.m in Sources */,
 				2FC5A2A01A7F23BA00DD0E63 /* CommunityTableViewCell.m in Sources */,
 				2F31B2351A83D74D00A2BB86 /* AFNetworkActivityIndicatorManager.m in Sources */,
+				2F7B75E01A8B430B00720650 /* AppDataHandling.m in Sources */,
 				2F28A00C1A89CFB700C296D6 /* NearbyTableViewCell.m in Sources */,
 				2F4A63AE1A890D5300B30986 /* CommunityForSelectionCell.m in Sources */,
 				2F7B75BC1A8AF9AC00720650 /* UserInforTableViewCell.m in Sources */,

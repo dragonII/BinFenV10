@@ -51,6 +51,8 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="addrLabel" destination="u4X-eV-tvB" id="g3w-jZ-boe"/>
+                <outlet property="deleteImage" destination="LQf-Tv-f5K" id="Iin-cl-kD5"/>
+                <outlet property="editImage" destination="RXN-3a-3gc" id="t9a-1g-y69"/>
                 <outlet property="phoneLabel" destination="Y2H-gf-SW3" id="rWo-gt-7Mp"/>
             </connections>
         </tableViewCell>

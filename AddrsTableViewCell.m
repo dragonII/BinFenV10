@@ -10,8 +10,47 @@
 
 @implementation AddrsTableViewCell
 
-- (void)awakeFromNib {
-    // Initialization code
+
+-(void)editDetected
+{
+    //NSLog(@"single Tap on imageview");
+    if([self.editDeleteDelegate respondsToSelector:@selector(editClicked:)])
+    {
+        [self.editDeleteDelegate performSelector:@selector(editClicked:) withObject:self];
+    }
+}
+
+- (void)deleteDetected
+{
+    if([self.editDeleteDelegate respondsToSelector:@selector(deleteClicked:)])
+    {
+        [self.editDeleteDelegate performSelector:@selector(deleteClicked:) withObject:self];
+    }
+}
+
+/*
+UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDetected)];
+singleTap.numberOfTapsRequired = 1;
+[self.searchView setUserInteractionEnabled:YES];
+[self.searchView addGestureRecognizer:singleTap];
+ */
+
+- (void)initImageViews
+{
+    UITapGestureRecognizer *editTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editDetected)];
+    UITapGestureRecognizer *deleteTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deleteDetected)];
+    [self.editImage setUserInteractionEnabled:YES];
+    [self.deleteImage setUserInteractionEnabled:YES];
+    
+    [self.editImage addGestureRecognizer:editTap];
+    [self.deleteImage addGestureRecognizer:deleteTap];
+}
+
+- (void)awakeFromNib
+{
+    [self initImageViews];
+    
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
