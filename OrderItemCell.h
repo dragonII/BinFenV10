@@ -14,7 +14,17 @@ typedef enum {
 
 #import <UIKit/UIKit.h>
 
+@class OrderItemCell;
+@protocol ButtonClickDelegate <NSObject>
+
+- (void)leftButtonClicked:(OrderItemCell *)cell;
+- (void)rightButtonClicked:(OrderItemCell *)cell;
+
+@end
+
 @interface OrderItemCell : UITableViewCell
+
+@property (weak, nonatomic) id<ButtonClickDelegate> buttonClickDelegate;
 
 @property OrderCellType orderCellType;
 

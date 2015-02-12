@@ -11,7 +11,11 @@
 
 static NSString *OrderItemCellIdentifier = @"OrderItemCell";
 
-@interface OrderListViewController () <UITableViewDataSource, UITableViewDelegate>
+static const NSInteger NeedPayImageTag = 41;
+static const NSInteger PaidImageTag = 42;
+static const NSInteger HistoryImageTag = 43;
+
+@interface OrderListViewController () <UITableViewDataSource, UITableViewDelegate, ButtonClickDelegate>
 
 
 @property (weak, nonatomic) IBOutlet UIImageView *needPayImage;
@@ -27,6 +31,8 @@ static NSString *OrderItemCellIdentifier = @"OrderItemCell";
 
 @property (strong, nonatomic) NSMutableArray *orderListArray;
 
+@property OrderCellType selectedOrderType;
+
 @end
 
 
@@ -38,6 +44,8 @@ static NSString *OrderItemCellIdentifier = @"OrderItemCell";
     [self.orderListArray addObject:@"Order1"];
     [self.orderListArray addObject:@"订单2"];
     [self.orderListArray addObject:@"订单3"];
+    
+    self.selectedOrderType = OrderCellTypeNeedPay;
 }
 
 - (void)initTableView
@@ -66,11 +74,53 @@ static NSString *OrderItemCellIdentifier = @"OrderItemCell";
     [self.view addSubview:self.tableView];
 }
 
+- (void)imageTapped:(UIGestureRecognizer *)gestureRecognizer
+{
+    UIImageView *imageView = (UIImageView *)gestureRecognizer.view;
+    switch (imageView.tag)
+    {
+        case NeedPayImageTag:
+            NSLog(@"Need Pay");
+            break;
+        
+        case PaidImageTag:
+            NSLog(@"Paid");
+            break;
+            
+        case HistoryImageTag:
+            NSLog(@"History");
+            break;
+            
+        default:
+            break;
+    }
+}
+
+- (void)initImageViewActions
+{
+    [self addActionInView:self.needPayImage Tag:NeedPayImageTag];
+    [self addActionInView:self.paidImage Tag:PaidImageTag];
+    [self addActionInView:self.historyImage Tag:HistoryImageTag];
+}
+
+- (void)addActionInView:(UIImageView *)imageView Tag:(NSInteger)tag
+{
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTapped:)];
+    tapGesture.numberOfTapsRequired = 1;
+    tapGesture.numberOfTouchesRequired = 1;
+    
+    imageView.tag = tag;
+    imageView.userInteractionEnabled = YES;
+    [imageView addGestureRecognizer:tapGesture];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     [self initOrderListArray];
+    
+    [self initImageViewActions];
     
     [self initTableView];
 }
@@ -98,8 +148,21 @@ static NSString *OrderItemCellIdentifier = @"OrderItemCell";
     if(cell == nil)
         cell = [[OrderItemCell alloc] init];
     
+    cell.buttonClickDelegate = self;
+    
     return cell;
 }
 
+#pragma ButtonClickDelegate
+
+- (void)leftButtonClicked:(OrderItemCell *)cell
+{
+    NSLog(@"Left Clicked");
+}
+
+- (void)rightButtonClicked:(OrderItemCell *)cell
+{
+    NSLog(@"Right Clicked");
+}
 
 @end
