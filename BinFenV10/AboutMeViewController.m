@@ -116,7 +116,7 @@ typedef enum
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    int sectionIndex = indexPath.section;
+    NSInteger sectionIndex = indexPath.section;
     switch (sectionIndex)
     {
         case SectionIndexUser:

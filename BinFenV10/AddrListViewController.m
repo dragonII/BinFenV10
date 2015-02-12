@@ -28,7 +28,7 @@ typedef enum
 
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *addrArray;
-@property int selectedAddrIndex;
+@property NSInteger selectedAddrIndex;
 
 @end
 

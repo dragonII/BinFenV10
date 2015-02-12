@@ -8,7 +8,7 @@
 
 #import "CommunityViewController.h"
 #import "CategoryTableViewCell.h"
-#import "ProductTableViewCell.h"
+#import "ShopsTableViewCell.h"
 #import "BFPreferenceData.h"
 #import "MLKMenuPopover.h"
 #import "defs.h"
@@ -16,13 +16,13 @@
 #import "DeviceHardware.h"
 
 NSString *CategoryCellIdentifier = @"CategoryCellIdentifier";
-NSString *ProductCellIdentifier = @"ProductCellIdentifier";
+NSString *ShopsCellIdentifier = @"ShopsCellIdentifier";
 
 static const int SectionCategory = 0;
-static const int SectionProduct = 1;
+static const int SectionShops = 1;
 static const int SectionLoadMore = 2;
 
-@interface CommunityViewController () <UITableViewDataSource, UITableViewDelegate, MLKMenuPopoverDelegate, ProductCellSegueDelegate>
+@interface CommunityViewController () <UITableViewDataSource, UITableViewDelegate, MLKMenuPopoverDelegate, ShopsCellSegueDelegate>
 
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) MLKMenuPopover *categoryPopover;
@@ -85,7 +85,7 @@ static const int SectionLoadMore = 2;
     
     [self initTableRowWithScroll];
     
-    self.navigationItem.title = @"社区";
+    self.navigationItem.title = @"（具体社区名称）";
     self.hidesBottomBarWhenPushed = YES;
 }
 
@@ -148,12 +148,12 @@ static const int SectionLoadMore = 2;
             return cell;
         }
             
-        case SectionProduct:
+        case SectionShops:
         {
-            ProductTableViewCell *cell = (ProductTableViewCell *)[tableView dequeueReusableCellWithIdentifier:ProductCellIdentifier];
+            ShopsTableViewCell *cell = (ShopsTableViewCell *)[tableView dequeueReusableCellWithIdentifier:ShopsCellIdentifier];
             if(cell == nil)
             {
-                cell = [[ProductTableViewCell alloc] init];
+                cell = [[ShopsTableViewCell alloc] init];
             }
             
             [cell initItems];
@@ -176,7 +176,7 @@ static const int SectionLoadMore = 2;
     }
 }
 
-- (void)loadNextBatchProducts
+- (void)loadNextBatchShops
 {
     NSArray *array = [BFPreferenceData loadTestDataArray];
     NSInteger batchIndex = [[NSUserDefaults standardUserDefaults] integerForKey:LoadContentBatchIndexKey];
@@ -194,7 +194,7 @@ static const int SectionLoadMore = 2;
 {
     if(indexPath.section == 2)
     {
-        [self loadNextBatchProducts];
+        [self loadNextBatchShops];
     }
 }
 
@@ -206,7 +206,7 @@ static const int SectionLoadMore = 2;
         case SectionCategory:
             return 214.0f;
             break;
-        case SectionProduct:
+        case SectionShops:
         {
             NSInteger batchIndex = [[NSUserDefaults standardUserDefaults] integerForKey:LoadContentBatchIndexKey];
             NSArray *array = [BFPreferenceData loadTestDataArray];
@@ -216,14 +216,14 @@ static const int SectionLoadMore = 2;
             }
             if([array count] >= batchIndex * TotalItemsPerBatch)
             {
-                NSLog(@"TotalRows: %ld", batchIndex * TotalRowsPerBatch);
-                return batchIndex * TotalRowsPerBatch * HeightOfItemInProductTableCell;
+                //NSLog(@"TotalRows: %ld", batchIndex * TotalRowsPerBatch);
+                return batchIndex * TotalRowsPerBatch * HeightOfItemInShopsTableCell;
             }
             else // 0 < count < batchIndex * TotalItemsPerBatch
             {
                 NSInteger totalRows = ([array count] - 1) / 2 + 1;
                 NSLog(@"TotalRows: %ld", (long)totalRows);
-                return totalRows * HeightOfItemInProductTableCell;
+                return totalRows * HeightOfItemInShopsTableCell;
             }
         }
         case SectionLoadMore:
@@ -240,12 +240,12 @@ static const int SectionLoadMore = 2;
 }
 
 
-- (void)scrollToTopOfProductSection
+- (void)scrollToTopOfShopsSection
 {
-    // 检测ProductSection的Header是否已经被置顶
+    // 检测ShopsSection的Header是否已经被置顶
     if(self.tableView.contentOffset.y < 150)
     {
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:SectionProduct];
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:SectionShops];
         [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
     }
 }
@@ -276,7 +276,7 @@ static const int SectionLoadMore = 2;
 - (void)categoryButtonClicked:(UIButton *)sender
 {
     self.categoryButtonIndex = sender.tag - 201;
-    [self scrollToTopOfProductSection];
+    [self scrollToTopOfShopsSection];
     
     [NSTimer scheduledTimerWithTimeInterval:0.2f target:self selector:@selector(showCategoryPopover:) userInfo:nil repeats:NO];
 }
@@ -320,13 +320,13 @@ static const int SectionLoadMore = 2;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if(section == SectionProduct)
+    if(section == SectionShops)
         return 36.0f;
     else
         return 0;
 }
 
-- (void)itemClickedInCell:(ProductTableViewCell *)cell
+- (void)itemClickedInCell:(ShopsTableViewCell *)cell
 {
     [self performSegueWithIdentifier:@"ShowProductDetailSegue" sender:self];
 }

@@ -6,12 +6,12 @@
 //  Copyright (c) 2015 Wang Long. All rights reserved.
 //
 
-#import "ProductTableViewCell.h"
+#import "ShopsTableViewCell.h"
 #import "BFPreferenceData.h"
 
 #import "defs.h"
 
-@implementation ProductTableViewCell
+@implementation ShopsTableViewCell
 
 - (void)awakeFromNib
 {

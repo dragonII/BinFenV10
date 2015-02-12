@@ -163,7 +163,7 @@ static const NSInteger SectionHistoryIndex = 1;
 - (void)deleteClickedInCell:(CommunityForSelectionCell *)cell
 {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    NSLog(@"section: %d, row: %d", indexPath.section, indexPath.row);
+    //NSLog(@"section: %d, row: %d", indexPath.section, indexPath.row);
     [self.communityHistoryList removeObjectAtIndex:indexPath.row];
     [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
 }

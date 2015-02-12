@@ -19,7 +19,7 @@ static NSString *ShowUserInfoCellIdentifier = @"ShowUserInfoCell";
 
 @property (strong, nonatomic) NSMutableDictionary *userInfoDict;
 
-@property int selectedCellIndex;
+@property NSInteger selectedCellIndex;
 
 @end
 
@@ -129,7 +129,7 @@ static NSString *ShowUserInfoCellIdentifier = @"ShowUserInfoCell";
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     EditUserInfoViewController *vc = (EditUserInfoViewController *)segue.destinationViewController;
-    vc.editUserInfoType = self.selectedCellIndex;
+    vc.editUserInfoType = (int)self.selectedCellIndex;
 }
 
 

@@ -12,7 +12,7 @@
 #import "CommunityTableViewCell.h"
 
 #import "CategoryTableViewCell.h"
-#import "ProductTableViewCell.h"
+#import "ShopsTableViewCell.h"
 
 #import "BFPreferenceData.h"
 
@@ -25,13 +25,13 @@
 
 static NSString *CommunityTableRowCellIdentifier = @"CommunityTableRowCellIdentifier";
 static NSString *CategoryTableCellIdentifier = @"CategoryTableCellIdentifier";
-static NSString *ProductTableCellIdentifier = @"ProductTableViewCellIdentifier";
+static NSString *ShopTableCellIdentifier = @"ShopTableViewCellIdentifier";
 
 static NSString *CommunityCollectionCellIdentifier = @"CommunityCollectionCellIdentifier";
 
 static const NSInteger CommunityTableSectionIndex = 0;
 static const NSInteger CategoryTableSectionIndex = 1;
-static const NSInteger ProductTableSectionIndex = 2;
+static const NSInteger ShopsTableSectionIndex = 2;
 static const NSInteger RefreshSectionIndex = 3;
 
 
@@ -50,7 +50,7 @@ static const NSInteger RefreshSectionIndex = 3;
 @property (strong, nonatomic) NSArray *communitiesDataList;
 @property (strong, nonatomic) NSMutableArray *communitiyIndexArray; //用来记录哪个CollectionCell被选择
 @property (strong, nonatomic) NSArray *categoriesDataList;
-@property (strong, nonatomic) NSArray *productsDataList;
+@property (strong, nonatomic) NSArray *shopsDataList;
 
 @property (assign, nonatomic) NSInteger categoryButtonIndex;
 
@@ -87,7 +87,7 @@ static const NSInteger RefreshSectionIndex = 3;
                                 @"Cate11"];
 }
 
-- (void)initProductsData
+- (void)initShopsData
 {
     NSMutableArray *array = [[NSMutableArray alloc] init];
     for(int i = 0; i < 51; i++)
@@ -95,7 +95,7 @@ static const NSInteger RefreshSectionIndex = 3;
         [array addObject:[NSString stringWithFormat:@"ID: %d", i]];
     }
     
-    self.productsDataList = [NSArray arrayWithArray:array];
+    self.shopsDataList = [NSArray arrayWithArray:array];
     [BFPreferenceData saveTestDataArray:array];
 }
 
@@ -103,7 +103,7 @@ static const NSInteger RefreshSectionIndex = 3;
 {
     [self initCommunitiesData];
     [self initCategoriesData];
-    [self initProductsData];
+    [self initShopsData];
 }
 
 - (void)initCommunityTableRow
@@ -118,10 +118,10 @@ static const NSInteger RefreshSectionIndex = 3;
     [self.otCoverView.tableView registerNib:nib forCellReuseIdentifier:CategoryTableCellIdentifier];
 }
 
-- (void)initProductTableRow
+- (void)initShopsTableRow
 {
-    UINib *nib = [UINib nibWithNibName:@"ProductTableViewCell" bundle:nil];
-    [self.otCoverView.tableView registerNib:nib forCellReuseIdentifier:ProductTableCellIdentifier];
+    UINib *nib = [UINib nibWithNibName:@"ShopsTableViewCell" bundle:nil];
+    [self.otCoverView.tableView registerNib:nib forCellReuseIdentifier:ShopTableCellIdentifier];
     
     // Batch Index is start from "1"
     [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:LoadContentBatchIndexKey];
@@ -141,7 +141,7 @@ static const NSInteger RefreshSectionIndex = 3;
     
     [self initCommunityTableRow];
     [self initCategoryTableRow];
-    [self initProductTableRow];
+    [self initShopsTableRow];
     
     [self.view addSubview:self.otCoverView];
 }
@@ -311,12 +311,12 @@ static const NSInteger RefreshSectionIndex = 3;
             return cell;
         }
             
-        case ProductTableSectionIndex:
+        case ShopsTableSectionIndex:
         {
-            ProductTableViewCell *cell = (ProductTableViewCell *)[tableView dequeueReusableCellWithIdentifier:ProductTableCellIdentifier];
+            ShopsTableViewCell *cell = (ShopsTableViewCell *)[tableView dequeueReusableCellWithIdentifier:ShopTableCellIdentifier];
             if(cell == nil)
             {
-                cell = [[ProductTableViewCell alloc] init];
+                cell = [[ShopsTableViewCell alloc] init];
             }
             
             [cell initItems];
@@ -358,7 +358,7 @@ static const NSInteger RefreshSectionIndex = 3;
         case CategoryTableSectionIndex:
             return 214.0f;
             
-        case ProductTableSectionIndex:
+        case ShopsTableSectionIndex:
         {
             NSInteger batchIndex = [[NSUserDefaults standardUserDefaults] integerForKey:LoadContentBatchIndexKey];
             NSArray *array = [BFPreferenceData loadTestDataArray];
@@ -368,14 +368,14 @@ static const NSInteger RefreshSectionIndex = 3;
             }
             if([array count] >= batchIndex * TotalItemsPerBatch)
             {
-                NSLog(@"TotalRows: %d", batchIndex * TotalRowsPerBatch);
-                return batchIndex * TotalRowsPerBatch * HeightOfItemInProductTableCell;
+                //NSLog(@"TotalRows: %d", batchIndex * TotalRowsPerBatch);
+                return batchIndex * TotalRowsPerBatch * HeightOfItemInShopsTableCell;
             }
             else // 0 < count < batchIndex * TotalItemsPerBatch
             {
                 NSInteger totalRows = ([array count] - 1) / 2 + 1;
                 NSLog(@"TotalRows: %ld", (long)totalRows);
-                return totalRows * HeightOfItemInProductTableCell;
+                return totalRows * HeightOfItemInShopsTableCell;
             }
         }
             
@@ -385,7 +385,7 @@ static const NSInteger RefreshSectionIndex = 3;
     }
 }
 
-- (void)loadNextBatchProducts
+- (void)loadNextBatchShops
 {
     NSArray *array = [BFPreferenceData loadTestDataArray];
     NSInteger batchIndex = [[NSUserDefaults standardUserDefaults] integerForKey:LoadContentBatchIndexKey];
@@ -404,7 +404,7 @@ static const NSInteger RefreshSectionIndex = 3;
 {
     if(indexPath.section == RefreshSectionIndex)
     {
-        [self loadNextBatchProducts];
+        [self loadNextBatchShops];
     }
 }
 
@@ -415,12 +415,12 @@ static const NSInteger RefreshSectionIndex = 3;
     NSLog(@"Category selected");
 }
 
-- (void)scrollToTopOfProductSection
+- (void)scrollToTopOfShopsSection
 {
-    // 检测ProductSection的Header是否已经被置顶
+    // 检测ShopsSection的Header是否已经被置顶
     if(self.otCoverView.tableView.contentOffset.y < 504)
     {
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:ProductTableSectionIndex];
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:ShopsTableSectionIndex];
         [self.otCoverView.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
     }
 }
@@ -450,7 +450,7 @@ static const NSInteger RefreshSectionIndex = 3;
 - (void)categoryButtonClicked:(UIButton *)sender
 {
     self.categoryButtonIndex = sender.tag - 101;
-    [self scrollToTopOfProductSection];
+    [self scrollToTopOfShopsSection];
     
     [NSTimer scheduledTimerWithTimeInterval:0.2f target:self selector:@selector(showCategoryPopover:) userInfo:nil repeats:NO];
 }
@@ -495,7 +495,7 @@ static const NSInteger RefreshSectionIndex = 3;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if(section == ProductTableSectionIndex)
+    if(section == ShopsTableSectionIndex)
         return 36.0f;
     else
         return 0;

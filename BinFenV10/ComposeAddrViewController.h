@@ -10,6 +10,6 @@
 
 @interface ComposeAddrViewController : UIViewController
 
-@property int selectedIndexForEdit;
+@property NSInteger selectedIndexForEdit;
 
 @end
