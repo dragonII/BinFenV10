@@ -219,7 +219,15 @@ typedef enum
             break;
         }
         case SectionIndexOthers:
+        {
+            if(indexPath.row == 0) //订单
+                [self performSegueWithIdentifier:@"ShowOrdersSegue" sender:self];
+            else // 收藏
+            {
+                
+            }
             break;
+        }
         
         case SectionIndexAbout:
         {

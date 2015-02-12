@@ -18,6 +18,11 @@
 
 @implementation EditUserInfoViewController
 
+- (void)saveButtonClicked:(UIButton *)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)initTableView
 {
     CGRect tableFrame;
@@ -52,6 +57,7 @@
     [self.saveButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     self.saveButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     
+    [self.saveButton addTarget:self action:@selector(saveButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.saveButton];
