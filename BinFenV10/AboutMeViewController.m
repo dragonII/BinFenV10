@@ -224,7 +224,7 @@ typedef enum
                 [self performSegueWithIdentifier:@"ShowOrdersSegue" sender:self];
             else // 收藏
             {
-                
+                [self performSegueWithIdentifier:@"ShowFavoriateSegue" sender:self];
             }
             break;
         }

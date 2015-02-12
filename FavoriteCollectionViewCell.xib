@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="FavoriteCollectionViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="144" height="208"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="144" height="208"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VvT-Zf-4RA">
+                        <rect key="frame" x="1" y="0.0" width="142" height="142"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="142" id="SMq-6J-nbn"/>
+                            <constraint firstAttribute="width" constant="142" id="fVY-bM-KdM"/>
+                        </constraints>
+                    </imageView>
+                    <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="介绍" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Krq-rX-Shj">
+                        <rect key="frame" x="1" y="142" width="142" height="66"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <constraints>
+                <constraint firstItem="Krq-rX-Shj" firstAttribute="top" secondItem="VvT-Zf-4RA" secondAttribute="bottom" id="0cq-G0-3MY"/>
+                <constraint firstAttribute="centerX" secondItem="VvT-Zf-4RA" secondAttribute="centerX" id="4o0-s6-YpP"/>
+                <constraint firstAttribute="bottom" secondItem="Krq-rX-Shj" secondAttribute="bottom" id="Apf-sc-Bd6"/>
+                <constraint firstAttribute="trailing" secondItem="Krq-rX-Shj" secondAttribute="trailing" constant="1" id="BJX-3w-zOB"/>
+                <constraint firstItem="VvT-Zf-4RA" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="SCh-LN-iuw"/>
+                <constraint firstItem="Krq-rX-Shj" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="1" id="Zb7-CN-cEG"/>
+            </constraints>
+            <connections>
+                <outlet property="descriptionTextView" destination="Krq-rX-Shj" id="TjY-DA-KYw"/>
+                <outlet property="imageView" destination="VvT-Zf-4RA" id="ZAo-iv-W0f"/>
+            </connections>
+        </collectionViewCell>
+    </objects>
+</document>

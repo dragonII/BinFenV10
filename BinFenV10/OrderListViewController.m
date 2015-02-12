@@ -52,10 +52,10 @@ static const NSInteger HistoryImageTag = 43;
 {
     CGFloat navigationBarHeight = self.navigationController.navigationBar.frame.size.height;
     
-    // table上方的订单类型选择区域高度为95: 12 ＋ 44 ＋ 8 ＋ 21 ＋ 10
+    // table上方的订单类型选择区域高度为95: 12 + 12 ＋ 44 ＋ 8 ＋ 21 ＋ 10
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 95,
                                                                    self.view.bounds.size.width,
-                                                                   self.view.bounds.size.height - navigationBarHeight - 95 - 20)];
+                                                                   self.view.bounds.size.height - navigationBarHeight - 12 - 95 - 20)];
     
     
     self.tableView.backgroundColor = [UIColor lightGrayColor];
