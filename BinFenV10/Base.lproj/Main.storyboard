@@ -35,9 +35,13 @@
                         <viewControllerLayoutGuide type="bottom" id="nXI-mO-wTV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="XCg-us-Jo4">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <segue destination="tJZ-Q1-K8P" kind="show" identifier="ShowProductSegueFromShop" id="lbI-Si-pX2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yns-b0-NIN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -190,7 +194,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <segue destination="tJZ-Q1-K8P" kind="show" identifier="ShowProductDetailSegue" id="mUm-lI-3Ng"/>
+                        <segue destination="9vL-Rp-3Nl" kind="show" identifier="ShowShopsSegueFromCommunity" id="TYm-Rj-8bD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cb5-JC-zbk" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -332,6 +336,7 @@
                     <connections>
                         <segue destination="nuf-EP-vNP" kind="show" identifier="ShowCommunitySegue" id="cCj-5z-a9i"/>
                         <segue destination="Zbh-th-tAl" kind="presentation" identifier="SelectCommunitySegue" id="DCd-Ke-7JW"/>
+                        <segue destination="9vL-Rp-3Nl" kind="show" identifier="ShowShopSegueFromTabHome" id="ppH-wg-Xq7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DHC-aL-dEd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -411,6 +416,7 @@
                         <viewControllerLayoutGuide type="bottom" id="7rK-UW-Rpo"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="S9d-VS-BYO">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -518,6 +524,7 @@
                         <viewControllerLayoutGuide type="bottom" id="U8e-mL-tW9"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="fVh-IW-kCq">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xkS-ZB-xt3">
@@ -690,21 +697,21 @@
                                 <exclude reference="Aze-oc-jX4"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="Tau-JD-Kji"/>
-                                <exclude reference="Weo-6I-Nf9"/>
-                                <exclude reference="pPa-Jc-lJB"/>
-                                <exclude reference="p1M-F6-eh7"/>
-                                <exclude reference="ybV-t9-pOq"/>
-                                <exclude reference="EfR-hB-oft"/>
-                                <exclude reference="gQB-by-myP"/>
-                                <exclude reference="sHd-mb-ncX"/>
                                 <exclude reference="S7H-AK-rHL"/>
                                 <exclude reference="nMm-tU-RFf"/>
                                 <exclude reference="qza-XK-j1H"/>
-                                <exclude reference="3M4-ot-if7"/>
-                                <exclude reference="Ngf-47-Z2z"/>
+                                <exclude reference="ybV-t9-pOq"/>
                                 <exclude reference="rR5-DP-gtH"/>
                                 <exclude reference="sEj-yN-buL"/>
+                                <exclude reference="3M4-ot-if7"/>
+                                <exclude reference="Ngf-47-Z2z"/>
+                                <exclude reference="EfR-hB-oft"/>
+                                <exclude reference="gQB-by-myP"/>
+                                <exclude reference="sHd-mb-ncX"/>
+                                <exclude reference="p1M-F6-eh7"/>
+                                <exclude reference="Tau-JD-Kji"/>
+                                <exclude reference="Weo-6I-Nf9"/>
+                                <exclude reference="pPa-Jc-lJB"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -718,21 +725,21 @@
                                 <include reference="Aze-oc-jX4"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="Tau-JD-Kji"/>
-                                <include reference="Weo-6I-Nf9"/>
-                                <include reference="pPa-Jc-lJB"/>
-                                <include reference="p1M-F6-eh7"/>
-                                <include reference="ybV-t9-pOq"/>
-                                <include reference="EfR-hB-oft"/>
-                                <include reference="gQB-by-myP"/>
-                                <include reference="sHd-mb-ncX"/>
                                 <include reference="S7H-AK-rHL"/>
                                 <include reference="nMm-tU-RFf"/>
                                 <include reference="qza-XK-j1H"/>
-                                <include reference="3M4-ot-if7"/>
-                                <include reference="Ngf-47-Z2z"/>
+                                <include reference="ybV-t9-pOq"/>
                                 <include reference="rR5-DP-gtH"/>
                                 <include reference="sEj-yN-buL"/>
+                                <include reference="3M4-ot-if7"/>
+                                <include reference="Ngf-47-Z2z"/>
+                                <include reference="EfR-hB-oft"/>
+                                <include reference="gQB-by-myP"/>
+                                <include reference="sHd-mb-ncX"/>
+                                <include reference="p1M-F6-eh7"/>
+                                <include reference="Tau-JD-Kji"/>
+                                <include reference="Weo-6I-Nf9"/>
+                                <include reference="pPa-Jc-lJB"/>
                             </mask>
                         </variation>
                     </view>
@@ -976,4 +983,7 @@
         <image name="Nearby" width="30" height="30"/>
         <image name="SaveButtonBG" width="288" height="36"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="TYm-Rj-8bD"/>
+    </inferredMetricsTieBreakers>
 </document>

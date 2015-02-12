@@ -8,7 +8,7 @@
 
 #import "CommunityViewController.h"
 #import "CategoryTableViewCell.h"
-#import "ShopsTableViewCell.h"
+#import "ShopsAndProductsCell.h"
 #import "BFPreferenceData.h"
 #import "MLKMenuPopover.h"
 #import "defs.h"
@@ -150,10 +150,10 @@ static const int SectionLoadMore = 2;
             
         case SectionShops:
         {
-            ShopsTableViewCell *cell = (ShopsTableViewCell *)[tableView dequeueReusableCellWithIdentifier:ShopsCellIdentifier];
+            ShopsAndProductsCell *cell = (ShopsAndProductsCell *)[tableView dequeueReusableCellWithIdentifier:ShopsCellIdentifier];
             if(cell == nil)
             {
-                cell = [[ShopsTableViewCell alloc] init];
+                cell = [[ShopsAndProductsCell alloc] init];
             }
             
             [cell initItems];
@@ -326,9 +326,9 @@ static const int SectionLoadMore = 2;
         return 0;
 }
 
-- (void)itemClickedInCell:(ShopsTableViewCell *)cell
+- (void)itemClickedInCell:(ShopsAndProductsCell *)cell
 {
-    [self performSegueWithIdentifier:@"ShowProductDetailSegue" sender:self];
+    [self performSegueWithIdentifier:@"ShowShopsSegueFromCommunity" sender:self];
 }
 
 @end

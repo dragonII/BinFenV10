@@ -12,13 +12,15 @@
 #import "CommunityTableViewCell.h"
 
 #import "CategoryTableViewCell.h"
-#import "ShopsTableViewCell.h"
+#import "ShopsAndProductsCell.h"
 
 #import "BFPreferenceData.h"
 
 #import "MLKMenuPopover.h"
 
 #import "CommunityViewController.h"
+
+#import "ShopViewController.h"
 
 #import "defs.h"
 
@@ -37,7 +39,7 @@ static const NSInteger RefreshSectionIndex = 3;
 
 
 
-@interface TabHomeViewController () <UITableViewDataSource, UITableViewDelegate, MLKMenuPopoverDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, OTCoverSegueDelegate>
+@interface TabHomeViewController () <UITableViewDataSource, UITableViewDelegate, MLKMenuPopoverDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, OTCoverSegueDelegate, ShopsCellSegueDelegate>
 
 @property (strong, nonatomic) OTCover *otCoverView;
 
@@ -120,7 +122,7 @@ static const NSInteger RefreshSectionIndex = 3;
 
 - (void)initShopsTableRow
 {
-    UINib *nib = [UINib nibWithNibName:@"ShopsTableViewCell" bundle:nil];
+    UINib *nib = [UINib nibWithNibName:@"ShopsAndProductsCell" bundle:nil];
     [self.otCoverView.tableView registerNib:nib forCellReuseIdentifier:ShopTableCellIdentifier];
     
     // Batch Index is start from "1"
@@ -313,14 +315,15 @@ static const NSInteger RefreshSectionIndex = 3;
             
         case ShopsTableSectionIndex:
         {
-            ShopsTableViewCell *cell = (ShopsTableViewCell *)[tableView dequeueReusableCellWithIdentifier:ShopTableCellIdentifier];
+            ShopsAndProductsCell *cell = (ShopsAndProductsCell *)[tableView dequeueReusableCellWithIdentifier:ShopTableCellIdentifier];
             if(cell == nil)
             {
-                cell = [[ShopsTableViewCell alloc] init];
+                cell = [[ShopsAndProductsCell alloc] init];
             }
             
             [cell initItems];
             
+            cell.segueDelegate = self;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
             return cell;
@@ -510,6 +513,13 @@ static const NSInteger RefreshSectionIndex = 3;
         communityVC.categoriesListArray = self.categoriesDataList;
         [self showNavigationItem];
     }
+    if([segue.identifier isEqualToString:@"ShowShopSegueFromTabHome"])
+    {
+        ShopViewController *shopVC = (ShopViewController *)segue.destinationViewController;
+        shopVC.hidesBottomBarWhenPushed = YES;
+        
+        [self showNavigationItem];
+    }
 }
 
 #pragma OTCoverSegueDelegate
@@ -524,6 +534,16 @@ static const NSInteger RefreshSectionIndex = 3;
 - (IBAction)unwindToTabHome:(UIStoryboardSegue *)segue
 {
     
+}
+
+#pragma SegueDelegate for ShopsAndProductsCell
+
+- (void)itemClickedInCell:(ShopsAndProductsCell *)cell
+{
+    //[self performSegueWithIdentifier:@"ShowProductDetailSegue" sender:self];
+    NSLog(@"%@", cell.shopID);
+    
+    [self performSegueWithIdentifier:@"ShowShopSegueFromTabHome" sender:self];
 }
 
 @end

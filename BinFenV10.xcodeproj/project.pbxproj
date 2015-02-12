@@ -15,8 +15,8 @@
 		2F01E7C61A87C2B3006BDDAB /* DescriptionTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F01E7C41A87C2B3006BDDAB /* DescriptionTableCell.xib */; };
 		2F01E7CD1A87C54C006BDDAB /* SeperatorTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F01E7CB1A87C54C006BDDAB /* SeperatorTableCell.m */; };
 		2F01E7CE1A87C54C006BDDAB /* SeperatorTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F01E7CC1A87C54C006BDDAB /* SeperatorTableCell.xib */; };
-		2F0475061A813D1B00196F0B /* ShopsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F0475041A813D1B00196F0B /* ShopsTableViewCell.m */; };
-		2F0475071A813D1B00196F0B /* ShopsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F0475051A813D1B00196F0B /* ShopsTableViewCell.xib */; };
+		2F0475061A813D1B00196F0B /* ShopsAndProductsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F0475041A813D1B00196F0B /* ShopsAndProductsCell.m */; };
+		2F0475071A813D1B00196F0B /* ShopsAndProductsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F0475051A813D1B00196F0B /* ShopsAndProductsCell.xib */; };
 		2F14CD701A8BA50E004125F6 /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F14CD6F1A8BA50E004125F6 /* UserInfoViewController.m */; };
 		2F14CD731A8BAE7C004125F6 /* EditUserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F14CD721A8BAE7C004125F6 /* EditUserInfoViewController.m */; };
 		2F28A0071A89BC6500C296D6 /* NearbyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F28A0061A89BC6500C296D6 /* NearbyViewController.m */; };
@@ -92,6 +92,8 @@
 		2FEEE8671A7E5B8F0095D8DB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FEEE8661A7E5B8F0095D8DB /* Images.xcassets */; };
 		2FEEE86A1A7E5B8F0095D8DB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FEEE8681A7E5B8F0095D8DB /* LaunchScreen.xib */; };
 		2FEEE8761A7E5B8F0095D8DB /* BinFenV10Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FEEE8751A7E5B8F0095D8DB /* BinFenV10Tests.m */; };
+		2FFBE6591A8C96DB00B29C48 /* CategoriesInShopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FFBE6571A8C96DB00B29C48 /* CategoriesInShopCell.m */; };
+		2FFBE65A1A8C96DB00B29C48 /* CategoriesInShopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FFBE6581A8C96DB00B29C48 /* CategoriesInShopCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,9 +119,9 @@
 		2F01E7CA1A87C54C006BDDAB /* SeperatorTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeperatorTableCell.h; sourceTree = "<group>"; };
 		2F01E7CB1A87C54C006BDDAB /* SeperatorTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeperatorTableCell.m; sourceTree = "<group>"; };
 		2F01E7CC1A87C54C006BDDAB /* SeperatorTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SeperatorTableCell.xib; sourceTree = "<group>"; };
-		2F0475031A813D1B00196F0B /* ShopsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopsTableViewCell.h; sourceTree = "<group>"; };
-		2F0475041A813D1B00196F0B /* ShopsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopsTableViewCell.m; sourceTree = "<group>"; };
-		2F0475051A813D1B00196F0B /* ShopsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShopsTableViewCell.xib; sourceTree = "<group>"; };
+		2F0475031A813D1B00196F0B /* ShopsAndProductsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopsAndProductsCell.h; sourceTree = "<group>"; };
+		2F0475041A813D1B00196F0B /* ShopsAndProductsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopsAndProductsCell.m; sourceTree = "<group>"; };
+		2F0475051A813D1B00196F0B /* ShopsAndProductsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShopsAndProductsCell.xib; sourceTree = "<group>"; };
 		2F14CD6E1A8BA50E004125F6 /* UserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoViewController.h; sourceTree = "<group>"; };
 		2F14CD6F1A8BA50E004125F6 /* UserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoViewController.m; sourceTree = "<group>"; };
 		2F14CD711A8BAE7C004125F6 /* EditUserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditUserInfoViewController.h; sourceTree = "<group>"; };
@@ -258,6 +260,9 @@
 		2FEEE86F1A7E5B8F0095D8DB /* BinFenV10Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BinFenV10Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FEEE8741A7E5B8F0095D8DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2FEEE8751A7E5B8F0095D8DB /* BinFenV10Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BinFenV10Tests.m; sourceTree = "<group>"; };
+		2FFBE6561A8C96DB00B29C48 /* CategoriesInShopCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoriesInShopCell.h; sourceTree = "<group>"; };
+		2FFBE6571A8C96DB00B29C48 /* CategoriesInShopCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoriesInShopCell.m; sourceTree = "<group>"; };
+		2FFBE6581A8C96DB00B29C48 /* CategoriesInShopCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CategoriesInShopCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -302,9 +307,9 @@
 		2F0475021A813CF000196F0B /* ProductTableCell */ = {
 			isa = PBXGroup;
 			children = (
-				2F0475031A813D1B00196F0B /* ShopsTableViewCell.h */,
-				2F0475041A813D1B00196F0B /* ShopsTableViewCell.m */,
-				2F0475051A813D1B00196F0B /* ShopsTableViewCell.xib */,
+				2F0475031A813D1B00196F0B /* ShopsAndProductsCell.h */,
+				2F0475041A813D1B00196F0B /* ShopsAndProductsCell.m */,
+				2F0475051A813D1B00196F0B /* ShopsAndProductsCell.xib */,
 				2F2B87E21A83670600FE8F20 /* ShopsCell.xib */,
 			);
 			name = ProductTableCell;
@@ -420,6 +425,9 @@
 				2F6EFEA41A8074E1001F9DE7 /* CategoryTableViewCell.m */,
 				2F6EFEA51A8074E1001F9DE7 /* CategoryTableViewCell.xib */,
 				2F2B87E01A83650C00FE8F20 /* CategoryCell.xib */,
+				2FFBE6561A8C96DB00B29C48 /* CategoriesInShopCell.h */,
+				2FFBE6571A8C96DB00B29C48 /* CategoriesInShopCell.m */,
+				2FFBE6581A8C96DB00B29C48 /* CategoriesInShopCell.xib */,
 			);
 			name = CategoryTableCell;
 			sourceTree = "<group>";
@@ -684,10 +692,11 @@
 				2F5954BC1A7E78BB001D5DAD /* CommunityCollectionViewCell.xib in Resources */,
 				2FEEE8651A7E5B8F0095D8DB /* Main.storyboard in Resources */,
 				2F01E7BC1A87B694006BDDAB /* ProductImageCell.xib in Resources */,
+				2FFBE65A1A8C96DB00B29C48 /* CategoriesInShopCell.xib in Resources */,
 				2F01E7C61A87C2B3006BDDAB /* DescriptionTableCell.xib in Resources */,
 				2F7B75C21A8AFBFE00720650 /* BasicSettingTableCell.xib in Resources */,
 				2F01E7CE1A87C54C006BDDAB /* SeperatorTableCell.xib in Resources */,
-				2F0475071A813D1B00196F0B /* ShopsTableViewCell.xib in Resources */,
+				2F0475071A813D1B00196F0B /* ShopsAndProductsCell.xib in Resources */,
 				2F6EFEA71A8074E1001F9DE7 /* CategoryTableViewCell.xib in Resources */,
 				2FC5A2A11A7F23BA00DD0E63 /* CommunityTableViewCell.xib in Resources */,
 				2F7B75D21A8B265A00720650 /* AddNewAddrCell.xib in Resources */,
@@ -717,6 +726,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FFBE6591A8C96DB00B29C48 /* CategoriesInShopCell.m in Sources */,
 				2F31B23A1A83D74D00A2BB86 /* UIProgressView+AFNetworking.m in Sources */,
 				2F9060891A8C4C3F0087FBB3 /* OrderListViewController.m in Sources */,
 				2F01E7C51A87C2B3006BDDAB /* DescriptionTableCell.m in Sources */,
@@ -738,7 +748,7 @@
 				2F31B2201A83D74000A2BB86 /* AFURLRequestSerialization.m in Sources */,
 				2F7B75D91A8B2DB800720650 /* EditInforCell.m in Sources */,
 				2F01E7C01A87C075006BDDAB /* PriceTableCell.m in Sources */,
-				2F0475061A813D1B00196F0B /* ShopsTableViewCell.m in Sources */,
+				2F0475061A813D1B00196F0B /* ShopsAndProductsCell.m in Sources */,
 				2F90609C1A8C74980087FBB3 /* FavoritesViewController.m in Sources */,
 				2F7B75D51A8B29BD00720650 /* ComposeAddrViewController.m in Sources */,
 				2F31B21C1A83D74000A2BB86 /* AFHTTPSessionManager.m in Sources */,

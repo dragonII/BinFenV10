@@ -8,17 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
-@class ShopsTableViewCell;
+@class ShopsAndProductsCell;
 
 @protocol ShopsCellSegueDelegate <NSObject>
 
-- (void)itemClickedInCell:(ShopsTableViewCell *)cell;
+- (void)itemClickedInCell:(ShopsAndProductsCell *)cell;
 
 @end
 
-@interface ShopsTableViewCell : UITableViewCell
+@interface ShopsAndProductsCell : UITableViewCell
 
 - (void)initItems;
+
+@property (copy, nonatomic) NSString *shopID;
 
 @property (weak, nonatomic) id<ShopsCellSegueDelegate> segueDelegate;
 

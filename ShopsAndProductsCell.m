@@ -6,12 +6,12 @@
 //  Copyright (c) 2015 Wang Long. All rights reserved.
 //
 
-#import "ShopsTableViewCell.h"
+#import "ShopsAndProductsCell.h"
 #import "BFPreferenceData.h"
 
 #import "defs.h"
 
-@implementation ShopsTableViewCell
+@implementation ShopsAndProductsCell
 
 - (void)awakeFromNib
 {
@@ -20,6 +20,9 @@
 
 - (void)itemClicked:(UITapGestureRecognizer*)sender
 {
+    UIView *view = (UIView *)sender.view;
+    self.shopID = [NSString stringWithFormat:@"ShopID_%d", (view.tag - 2000)];
+    NSLog(@"xx%@", self.shopID);
     if([self.segueDelegate respondsToSelector:@selector(itemClickedInCell:)])
     {
         [self.segueDelegate performSelector:@selector(itemClickedInCell:) withObject:self];
