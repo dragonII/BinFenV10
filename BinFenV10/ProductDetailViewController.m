@@ -199,7 +199,6 @@ static const NSInteger SeperatorCellIndex = 3;
     [super viewDidLoad];
     
     self.navigationItem.title = @"商品详情";
-    //self.productImageView.image = [UIImage imageNamed:@"Image-320x200"];
     
     [self initTableView];
     [self initBottomView];

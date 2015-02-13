@@ -22,7 +22,7 @@
                             <constraint firstAttribute="height" constant="12" id="Uq7-i5-hsT"/>
                         </constraints>
                     </view>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FCY-fI-Sn5">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Default_56x56" translatesAutoresizingMaskIntoConstraints="NO" id="FCY-fI-Sn5">
                         <rect key="frame" x="26" y="50" width="56" height="56"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="56" id="kG1-5C-dlT"/>
@@ -123,6 +123,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="Default_56x56" width="56" height="56"/>
         <image name="NarrowOrangeButtonBG" width="56" height="22"/>
         <image name="WideGrayButtonBG" width="74" height="22"/>
     </resources>

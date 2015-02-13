@@ -74,6 +74,15 @@ static const NSInteger HistoryImageTag = 43;
     [self.view addSubview:self.tableView];
 }
 
+- (void)setLabelHightlightedColor:(UILabel *)label
+{
+    self.needPayLabel.textColor = [UIColor blackColor];
+    self.paidLabel.textColor = [UIColor blackColor];
+    self.historyLabel.textColor = [UIColor blackColor];
+    
+    label.textColor = [UIColor colorWithRed:253/255.0f green:155/255.0f blue:90/255.0f alpha:1.0f];
+}
+
 - (void)imageTapped:(UIGestureRecognizer *)gestureRecognizer
 {
     UIImageView *imageView = (UIImageView *)gestureRecognizer.view;
@@ -81,14 +90,17 @@ static const NSInteger HistoryImageTag = 43;
     {
         case NeedPayImageTag:
             NSLog(@"Need Pay");
+            [self setLabelHightlightedColor:self.needPayLabel];
             break;
         
         case PaidImageTag:
             NSLog(@"Paid");
+            [self setLabelHightlightedColor:self.paidLabel];
             break;
             
         case HistoryImageTag:
             NSLog(@"History");
+            [self setLabelHightlightedColor:self.historyLabel];
             break;
             
         default:
@@ -112,6 +124,18 @@ static const NSInteger HistoryImageTag = 43;
     imageView.tag = tag;
     imageView.userInteractionEnabled = YES;
     [imageView addGestureRecognizer:tapGesture];
+    
+    // Performance
+    imageView.layer.cornerRadius = 22.0f;
+    imageView.layer.masksToBounds = NO;
+    imageView.layer.shouldRasterize = YES;
+    imageView.layer.rasterizationScale = [UIScreen mainScreen].scale;
+    
+    /////
+    imageView.layer.borderWidth = 1.0f;
+    imageView.layer.borderColor = [UIColor whiteColor].CGColor;
+    imageView.clipsToBounds = YES;
+    imageView.alpha = 0.8f;
 }
 
 - (void)viewDidLoad

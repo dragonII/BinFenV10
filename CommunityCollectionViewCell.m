@@ -19,10 +19,9 @@
     
     // Array of images
     NSMutableArray *arrImages = [NSMutableArray array];
-    for (int i = 1; i <= 6; i++)
-    {
-        [arrImages addObject:[UIImage imageNamed:[NSString stringWithFormat:@"ios%d", i]]];
-    }
+    
+    [arrImages addObject:[UIImage imageNamed:@"Default_120x160"]];
+    [arrImages addObject:[UIImage imageNamed:@"Default_120x160_1"]];
     
     
     // LAAnimatedGrid

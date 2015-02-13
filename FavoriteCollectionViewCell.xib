@@ -13,7 +13,7 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="144" height="208"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VvT-Zf-4RA">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Default_142x142" translatesAutoresizingMaskIntoConstraints="NO" id="VvT-Zf-4RA">
                         <rect key="frame" x="1" y="0.0" width="142" height="142"/>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -44,4 +44,7 @@
             </connections>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="Default_142x142" width="142" height="142"/>
+    </resources>
 </document>

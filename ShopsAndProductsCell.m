@@ -79,7 +79,7 @@
         //http://stackoverflow.com/questions/9907100/issues-with-setting-some-different-font-for-uilabel
         label.font = [UIFont fontWithName:@"STHeitiSC-Light" size:10];
         
-        imageView.image = [UIImage imageNamed:@"142x142"];
+        imageView.image = [UIImage imageNamed:@"Default_142x142"];
         
         
         [itemView addSubview:imageView];

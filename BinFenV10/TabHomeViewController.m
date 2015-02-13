@@ -132,7 +132,7 @@ static const NSInteger RefreshSectionIndex = 3;
 
 - (void)initViews
 {
-    self.otCoverView = [[OTCover alloc] initWithTableViewWithHeaderImage:[UIImage imageNamed:@"HeaderPlaceHolder"] withOTCoverHeight:170];
+    self.otCoverView = [[OTCover alloc] initWithTableViewWithHeaderImage:[UIImage imageNamed:@"Default_170×320"] withOTCoverHeight:170];
     
     self.otCoverView.tableView.delegate = self;
     self.otCoverView.tableView.dataSource = self;

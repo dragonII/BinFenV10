@@ -28,7 +28,6 @@
 		2F2B87DC1A832A7100FE8F20 /* MLKMenuPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2B87DB1A832A7100FE8F20 /* MLKMenuPopover.m */; };
 		2F2B87DF1A833F4800FE8F20 /* CommunityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2B87DE1A833F4800FE8F20 /* CommunityViewController.m */; };
 		2F2B87E11A83650C00FE8F20 /* CategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F2B87E01A83650C00FE8F20 /* CategoryCell.xib */; };
-		2F2B87E31A83670600FE8F20 /* ShopsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F2B87E21A83670600FE8F20 /* ShopsCell.xib */; };
 		2F31B21A1A83D74000A2BB86 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F31B2081A83D74000A2BB86 /* AFHTTPRequestOperation.m */; };
 		2F31B21B1A83D74000A2BB86 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F31B20A1A83D74000A2BB86 /* AFHTTPRequestOperationManager.m */; };
 		2F31B21C1A83D74000A2BB86 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F31B20C1A83D74000A2BB86 /* AFHTTPSessionManager.m */; };
@@ -142,7 +141,6 @@
 		2F2B87DD1A833F4800FE8F20 /* CommunityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommunityViewController.h; sourceTree = "<group>"; };
 		2F2B87DE1A833F4800FE8F20 /* CommunityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommunityViewController.m; sourceTree = "<group>"; };
 		2F2B87E01A83650C00FE8F20 /* CategoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CategoryCell.xib; sourceTree = "<group>"; };
-		2F2B87E21A83670600FE8F20 /* ShopsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShopsCell.xib; sourceTree = "<group>"; };
 		2F31B2071A83D74000A2BB86 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		2F31B2081A83D74000A2BB86 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		2F31B2091A83D74000A2BB86 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -310,7 +308,6 @@
 				2F0475031A813D1B00196F0B /* ShopsAndProductsCell.h */,
 				2F0475041A813D1B00196F0B /* ShopsAndProductsCell.m */,
 				2F0475051A813D1B00196F0B /* ShopsAndProductsCell.xib */,
-				2F2B87E21A83670600FE8F20 /* ShopsCell.xib */,
 			);
 			name = ProductTableCell;
 			sourceTree = "<group>";
@@ -686,7 +683,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2F2B87E31A83670600FE8F20 /* ShopsCell.xib in Resources */,
 				2F01E7C11A87C075006BDDAB /* PriceTableCell.xib in Resources */,
 				2F28A00D1A89CFB700C296D6 /* NearbyTableViewCell.xib in Resources */,
 				2F5954BC1A7E78BB001D5DAD /* CommunityCollectionViewCell.xib in Resources */,

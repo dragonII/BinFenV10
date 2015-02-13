@@ -34,8 +34,7 @@
 
 - (void)initImages
 {
-    self.imageNamesArray = @[@"Image-320x200",
-                             @"Image-320x200_2"];
+    self.imageNamesArray = @[@"Default_320x200"];
 }
 
 - (void)initItems
@@ -59,6 +58,8 @@
         
         [self.scrollView addSubview:imageView];
     }
+    if([self.imageNamesArray count] <= 1)
+        [self.pageControl setHidden:YES];
     
     //int tilesPerPage = columnsPerPage * 2;
     //int numPages = ceilf([self.categoriesListArray count] / (float)tilesPerPage);
