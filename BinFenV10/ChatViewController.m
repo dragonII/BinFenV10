@@ -147,6 +147,7 @@
 - (JSBubbleMessageType)messageTypeForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MessageData *message = [self.messageArray objectAtIndex:indexPath.row];
+    //NSLog(@"Row(%d):Type(%d)", indexPath.row, message.messageType);
     return message.messageType;
 }
 
