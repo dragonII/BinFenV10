@@ -48,7 +48,7 @@
 		2F31B2421A83D77E00A2BB86 /* LAAnimatedGrid.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F31B23F1A83D77E00A2BB86 /* LAAnimatedGrid.m */; };
 		2F31B2431A83D77E00A2BB86 /* LAAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F31B2411A83D77E00A2BB86 /* LAAnimatedView.m */; };
 		2F34CEE81A8878ED000AD896 /* CommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F34CEE71A8878ED000AD896 /* CommentTableViewCell.m */; };
-		2F34CEF41A88AC35000AD896 /* OrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F34CEF31A88AC35000AD896 /* OrderDetailViewController.m */; };
+		2F34CEF41A88AC35000AD896 /* ShoppingCartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F34CEF31A88AC35000AD896 /* ShoppingCartViewController.m */; };
 		2F480A911A864BB60034CA65 /* ProductDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F480A901A864BB60034CA65 /* ProductDetailViewController.m */; };
 		2F4A63AA1A89049D00B30986 /* CommunitySelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4A63A91A89049D00B30986 /* CommunitySelectionViewController.m */; };
 		2F4A63AE1A890D5300B30986 /* CommunityForSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4A63AC1A890D5300B30986 /* CommunityForSelectionCell.m */; };
@@ -183,8 +183,8 @@
 		2F31B2411A83D77E00A2BB86 /* LAAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAAnimatedView.m; sourceTree = "<group>"; };
 		2F34CEE61A8878ED000AD896 /* CommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentTableViewCell.h; sourceTree = "<group>"; };
 		2F34CEE71A8878ED000AD896 /* CommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentTableViewCell.m; sourceTree = "<group>"; };
-		2F34CEF21A88AC35000AD896 /* OrderDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailViewController.h; sourceTree = "<group>"; };
-		2F34CEF31A88AC35000AD896 /* OrderDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailViewController.m; sourceTree = "<group>"; };
+		2F34CEF21A88AC35000AD896 /* ShoppingCartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingCartViewController.h; sourceTree = "<group>"; };
+		2F34CEF31A88AC35000AD896 /* ShoppingCartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingCartViewController.m; sourceTree = "<group>"; };
 		2F480A8F1A864BB60034CA65 /* ProductDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductDetailViewController.h; sourceTree = "<group>"; };
 		2F480A901A864BB60034CA65 /* ProductDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductDetailViewController.m; sourceTree = "<group>"; };
 		2F4A63A81A89049D00B30986 /* CommunitySelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommunitySelectionViewController.h; sourceTree = "<group>"; };
@@ -546,8 +546,8 @@
 				2F90609E1A8C87BF0087FBB3 /* ShopViewController.m */,
 				2F480A8F1A864BB60034CA65 /* ProductDetailViewController.h */,
 				2F480A901A864BB60034CA65 /* ProductDetailViewController.m */,
-				2F34CEF21A88AC35000AD896 /* OrderDetailViewController.h */,
-				2F34CEF31A88AC35000AD896 /* OrderDetailViewController.m */,
+				2F34CEF21A88AC35000AD896 /* ShoppingCartViewController.h */,
+				2F34CEF31A88AC35000AD896 /* ShoppingCartViewController.m */,
 				2F28A0051A89BC6500C296D6 /* NearbyViewController.h */,
 				2F28A0061A89BC6500C296D6 /* NearbyViewController.m */,
 				2F28A00E1A89D60E00C296D6 /* MessageViewController.h */,
@@ -771,7 +771,7 @@
 				2F28A0161A89E36F00C296D6 /* DeviceHardware.m in Sources */,
 				2F6EFEA61A8074E1001F9DE7 /* CategoryTableViewCell.m in Sources */,
 				2F28A0101A89D60E00C296D6 /* MessageViewController.m in Sources */,
-				2F34CEF41A88AC35000AD896 /* OrderDetailViewController.m in Sources */,
+				2F34CEF41A88AC35000AD896 /* ShoppingCartViewController.m in Sources */,
 				2F7B75CC1A8B21AC00720650 /* AddrsTableViewCell.m in Sources */,
 				2F31B2371A83D74D00A2BB86 /* UIAlertView+AFNetworking.m in Sources */,
 				2F5954B31A7E6857001D5DAD /* BFPreferenceData.m in Sources */,

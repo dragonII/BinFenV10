@@ -63,7 +63,7 @@ static const NSInteger SeperatorCellIndex = 3;
 
 - (IBAction)orderClicked:(UIButton *)sender
 {
-    [self performSegueWithIdentifier:@"ShowOrderDetailSegue" sender:self];
+    [self performSegueWithIdentifier:@"ShowShoppingCartSegue" sender:self];
 }
 
 - (void)initBottomView
@@ -96,7 +96,7 @@ static const NSInteger SeperatorCellIndex = 3;
                                          7,
                                          orderButtonWidth, orderButtonHeight);
     self.orderButton = [[UIButton alloc] initWithFrame:orderButtonFrame];
-    [self.orderButton setTitle:@"去下单" forState:UIControlStateNormal];
+    [self.orderButton setTitle:@"购物车" forState:UIControlStateNormal];
     self.orderButton.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"OrderButtonBG"]];
     [self.orderButton addTarget:self action:@selector(orderClicked:) forControlEvents:UIControlEventTouchUpInside];
     [bottomView addSubview:self.orderButton];

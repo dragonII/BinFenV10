@@ -6,19 +6,19 @@
 //  Copyright (c) 2015 Wang Long. All rights reserved.
 //
 
-#import "OrderDetailViewController.h"
+#import "ShoppingCartViewController.h"
 
-@interface OrderDetailViewController ()
+@interface ShoppingCartViewController ()
 
 @end
 
-@implementation OrderDetailViewController
+@implementation ShoppingCartViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    self.navigationItem.title = @"订单详情";
+    self.navigationItem.title = @"购物车";
 }
 
 - (void)didReceiveMemoryWarning {

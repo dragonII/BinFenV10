@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface OrderDetailViewController : UIViewController
+@interface ShoppingCartViewController : UIViewController
 
 @end
