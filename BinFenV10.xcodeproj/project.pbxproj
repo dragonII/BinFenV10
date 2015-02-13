@@ -84,6 +84,9 @@
 		2FC5A29B1A7F1CB200DD0E63 /* TabHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5A29A1A7F1CB200DD0E63 /* TabHomeViewController.m */; };
 		2FC5A2A01A7F23BA00DD0E63 /* CommunityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5A29E1A7F23B900DD0E63 /* CommunityTableViewCell.m */; };
 		2FC5A2A11A7F23BA00DD0E63 /* CommunityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FC5A29F1A7F23B900DD0E63 /* CommunityTableViewCell.xib */; };
+		2FDA11BF1A8DC5AB00A60362 /* ConversationListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FDA11BD1A8DC5AB00A60362 /* ConversationListCell.m */; };
+		2FDA11C01A8DC5AB00A60362 /* ConversationListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FDA11BE1A8DC5AB00A60362 /* ConversationListCell.xib */; };
+		2FDA11C31A8DCB9400A60362 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FDA11C21A8DCB9400A60362 /* ChatViewController.m */; };
 		2FEEE85C1A7E5B8E0095D8DB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FEEE85B1A7E5B8E0095D8DB /* main.m */; };
 		2FEEE85F1A7E5B8E0095D8DB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FEEE85E1A7E5B8E0095D8DB /* AppDelegate.m */; };
 		2FEEE8621A7E5B8E0095D8DB /* WizardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FEEE8611A7E5B8E0095D8DB /* WizardViewController.m */; };
@@ -245,6 +248,11 @@
 		2FC5A29D1A7F23B900DD0E63 /* CommunityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommunityTableViewCell.h; sourceTree = "<group>"; };
 		2FC5A29E1A7F23B900DD0E63 /* CommunityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommunityTableViewCell.m; sourceTree = "<group>"; };
 		2FC5A29F1A7F23B900DD0E63 /* CommunityTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommunityTableViewCell.xib; sourceTree = "<group>"; };
+		2FDA11BC1A8DC5AB00A60362 /* ConversationListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConversationListCell.h; sourceTree = "<group>"; };
+		2FDA11BD1A8DC5AB00A60362 /* ConversationListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConversationListCell.m; sourceTree = "<group>"; };
+		2FDA11BE1A8DC5AB00A60362 /* ConversationListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConversationListCell.xib; sourceTree = "<group>"; };
+		2FDA11C11A8DCB9400A60362 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
+		2FDA11C21A8DCB9400A60362 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
 		2FEEE8561A7E5B8E0095D8DB /* BinFenV10.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BinFenV10.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FEEE85A1A7E5B8E0095D8DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2FEEE85B1A7E5B8E0095D8DB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -492,9 +500,20 @@
 			name = CommunityTableRowCell;
 			sourceTree = "<group>";
 		};
+		2FDA11BB1A8DC58D00A60362 /* MessageCells */ = {
+			isa = PBXGroup;
+			children = (
+				2FDA11BC1A8DC5AB00A60362 /* ConversationListCell.h */,
+				2FDA11BD1A8DC5AB00A60362 /* ConversationListCell.m */,
+				2FDA11BE1A8DC5AB00A60362 /* ConversationListCell.xib */,
+			);
+			name = MessageCells;
+			sourceTree = "<group>";
+		};
 		2FEEE84D1A7E5B8E0095D8DB = {
 			isa = PBXGroup;
 			children = (
+				2FDA11BB1A8DC58D00A60362 /* MessageCells */,
 				2F90608A1A8C4CE90087FBB3 /* EditOrderTableCell */,
 				2F7B75B81A8AF96800720650 /* MyselfTableCells */,
 				2F28A0081A89CF9A00C296D6 /* NearbyTableCell */,
@@ -552,6 +571,8 @@
 				2F28A0061A89BC6500C296D6 /* NearbyViewController.m */,
 				2F28A00E1A89D60E00C296D6 /* MessageViewController.h */,
 				2F28A00F1A89D60E00C296D6 /* MessageViewController.m */,
+				2FDA11C11A8DCB9400A60362 /* ChatViewController.h */,
+				2FDA11C21A8DCB9400A60362 /* ChatViewController.m */,
 				2F28A0171A8A057300C296D6 /* AboutMeViewController.h */,
 				2F28A0181A8A057300C296D6 /* AboutMeViewController.m */,
 				2F7B75C31A8B043D00720650 /* AboutProductViewController.h */,
@@ -688,6 +709,7 @@
 				2F5954BC1A7E78BB001D5DAD /* CommunityCollectionViewCell.xib in Resources */,
 				2FEEE8651A7E5B8F0095D8DB /* Main.storyboard in Resources */,
 				2F01E7BC1A87B694006BDDAB /* ProductImageCell.xib in Resources */,
+				2FDA11C01A8DC5AB00A60362 /* ConversationListCell.xib in Resources */,
 				2FFBE65A1A8C96DB00B29C48 /* CategoriesInShopCell.xib in Resources */,
 				2F01E7C61A87C2B3006BDDAB /* DescriptionTableCell.xib in Resources */,
 				2F7B75C21A8AFBFE00720650 /* BasicSettingTableCell.xib in Resources */,
@@ -735,6 +757,7 @@
 				2FC5A29B1A7F1CB200DD0E63 /* TabHomeViewController.m in Sources */,
 				2F90609F1A8C87BF0087FBB3 /* ShopViewController.m in Sources */,
 				2F31B21B1A83D74000A2BB86 /* AFHTTPRequestOperationManager.m in Sources */,
+				2FDA11BF1A8DC5AB00A60362 /* ConversationListCell.m in Sources */,
 				2F480A911A864BB60034CA65 /* ProductDetailViewController.m in Sources */,
 				2FEEE8621A7E5B8E0095D8DB /* WizardViewController.m in Sources */,
 				2F31B21F1A83D74000A2BB86 /* AFURLConnectionOperation.m in Sources */,
@@ -773,6 +796,7 @@
 				2F28A0101A89D60E00C296D6 /* MessageViewController.m in Sources */,
 				2F34CEF41A88AC35000AD896 /* ShoppingCartViewController.m in Sources */,
 				2F7B75CC1A8B21AC00720650 /* AddrsTableViewCell.m in Sources */,
+				2FDA11C31A8DCB9400A60362 /* ChatViewController.m in Sources */,
 				2F31B2371A83D74D00A2BB86 /* UIAlertView+AFNetworking.m in Sources */,
 				2F5954B31A7E6857001D5DAD /* BFPreferenceData.m in Sources */,
 				2F2B87DF1A833F4800FE8F20 /* CommunityViewController.m in Sources */,
