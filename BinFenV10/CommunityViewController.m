@@ -11,6 +11,7 @@
 #import "ShopsAndProductsCell.h"
 #import "BFPreferenceData.h"
 #import "MLKMenuPopover.h"
+#import "ShopViewController.h"
 #import "defs.h"
 
 #import "DeviceHardware.h"
@@ -85,7 +86,7 @@ static const int SectionLoadMore = 2;
     
     [self initTableRowWithScroll];
     
-    self.navigationItem.title = @"（具体社区名称）";
+    self.navigationItem.title = @"具体社区名称";
     self.hidesBottomBarWhenPushed = YES;
 }
 
@@ -324,6 +325,16 @@ static const int SectionLoadMore = 2;
         return 36.0f;
     else
         return 0;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([segue.identifier isEqualToString:@"ShowShopsSegueFromCommunity"])
+    {
+        // showShopViewFrom默认值为0，这里可以省略
+        //ShopViewController *shopVC = (ShopViewController *)segue.destinationViewController;
+        //shopVC.showShopViewFrom = ShowViewFromHome;
+    }
 }
 
 - (void)itemClickedInCell:(ShopsAndProductsCell *)cell

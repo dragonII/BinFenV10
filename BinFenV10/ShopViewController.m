@@ -9,6 +9,7 @@
 #import "ShopViewController.h"
 #import "CategoriesInShopCell.h"
 #import "ShopsAndProductsCell.h"
+#import "ProductDetailViewController.h"
 
 #import "DeviceHardware.h"
 
@@ -30,6 +31,8 @@ static NSString *ShopsCellIdentifier = @"ShopsCell";
 {
     CGRect tableViewFrame;
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    
     DeviceHardwareGeneralPlatform generalPlatform = [DeviceHardware generalPlatform];
     
     switch (generalPlatform)
@@ -40,9 +43,16 @@ static NSString *ShopsCellIdentifier = @"ShopsCell";
             NSLog(@"iphone 4, 4S");
             CGFloat navigationBarHeight = self.navigationController.navigationBar.frame.size.height;
             CGFloat statusBarHeight = 20;
-            tableViewFrame = CGRectMake(0, navigationBarHeight + statusBarHeight,
-                                        self.view.bounds.size.width,
-                                        self.view.bounds.size.height - navigationBarHeight - statusBarHeight);
+            if(self.showShopViewFrom == ShowViewFromHome)
+            {
+            
+                tableViewFrame = CGRectMake(0, navigationBarHeight + statusBarHeight,
+                                            self.view.bounds.size.width,
+                                            self.view.bounds.size.height - navigationBarHeight - statusBarHeight);
+            } else {
+                tableViewFrame = self.view.frame;
+            }
+            
             break;
         }
         case DeviceHardwareGeneralPlatform_iPhone_5:
@@ -84,6 +94,7 @@ static NSString *ShopsCellIdentifier = @"ShopsCell";
     [super viewDidLoad];
     
     self.navigationItem.title = @"商家店名";
+    self.automaticallyAdjustsScrollViewInsets = NO;
     
     [self initTableView];
 }
@@ -153,6 +164,16 @@ static NSString *ShopsCellIdentifier = @"ShopsCell";
 - (void)itemClickedInCell:(ShopsAndProductsCell *)cell
 {
     [self performSegueWithIdentifier:@"ShowProductSegueFromShop" sender:self];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([segue.identifier isEqualToString:@"ShowProductSegueFromShop"])
+    {
+        ProductDetailViewController *productVC = (ProductDetailViewController *)segue.destinationViewController;
+        productVC.showProductViewFrom = self.showShopViewFrom;
+    }
+        
 }
 
 

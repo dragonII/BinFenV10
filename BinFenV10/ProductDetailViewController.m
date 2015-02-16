@@ -118,12 +118,17 @@ static const NSInteger SeperatorCellIndex = 3;
         case DeviceHardwareGeneralPlatform_iPhone_4:
         case DeviceHardwareGeneralPlatform_iPhone_4S:
         {
-            NSLog(@"iphone 4, 4S");
+            //NSLog(@"iphone 4, 4S");
             CGFloat navigationBarHeight = self.navigationController.navigationBar.frame.size.height;
             CGFloat statusBarHeight = 20;
+            if(self.showProductViewFrom == ShowViewFromHome)
+            {
             tableViewFrame = CGRectMake(0, navigationBarHeight + statusBarHeight,
                                         self.view.bounds.size.width,
                                         self.view.bounds.size.height - navigationBarHeight - statusBarHeight - bottomViewHeight);
+            } else {
+                tableViewFrame = self.view.frame;
+            }
             break;
         }
         case DeviceHardwareGeneralPlatform_iPhone_5:
@@ -144,17 +149,6 @@ static const NSInteger SeperatorCellIndex = 3;
             break;
     }
     
-    //CGFloat navigationBarHeight = self.navigationController.navigationBar.frame.size.height;
-    
-    /*
-    CGRect mainFrame = self.view.bounds;
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(mainFrame.origin.x,
-                                                                  mainFrame.origin.y + navigationBarHeight,
-                                                                  mainFrame.size.width,
-                                                                   mainFrame.size.height - navigationBarHeight - 44)];
-     */
-    
-    //self.tableView = [[UITableView alloc] initWithFrame:self.view.frame];
     self.tableView = [[UITableView alloc] initWithFrame:tableViewFrame];
     
     self.tableView.delegate = self;

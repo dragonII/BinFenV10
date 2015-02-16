@@ -20,4 +20,13 @@ static int TotalRowsPerBatch = 10;
 
 static const CGFloat HeightOfItemInShopsTableCell = 208 + 10; //item + spacing
 
+// 因为HomeTab中含有隐藏和显示NavigationBar的操作，此操作会使得后续的View中Frame产生变化，所以需要在此标示出从哪里进入，
+// 用来决定Frame的值
+typedef enum
+{
+    ShowViewFromHome,
+    ShowViewFromOthers
+} ShowViewBySourceType;
+
+
 #endif

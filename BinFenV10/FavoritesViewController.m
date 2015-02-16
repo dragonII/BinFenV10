@@ -8,6 +8,7 @@
 
 #import "FavoritesViewController.h"
 #import "FavoriteCollectionViewCell.h"
+#import "ShopViewController.h"
 
 static NSString *FavoriteCellIdentifier = @"FavoriteCell";
 
@@ -126,20 +127,20 @@ static NSString *FavoriteCellIdentifier = @"FavoriteCell";
     return 12.0;
 }
 
-/*
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    CommunityCollectionViewCell *cell = (CommunityCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    if([self.communitiyIndexArray containsObject:indexPath])
-    {
-        //cell.imageView.image = [UIImage imageNamed:@"CellPlaceHolder"];
-    } else {
-        [self.communitiyIndexArray addObject:indexPath];
-        //cell.imageView.image = [UIImage imageNamed:@"120x160_2"];
-    }
-    
-    [self performSegueWithIdentifier:@"ShowCommunitySegue" sender:self];
+    [self performSegueWithIdentifier:@"ShowShopSegueFromFavorite" sender:self];
 }
- */
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([segue.identifier isEqualToString:@"ShowShopSegueFromFavorite"])
+    {
+        ShopViewController *shopVC = (ShopViewController *)segue.destinationViewController;
+        shopVC.showShopViewFrom = ShowViewFromOthers;
+    }
+}
 
 @end

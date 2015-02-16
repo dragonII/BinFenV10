@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "defs.h"
 
 @interface ShopViewController : UIViewController
+
+@property ShowViewBySourceType showShopViewFrom;
 
 @end

@@ -161,10 +161,12 @@ static const NSInteger RefreshSectionIndex = 3;
     self.navigationController.navigationBarHidden = NO;
 }
 
+/*
 - (void)hideTabBar
 {
     self.tabBarController.hidesBottomBarWhenPushed = YES;
 }
+ */
 
 
 - (void)viewDidLoad {
@@ -174,9 +176,16 @@ static const NSInteger RefreshSectionIndex = 3;
     
     self.hideCommunityRowCell = NO;
     
-    [self hideNavigationItem];
+    //[self hideNavigationItem];
     
     [self initViews];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [self showNavigationItem];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -511,14 +520,14 @@ static const NSInteger RefreshSectionIndex = 3;
         CommunityViewController *communityVC = (CommunityViewController *)segue.destinationViewController;
         communityVC.hidesBottomBarWhenPushed = YES;
         communityVC.categoriesListArray = self.categoriesDataList;
-        [self showNavigationItem];
+        //[self showNavigationItem];
     }
     if([segue.identifier isEqualToString:@"ShowShopSegueFromTabHome"])
     {
         ShopViewController *shopVC = (ShopViewController *)segue.destinationViewController;
         shopVC.hidesBottomBarWhenPushed = YES;
         
-        [self showNavigationItem];
+        //[self showNavigationItem];
     }
 }
 
@@ -540,7 +549,6 @@ static const NSInteger RefreshSectionIndex = 3;
 
 - (void)itemClickedInCell:(ShopsAndProductsCell *)cell
 {
-    //[self performSegueWithIdentifier:@"ShowProductDetailSegue" sender:self];
     NSLog(@"%@", cell.shopID);
     
     [self performSegueWithIdentifier:@"ShowShopSegueFromTabHome" sender:self];

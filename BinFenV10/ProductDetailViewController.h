@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+#import "defs.h"
+
 @interface ProductDetailViewController : UIViewController
+
+@property ShowViewBySourceType showProductViewFrom;
 
 @end
