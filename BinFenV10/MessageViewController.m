@@ -43,6 +43,11 @@ static NSString *ConversationCellIdentifier = @"ConversationCell";
     }
 }
 
+- (void)showLoginViewController
+{
+    [self performSegueWithIdentifier:@"FromMessageToLoginSegue" sender:self];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -52,6 +57,13 @@ static NSString *ConversationCellIdentifier = @"ConversationCell";
     [self loadConversations];
     
     [self initTableView];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self showLoginViewController];
 }
 
 - (void)didReceiveMemoryWarning {

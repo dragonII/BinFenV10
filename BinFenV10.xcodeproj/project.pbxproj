@@ -85,6 +85,8 @@
 		2FC5A2A01A7F23BA00DD0E63 /* CommunityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5A29E1A7F23B900DD0E63 /* CommunityTableViewCell.m */; };
 		2FC5A2A11A7F23BA00DD0E63 /* CommunityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FC5A29F1A7F23B900DD0E63 /* CommunityTableViewCell.xib */; };
 		2FCAC8B11AA424180050BC56 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2FCAC8B31AA424180050BC56 /* InfoPlist.strings */; };
+		2FCAC8B71AA42AA10050BC56 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FCAC8B61AA42AA10050BC56 /* LoginViewController.m */; };
+		2FCAC8BA1AA43CD00050BC56 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FCAC8B91AA43CD00050BC56 /* RegisterViewController.m */; };
 		2FDA11BF1A8DC5AB00A60362 /* ConversationListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FDA11BD1A8DC5AB00A60362 /* ConversationListCell.m */; };
 		2FDA11C01A8DC5AB00A60362 /* ConversationListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FDA11BE1A8DC5AB00A60362 /* ConversationListCell.xib */; };
 		2FDA11C31A8DCB9400A60362 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FDA11C21A8DCB9400A60362 /* ChatViewController.m */; };
@@ -311,6 +313,10 @@
 		2FC5A29F1A7F23B900DD0E63 /* CommunityTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommunityTableViewCell.xib; sourceTree = "<group>"; };
 		2FCAC8B21AA424180050BC56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2FCAC8B41AA4242C0050BC56 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		2FCAC8B51AA42AA10050BC56 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		2FCAC8B61AA42AA10050BC56 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		2FCAC8B81AA43CD00050BC56 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
+		2FCAC8B91AA43CD00050BC56 /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
 		2FDA11BC1A8DC5AB00A60362 /* ConversationListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConversationListCell.h; sourceTree = "<group>"; };
 		2FDA11BD1A8DC5AB00A60362 /* ConversationListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConversationListCell.m; sourceTree = "<group>"; };
 		2FDA11BE1A8DC5AB00A60362 /* ConversationListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConversationListCell.xib; sourceTree = "<group>"; };
@@ -830,6 +836,10 @@
 				2F9060881A8C4C3F0087FBB3 /* OrderListViewController.m */,
 				2F90609A1A8C74980087FBB3 /* FavoritesViewController.h */,
 				2F90609B1A8C74980087FBB3 /* FavoritesViewController.m */,
+				2FCAC8B51AA42AA10050BC56 /* LoginViewController.h */,
+				2FCAC8B61AA42AA10050BC56 /* LoginViewController.m */,
+				2FCAC8B81AA43CD00050BC56 /* RegisterViewController.h */,
+				2FCAC8B91AA43CD00050BC56 /* RegisterViewController.m */,
 				2FEEE8631A7E5B8F0095D8DB /* Main.storyboard */,
 				2FEEE8661A7E5B8F0095D8DB /* Images.xcassets */,
 				2FEEE8681A7E5B8F0095D8DB /* LaunchScreen.xib */,
@@ -1041,6 +1051,7 @@
 				2F01E7C51A87C2B3006BDDAB /* DescriptionTableCell.m in Sources */,
 				2F7B75C51A8B043D00720650 /* AboutProductViewController.m in Sources */,
 				2F31B23B1A83D74D00A2BB86 /* UIRefreshControl+AFNetworking.m in Sources */,
+				2FCAC8B71AA42AA10050BC56 /* LoginViewController.m in Sources */,
 				2F4A63AA1A89049D00B30986 /* CommunitySelectionViewController.m in Sources */,
 				2F14CD701A8BA50E004125F6 /* UserInfoViewController.m in Sources */,
 				2F31B23C1A83D74D00A2BB86 /* UIWebView+AFNetworking.m in Sources */,
@@ -1089,6 +1100,7 @@
 				2F01E7BB1A87B694006BDDAB /* ProductImageCell.m in Sources */,
 				2F28A0161A89E36F00C296D6 /* DeviceHardware.m in Sources */,
 				2F6EFEA61A8074E1001F9DE7 /* CategoryTableViewCell.m in Sources */,
+				2FCAC8BA1AA43CD00050BC56 /* RegisterViewController.m in Sources */,
 				2F28A0101A89D60E00C296D6 /* MessageViewController.m in Sources */,
 				2F34CEF41A88AC35000AD896 /* ShoppingCartViewController.m in Sources */,
 				2F7B75CC1A8B21AC00720650 /* AddrsTableViewCell.m in Sources */,
