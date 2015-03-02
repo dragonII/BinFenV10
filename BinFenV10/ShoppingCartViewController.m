@@ -16,6 +16,14 @@ static NSString *ProductCartCellIdentifier = @"ProductCartCell";
 static NSString *TextInfoCartCellIdentifier = @"TextCartCell";
 static NSString *CommentCartCellIdentifier = @"CommentCartCell";
 
+typedef enum
+{
+    ProductCartCellSection = 0,
+    AddressCartCellSection,
+    PaymentCartCellSection,
+    CommentCartCellSection
+} CartSectionIndexType;
+
 @interface ShoppingCartViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) UITableView *tableView;
@@ -73,6 +81,11 @@ static NSString *CommentCartCellIdentifier = @"CommentCartCell";
     
     self.tableView = [[UITableView alloc] initWithFrame:tableViewFrame];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.backgroundColor = [UIColor lightGrayColor];
+    
+    // Remove the separator lines for emtpy cells
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.tableView.tableFooterView = footerView;
     
     UINib *nib = [UINib nibWithNibName:@"ProductTableCartCell" bundle:nil];
     [self.tableView registerNib:nib forCellReuseIdentifier:ProductCartCellIdentifier];
@@ -109,20 +122,38 @@ static NSString *CommentCartCellIdentifier = @"CommentCartCell";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    return 1;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
     return 4;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.row == 0)
-        return 112;
+    if(indexPath.section == ProductCartCellSection)
+        return 100;
     else
-        return 56;
+        return 44;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 12.0f;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 12.0f)];
+    headerView.backgroundColor = [UIColor lightGrayColor];
+    
+    return headerView;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.row == 0)
+    if(indexPath.section == ProductCartCellSection)
     {
         ProductTableCartCell *cell = (ProductTableCartCell *)[tableView dequeueReusableCellWithIdentifier:ProductCartCellIdentifier];
         if(cell == nil)
@@ -131,21 +162,21 @@ static NSString *CommentCartCellIdentifier = @"CommentCartCell";
         return cell;
     }
     
-    if(indexPath.row == 1 || indexPath.row == 2)
+    if(indexPath.section == AddressCartCellSection || indexPath.section == PaymentCartCellSection)
     {
         TextInfoCartCell *cell = (TextInfoCartCell *)[tableView dequeueReusableCellWithIdentifier:TextInfoCartCellIdentifier];
         if(cell == nil)
             cell = [[TextInfoCartCell alloc] init];
         
-        if(indexPath.row == 1)
+        if(indexPath.section == AddressCartCellSection)
             cell.textInfoTitleLabel.text = @"收货地址";
-        if(indexPath.row == 2)
+        if(indexPath.section == PaymentCartCellSection)
             cell.textInfoTitleLabel.text = @"支付方式";
         
         return cell;
     }
     
-    if(indexPath.row == 3)
+    if(indexPath.section == CommentCartCellSection)
     {
         CommentCartCell *cell = (CommentCartCell *)[tableView dequeueReusableCellWithIdentifier:CommentCartCellIdentifier];
         if(cell == nil)
@@ -155,6 +186,12 @@ static NSString *CommentCartCellIdentifier = @"CommentCartCell";
     }
     
     return [[UITableViewCell alloc] init];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.section != CommentCartCellSection)
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 
