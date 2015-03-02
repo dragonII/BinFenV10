@@ -24,7 +24,7 @@ typedef enum
     CommentCartCellSection
 } CartSectionIndexType;
 
-@interface ShoppingCartViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface ShoppingCartViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
 @property (strong, nonatomic) UITableView *tableView;
 
@@ -103,6 +103,36 @@ typedef enum
     [self.view addSubview:self.tableView];
 }
 
+- (void)registerForKeyboardNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+}
+
+- (void)keyboardWasShown:(NSNotification *)notification
+{
+    NSDictionary *info = [notification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0, 0, kbSize.height, 0);
+    self.tableView.contentInset = contentInsets;
+    self.tableView.scrollIndicatorInsets = contentInsets;
+}
+
+- (void)keyboardWillBeHidden:(NSNotification *)notification
+{
+    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+    self.tableView.contentInset = contentInsets;
+    self.tableView.scrollIndicatorInsets = contentInsets;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -110,6 +140,8 @@ typedef enum
     self.navigationItem.title = @"购物车";
     
     [self initTableView];
+    
+    [self registerForKeyboardNotifications];
 }
 
 - (void)didReceiveMemoryWarning
@@ -182,6 +214,8 @@ typedef enum
         if(cell == nil)
             cell = [[CommentCartCell alloc] init];
         
+        cell.commentTextField.delegate = self;
+        
         return cell;
     }
     
@@ -190,9 +224,16 @@ typedef enum
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.section != CommentCartCellSection)
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    NSLog(@"Text Return");
+    [textField resignFirstResponder];
+    return YES;
+}
 
 @end
