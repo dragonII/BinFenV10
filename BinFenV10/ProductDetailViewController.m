@@ -12,6 +12,7 @@
 #import "DescriptionTableCell.h"
 #import "SeperatorTableCell.h"
 #import "CommentTableViewCell.h"
+#import "ShoppingCartViewController.h"
 
 #import "DeviceHardware.h"
 
@@ -59,6 +60,15 @@ static const NSInteger SeperatorCellIndex = 3;
     quantity++;
     [self.quantityInCartLabel setText:[NSString stringWithFormat:@"%d", quantity]];
     [button setSelected:NO];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([segue.identifier isEqualToString:@"ShowShoppingCartSegue"])
+    {
+        ShoppingCartViewController *cartVC = (ShoppingCartViewController *)segue.destinationViewController;
+        cartVC.showShoppingCartViewFrom = self.showProductViewFrom;
+    }
 }
 
 - (IBAction)orderClicked:(UIButton *)sender

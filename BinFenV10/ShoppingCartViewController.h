@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+#import "defs.h"
+
 @interface ShoppingCartViewController : UIViewController
+
+@property ShowViewBySourceType showShoppingCartViewFrom;
 
 @end

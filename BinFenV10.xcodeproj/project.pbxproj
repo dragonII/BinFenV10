@@ -87,6 +87,12 @@
 		2FCAC8B11AA424180050BC56 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2FCAC8B31AA424180050BC56 /* InfoPlist.strings */; };
 		2FCAC8B71AA42AA10050BC56 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FCAC8B61AA42AA10050BC56 /* LoginViewController.m */; };
 		2FCAC8BA1AA43CD00050BC56 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FCAC8B91AA43CD00050BC56 /* RegisterViewController.m */; };
+		2FCAC8BF1AA451890050BC56 /* ProductTableCartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FCAC8BD1AA451890050BC56 /* ProductTableCartCell.m */; };
+		2FCAC8C01AA451890050BC56 /* ProductTableCartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FCAC8BE1AA451890050BC56 /* ProductTableCartCell.xib */; };
+		2FCAC8C41AA4549C0050BC56 /* TextInfoCartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FCAC8C21AA4549C0050BC56 /* TextInfoCartCell.m */; };
+		2FCAC8C51AA4549C0050BC56 /* TextInfoCartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FCAC8C31AA4549C0050BC56 /* TextInfoCartCell.xib */; };
+		2FCAC8C91AA457C90050BC56 /* CommentCartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FCAC8C71AA457C90050BC56 /* CommentCartCell.m */; };
+		2FCAC8CA1AA457C90050BC56 /* CommentCartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FCAC8C81AA457C90050BC56 /* CommentCartCell.xib */; };
 		2FDA11BF1A8DC5AB00A60362 /* ConversationListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FDA11BD1A8DC5AB00A60362 /* ConversationListCell.m */; };
 		2FDA11C01A8DC5AB00A60362 /* ConversationListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FDA11BE1A8DC5AB00A60362 /* ConversationListCell.xib */; };
 		2FDA11C31A8DCB9400A60362 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FDA11C21A8DCB9400A60362 /* ChatViewController.m */; };
@@ -317,6 +323,15 @@
 		2FCAC8B61AA42AA10050BC56 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		2FCAC8B81AA43CD00050BC56 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		2FCAC8B91AA43CD00050BC56 /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
+		2FCAC8BC1AA451890050BC56 /* ProductTableCartCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductTableCartCell.h; sourceTree = "<group>"; };
+		2FCAC8BD1AA451890050BC56 /* ProductTableCartCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductTableCartCell.m; sourceTree = "<group>"; };
+		2FCAC8BE1AA451890050BC56 /* ProductTableCartCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductTableCartCell.xib; sourceTree = "<group>"; };
+		2FCAC8C11AA4549C0050BC56 /* TextInfoCartCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextInfoCartCell.h; sourceTree = "<group>"; };
+		2FCAC8C21AA4549C0050BC56 /* TextInfoCartCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextInfoCartCell.m; sourceTree = "<group>"; };
+		2FCAC8C31AA4549C0050BC56 /* TextInfoCartCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextInfoCartCell.xib; sourceTree = "<group>"; };
+		2FCAC8C61AA457C90050BC56 /* CommentCartCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentCartCell.h; sourceTree = "<group>"; };
+		2FCAC8C71AA457C90050BC56 /* CommentCartCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentCartCell.m; sourceTree = "<group>"; };
+		2FCAC8C81AA457C90050BC56 /* CommentCartCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentCartCell.xib; sourceTree = "<group>"; };
 		2FDA11BC1A8DC5AB00A60362 /* ConversationListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConversationListCell.h; sourceTree = "<group>"; };
 		2FDA11BD1A8DC5AB00A60362 /* ConversationListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConversationListCell.m; sourceTree = "<group>"; };
 		2FDA11BE1A8DC5AB00A60362 /* ConversationListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConversationListCell.xib; sourceTree = "<group>"; };
@@ -645,6 +660,22 @@
 			name = CommunityTableRowCell;
 			sourceTree = "<group>";
 		};
+		2FCAC8BB1AA451550050BC56 /* ShoppingCartTableCell */ = {
+			isa = PBXGroup;
+			children = (
+				2FCAC8BC1AA451890050BC56 /* ProductTableCartCell.h */,
+				2FCAC8BD1AA451890050BC56 /* ProductTableCartCell.m */,
+				2FCAC8BE1AA451890050BC56 /* ProductTableCartCell.xib */,
+				2FCAC8C11AA4549C0050BC56 /* TextInfoCartCell.h */,
+				2FCAC8C21AA4549C0050BC56 /* TextInfoCartCell.m */,
+				2FCAC8C31AA4549C0050BC56 /* TextInfoCartCell.xib */,
+				2FCAC8C61AA457C90050BC56 /* CommentCartCell.h */,
+				2FCAC8C71AA457C90050BC56 /* CommentCartCell.m */,
+				2FCAC8C81AA457C90050BC56 /* CommentCartCell.xib */,
+			);
+			name = ShoppingCartTableCell;
+			sourceTree = "<group>";
+		};
 		2FDA11BB1A8DC58D00A60362 /* MessageCells */ = {
 			isa = PBXGroup;
 			children = (
@@ -759,6 +790,7 @@
 		2FEEE84D1A7E5B8E0095D8DB = {
 			isa = PBXGroup;
 			children = (
+				2FCAC8BB1AA451550050BC56 /* ShoppingCartTableCell */,
 				2FDA11BB1A8DC58D00A60362 /* MessageCells */,
 				2F90608A1A8C4CE90087FBB3 /* EditOrderTableCell */,
 				2F7B75B81A8AF96800720650 /* MyselfTableCells */,
@@ -1014,9 +1046,11 @@
 				2FDA123F1A8DD7B400A60362 /* send-highlighted@2x.png in Resources */,
 				2F7B75CD1A8B21AC00720650 /* AddrsTableViewCell.xib in Resources */,
 				2F7B75BD1A8AF9AC00720650 /* UserInforTableViewCell.xib in Resources */,
+				2FCAC8CA1AA457C90050BC56 /* CommentCartCell.xib in Resources */,
 				2F9060941A8C521B0087FBB3 /* OrderItemCell.xib in Resources */,
 				2F9060991A8C73F90087FBB3 /* FavoriteCollectionViewCell.xib in Resources */,
 				2FDA123B1A8DD7B400A60362 /* input-field@2x.png in Resources */,
+				2FCAC8C51AA4549C0050BC56 /* TextInfoCartCell.xib in Resources */,
 				2FEEE86A1A7E5B8F0095D8DB /* LaunchScreen.xib in Resources */,
 				2FDA12371A8DD7B400A60362 /* input-bar-flat@2x.png in Resources */,
 				2FDA12211A8DD7B400A60362 /* bubble-default-outgoing@2x.png in Resources */,
@@ -1025,6 +1059,7 @@
 				2FDA12351A8DD7B400A60362 /* bubble-typing@2x.png in Resources */,
 				2FDA122A1A8DD7B400A60362 /* bubble-flat-outgoing.png in Resources */,
 				2FDA124C1A8DE06D00A60362 /* demo.jpg in Resources */,
+				2FCAC8C01AA451890050BC56 /* ProductTableCartCell.xib in Resources */,
 				2F7B75DA1A8B2DB800720650 /* EditInforCell.xib in Resources */,
 				2FDA12251A8DD7B400A60362 /* bubble-flat-incoming@2x.png in Resources */,
 				2F2B87E11A83650C00FE8F20 /* CategoryCell.xib in Resources */,
@@ -1054,11 +1089,13 @@
 				2FCAC8B71AA42AA10050BC56 /* LoginViewController.m in Sources */,
 				2F4A63AA1A89049D00B30986 /* CommunitySelectionViewController.m in Sources */,
 				2F14CD701A8BA50E004125F6 /* UserInfoViewController.m in Sources */,
+				2FCAC8C91AA457C90050BC56 /* CommentCartCell.m in Sources */,
 				2F31B23C1A83D74D00A2BB86 /* UIWebView+AFNetworking.m in Sources */,
 				2F5954BB1A7E78BB001D5DAD /* CommunityCollectionViewCell.m in Sources */,
 				2FDA12101A8DD7B400A60362 /* JSDismissiveTextView.m in Sources */,
 				2FC5A29B1A7F1CB200DD0E63 /* TabHomeViewController.m in Sources */,
 				2F90609F1A8C87BF0087FBB3 /* ShopViewController.m in Sources */,
+				2FCAC8C41AA4549C0050BC56 /* TextInfoCartCell.m in Sources */,
 				2F31B21B1A83D74000A2BB86 /* AFHTTPRequestOperationManager.m in Sources */,
 				2FDA11BF1A8DC5AB00A60362 /* ConversationListCell.m in Sources */,
 				2F480A911A864BB60034CA65 /* ProductDetailViewController.m in Sources */,
@@ -1085,6 +1122,7 @@
 				2F4A63AE1A890D5300B30986 /* CommunityForSelectionCell.m in Sources */,
 				2F7B75BC1A8AF9AC00720650 /* UserInforTableViewCell.m in Sources */,
 				2F7B75D11A8B265A00720650 /* AddNewAddrCell.m in Sources */,
+				2FCAC8BF1AA451890050BC56 /* ProductTableCartCell.m in Sources */,
 				2F9060931A8C521B0087FBB3 /* OrderItemCell.m in Sources */,
 				2F31B21E1A83D74000A2BB86 /* AFSecurityPolicy.m in Sources */,
 				2FDA12141A8DD7B400A60362 /* JSMessageTextView.m in Sources */,
