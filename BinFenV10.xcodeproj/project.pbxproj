@@ -84,6 +84,7 @@
 		2FC5A29B1A7F1CB200DD0E63 /* TabHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5A29A1A7F1CB200DD0E63 /* TabHomeViewController.m */; };
 		2FC5A2A01A7F23BA00DD0E63 /* CommunityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5A29E1A7F23B900DD0E63 /* CommunityTableViewCell.m */; };
 		2FC5A2A11A7F23BA00DD0E63 /* CommunityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FC5A29F1A7F23B900DD0E63 /* CommunityTableViewCell.xib */; };
+		2FCAC8B11AA424180050BC56 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2FCAC8B31AA424180050BC56 /* InfoPlist.strings */; };
 		2FDA11BF1A8DC5AB00A60362 /* ConversationListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FDA11BD1A8DC5AB00A60362 /* ConversationListCell.m */; };
 		2FDA11C01A8DC5AB00A60362 /* ConversationListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FDA11BE1A8DC5AB00A60362 /* ConversationListCell.xib */; };
 		2FDA11C31A8DCB9400A60362 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FDA11C21A8DCB9400A60362 /* ChatViewController.m */; };
@@ -308,6 +309,8 @@
 		2FC5A29D1A7F23B900DD0E63 /* CommunityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommunityTableViewCell.h; sourceTree = "<group>"; };
 		2FC5A29E1A7F23B900DD0E63 /* CommunityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommunityTableViewCell.m; sourceTree = "<group>"; };
 		2FC5A29F1A7F23B900DD0E63 /* CommunityTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommunityTableViewCell.xib; sourceTree = "<group>"; };
+		2FCAC8B21AA424180050BC56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2FCAC8B41AA4242C0050BC56 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		2FDA11BC1A8DC5AB00A60362 /* ConversationListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConversationListCell.h; sourceTree = "<group>"; };
 		2FDA11BD1A8DC5AB00A60362 /* ConversationListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConversationListCell.m; sourceTree = "<group>"; };
 		2FDA11BE1A8DC5AB00A60362 /* ConversationListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConversationListCell.xib; sourceTree = "<group>"; };
@@ -840,6 +843,7 @@
 			children = (
 				2FEEE85A1A7E5B8E0095D8DB /* Info.plist */,
 				2FEEE85B1A7E5B8E0095D8DB /* main.m */,
+				2FCAC8B31AA424180050BC56 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -925,6 +929,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 2FEEE84D1A7E5B8E0095D8DB;
 			productRefGroup = 2FEEE8571A7E5B8E0095D8DB /* Products */;
@@ -992,6 +997,7 @@
 				2F7B75D21A8B265A00720650 /* AddNewAddrCell.xib in Resources */,
 				2FDA12421A8DD7B400A60362 /* messageReceived.aiff in Resources */,
 				2FDA12401A8DD7B400A60362 /* send.png in Resources */,
+				2FCAC8B11AA424180050BC56 /* InfoPlist.strings in Resources */,
 				2FDA12431A8DD7B400A60362 /* messageSent.aiff in Resources */,
 				2FDA12171A8DD7B400A60362 /* bubble-default-incoming-green@2x.png in Resources */,
 				2FDA12231A8DD7B400A60362 /* bubble-flat-incoming-selected@2x.png in Resources */,
@@ -1129,6 +1135,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		2FCAC8B31AA424180050BC56 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2FCAC8B21AA424180050BC56 /* Base */,
+				2FCAC8B41AA4242C0050BC56 /* zh-Hans */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		2FEEE8631A7E5B8F0095D8DB /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
