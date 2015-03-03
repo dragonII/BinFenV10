@@ -107,7 +107,7 @@ typedef enum
 {
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWasShown:)
-                                                 name:UIKeyboardDidShowNotification
+                                                 name:UIKeyboardWillShowNotification
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -118,6 +118,12 @@ typedef enum
 
 - (void)keyboardWasShown:(NSNotification *)notification
 {
+    DeviceHardwareGeneralPlatform generalPlatform = [DeviceHardware generalPlatform];
+    if(generalPlatform == DeviceHardwareGeneralPlatform_iPhone_6 || generalPlatform == DeviceHardwareGeneralPlatform_iPhone_6_Plus)
+    {
+        return;
+    }
+    
     NSDictionary *info = [notification userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     
@@ -128,6 +134,12 @@ typedef enum
 
 - (void)keyboardWillBeHidden:(NSNotification *)notification
 {
+    DeviceHardwareGeneralPlatform generalPlatform = [DeviceHardware generalPlatform];
+    if(generalPlatform == DeviceHardwareGeneralPlatform_iPhone_6 || generalPlatform == DeviceHardwareGeneralPlatform_iPhone_6_Plus)
+    {
+        return;
+    }
+    
     UIEdgeInsets contentInsets = UIEdgeInsetsZero;
     self.tableView.contentInset = contentInsets;
     self.tableView.scrollIndicatorInsets = contentInsets;
