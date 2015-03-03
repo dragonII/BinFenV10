@@ -54,17 +54,13 @@ static NSString *ConversationCellIdentifier = @"ConversationCell";
     
     [self initNavigationItem];
     
+    [self showLoginViewController];
+    
     [self loadConversations];
     
     [self initTableView];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    [self showLoginViewController];
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

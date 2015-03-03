@@ -62,9 +62,16 @@ static NSString *ShopsCellIdentifier = @"ShopsCell";
         case DeviceHardwareGeneralPlatform_iPhone_6_Plus:
         {
             NSLog(@"iphone 5, 6");
+            /*
             tableViewFrame = CGRectMake(0, 0,
                                         self.view.bounds.size.width,
                                         self.view.bounds.size.height);
+             */
+            CGFloat navigationBarHeight = self.navigationController.navigationBar.frame.size.height;
+            CGFloat statusBarHeight = 20;
+            tableViewFrame = CGRectMake(0, navigationBarHeight + statusBarHeight,
+                                        self.view.bounds.size.width,
+                                        self.view.bounds.size.height - navigationBarHeight - statusBarHeight);
             break;
         }
             

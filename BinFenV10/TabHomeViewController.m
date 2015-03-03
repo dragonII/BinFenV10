@@ -24,6 +24,8 @@
 
 #import "defs.h"
 
+//#import "DataModel.h"
+
 
 static NSString *CommunityTableRowCellIdentifier = @"CommunityTableRowCellIdentifier";
 static NSString *CategoryTableCellIdentifier = @"CategoryTableCellIdentifier";
@@ -72,6 +74,11 @@ static const NSInteger RefreshSectionIndex = 3;
     }
     self.communitiesDataList = [NSArray arrayWithArray:array];
     self.communitiyIndexArray = [[NSMutableArray alloc] init];
+}
+
+- (void)loadCommunitiesData
+{
+    
 }
 
 - (void)initCategoriesData
