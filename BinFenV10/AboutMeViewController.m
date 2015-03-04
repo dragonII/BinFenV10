@@ -22,7 +22,7 @@ typedef enum
     SectionIndexAbout
 } SectionIndexType;
 
-@interface AboutMeViewController () <UITableViewDataSource, UITableViewDelegate, AvatarChangeDelegate>
+@interface AboutMeViewController () <UITableViewDataSource, UITableViewDelegate, AvatarChangeDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (strong, nonatomic) UITableView *tableView;
 
@@ -242,9 +242,61 @@ typedef enum
 }
 
 #pragma mark - AvatarChangeDelegate
+
 - (void)editClicked:(UserInforTableViewCell *)cell
 {
     NSLog(@"Edit Avatar");
+    
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    
+    picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+    /*
+    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+    {
+        picker.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera];
+    }
+     */
+    [self presentViewController:picker animated:YES completion:nil];
+}
+
+#pragma mark -
+#pragma mark ImagePickerControllerDelegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    
+    NSLog(@"info = %@",info);
+    
+    UIImage *editedImage;
+    
+    NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
+    
+    if([mediaType isEqualToString:@"public.movie"])			//被选中的是视频
+    {
+
+    }
+    else if([mediaType isEqualToString:@"public.image"])	//被选中的是图片
+    {
+        //获取照片实例
+        editedImage = [info objectForKey:UIImagePickerControllerEditedImage];
+        
+        [self performSelector:@selector(saveImg:) withObject:editedImage afterDelay:0.0];
+    }
+    else
+    {
+        NSLog(@"Error media type");
+        return;
+    }
+}
+
+-(void)saveImg:(UIImage *) image
+{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:SectionIndexUser];
+    UserInforTableViewCell *cell = (UserInforTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+    cell.userImage.image = image;
 }
 
 @end
