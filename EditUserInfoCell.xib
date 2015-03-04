@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -15,18 +14,12 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FsR-AB-YSJ">
-                        <rect key="frame" x="8" y="7" width="304" height="30"/>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FsR-AB-YSJ">
+                        <rect key="frame" x="8" y="7" width="312" height="30"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
                 </subviews>
-                <constraints>
-                    <constraint firstItem="FsR-AB-YSJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="2ry-6P-mXf"/>
-                    <constraint firstItem="FsR-AB-YSJ" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="HcI-0H-Sbd"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="FsR-AB-YSJ" secondAttribute="bottom" constant="-1" id="Rn8-Lr-lbt"/>
-                    <constraint firstItem="FsR-AB-YSJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-1" id="bk1-sD-fWi"/>
-                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="infoTextField" destination="FsR-AB-YSJ" id="EbV-El-HdU"/>

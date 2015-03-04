@@ -99,6 +99,11 @@ static NSString *ShowUserInfoCellIdentifier = @"ShowUserInfoCell";
     return 12.0f;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 44.0f;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     EditInforCell *cell = (EditInforCell *)[tableView dequeueReusableCellWithIdentifier:ShowUserInfoCellIdentifier];
