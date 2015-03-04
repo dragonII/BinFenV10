@@ -8,6 +8,9 @@
 
 #import "EditUserInfoViewController.h"
 #import "AppData.h"
+#import "EditUserInfoCell.h"
+
+static NSString *EditInfoCellIdentifier = @"EditInfoUserCell";
 
 @interface EditUserInfoViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -20,6 +23,38 @@
 
 - (void)saveButtonClicked:(UIButton *)sender
 {
+    EditUserInfoCell *cell;
+    NSIndexPath *indexPath;
+    switch (self.editUserInfoType)
+    {
+        case EditUserNameInfo:
+            indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+            cell = (EditUserInfoCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+            NSLog(@"Name: %@", cell.infoTextField.text);
+            break;
+            
+        case EditUserPhoneNum:
+            indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+            cell = (EditUserInfoCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+            NSLog(@"Phone: %@", cell.infoTextField.text);
+            break;
+            
+        case EditUserPassword:
+            indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+            cell = (EditUserInfoCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+            NSLog(@"Old: %@", cell.infoTextField.text);
+            
+            indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+            cell = (EditUserInfoCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+            NSLog(@"New_1: %@", cell.infoTextField.text);
+            
+            indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
+            cell = (EditUserInfoCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+            NSLog(@"New_2: %@", cell.infoTextField.text);
+            
+        default:
+            break;
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -35,7 +70,7 @@
             break;
         
         case EditUserPassword:
-            tableFrame = CGRectMake(0, 0, self.view.bounds.size.width, 44 * 2 + 12);
+            tableFrame = CGRectMake(0, 0, self.view.bounds.size.width, 44 * 3 + 12);
             break;
             
         default:
@@ -44,8 +79,11 @@
     }
     
     self.tableView = [[UITableView alloc] initWithFrame:tableFrame];
+    
+    UINib *nib = [UINib nibWithNibName:@"EditUserInfoCell" bundle:nil];
+    [self.tableView registerNib:nib forCellReuseIdentifier:EditInfoCellIdentifier];
 
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
+    //[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -91,7 +129,7 @@
             return 1;
            
         case EditUserPassword:
-            return 2;
+            return 3;
             
         default:
             return 0;
@@ -112,7 +150,38 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    EditUserInfoCell *cell = (EditUserInfoCell *)[tableView dequeueReusableCellWithIdentifier:EditInfoCellIdentifier];
+    
+    switch (self.editUserInfoType)
+    {
+        case EditUserNameInfo:
+            cell.infoTextField.keyboardType = UIKeyboardTypeDefault;
+            cell.infoTextField.placeholder = @"新用户名";
+            [cell.infoTextField becomeFirstResponder];
+            break;
+            
+        case EditUserPhoneNum:
+            cell.infoTextField.keyboardType = UIKeyboardTypePhonePad;
+            cell.infoTextField.placeholder = @"新手机号码";
+            [cell.infoTextField becomeFirstResponder];
+            break;
+            
+        case EditUserPassword:
+            cell.infoTextField.keyboardType = UIKeyboardTypeASCIICapable;
+            cell.infoTextField.secureTextEntry = YES;
+            if(indexPath.row == 0)
+            {
+                cell.infoTextField.placeholder = @"原密码";
+                [cell.infoTextField becomeFirstResponder];
+            }
+            if(indexPath.row == 1)
+                cell.infoTextField.placeholder = @"新密码";
+            if(indexPath.row == 2)
+                cell.infoTextField.placeholder = @"新密码确认";
+            break;
+        default:
+            break;
+    }
     
     return cell;
 }

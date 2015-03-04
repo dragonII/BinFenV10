@@ -64,6 +64,8 @@
 		2F6EFEA61A8074E1001F9DE7 /* CategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6EFEA41A8074E1001F9DE7 /* CategoryTableViewCell.m */; };
 		2F6EFEA71A8074E1001F9DE7 /* CategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F6EFEA51A8074E1001F9DE7 /* CategoryTableViewCell.xib */; };
 		2F6EFEBC1A808806001F9DE7 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6EFEBB1A808806001F9DE7 /* UIImage+ImageEffects.m */; };
+		2F703FE91AA6A4C000D0ED4F /* EditUserInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F703FE71AA6A4C000D0ED4F /* EditUserInfoCell.m */; };
+		2F703FEA1AA6A4C000D0ED4F /* EditUserInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F703FE81AA6A4C000D0ED4F /* EditUserInfoCell.xib */; };
 		2F7B75BC1A8AF9AC00720650 /* UserInforTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F7B75BA1A8AF9AC00720650 /* UserInforTableViewCell.m */; };
 		2F7B75BD1A8AF9AC00720650 /* UserInforTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F7B75BB1A8AF9AC00720650 /* UserInforTableViewCell.xib */; };
 		2F7B75C11A8AFBFE00720650 /* BasicSettingTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F7B75BF1A8AFBFE00720650 /* BasicSettingTableCell.m */; };
@@ -290,6 +292,9 @@
 		2F6EFEA51A8074E1001F9DE7 /* CategoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CategoryTableViewCell.xib; sourceTree = "<group>"; };
 		2F6EFEBA1A808806001F9DE7 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+ImageEffects.h"; path = "BinFenV10/UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		2F6EFEBB1A808806001F9DE7 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+ImageEffects.m"; path = "BinFenV10/UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		2F703FE61AA6A4C000D0ED4F /* EditUserInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditUserInfoCell.h; sourceTree = "<group>"; };
+		2F703FE71AA6A4C000D0ED4F /* EditUserInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditUserInfoCell.m; sourceTree = "<group>"; };
+		2F703FE81AA6A4C000D0ED4F /* EditUserInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditUserInfoCell.xib; sourceTree = "<group>"; };
 		2F7B75B91A8AF9AC00720650 /* UserInforTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInforTableViewCell.h; sourceTree = "<group>"; };
 		2F7B75BA1A8AF9AC00720650 /* UserInforTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInforTableViewCell.m; sourceTree = "<group>"; };
 		2F7B75BB1A8AF9AC00720650 /* UserInforTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserInforTableViewCell.xib; sourceTree = "<group>"; };
@@ -631,6 +636,16 @@
 			name = Categories;
 			sourceTree = "<group>";
 		};
+		2F703FE51AA6A49D00D0ED4F /* EditUserInfoCell */ = {
+			isa = PBXGroup;
+			children = (
+				2F703FE61AA6A4C000D0ED4F /* EditUserInfoCell.h */,
+				2F703FE71AA6A4C000D0ED4F /* EditUserInfoCell.m */,
+				2F703FE81AA6A4C000D0ED4F /* EditUserInfoCell.xib */,
+			);
+			name = EditUserInfoCell;
+			sourceTree = "<group>";
+		};
 		2F7B75B81A8AF96800720650 /* MyselfTableCells */ = {
 			isa = PBXGroup;
 			children = (
@@ -815,6 +830,7 @@
 		2FEEE84D1A7E5B8E0095D8DB = {
 			isa = PBXGroup;
 			children = (
+				2F703FE51AA6A49D00D0ED4F /* EditUserInfoCell */,
 				2FCAC8BB1AA451550050BC56 /* ShoppingCartTableCell */,
 				2FDA11BB1A8DC58D00A60362 /* MessageCells */,
 				2F90608A1A8C4CE90087FBB3 /* EditOrderTableCell */,
@@ -1017,6 +1033,7 @@
 				2F01E7C11A87C075006BDDAB /* PriceTableCell.xib in Resources */,
 				2FDA121D1A8DD7B400A60362 /* bubble-default-outgoing-green@2x.png in Resources */,
 				2F28A00D1A89CFB700C296D6 /* NearbyTableViewCell.xib in Resources */,
+				2F703FEA1AA6A4C000D0ED4F /* EditUserInfoCell.xib in Resources */,
 				2FDA12281A8DD7B400A60362 /* bubble-flat-outgoing-selected.png in Resources */,
 				2F5954BC1A7E78BB001D5DAD /* CommunityCollectionViewCell.xib in Resources */,
 				2FDA12291A8DD7B400A60362 /* bubble-flat-outgoing-selected@2x.png in Resources */,
@@ -1111,6 +1128,7 @@
 				2F01E7C51A87C2B3006BDDAB /* DescriptionTableCell.m in Sources */,
 				2F7B75C51A8B043D00720650 /* AboutProductViewController.m in Sources */,
 				2F31B23B1A83D74D00A2BB86 /* UIRefreshControl+AFNetworking.m in Sources */,
+				2F703FE91AA6A4C000D0ED4F /* EditUserInfoCell.m in Sources */,
 				2FCAC8B71AA42AA10050BC56 /* LoginViewController.m in Sources */,
 				2F4A63AA1A89049D00B30986 /* CommunitySelectionViewController.m in Sources */,
 				2F14CD701A8BA50E004125F6 /* UserInfoViewController.m in Sources */,
