@@ -22,7 +22,7 @@ typedef enum
     SectionIndexAbout
 } SectionIndexType;
 
-@interface AboutMeViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface AboutMeViewController () <UITableViewDataSource, UITableViewDelegate, AvatarChangeDelegate>
 
 @property (strong, nonatomic) UITableView *tableView;
 
@@ -126,6 +126,7 @@ typedef enum
             {
                 cell = [[UserInforTableViewCell alloc] init];
             }
+            cell.editDelegate = self;
             return cell;
         }
             
@@ -238,6 +239,12 @@ typedef enum
         default:
             break;
     }
+}
+
+#pragma mark - AvatarChangeDelegate
+- (void)editClicked:(UserInforTableViewCell *)cell
+{
+    NSLog(@"Edit Avatar");
 }
 
 @end

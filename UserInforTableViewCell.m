@@ -15,8 +15,24 @@
 
 @implementation UserInforTableViewCell
 
-- (void)awakeFromNib {
-    // Initialization code
+-(void)editDetected
+{
+    if([self.editDelegate respondsToSelector:@selector(editClicked:)])
+    {
+        [self.editDelegate performSelector:@selector(editClicked:) withObject:self];
+    }
+}
+
+- (void)addEditActionToUserImage
+{
+    UITapGestureRecognizer *avatarTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editDetected)];
+    
+    [self.userImage addGestureRecognizer:avatarTap];
+}
+
+- (void)awakeFromNib
+{
+    [self addEditActionToUserImage];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

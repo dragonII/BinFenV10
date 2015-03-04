@@ -8,7 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@class UserInforTableViewCell;
+@protocol AvatarChangeDelegate <NSObject>
+
+- (void)editClicked:(UserInforTableViewCell *)cell;
+
+@end
+
 @interface UserInforTableViewCell : UITableViewCell
+
+@property (weak, nonatomic) id<AvatarChangeDelegate> editDelegate;
 
 @property (weak, nonatomic) IBOutlet UIImageView *userImage;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
