@@ -102,10 +102,10 @@ typedef enum
     imageView.layer.rasterizationScale = [UIScreen mainScreen].scale;
     
     /////
-    imageView.layer.borderWidth = 1.0f;
-    imageView.layer.borderColor = [UIColor whiteColor].CGColor;
+    //imageView.layer.borderWidth = 1.0f;
+    //imageView.layer.borderColor = [UIColor whiteColor].CGColor;
     imageView.clipsToBounds = YES;
-    imageView.alpha = 0.8f;
+    imageView.alpha = 1.0f;
 }
 
 - (void)viewDidLoad
