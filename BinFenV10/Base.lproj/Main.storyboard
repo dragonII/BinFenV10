@@ -675,23 +675,6 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aze-oc-jX4">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <color key="backgroundColor" red="0.88235294117647056" green="0.88235294117647056" blue="0.88235294117647056" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="12" id="sV8-Nr-C5w"/>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="sV8-Nr-C5w"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="sV8-Nr-C5w"/>
-                                    </mask>
-                                </variation>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -699,12 +682,9 @@
                             <constraint firstItem="xkS-ZB-xt3" firstAttribute="top" secondItem="hOA-He-sBt" secondAttribute="bottom" constant="12" id="EfR-hB-oft"/>
                             <constraint firstItem="fnM-gq-5Ir" firstAttribute="leading" secondItem="xkS-ZB-xt3" secondAttribute="trailing" constant="47" id="Ngf-47-Z2z"/>
                             <constraint firstItem="FKI-k8-VQG" firstAttribute="leading" secondItem="MRW-IR-eiO" secondAttribute="trailing" constant="27" id="S7H-AK-rHL"/>
-                            <constraint firstItem="Aze-oc-jX4" firstAttribute="top" secondItem="hOA-He-sBt" secondAttribute="bottom" id="Tau-JD-Kji"/>
-                            <constraint firstItem="Aze-oc-jX4" firstAttribute="leading" secondItem="fVh-IW-kCq" secondAttribute="leadingMargin" constant="-16" id="Weo-6I-Nf9"/>
                             <constraint firstItem="xkS-ZB-xt3" firstAttribute="leading" secondItem="xpL-Wa-sam" secondAttribute="trailing" constant="47" id="gQB-by-myP"/>
                             <constraint firstItem="FKI-k8-VQG" firstAttribute="top" secondItem="xkS-ZB-xt3" secondAttribute="bottom" constant="8" id="nMm-tU-RFf"/>
                             <constraint firstItem="xpL-Wa-sam" firstAttribute="top" secondItem="hOA-He-sBt" secondAttribute="bottom" constant="12" id="p1M-F6-eh7"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Aze-oc-jX4" secondAttribute="trailing" constant="-16" id="pPa-Jc-lJB"/>
                             <constraint firstAttribute="centerX" secondItem="FKI-k8-VQG" secondAttribute="centerX" id="qza-XK-j1H"/>
                             <constraint firstItem="iI7-no-bju" firstAttribute="leading" secondItem="FKI-k8-VQG" secondAttribute="trailing" constant="27" id="rR5-DP-gtH"/>
                             <constraint firstItem="iI7-no-bju" firstAttribute="top" secondItem="fnM-gq-5Ir" secondAttribute="bottom" constant="8" id="sEj-yN-buL"/>
@@ -719,7 +699,6 @@
                                 <exclude reference="MRW-IR-eiO"/>
                                 <exclude reference="iI7-no-bju"/>
                                 <exclude reference="FKI-k8-VQG"/>
-                                <exclude reference="Aze-oc-jX4"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="S7H-AK-rHL"/>
@@ -734,9 +713,6 @@
                                 <exclude reference="gQB-by-myP"/>
                                 <exclude reference="sHd-mb-ncX"/>
                                 <exclude reference="p1M-F6-eh7"/>
-                                <exclude reference="Tau-JD-Kji"/>
-                                <exclude reference="Weo-6I-Nf9"/>
-                                <exclude reference="pPa-Jc-lJB"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -747,7 +723,6 @@
                                 <include reference="MRW-IR-eiO"/>
                                 <include reference="iI7-no-bju"/>
                                 <include reference="FKI-k8-VQG"/>
-                                <include reference="Aze-oc-jX4"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="S7H-AK-rHL"/>
@@ -762,9 +737,6 @@
                                 <include reference="gQB-by-myP"/>
                                 <include reference="sHd-mb-ncX"/>
                                 <include reference="p1M-F6-eh7"/>
-                                <include reference="Tau-JD-Kji"/>
-                                <include reference="Weo-6I-Nf9"/>
-                                <include reference="pPa-Jc-lJB"/>
                             </mask>
                         </variation>
                     </view>

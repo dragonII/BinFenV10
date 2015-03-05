@@ -104,7 +104,7 @@ typedef enum
             return 1;
             
         case SectionIndexOthers:
-            return 2;
+            return 3;
             
         case SectionIndexAbout:
             return 1;
@@ -152,9 +152,16 @@ typedef enum
             {
                 cell.symbolImage.image = [UIImage imageNamed:@"OrderEdit"];
                 cell.titleLabel.text = @"订单";
-            } else {
+            }
+            if(indexPath.row == 1)
+            {
                 cell.symbolImage.image = [UIImage imageNamed:@"FavoriteEdit"];
                 cell.titleLabel.text = @"收藏";
+            }
+            if(indexPath.row == 2)
+            {
+                cell.symbolImage.image = [UIImage imageNamed:@"ShoppingCart"];
+                cell.titleLabel.text = @"购物车";
             }
             return cell;
         }
@@ -222,10 +229,16 @@ typedef enum
         case SectionIndexOthers:
         {
             if(indexPath.row == 0) //订单
+            {
                 [self performSegueWithIdentifier:@"ShowOrdersSegue" sender:self];
-            else // 收藏
+            }
+            if(indexPath.row == 1)// 收藏
             {
                 [self performSegueWithIdentifier:@"ShowFavoriateSegue" sender:self];
+            }
+            if(indexPath.row == 2) //购物车
+            {
+                
             }
             break;
         }
