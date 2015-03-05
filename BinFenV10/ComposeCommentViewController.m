@@ -19,7 +19,7 @@ typedef enum
     CommentLevelBad
 } CommentLevelType;
 
-@interface ComposeCommentViewController ()
+@interface ComposeCommentViewController () <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *goodImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *middleImageView;
@@ -28,6 +28,9 @@ typedef enum
 @property (weak, nonatomic) IBOutlet UILabel *goodLabel;
 @property (weak, nonatomic) IBOutlet UILabel *middleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *badLabel;
+
+@property (weak, nonatomic) IBOutlet UITextField *commentTextField;
+@property (weak, nonatomic) IBOutlet UIButton *submitButton;
 
 @property (assign, nonatomic) CommentLevelType selectedCommentLevel;
 
@@ -112,6 +115,9 @@ typedef enum
     self.selectedCommentLevel = CommentLevelGood;
     
     [self initImageViewActions];
+    self.commentTextField.delegate = self;
+    
+    self.submitButton.layer.cornerRadius = 5.0f;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -119,14 +125,21 @@ typedef enum
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
+#pragma mark - TextFieldDelegate
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    //[textField resignFirstResponder];
 }
-*/
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+- (IBAction)submitClicked:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 @end
