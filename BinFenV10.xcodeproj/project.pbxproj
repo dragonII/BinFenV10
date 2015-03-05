@@ -87,6 +87,7 @@
 		2F9060991A8C73F90087FBB3 /* FavoriteCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F9060971A8C73F90087FBB3 /* FavoriteCollectionViewCell.xib */; };
 		2F90609C1A8C74980087FBB3 /* FavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F90609B1A8C74980087FBB3 /* FavoritesViewController.m */; };
 		2F90609F1A8C87BF0087FBB3 /* ShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F90609E1A8C87BF0087FBB3 /* ShopViewController.m */; };
+		2F9D88B81AA840D00099E5AD /* ComposeCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9D88B71AA840D00099E5AD /* ComposeCommentViewController.m */; };
 		2FC5A2981A7F1BB900DD0E63 /* OTCover.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5A2971A7F1BB900DD0E63 /* OTCover.m */; };
 		2FC5A29B1A7F1CB200DD0E63 /* TabHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5A29A1A7F1CB200DD0E63 /* TabHomeViewController.m */; };
 		2FC5A2A01A7F23BA00DD0E63 /* CommunityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5A29E1A7F23B900DD0E63 /* CommunityTableViewCell.m */; };
@@ -330,6 +331,8 @@
 		2F90609B1A8C74980087FBB3 /* FavoritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritesViewController.m; sourceTree = "<group>"; };
 		2F90609D1A8C87BF0087FBB3 /* ShopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopViewController.h; sourceTree = "<group>"; };
 		2F90609E1A8C87BF0087FBB3 /* ShopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopViewController.m; sourceTree = "<group>"; };
+		2F9D88B61AA840D00099E5AD /* ComposeCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComposeCommentViewController.h; sourceTree = "<group>"; };
+		2F9D88B71AA840D00099E5AD /* ComposeCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComposeCommentViewController.m; sourceTree = "<group>"; };
 		2FC5A2961A7F1BB900DD0E63 /* OTCover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTCover.h; sourceTree = "<group>"; };
 		2FC5A2971A7F1BB900DD0E63 /* OTCover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTCover.m; sourceTree = "<group>"; };
 		2FC5A2991A7F1CB200DD0E63 /* TabHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabHomeViewController.h; sourceTree = "<group>"; };
@@ -907,6 +910,8 @@
 				2F14CD721A8BAE7C004125F6 /* EditUserInfoViewController.m */,
 				2F9060871A8C4C3F0087FBB3 /* OrderListViewController.h */,
 				2F9060881A8C4C3F0087FBB3 /* OrderListViewController.m */,
+				2F9D88B61AA840D00099E5AD /* ComposeCommentViewController.h */,
+				2F9D88B71AA840D00099E5AD /* ComposeCommentViewController.m */,
 				2F90609A1A8C74980087FBB3 /* FavoritesViewController.h */,
 				2F90609B1A8C74980087FBB3 /* FavoritesViewController.m */,
 				2FCAC8B51AA42AA10050BC56 /* LoginViewController.h */,
@@ -1183,6 +1188,7 @@
 				2F28A0161A89E36F00C296D6 /* DeviceHardware.m in Sources */,
 				2F6EFEA61A8074E1001F9DE7 /* CategoryTableViewCell.m in Sources */,
 				2FCAC8BA1AA43CD00050BC56 /* RegisterViewController.m in Sources */,
+				2F9D88B81AA840D00099E5AD /* ComposeCommentViewController.m in Sources */,
 				2F28A0101A89D60E00C296D6 /* MessageViewController.m in Sources */,
 				2F34CEF41A88AC35000AD896 /* ShoppingCartViewController.m in Sources */,
 				2F7B75CC1A8B21AC00720650 /* AddrsTableViewCell.m in Sources */,

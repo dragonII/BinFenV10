@@ -57,8 +57,8 @@
                             <constraint firstAttribute="width" constant="56" id="ByU-Ri-8kp"/>
                             <constraint firstAttribute="height" constant="22" id="HRW-9B-3es"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="STHeitiSC-Light" family="Heiti SC" pointSize="15"/>
-                        <state key="normal" title="Button" backgroundImage="NarrowOrangeButtonBG">
+                        <fontDescription key="fontDescription" name="STHeitiSC-Light" family="Heiti SC" pointSize="14"/>
+                        <state key="normal" title="付款" backgroundImage="NarrowOrangeButtonBG">
                             <color key="titleColor" red="0.99215686274509807" green="0.60784313725490191" blue="0.3529411764705882" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
@@ -67,13 +67,13 @@
                         </connections>
                     </button>
                     <button opaque="NO" tag="51" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5bm-hP-qeZ">
-                        <rect key="frame" x="175" y="116" width="74" height="22"/>
+                        <rect key="frame" x="173" y="116" width="76" height="22"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="22" id="LZA-Mk-hjP"/>
-                            <constraint firstAttribute="width" constant="74" id="w8Q-6f-bdn"/>
+                            <constraint firstAttribute="width" constant="76" id="w8Q-6f-bdn"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="STHeitiSC-Light" family="Heiti SC" pointSize="15"/>
-                        <state key="normal" title="Button" backgroundImage="WideGrayButtonBG">
+                        <fontDescription key="fontDescription" name="STHeitiSC-Light" family="Heiti SC" pointSize="14"/>
+                        <state key="normal" title="取消订单" backgroundImage="WideGrayButtonBG">
                             <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
@@ -120,6 +120,11 @@
                     <constraint firstItem="Yht-LZ-s2m" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="yxN-Z6-4do"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="leftButton" destination="5bm-hP-qeZ" id="mvL-JL-MC8"/>
+                <outlet property="rightButton" destination="Ngx-gR-PAI" id="cyU-z0-WpC"/>
+                <outlet property="statusLabel" destination="U8t-M9-wDQ" id="hBb-1e-frD"/>
+            </connections>
         </tableViewCell>
     </objects>
     <resources>

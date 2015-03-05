@@ -24,6 +24,11 @@ typedef enum {
 
 @interface OrderItemCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *statusLabel;
+
+@property (weak, nonatomic) IBOutlet UIButton *leftButton;
+@property (weak, nonatomic) IBOutlet UIButton *rightButton;
+
 @property (weak, nonatomic) id<ButtonClickDelegate> buttonClickDelegate;
 
 @property OrderCellType orderCellType;

@@ -29,7 +29,9 @@ static const NSInteger HistoryImageTag = 43;
 
 @property (strong, nonatomic) UITableView *tableView;
 
-@property (strong, nonatomic) NSMutableArray *orderListArray;
+@property (strong, nonatomic) NSMutableArray *needPayOrderList;
+@property (strong, nonatomic) NSMutableArray *paidOrderList;
+@property (strong, nonatomic) NSMutableArray *historyOrderList;
 
 @property OrderCellType selectedOrderType;
 
@@ -40,10 +42,23 @@ static const NSInteger HistoryImageTag = 43;
 
 - (void)initOrderListArray
 {
-    self.orderListArray = [[NSMutableArray alloc] init];
-    [self.orderListArray addObject:@"Order1"];
-    [self.orderListArray addObject:@"订单2"];
-    [self.orderListArray addObject:@"订单3"];
+    self.needPayOrderList = [[NSMutableArray alloc] init];
+    [self.needPayOrderList addObject:@"Order1"];
+    [self.needPayOrderList addObject:@"订单2"];
+    [self.needPayOrderList addObject:@"订单3"];
+    
+    self.paidOrderList = [[NSMutableArray alloc] init];
+    [self.paidOrderList addObject:@"Order1"];
+    [self.paidOrderList addObject:@"订单2"];
+    [self.paidOrderList addObject:@"订单3"];
+    [self.paidOrderList addObject:@"Order_4"];
+    
+    self.historyOrderList = [[NSMutableArray alloc] init];
+    [self.historyOrderList addObject:@"Order1"];
+    [self.historyOrderList addObject:@"订单2"];
+    [self.historyOrderList addObject:@"订单3"];
+    [self.historyOrderList addObject:@"Order_41"];
+    [self.historyOrderList addObject:@"Order_42"];
     
     self.selectedOrderType = OrderCellTypeNeedPay;
 }
@@ -90,17 +105,32 @@ static const NSInteger HistoryImageTag = 43;
     {
         case NeedPayImageTag:
             NSLog(@"Need Pay");
-            [self setLabelHightlightedColor:self.needPayLabel];
+            if(self.selectedOrderType != OrderCellTypeNeedPay)
+            {
+                self.selectedOrderType = OrderCellTypeNeedPay;
+                [self setLabelHightlightedColor:self.needPayLabel];
+                [self.tableView reloadData];
+            }
             break;
         
         case PaidImageTag:
             NSLog(@"Paid");
-            [self setLabelHightlightedColor:self.paidLabel];
+            if(self.selectedOrderType != OrderCellTypePaid)
+            {
+                self.selectedOrderType = OrderCellTypePaid;
+                [self setLabelHightlightedColor:self.paidLabel];
+                [self.tableView reloadData];
+            }
             break;
             
         case HistoryImageTag:
             NSLog(@"History");
-            [self setLabelHightlightedColor:self.historyLabel];
+            if(self.selectedOrderType != OrderCellTypeHistory)
+            {
+                self.selectedOrderType = OrderCellTypeHistory;
+                [self setLabelHightlightedColor:self.historyLabel];
+                [self.tableView reloadData];
+            }
             break;
             
         default:
@@ -113,6 +143,9 @@ static const NSInteger HistoryImageTag = 43;
     [self addActionInView:self.needPayImage Tag:NeedPayImageTag];
     [self addActionInView:self.paidImage Tag:PaidImageTag];
     [self addActionInView:self.historyImage Tag:HistoryImageTag];
+    
+    //default
+    [self setLabelHightlightedColor:self.needPayLabel];
 }
 
 - (void)addActionInView:(UIImageView *)imageView Tag:(NSInteger)tag
@@ -158,7 +191,21 @@ static const NSInteger HistoryImageTag = 43;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.orderListArray count];
+    //return [self.orderListArray count];
+    switch (self.selectedOrderType)
+    {
+        case OrderCellTypeNeedPay:
+            return [self.needPayOrderList count];
+            
+        case OrderCellTypePaid:
+            return [self.paidOrderList count];
+            
+        case OrderCellTypeHistory:
+            return [self.historyOrderList count];
+            
+        default:
+            return 0;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -174,6 +221,30 @@ static const NSInteger HistoryImageTag = 43;
     
     cell.buttonClickDelegate = self;
     
+    switch (self.selectedOrderType)
+    {
+        case OrderCellTypeNeedPay:
+            cell.statusLabel.text = @"待支付";
+            [cell.leftButton setTitle:@"取消订单" forState:UIControlStateNormal];
+            [cell.rightButton setTitle:@"付款" forState:UIControlStateNormal];
+            break;
+            
+        case OrderCellTypePaid:
+            cell.statusLabel.text = @"待收货";
+            [cell.leftButton setTitle:@"查看物流" forState:UIControlStateNormal];
+            [cell.rightButton setTitle:@"收货" forState:UIControlStateNormal];
+            break;
+            
+        case OrderCellTypeHistory:
+            cell.statusLabel.text = @"待评价";
+            [cell.leftButton setTitle:@"删除订单" forState:UIControlStateNormal];
+            [cell.rightButton setTitle:@"评价" forState:UIControlStateNormal];
+            break;
+            
+        default:
+            break;
+    }
+    
     return cell;
 }
 
@@ -181,12 +252,24 @@ static const NSInteger HistoryImageTag = 43;
 
 - (void)leftButtonClicked:(OrderItemCell *)cell
 {
-    NSLog(@"Left Clicked");
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    NSLog(@"Left Clicked: %d", indexPath.row);
 }
 
 - (void)rightButtonClicked:(OrderItemCell *)cell
 {
-    NSLog(@"Right Clicked");
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    NSLog(@"Right Clicked: %d", indexPath.row);
+    
+    switch (self.selectedOrderType)
+    {
+        case OrderCellTypeHistory:
+            [self performSegueWithIdentifier:@"ComposeCommentSegue" sender:self];
+            break;
+            
+        default:
+            break;
+    }
 }
 
 @end
