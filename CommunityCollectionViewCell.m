@@ -7,7 +7,10 @@
 //
 
 #import "CommunityCollectionViewCell.h"
-#import "LAAnimatedGrid.h"
+//#import "LAAnimatedGrid.h"
+#import "LTransitionImageView.h"
+
+static AnimationDirection directions[4];
 
 @implementation CommunityCollectionViewCell
 
@@ -18,20 +21,28 @@
     
     
     // Array of images
-    NSMutableArray *arrImages = [NSMutableArray array];
+    self.images = [NSMutableArray array];
     
-    [arrImages addObject:[UIImage imageNamed:@"Default_120x160"]];
-    [arrImages addObject:[UIImage imageNamed:@"Default_120x160_1"]];
+    [self.images addObject:[UIImage imageNamed:@"Default_120x160"]];
+    [self.images addObject:[UIImage imageNamed:@"Default_120x160_1"]];
     
-    
+    /*
     // LAAnimatedGrid
     LAAnimatedGrid *laag = [[LAAnimatedGrid alloc] initWithFrame:self.contentView.bounds];
     [laag setArrImages:arrImages];
     [laag setLaagOrientation:LAAGOrientationHorizontal];
-    // [laag setLaagOrientation:LAAGOrientationVertical];
-    // [laag setLaagBorderColor:[UIColor blackColor]];
-    // [laag setLaagBackGroundColor:[UIColor whiteColor]];
     [self.contentView addSubview:laag];
+     */
+    
+    // 使用LTransitionImageView
+    self.transitionView = [[LTransitionImageView alloc] initWithFrame:self.contentView.bounds];
+    self.transitionView.animationDuration = 2;
+    self.transitionView.animationDirection = directions[[self loadRandomNumberInRange:4]];
+    self.transitionView.image = [self.images objectAtIndex:[self loadRandomNumberInRange:[self.images count]]];
+    [self.contentView addSubview:self.transitionView];
+    
+    [self transitionAnimations];
+    
     
     self.textLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.contentView.bounds.origin.x,
                                                               self.contentView.bounds.origin.y + 128,
@@ -42,6 +53,34 @@
     self.textLabel.font = [UIFont fontWithName:@"STHeitiSC-Light" size:10];
     [self.contentView addSubview:self.textLabel];
     
+}
+
+- (void)transitionAnimations
+{
+    [NSTimer scheduledTimerWithTimeInterval:self.transitionView.animationDuration + 1
+                                     target:self
+                                   selector:@selector(animateImage)
+                                   userInfo:nil
+                                    repeats:YES];
+}
+
+- (void)animateImage
+{
+    UIImage *image;
+    AnimationDirection newDirection;
+    
+    newDirection = directions[[self loadRandomNumberInRange:4]];
+    if(self.transitionView.animationDirection != newDirection)
+        self.transitionView.animationDirection = newDirection;
+    
+    image = [self.images objectAtIndex:[self loadRandomNumberInRange:[self.images count]]];
+    
+    self.transitionView.image = image;
+}
+
+- (int)loadRandomNumberInRange:(int)range
+{
+    return arc4random() % range;
 }
 
 - (void)setText:(NSString *)text

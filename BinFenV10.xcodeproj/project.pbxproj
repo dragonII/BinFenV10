@@ -164,6 +164,7 @@
 		2FDA12471A8DD7B400A60362 /* UIView+AnimationOptionsForCurve.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FDA120D1A8DD7B400A60362 /* UIView+AnimationOptionsForCurve.m */; };
 		2FDA124A1A8DD9A900A60362 /* MessageData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FDA12491A8DD9A900A60362 /* MessageData.m */; };
 		2FDA124C1A8DE06D00A60362 /* demo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2FDA124B1A8DE06D00A60362 /* demo.jpg */; };
+		2FEA733A1AA97A2E00A652D2 /* LTransitionImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FEA73381AA97A2E00A652D2 /* LTransitionImageView.m */; };
 		2FEEE85C1A7E5B8E0095D8DB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FEEE85B1A7E5B8E0095D8DB /* main.m */; };
 		2FEEE85F1A7E5B8E0095D8DB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FEEE85E1A7E5B8E0095D8DB /* AppDelegate.m */; };
 		2FEEE8621A7E5B8E0095D8DB /* WizardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FEEE8611A7E5B8E0095D8DB /* WizardViewController.m */; };
@@ -433,6 +434,8 @@
 		2FDA12481A8DD9A900A60362 /* MessageData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageData.h; sourceTree = "<group>"; };
 		2FDA12491A8DD9A900A60362 /* MessageData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageData.m; sourceTree = "<group>"; };
 		2FDA124B1A8DE06D00A60362 /* demo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = demo.jpg; sourceTree = "<group>"; };
+		2FEA73371AA97A2E00A652D2 /* LTransitionImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LTransitionImageView.h; path = Classes/LTransitionImageView.h; sourceTree = "<group>"; };
+		2FEA73381AA97A2E00A652D2 /* LTransitionImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LTransitionImageView.m; path = Classes/LTransitionImageView.m; sourceTree = "<group>"; };
 		2FEEE8561A7E5B8E0095D8DB /* BinFenV10.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BinFenV10.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FEEE85A1A7E5B8E0095D8DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2FEEE85B1A7E5B8E0095D8DB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -830,9 +833,19 @@
 			path = Sounds;
 			sourceTree = "<group>";
 		};
+		2FEA73351AA97A2E00A652D2 /* LTransitionImageView */ = {
+			isa = PBXGroup;
+			children = (
+				2FEA73371AA97A2E00A652D2 /* LTransitionImageView.h */,
+				2FEA73381AA97A2E00A652D2 /* LTransitionImageView.m */,
+			);
+			path = LTransitionImageView;
+			sourceTree = "<group>";
+		};
 		2FEEE84D1A7E5B8E0095D8DB = {
 			isa = PBXGroup;
 			children = (
+				2FEA73351AA97A2E00A652D2 /* LTransitionImageView */,
 				2F703FE51AA6A49D00D0ED4F /* EditUserInfoCell */,
 				2FCAC8BB1AA451550050BC56 /* ShoppingCartTableCell */,
 				2FDA11BB1A8DC58D00A60362 /* MessageCells */,
@@ -1170,6 +1183,7 @@
 				2F28A00C1A89CFB700C296D6 /* NearbyTableViewCell.m in Sources */,
 				2F4A63AE1A890D5300B30986 /* CommunityForSelectionCell.m in Sources */,
 				2F7B75BC1A8AF9AC00720650 /* UserInforTableViewCell.m in Sources */,
+				2FEA733A1AA97A2E00A652D2 /* LTransitionImageView.m in Sources */,
 				2F7B75D11A8B265A00720650 /* AddNewAddrCell.m in Sources */,
 				2FCAC8BF1AA451890050BC56 /* ProductTableCartCell.m in Sources */,
 				2F9060931A8C521B0087FBB3 /* OrderItemCell.m in Sources */,
