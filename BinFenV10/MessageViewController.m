@@ -103,6 +103,7 @@ static NSString *ConversationCellIdentifier = @"ConversationCell";
     ConversationListCell *cell = (ConversationListCell *)[tableView dequeueReusableCellWithIdentifier:ConversationCellIdentifier];
     if(cell == nil)
         cell = [[ConversationListCell alloc] init];
+    cell.usernameLabel.text = [self.conversationList objectAtIndex:indexPath.row];
     
     return cell;
 }
@@ -112,6 +113,24 @@ static NSString *ConversationCellIdentifier = @"ConversationCell";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     [self performSegueWithIdentifier:@"ShowChatViewSegue" sender:self];
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        NSLog(@"CommitEdit: %d", editingStyle);
+        NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:indexPath.row];
+        [self.conversationList removeObjectsAtIndexes:indexSet];
+        //ConversationListCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        //[tableView reloadData];
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
