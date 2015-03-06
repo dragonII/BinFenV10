@@ -28,6 +28,8 @@ typedef enum
 
 @property (strong, nonatomic) UITableView *tableView;
 
+@property (strong, nonatomic) NSMutableArray *sortCartItemArray;
+
 @end
 
 @implementation ShoppingCartViewController
@@ -55,7 +57,7 @@ typedef enum
             {
                 tableViewFrame = CGRectMake(0, navigationBarHeight + statusBarHeight,
                                             self.view.bounds.size.width,
-                                            self.view.bounds.size.height - navigationBarHeight - statusBarHeight - bottomViewHeight);
+                                            self.view.bounds.size.height - navigationBarHeight - statusBarHeight);// - bottomViewHeight);
             } else {
                 tableViewFrame = self.view.frame;
             }
@@ -127,7 +129,14 @@ typedef enum
     NSDictionary *info = [notification userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     
-    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0, 0, kbSize.height, 0);
+    NSLog(@"kbheight: %f", kbSize.height);
+    UIEdgeInsets contentInsets;
+    if(self.showShoppingCartViewFrom == ShowViewFromHome)
+    {
+        contentInsets = UIEdgeInsetsMake(0, 0, kbSize.height + 44, 0);
+    } else {
+        contentInsets = UIEdgeInsetsMake(0, 0, kbSize.height + 44 + 60, 0);
+    }
     self.tableView.contentInset = contentInsets;
     self.tableView.scrollIndicatorInsets = contentInsets;
 }
@@ -145,11 +154,104 @@ typedef enum
     self.tableView.scrollIndicatorInsets = contentInsets;
 }
 
+- (void)loadShoppingCartItems
+{
+    NSDictionary *dict1 = @{@"productName":@"a",
+                           @"price":@"38.5",
+                           @"quantity":@"1",
+                           @"description":@"a description",
+                           @"shop":@"id1"};
+    NSDictionary *dict2 = @{@"productName":@"ab",
+                           @"price":@"318",
+                           @"quantity":@"2",
+                           @"description":@"ab description",
+                           @"shop":@"id1"};
+    NSDictionary *dict3 = @{@"productName":@"abc",
+                           @"price":@"28",
+                           @"quantity":@"9",
+                           @"description":@"abc description",
+                           @"shop":@"id2"};
+    NSDictionary *dict4 = @{@"productName":@"abcd",
+                           @"price":@"17",
+                           @"quantity":@"7",
+                           @"description":@"abcd description",
+                           @"shop":@"id2"};
+    NSDictionary *dict5 = @{@"productName":@"abcde",
+                           @"price":@"28",
+                           @"quantity":@"6",
+                           @"description":@"abcde description",
+                           @"shop":@"id3"};
+    NSDictionary *dict6 = @{@"productName":@"abcdef",
+                            @"price":@"24",
+                            @"quantity":@"11",
+                            @"description":@"abcdef description",
+                            @"shop":@"id2"};
+    NSDictionary *dict7 = @{@"productName":@"abcdefg",
+                            @"price":@"23",
+                            @"quantity":@"12",
+                            @"description":@"abcdefg description",
+                            @"shop":@"id3"};
+    NSDictionary *dict8 = @{@"productName":@"abcdefgh",
+                            @"price":@"42",
+                            @"quantity":@"5",
+                            @"description":@"abcdefgh description",
+                            @"shop":@"id1"};
+
+    
+    self.cartItemsArray = @[dict1, dict2, dict3, dict4, dict5, dict6, dict7, dict8];
+    self.sortCartItemArray = [[NSMutableArray alloc] init];
+    self.shopsArray = [[NSMutableArray alloc] init];
+    
+    if([self.cartItemsArray count] > 0)
+    {
+        [self.shopsArray addObject:[[self.cartItemsArray objectAtIndex:0] objectForKey:@"shop"]];
+        
+        BOOL found;
+        NSString *shopID;
+        
+        for(int i = 0; i < [self.cartItemsArray count]; i++)
+        {
+            found = NO;
+            shopID = [[self.cartItemsArray objectAtIndex:i] objectForKey:@"shop"];
+            for(int j = 0; j < [self.shopsArray count]; j++)
+            {
+                if([shopID isEqualToString:[self.shopsArray objectAtIndex:j]])
+                {
+                    found = YES;
+                    break;
+                }
+            }
+            if(found == NO)
+                [self.shopsArray addObject:shopID];
+        }
+    }
+    
+    for(int i = 0; i < [self.shopsArray count]; i++)
+    {
+        NSMutableArray *tmpArray = [[NSMutableArray alloc] init];
+        NSString *shopID = [self.shopsArray objectAtIndex:i];
+        for(int j = 0; j < [self.cartItemsArray count]; j++)
+        {
+            if([shopID isEqualToString:[[self.cartItemsArray objectAtIndex:j] objectForKey:@"shop"]])
+            {
+                [tmpArray addObject:[self.cartItemsArray objectAtIndex:j]];
+            }
+        }
+        [self.sortCartItemArray addObject:tmpArray];
+    }
+    
+    NSLog(@"cartItem: %@", self.cartItemsArray);
+    NSLog(@"shops: %@", self.shopsArray);
+    NSLog(@"Sorted: %@", self.sortCartItemArray);
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     self.navigationItem.title = @"购物车";
+    
+    [self loadShoppingCartItems];
     
     [self initTableView];
     
@@ -166,20 +268,40 @@ typedef enum
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    //return 1;
+    if(section == 0)
+        return 1;
+    else
+    {
+        // 货品列表和备注信息
+        return [[self.sortCartItemArray objectAtIndex:(section - 1)] count] + 1;
+    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+    //return 4;
+    // 按照店铺展示，顶部为收货联系信息
+    return [self.shopsArray count] + 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.section == ProductCartCellSection)
-        return 100;
-    else
+    if(indexPath.section == 0)
         return 44;
+    //if(indexPath.section == ProductCartCellSection)
+    //    return 125;
+    else
+    {
+        int index = indexPath.section - 1;
+        if(indexPath.row != [[self.sortCartItemArray objectAtIndex:index] count])
+            return 125;
+        else
+        {
+            // 备注行
+            return 44;
+        }
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -197,6 +319,24 @@ typedef enum
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if(indexPath.section == 0)
+    {
+        TextInfoCartCell *cell = (TextInfoCartCell *)[tableView dequeueReusableCellWithIdentifier:TextInfoCartCellIdentifier];
+        if(cell == nil)
+            cell = [[TextInfoCartCell alloc] init];
+        cell.textInfoTitleLabel.text = @"1234568 地址ABC";
+        return cell;
+    }
+    
+    ProductTableCartCell *cell = (ProductTableCartCell *)[tableView dequeueReusableCellWithIdentifier:ProductCartCellIdentifier];
+    if(cell == nil)
+        cell = [[ProductTableCartCell alloc] init];
+    NSDictionary *infoDict = [[self.sortCartItemArray objectAtIndex:(indexPath.section - 1)] objectAtIndex:indexPath.row];
+    cell.productNameLabel.text = [infoDict objectForKey:@"productName"];
+    cell.priceLabel.text = [infoDict objectForKey:@"price"];
+    cell.quantityLabel.text = [infoDict objectForKey:@"quantity"];
+    
+    /*
     if(indexPath.section == ProductCartCellSection)
     {
         ProductTableCartCell *cell = (ProductTableCartCell *)[tableView dequeueReusableCellWithIdentifier:ProductCartCellIdentifier];
@@ -230,6 +370,7 @@ typedef enum
         
         return cell;
     }
+     */
     
     return [[UITableViewCell alloc] init];
 }

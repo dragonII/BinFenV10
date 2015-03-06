@@ -423,6 +423,7 @@
                         <segue destination="Jo7-6b-jhK" kind="show" identifier="ShowUserInfoSegue" id="W0b-Tq-8Vs"/>
                         <segue destination="y0H-to-38S" kind="show" identifier="ShowOrdersSegue" id="06k-IH-s76"/>
                         <segue destination="HUS-bv-Z4j" kind="show" identifier="ShowFavoriateSegue" id="ihS-hW-xFc"/>
+                        <segue destination="Xmm-IW-YpS" kind="show" identifier="ShowShoppingCartFromAboutSegue" id="sh7-5c-V5V"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vdk-uU-gO1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2022,6 +2023,7 @@
         <image name="SaveButtonBG" width="288" height="36"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="sh7-5c-V5V"/>
         <segue reference="NxJ-oJ-khm"/>
     </inferredMetricsTieBreakers>
 </document>

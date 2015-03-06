@@ -14,4 +14,7 @@
 
 @property ShowViewBySourceType showShoppingCartViewFrom;
 
+@property (strong, nonatomic) NSArray *cartItemsArray;
+@property (strong, nonatomic) NSMutableArray *shopsArray;
+
 @end

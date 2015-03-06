@@ -21,7 +21,7 @@
 - (void)itemClicked:(UITapGestureRecognizer*)sender
 {
     UIView *view = (UIView *)sender.view;
-    self.shopID = [NSString stringWithFormat:@"ShopID_%d", (view.tag - 2000)];
+    self.shopID = [NSString stringWithFormat:@"ShopID_%ld", (view.tag - 2000)];
     NSLog(@"xx%@", self.shopID);
     if([self.segueDelegate respondsToSelector:@selector(itemClickedInCell:)])
     {

@@ -16,9 +16,9 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MJn-2n-lZG">
-                        <rect key="frame" x="15" y="16" width="114" height="14"/>
+                        <rect key="frame" x="15" y="16" width="259" height="14"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="114" id="AV4-lr-XBT"/>
+                            <constraint firstAttribute="width" constant="259" id="AV4-lr-XBT"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="STHeitiSC-Light" family="Heiti SC" pointSize="14"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>

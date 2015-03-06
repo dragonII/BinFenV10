@@ -20,4 +20,13 @@
     // Configure the view for the selected state
 }
 
+- (IBAction)decreaseClicked:(id)sender
+{
+    NSLog(@"Decrease");
+}
+
+- (IBAction)increaseClicked:(id)sender
+{
+    NSLog(@"Increase");
+}
 @end

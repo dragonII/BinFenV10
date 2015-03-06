@@ -15,7 +15,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="添加备注" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8rS-aX-erT">
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="想对卖家说点什么？" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8rS-aX-erT">
                         <rect key="frame" x="15" y="5" width="297" height="30"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="0mh-bt-p3Z"/>

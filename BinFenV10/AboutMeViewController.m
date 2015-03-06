@@ -10,6 +10,7 @@
 #import "UserInforTableViewCell.h"
 #import "BasicSettingTableCell.h"
 #import "AboutProductViewController.h"
+#import "ShoppingCartViewController.h"
 
 static NSString *UserInfoCellIdentifier = @"UserInfoCell";
 static NSString *BasicSettingCellIdentifier = @"BasicSettingCell";
@@ -209,6 +210,12 @@ typedef enum
 {
     UIViewController *vc = (UIViewController *)segue.destinationViewController;
     vc.hidesBottomBarWhenPushed = YES;
+    
+    if([segue.identifier isEqualToString:@"ShowShoppingCartFromAboutSegue"])
+    {
+        ShoppingCartViewController *cartVC = (ShoppingCartViewController *)segue.destinationViewController;
+        cartVC.showShoppingCartViewFrom = ShowViewFromOthers;
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -238,7 +245,7 @@ typedef enum
             }
             if(indexPath.row == 2) //购物车
             {
-                
+                [self performSegueWithIdentifier:@"ShowShoppingCartFromAboutSegue" sender:self];
             }
             break;
         }
