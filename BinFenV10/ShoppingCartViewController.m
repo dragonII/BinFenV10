@@ -26,6 +26,9 @@ typedef enum
 
 @interface ShoppingCartViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
+@property (weak, nonatomic) IBOutlet UILabel *totalPriceLabel;
+@property (weak, nonatomic) IBOutlet UIButton *submitButton;
+
 @property (strong, nonatomic) UITableView *tableView;
 
 @property (strong, nonatomic) NSMutableArray *sortCartItemArray;
@@ -36,11 +39,14 @@ typedef enum
 
 - (void)initTableView
 {
-    self.view.backgroundColor = [UIColor lightGrayColor];
+    self.view.backgroundColor = [UIColor colorWithRed:225/255.0f
+                                                green:225/255.0f
+                                                 blue:225/255.0f
+                                                alpha:1.0f];
     
     CGRect tableViewFrame;
     
-    CGFloat bottomViewHeight = 44.0f;
+    CGFloat bottomViewHeight = 49.0f;
     
     DeviceHardwareGeneralPlatform generalPlatform = [DeviceHardware generalPlatform];
     NSLog(@"generalPlatform: %d", generalPlatform);
@@ -57,9 +63,11 @@ typedef enum
             {
                 tableViewFrame = CGRectMake(0, navigationBarHeight + statusBarHeight,
                                             self.view.bounds.size.width,
-                                            self.view.bounds.size.height - navigationBarHeight - statusBarHeight);// - bottomViewHeight);
+                                            self.view.bounds.size.height - navigationBarHeight - statusBarHeight -bottomViewHeight);
             } else {
-                tableViewFrame = self.view.frame;
+                tableViewFrame = CGRectMake(0, 0,
+                                            self.view.bounds.size.width,
+                                            self.view.bounds.size.height - bottomViewHeight - statusBarHeight - 49 + 8);
             }
             break;
         }
@@ -82,8 +90,10 @@ typedef enum
     }
     
     self.tableView = [[UITableView alloc] initWithFrame:tableViewFrame];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.backgroundColor = [UIColor lightGrayColor];
+    self.tableView.backgroundColor = [UIColor colorWithRed:225/255.0f
+                                                     green:225/255.0f
+                                                      blue:225/255.0f
+                                                     alpha:1.0f];
     
     // Remove the separator lines for emtpy cells
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -133,9 +143,9 @@ typedef enum
     UIEdgeInsets contentInsets;
     if(self.showShoppingCartViewFrom == ShowViewFromHome)
     {
-        contentInsets = UIEdgeInsetsMake(0, 0, kbSize.height + 44, 0);
+        contentInsets = UIEdgeInsetsMake(0, 0, kbSize.height, 0);
     } else {
-        contentInsets = UIEdgeInsetsMake(0, 0, kbSize.height + 44 + 60, 0);
+        contentInsets = UIEdgeInsetsMake(0, 0, kbSize.height, 0);
     }
     self.tableView.contentInset = contentInsets;
     self.tableView.scrollIndicatorInsets = contentInsets;
@@ -245,6 +255,12 @@ typedef enum
     NSLog(@"Sorted: %@", self.sortCartItemArray);
 }
 
+- (void)initBottomView
+{
+    self.submitButton.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"ButtonBGOrange"]];
+    self.submitButton.layer.cornerRadius = 5.0f;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -252,6 +268,8 @@ typedef enum
     self.navigationItem.title = @"购物车";
     
     [self loadShoppingCartItems];
+    
+    [self initBottomView];
     
     [self initTableView];
     
@@ -280,7 +298,6 @@ typedef enum
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    //return 4;
     // 按照店铺展示，顶部为收货联系信息
     return [self.shopsArray count] + 1;
 }
@@ -289,8 +306,6 @@ typedef enum
 {
     if(indexPath.section == 0)
         return 44;
-    //if(indexPath.section == ProductCartCellSection)
-    //    return 125;
     else
     {
         int index = indexPath.section - 1;
@@ -306,13 +321,22 @@ typedef enum
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
+    if(section == 0)
+        return 0;
+    
     return 12.0f;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
+    if(section == 0)
+        return nil;
+    
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 12.0f)];
-    headerView.backgroundColor = [UIColor lightGrayColor];
+    headerView.backgroundColor = [UIColor colorWithRed:225/255.0f
+                                                 green:225/255.0f
+                                                  blue:225/255.0f
+                                                 alpha:1.0f];
     
     return headerView;
 }
@@ -328,51 +352,26 @@ typedef enum
         return cell;
     }
     
-    ProductTableCartCell *cell = (ProductTableCartCell *)[tableView dequeueReusableCellWithIdentifier:ProductCartCellIdentifier];
-    if(cell == nil)
-        cell = [[ProductTableCartCell alloc] init];
-    NSDictionary *infoDict = [[self.sortCartItemArray objectAtIndex:(indexPath.section - 1)] objectAtIndex:indexPath.row];
-    cell.productNameLabel.text = [infoDict objectForKey:@"productName"];
-    cell.priceLabel.text = [infoDict objectForKey:@"price"];
-    cell.quantityLabel.text = [infoDict objectForKey:@"quantity"];
-    
-    /*
-    if(indexPath.section == ProductCartCellSection)
+    int sectionIndex = (int)indexPath.section - 1;
+    NSArray *itemInShopArray = [self.sortCartItemArray objectAtIndex:sectionIndex];
+    if(indexPath.row < [itemInShopArray count])
     {
         ProductTableCartCell *cell = (ProductTableCartCell *)[tableView dequeueReusableCellWithIdentifier:ProductCartCellIdentifier];
         if(cell == nil)
             cell = [[ProductTableCartCell alloc] init];
-        
+        NSDictionary *infoDict = [[self.sortCartItemArray objectAtIndex:(indexPath.section - 1)] objectAtIndex:indexPath.row];
+        cell.productNameLabel.text = [infoDict objectForKey:@"productName"];
+        cell.priceLabel.text = [infoDict objectForKey:@"price"];
+        cell.quantityLabel.text = [infoDict objectForKey:@"quantity"];
         return cell;
-    }
-    
-    if(indexPath.section == AddressCartCellSection || indexPath.section == PaymentCartCellSection)
-    {
-        TextInfoCartCell *cell = (TextInfoCartCell *)[tableView dequeueReusableCellWithIdentifier:TextInfoCartCellIdentifier];
-        if(cell == nil)
-            cell = [[TextInfoCartCell alloc] init];
-        
-        if(indexPath.section == AddressCartCellSection)
-            cell.textInfoTitleLabel.text = @"收货地址";
-        if(indexPath.section == PaymentCartCellSection)
-            cell.textInfoTitleLabel.text = @"支付方式";
-        
-        return cell;
-    }
-    
-    if(indexPath.section == CommentCartCellSection)
-    {
+    } else {
         CommentCartCell *cell = (CommentCartCell *)[tableView dequeueReusableCellWithIdentifier:CommentCartCellIdentifier];
         if(cell == nil)
             cell = [[CommentCartCell alloc] init];
-        
+        #warning  通过保存备注信息，在每次调用程序运行到此的时候，先重新加载备注信息，便可以保证备注信息是正确的
         cell.commentTextField.delegate = self;
-        
         return cell;
     }
-     */
-    
-    return [[UITableViewCell alloc] init];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
