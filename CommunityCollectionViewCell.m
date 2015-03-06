@@ -35,7 +35,7 @@ static AnimationDirection directions[4];
     int r = [self loadRandomNumberInRange:4];
     self.transitionView.animationDirection = directions[r];
     NSLog(@"Direction: %d", self.transitionView.animationDirection);
-    self.transitionView.image = [self.images objectAtIndex:[self loadRandomNumberInRange:[self.images count]]];
+    self.transitionView.image = [self.images objectAtIndex:[self loadRandomNumberInRange:(int)[self.images count]]];
     [self.contentView addSubview:self.transitionView];
     
     [self transitionAnimations];
@@ -72,7 +72,7 @@ static AnimationDirection directions[4];
     if(self.transitionView.animationDirection != newDirection)
         self.transitionView.animationDirection = newDirection;
     
-    image = [self.images objectAtIndex:[self loadRandomNumberInRange:[self.images count]]];
+    image = [self.images objectAtIndex:[self loadRandomNumberInRange:(int)[self.images count]]];
     
     self.transitionView.image = image;
 }

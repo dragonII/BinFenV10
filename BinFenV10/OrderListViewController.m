@@ -253,13 +253,13 @@ static const NSInteger HistoryImageTag = 43;
 - (void)leftButtonClicked:(OrderItemCell *)cell
 {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    NSLog(@"Left Clicked: %d", indexPath.row);
+    NSLog(@"Left Clicked: %d", (int)indexPath.row);
 }
 
 - (void)rightButtonClicked:(OrderItemCell *)cell
 {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    NSLog(@"Right Clicked: %d", indexPath.row);
+    NSLog(@"Right Clicked: %d", (int)indexPath.row);
     
     switch (self.selectedOrderType)
     {
