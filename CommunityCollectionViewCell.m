@@ -16,28 +16,25 @@ static AnimationDirection directions[4];
 
 - (void)awakeFromNib
 {
-    //self.imageView.image = [UIImage imageNamed:@"CellPlaceHolder"];
-    //self.imageView.image = [UIImage imageNamed:@"ios1"];
-    
+    directions[0] = AnimationDirectionLeftToRight;
+    directions[1] = AnimationDirectionRightToLeft;
+    directions[2] = AnimationDirectionTopToBottom;
+    directions[3] = AnimationDirectionBottomToTop;
     
     // Array of images
     self.images = [NSMutableArray array];
     
     [self.images addObject:[UIImage imageNamed:@"Default_120x160"]];
     [self.images addObject:[UIImage imageNamed:@"Default_120x160_1"]];
-    
-    /*
-    // LAAnimatedGrid
-    LAAnimatedGrid *laag = [[LAAnimatedGrid alloc] initWithFrame:self.contentView.bounds];
-    [laag setArrImages:arrImages];
-    [laag setLaagOrientation:LAAGOrientationHorizontal];
-    [self.contentView addSubview:laag];
-     */
+    [self.images addObject:[UIImage imageNamed:@"E1"]];
+    [self.images addObject:[UIImage imageNamed:@"E2"]];
     
     // 使用LTransitionImageView
     self.transitionView = [[LTransitionImageView alloc] initWithFrame:self.contentView.bounds];
-    self.transitionView.animationDuration = 2;
-    self.transitionView.animationDirection = directions[[self loadRandomNumberInRange:4]];
+    self.transitionView.animationDuration = 1;
+    int r = [self loadRandomNumberInRange:4];
+    self.transitionView.animationDirection = directions[r];
+    NSLog(@"Direction: %d", self.transitionView.animationDirection);
     self.transitionView.image = [self.images objectAtIndex:[self loadRandomNumberInRange:[self.images count]]];
     [self.contentView addSubview:self.transitionView];
     
@@ -48,7 +45,6 @@ static AnimationDirection directions[4];
                                                               self.contentView.bounds.origin.y + 128,
                                                               self.contentView.bounds.size.width,
                                                                21)];
-    //label.text = @"Label";
     self.textLabel.textAlignment = NSTextAlignmentCenter;
     self.textLabel.font = [UIFont fontWithName:@"STHeitiSC-Light" size:10];
     [self.contentView addSubview:self.textLabel];
@@ -57,7 +53,9 @@ static AnimationDirection directions[4];
 
 - (void)transitionAnimations
 {
-    [NSTimer scheduledTimerWithTimeInterval:self.transitionView.animationDuration + 1
+    int temp = [self loadRandomNumberInRange:4] + 1; // [1, 4]
+    CGFloat delay = 4.0f / (CGFloat)temp;
+    [NSTimer scheduledTimerWithTimeInterval:self.transitionView.animationDuration + delay
                                      target:self
                                    selector:@selector(animateImage)
                                    userInfo:nil
@@ -69,7 +67,8 @@ static AnimationDirection directions[4];
     UIImage *image;
     AnimationDirection newDirection;
     
-    newDirection = directions[[self loadRandomNumberInRange:4]];
+    int r = [self loadRandomNumberInRange:4];
+    newDirection = directions[r];
     if(self.transitionView.animationDirection != newDirection)
         self.transitionView.animationDirection = newDirection;
     
