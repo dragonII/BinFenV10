@@ -10,8 +10,19 @@
 
 @implementation ProductTableCartCell
 
-- (void)awakeFromNib {
-    // Initialization code
+- (void)itemTapped
+{
+    if([self.itemCheckedDelegate respondsToSelector:@selector(productItemChecked:)])
+    {
+        [self.itemCheckedDelegate performSelector:@selector(productItemChecked:) withObject:self];
+    }
+}
+
+- (void)awakeFromNib
+{
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(itemTapped)];
+    [self.itemCheckImage setUserInteractionEnabled:YES];
+    [self.itemCheckImage addGestureRecognizer:tapGesture];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

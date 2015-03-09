@@ -24,7 +24,7 @@ typedef enum
     CommentCartCellSection
 } CartSectionIndexType;
 
-@interface ShoppingCartViewController () <UITableViewDataSource, UITableViewDelegate, CommentEditDelegate>
+@interface ShoppingCartViewController () <UITableViewDataSource, UITableViewDelegate, CommentEditDelegate, ItemCheckedDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *totalPriceLabel;
 @property (weak, nonatomic) IBOutlet UIButton *submitButton;
@@ -171,48 +171,56 @@ typedef enum
                            @"price":@"38.5",
                            @"quantity":@"1",
                            @"description":@"a description",
+                            @"itemChecked": @0,
                            @"shop":@"id1"};
     NSDictionary *dict2 = @{@"productName":@"ab",
                             @"productID": @"ab",
                            @"price":@"318",
                            @"quantity":@"2",
                            @"description":@"ab description",
+                            @"itemChecked": @0,
                            @"shop":@"id1"};
     NSDictionary *dict3 = @{@"productName":@"abc",
                             @"productID":@"abc",
                            @"price":@"28",
                            @"quantity":@"9",
                            @"description":@"abc description",
+                            @"itemChecked": @0,
                            @"shop":@"id2"};
     NSDictionary *dict4 = @{@"productName":@"abcd",
                             @"productID":@"abcd",
                            @"price":@"17",
                            @"quantity":@"7",
                            @"description":@"abcd description",
+                            @"itemChecked": @0,
                            @"shop":@"id2"};
     NSDictionary *dict5 = @{@"productName":@"abcde",
                             @"productID":@"abcde",
                            @"price":@"28",
                            @"quantity":@"6",
                            @"description":@"abcde description",
+                            @"itemChecked": @0,
                            @"shop":@"id3"};
     NSDictionary *dict6 = @{@"productName":@"abcdef",
                             @"productID":@"abcdef",
                             @"price":@"24",
                             @"quantity":@"11",
                             @"description":@"abcdef description",
+                            @"itemChecked": @0,
                             @"shop":@"id2"};
     NSDictionary *dict7 = @{@"productName":@"abcdefg",
                             @"productID":@"abcdefg",
                             @"price":@"23",
                             @"quantity":@"12",
                             @"description":@"abcdefg description",
+                            @"itemChecked": @0,
                             @"shop":@"id3"};
     NSDictionary *dict8 = @{@"productName":@"abcdefgh",
                             @"productID":@"abcdefgh",
                             @"price":@"42",
                             @"quantity":@"5",
                             @"description":@"abcdefgh description",
+                            @"itemChecked": @0,
                             @"shop":@"id1"};
 
     
@@ -224,7 +232,6 @@ typedef enum
     
     if([self.cartItemsArray count] > 0)
     {
-        //[self.shopsArray addObject:[[self.cartItemsArray objectAtIndex:0] objectForKey:@"shop"]];
         tmpDict = [[NSMutableDictionary alloc] init];
         [tmpDict setObject:@0 forKey:@"shopChecked"];
         [tmpDict setObject:@"" forKey:@"comment"];
@@ -240,7 +247,6 @@ typedef enum
             shopID = [[self.cartItemsArray objectAtIndex:i] objectForKey:@"shop"];
             for(int j = 0; j < [self.shopsArray count]; j++)
             {
-                //if([shopID isEqualToString:[self.shopsArray objectAtIndex:j] ])
                 if([shopID isEqualToString:[[self.shopsArray objectAtIndex:j] objectForKey:@"shopID"]])
                 {
                     found = YES;
@@ -278,19 +284,9 @@ typedef enum
         [self.itemCheckedDict setObject:@0 forKey:[[self.cartItemsArray objectAtIndex:i] objectForKey:@"productID"]];
     }
     
-    /*
-    self.shopCheckedDict = [[NSMutableDictionary alloc] init];
-    for(int i = 0; i < [self.shopsArray count]; i++)
-    {
-        [self.shopCheckedDict setObject:@0 forKey:[self.shopsArray objectAtIndex:i]];
-    }
-     */
-    
     NSLog(@"cartItem: %@", self.cartItemsArray);
     NSLog(@"shops: %@", self.shopsArray);
     NSLog(@"Sorted: %@", self.sortCartItemArray);
-    //NSLog(@"itemChecked: %@", self.itemCheckedDict);
-    //NSLog(@"shopChecked: %@", self.shopCheckedDict);
 }
 
 - (void)initBottomView
@@ -376,20 +372,18 @@ typedef enum
 {
     int tag = sender.view.tag - 50;
     UIImageView *checkImage = (UIImageView *)sender.view;
-    NSLog(@"%d clicked", tag);
     NSInteger checkedStatus = [[[self.shopsArray objectAtIndex:tag] objectForKey:@"shopChecked"] integerValue];
-    //NSInteger checkedStatus = [[self.shopCheckedDict objectForKey:[self.shopsArray objectAtIndex:tag]] integerValue];
     if(checkedStatus == 0)
     {
-        //[self.shopCheckedDict setObject:@1 forKey:[self.shopsArray objectAtIndex:tag]];
         [[self.shopsArray objectAtIndex:tag] setObject:@1 forKey:@"shopChecked"];
         checkImage.image = [UIImage imageNamed:@"CartItemSelected"];
     } else
     {
         [[self.shopsArray objectAtIndex:tag] setObject:@0 forKey:@"shopChecked"];
-        //[self.shopCheckedDict setObject:@0 forKey:[self.shopsArray objectAtIndex:tag]];
         checkImage.image = [UIImage imageNamed:@"CartItemNotSelected"];
     }
+    
+    [self.tableView reloadData];
 }
 
 
@@ -409,7 +403,6 @@ typedef enum
         checkImageView.image = [UIImage imageNamed:@"CartItemSelected"];
     checkImageView.tag = 50 + section - 1;
     
-    //NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:section];
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shopSelected:)];
     [checkImageView setUserInteractionEnabled:YES];
     [checkImageView addGestureRecognizer:tapGesture];
@@ -430,6 +423,24 @@ typedef enum
     return headerView;
 }
 
+-(void)itemSelected:(UITapGestureRecognizer *)sender
+{
+    int tag = sender.view.tag - 50;
+    UIImageView *checkImage = (UIImageView *)sender.view;
+    NSInteger checkedStatus = [[[self.shopsArray objectAtIndex:tag] objectForKey:@"shopChecked"] integerValue];
+    if(checkedStatus == 0)
+    {
+        [[self.shopsArray objectAtIndex:tag] setObject:@1 forKey:@"shopChecked"];
+        checkImage.image = [UIImage imageNamed:@"CartItemSelected"];
+    } else
+    {
+        [[self.shopsArray objectAtIndex:tag] setObject:@0 forKey:@"shopChecked"];
+        checkImage.image = [UIImage imageNamed:@"CartItemNotSelected"];
+    }
+    
+    [self.tableView reloadData];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(indexPath.section == 0)
@@ -448,10 +459,21 @@ typedef enum
         ProductTableCartCell *cell = (ProductTableCartCell *)[tableView dequeueReusableCellWithIdentifier:ProductCartCellIdentifier];
         if(cell == nil)
             cell = [[ProductTableCartCell alloc] init];
+        
+        cell.itemCheckedDelegate = self;
+        
         NSDictionary *infoDict = [[self.sortCartItemArray objectAtIndex:(indexPath.section - 1)] objectAtIndex:indexPath.row];
         cell.productNameLabel.text = [infoDict objectForKey:@"productName"];
         cell.priceLabel.text = [infoDict objectForKey:@"price"];
         cell.quantityLabel.text = [infoDict objectForKey:@"quantity"];
+        NSInteger shopSelected = [[[self.shopsArray objectAtIndex:indexPath.section - 1] objectForKey:@"shopChecked"] integerValue];
+        NSInteger itemSelected = [[self.itemCheckedDict objectForKey:@"productID"] integerValue];
+        if(shopSelected == 1 || itemSelected == 1)
+        {
+            cell.itemCheckImage.image = [UIImage imageNamed:@"CartItemSelected"];
+        } else {
+            cell.itemCheckImage.image = [UIImage imageNamed:@"CartItemNotSelected"];
+        }
         return cell;
     } else {
         CommentCartCell *cell = (CommentCartCell *)[tableView dequeueReusableCellWithIdentifier:CommentCartCellIdentifier];
@@ -459,7 +481,6 @@ typedef enum
             cell = [[CommentCartCell alloc] init];
         
         cell.commentTextField.text = [[self.shopsArray objectAtIndex:sectionIndex] objectForKey:@"comment"];
-        //cell.commentTextField.delegate = self;
         cell.editDelegate = self;
         return cell;
     }
@@ -477,8 +498,38 @@ typedef enum
     NSLog(@"Editting: %d", indexPath.section - 1);
     int sectionIndex = indexPath.section - 1;
     [[self.shopsArray objectAtIndex:sectionIndex] setObject:cell.commentTextField.text forKey:@"comment"];
+}
+
+- (void)itemChecked:(ProductTableCartCell *)cell
+{
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    NSString *productID = [[self.sortCartItemArray objectAtIndex:indexPath.section - 1] objectForKey:@"productID"];
+    int checkedStatus = [[self.itemCheckedDict objectForKey:productID] integerValue];
+    if(checkedStatus == 0)
+    {
+        [self.itemCheckedDict setObject:@1 forKey:productID];
+        cell.itemCheckImage.image = [UIImage imageNamed:@"CartItemSelected"];
+    } else {
+        [self.itemCheckedDict setObject:@0 forKey:productID];
+        cell.itemCheckImage.image = [UIImage imageNamed:@"CartItemNotSelected"];
+    }
+}
+
+- (void)productItemChecked:(ProductTableCartCell *)cell
+{
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     
-    NSLog(@"%@", self.shopsArray);
+    NSString *productID = [[[self.sortCartItemArray objectAtIndex:indexPath.section - 1] objectAtIndex:indexPath.row] objectForKey:@"productID"];
+
+    int checkedStatus = [[self.itemCheckedDict objectForKey:productID] integerValue];
+    if(checkedStatus == 0)
+    {
+        [self.itemCheckedDict setObject:@1 forKey:productID];
+        cell.itemCheckImage.image = [UIImage imageNamed:@"CartItemSelected"];
+    } else {
+        [self.itemCheckedDict setObject:@0 forKey:productID];
+        cell.itemCheckImage.image = [UIImage imageNamed:@"CartItemNotSelected"];
+    }
 }
 
 @end

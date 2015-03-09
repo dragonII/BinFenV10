@@ -28,14 +28,6 @@
     }
 }
 
-/*
-UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDetected)];
-singleTap.numberOfTapsRequired = 1;
-[self.searchView setUserInteractionEnabled:YES];
-[self.searchView addGestureRecognizer:singleTap];
- */
-
-
 
 - (void)initImageViews
 {

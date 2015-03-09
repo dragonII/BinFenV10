@@ -8,7 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@class ProductTableCartCell;
+
+@protocol ItemCheckedDelegate <NSObject>
+
+- (void)productItemChecked:(ProductTableCartCell *)cell;
+
+@end
+
 @interface ProductTableCartCell : UITableViewCell
+
+@property (weak, nonatomic) id<ItemCheckedDelegate> itemCheckedDelegate;
 
 @property (weak, nonatomic) IBOutlet UILabel *productNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *quantityLabel;
