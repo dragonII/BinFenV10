@@ -16,5 +16,7 @@
 
 @property (strong, nonatomic) NSArray *cartItemsArray;
 @property (strong, nonatomic) NSMutableArray *shopsArray;
+@property (strong, nonatomic) NSMutableDictionary *itemCheckedDict;
+//@property (strong, nonatomic) NSMutableDictionary *shopCheckedDict;
 
 @end

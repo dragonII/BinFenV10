@@ -35,6 +35,8 @@ singleTap.numberOfTapsRequired = 1;
 [self.searchView addGestureRecognizer:singleTap];
  */
 
+
+
 - (void)initImageViews
 {
     UITapGestureRecognizer *editTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editDetected)];

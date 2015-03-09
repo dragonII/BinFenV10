@@ -104,6 +104,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="itemCheckImage" destination="pvw-G6-qbh" id="I9q-QK-fD7"/>
                 <outlet property="locationLabel" destination="vgT-J8-B1e" id="81e-BZ-KBH"/>
                 <outlet property="priceLabel" destination="dzV-Qb-EgG" id="Taf-GC-rcu"/>
                 <outlet property="productImageView" destination="oWE-9m-Wbg" id="O55-pG-Q9Q"/>

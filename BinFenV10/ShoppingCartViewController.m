@@ -24,7 +24,7 @@ typedef enum
     CommentCartCellSection
 } CartSectionIndexType;
 
-@interface ShoppingCartViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
+@interface ShoppingCartViewController () <UITableViewDataSource, UITableViewDelegate, CommentEditDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *totalPriceLabel;
 @property (weak, nonatomic) IBOutlet UIButton *submitButton;
@@ -167,41 +167,49 @@ typedef enum
 - (void)loadShoppingCartItems
 {
     NSDictionary *dict1 = @{@"productName":@"a",
+                            @"productID":@"a",
                            @"price":@"38.5",
                            @"quantity":@"1",
                            @"description":@"a description",
                            @"shop":@"id1"};
     NSDictionary *dict2 = @{@"productName":@"ab",
+                            @"productID": @"ab",
                            @"price":@"318",
                            @"quantity":@"2",
                            @"description":@"ab description",
                            @"shop":@"id1"};
     NSDictionary *dict3 = @{@"productName":@"abc",
+                            @"productID":@"abc",
                            @"price":@"28",
                            @"quantity":@"9",
                            @"description":@"abc description",
                            @"shop":@"id2"};
     NSDictionary *dict4 = @{@"productName":@"abcd",
+                            @"productID":@"abcd",
                            @"price":@"17",
                            @"quantity":@"7",
                            @"description":@"abcd description",
                            @"shop":@"id2"};
     NSDictionary *dict5 = @{@"productName":@"abcde",
+                            @"productID":@"abcde",
                            @"price":@"28",
                            @"quantity":@"6",
                            @"description":@"abcde description",
                            @"shop":@"id3"};
     NSDictionary *dict6 = @{@"productName":@"abcdef",
+                            @"productID":@"abcdef",
                             @"price":@"24",
                             @"quantity":@"11",
                             @"description":@"abcdef description",
                             @"shop":@"id2"};
     NSDictionary *dict7 = @{@"productName":@"abcdefg",
+                            @"productID":@"abcdefg",
                             @"price":@"23",
                             @"quantity":@"12",
                             @"description":@"abcdefg description",
                             @"shop":@"id3"};
     NSDictionary *dict8 = @{@"productName":@"abcdefgh",
+                            @"productID":@"abcdefgh",
                             @"price":@"42",
                             @"quantity":@"5",
                             @"description":@"abcdefgh description",
@@ -212,9 +220,16 @@ typedef enum
     self.sortCartItemArray = [[NSMutableArray alloc] init];
     self.shopsArray = [[NSMutableArray alloc] init];
     
+    NSMutableDictionary *tmpDict;
+    
     if([self.cartItemsArray count] > 0)
     {
-        [self.shopsArray addObject:[[self.cartItemsArray objectAtIndex:0] objectForKey:@"shop"]];
+        //[self.shopsArray addObject:[[self.cartItemsArray objectAtIndex:0] objectForKey:@"shop"]];
+        tmpDict = [[NSMutableDictionary alloc] init];
+        [tmpDict setObject:@0 forKey:@"shopChecked"];
+        [tmpDict setObject:@"" forKey:@"comment"];
+        [tmpDict setObject:[[self.cartItemsArray objectAtIndex:0] objectForKey:@"shop"] forKey:@"shopID"];
+        [self.shopsArray addObject:tmpDict];
         
         BOOL found;
         NSString *shopID;
@@ -225,21 +240,28 @@ typedef enum
             shopID = [[self.cartItemsArray objectAtIndex:i] objectForKey:@"shop"];
             for(int j = 0; j < [self.shopsArray count]; j++)
             {
-                if([shopID isEqualToString:[self.shopsArray objectAtIndex:j]])
+                //if([shopID isEqualToString:[self.shopsArray objectAtIndex:j] ])
+                if([shopID isEqualToString:[[self.shopsArray objectAtIndex:j] objectForKey:@"shopID"]])
                 {
                     found = YES;
                     break;
                 }
             }
             if(found == NO)
-                [self.shopsArray addObject:shopID];
+            {
+                tmpDict = [[NSMutableDictionary alloc] init];
+                [tmpDict setObject:@0 forKey:@"shopChecked"];
+                [tmpDict setObject:@"" forKey:@"comment"];
+                [tmpDict setObject:shopID forKey:@"shopID"];
+                [self.shopsArray addObject:tmpDict];
+            }
         }
     }
     
     for(int i = 0; i < [self.shopsArray count]; i++)
     {
         NSMutableArray *tmpArray = [[NSMutableArray alloc] init];
-        NSString *shopID = [self.shopsArray objectAtIndex:i];
+        NSString *shopID = [[self.shopsArray objectAtIndex:i] objectForKey:@"shopID"];
         for(int j = 0; j < [self.cartItemsArray count]; j++)
         {
             if([shopID isEqualToString:[[self.cartItemsArray objectAtIndex:j] objectForKey:@"shop"]])
@@ -250,9 +272,25 @@ typedef enum
         [self.sortCartItemArray addObject:tmpArray];
     }
     
+    self.itemCheckedDict = [[NSMutableDictionary alloc] init];
+    for(int i = 0; i < [self.cartItemsArray count]; i++)
+    {
+        [self.itemCheckedDict setObject:@0 forKey:[[self.cartItemsArray objectAtIndex:i] objectForKey:@"productID"]];
+    }
+    
+    /*
+    self.shopCheckedDict = [[NSMutableDictionary alloc] init];
+    for(int i = 0; i < [self.shopsArray count]; i++)
+    {
+        [self.shopCheckedDict setObject:@0 forKey:[self.shopsArray objectAtIndex:i]];
+    }
+     */
+    
     NSLog(@"cartItem: %@", self.cartItemsArray);
     NSLog(@"shops: %@", self.shopsArray);
     NSLog(@"Sorted: %@", self.sortCartItemArray);
+    //NSLog(@"itemChecked: %@", self.itemCheckedDict);
+    //NSLog(@"shopChecked: %@", self.shopCheckedDict);
 }
 
 - (void)initBottomView
@@ -274,6 +312,13 @@ typedef enum
     [self initTableView];
     
     [self registerForKeyboardNotifications];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    NSLog(@"ShopArray: %@", self.shopsArray);
 }
 
 - (void)didReceiveMemoryWarning
@@ -324,19 +369,63 @@ typedef enum
     if(section == 0)
         return 0;
     
-    return 12.0f;
+    return 30.0f;
 }
+
+-(void)shopSelected:(UITapGestureRecognizer *)sender
+{
+    int tag = sender.view.tag - 50;
+    UIImageView *checkImage = (UIImageView *)sender.view;
+    NSLog(@"%d clicked", tag);
+    NSInteger checkedStatus = [[[self.shopsArray objectAtIndex:tag] objectForKey:@"shopChecked"] integerValue];
+    //NSInteger checkedStatus = [[self.shopCheckedDict objectForKey:[self.shopsArray objectAtIndex:tag]] integerValue];
+    if(checkedStatus == 0)
+    {
+        //[self.shopCheckedDict setObject:@1 forKey:[self.shopsArray objectAtIndex:tag]];
+        [[self.shopsArray objectAtIndex:tag] setObject:@1 forKey:@"shopChecked"];
+        checkImage.image = [UIImage imageNamed:@"CartItemSelected"];
+    } else
+    {
+        [[self.shopsArray objectAtIndex:tag] setObject:@0 forKey:@"shopChecked"];
+        //[self.shopCheckedDict setObject:@0 forKey:[self.shopsArray objectAtIndex:tag]];
+        checkImage.image = [UIImage imageNamed:@"CartItemNotSelected"];
+    }
+}
+
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     if(section == 0)
         return nil;
     
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 12.0f)];
-    headerView.backgroundColor = [UIColor colorWithRed:225/255.0f
-                                                 green:225/255.0f
-                                                  blue:225/255.0f
-                                                 alpha:1.0f];
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 30.0f)];
+    headerView.backgroundColor = [UIColor whiteColor];
+    
+    UIImageView *checkImageView = [[UIImageView alloc] initWithFrame:CGRectMake(11, 6, 18, 18)];
+    NSInteger checkedStatus = [[[self.shopsArray objectAtIndex:section - 1] objectForKey:@"shopChecked"] integerValue];
+    if(checkedStatus == 0)
+        checkImageView.image = [UIImage imageNamed:@"CartItemNotSelected"];
+    else
+        checkImageView.image = [UIImage imageNamed:@"CartItemSelected"];
+    checkImageView.tag = 50 + section - 1;
+    
+    //NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:section];
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shopSelected:)];
+    [checkImageView setUserInteractionEnabled:YES];
+    [checkImageView addGestureRecognizer:tapGesture];
+    
+    UILabel *shopNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 5, 200, 21)];
+    shopNameLabel.text = [[[self.sortCartItemArray objectAtIndex:(section - 1)] objectAtIndex:0] objectForKey:@"shop"];
+    
+    [headerView addSubview:checkImageView];
+    [headerView addSubview:shopNameLabel];
+    
+    UIView *separatorLine = [[UIView alloc] initWithFrame:CGRectMake(0, 29, self.view.bounds.size.width, 0.5)];
+    separatorLine.backgroundColor = [UIColor colorWithRed:225/255.0f
+                                                    green:225/255.0f
+                                                     blue:225/255.0f
+                                                    alpha:1.0f];
+    [headerView addSubview:separatorLine];
     
     return headerView;
 }
@@ -368,8 +457,10 @@ typedef enum
         CommentCartCell *cell = (CommentCartCell *)[tableView dequeueReusableCellWithIdentifier:CommentCartCellIdentifier];
         if(cell == nil)
             cell = [[CommentCartCell alloc] init];
-        #warning  通过保存备注信息，在每次调用程序运行到此的时候，先重新加载备注信息，便可以保证备注信息是正确的
-        cell.commentTextField.delegate = self;
+        
+        cell.commentTextField.text = [[self.shopsArray objectAtIndex:sectionIndex] objectForKey:@"comment"];
+        //cell.commentTextField.delegate = self;
+        cell.editDelegate = self;
         return cell;
     }
 }
@@ -379,13 +470,15 @@ typedef enum
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-#pragma mark - UITextFieldDelegate
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
+- (void)editClicked:(CommentCartCell *)cell
 {
-    NSLog(@"Text Return");
-    [textField resignFirstResponder];
-    return YES;
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    NSLog(@"Editting: %d", indexPath.section - 1);
+    int sectionIndex = indexPath.section - 1;
+    [[self.shopsArray objectAtIndex:sectionIndex] setObject:cell.commentTextField.text forKey:@"comment"];
+    
+    NSLog(@"%@", self.shopsArray);
 }
 
 @end

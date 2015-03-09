@@ -8,7 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CommentCartCell : UITableViewCell
+@class CommentCartCell;
+
+@protocol CommentEditDelegate <NSObject>
+
+- (void)editClicked:(CommentCartCell *)cell;
+
+@end
+
+@interface CommentCartCell : UITableViewCell <UITextFieldDelegate>
+
+@property (weak, nonatomic) id<CommentEditDelegate> editDelegate;
 
 @property (weak, nonatomic) IBOutlet UITextField *commentTextField;
 
