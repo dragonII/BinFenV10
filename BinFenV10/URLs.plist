@@ -3,8 +3,10 @@
 <plist version="1.0">
 <array>
 	<dict>
+		<key>backup</key>
+		<string>http://mixmb.syslive.cn</string>
 		<key>url</key>
-		<string>http://192.168.1.250:81/myinfo/shopinfolist_json.ds</string>
+		<string>http://192.168.1.250:81</string>
 		<key>description</key>
 		<string>shops</string>
 	</dict>

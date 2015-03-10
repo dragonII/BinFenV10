@@ -26,6 +26,8 @@ static NSString *StoreStatusKey = @"status";
 
 @interface DataModel : NSObject
 
+@property (assign, nonatomic) BOOL loadFinished;
+
 @property (strong, nonatomic) AFHTTPSessionManager *httpSessionManager;
 
 @property (strong, nonatomic) NSMutableArray *communities;

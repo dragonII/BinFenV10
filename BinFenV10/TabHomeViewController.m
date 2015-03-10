@@ -64,6 +64,8 @@ static const NSInteger RefreshSectionIndex = 3;
 
 @property (strong, nonatomic) AFHTTPSessionManager *httpSessionManager;
 
+@property (strong, nonatomic) NSTimer *timer;
+
 @end
 
 
@@ -117,9 +119,29 @@ static const NSInteger RefreshSectionIndex = 3;
                                 @"Cate11"];
 }
 
+- (void)load
+{
+    if(self.dataModel.loadFinished == YES)
+    {
+        NSLog(@"xxx%@", self.dataModel.shops);
+        [self.timer invalidate];
+        
+        DataModel *newData = [[DataModel alloc] init];
+        NSLog(@"CCC%@", newData.shops);
+        [newData loadDataModelLocally];
+        NSLog(@"zzz%@", newData.shops);
+    }
+}
+
 - (void)initShopsData
 {
     [self.dataModel loadDataModelRemotely];
+    
+    //NSLog(@"xxx%@", self.dataModel.shops);
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1
+                                                      target:self
+                                                    selector:@selector(load)
+                                                    userInfo:nil repeats:YES];
     
     NSMutableArray *array = [[NSMutableArray alloc] init];
     for(int i = 0; i < 51; i++)

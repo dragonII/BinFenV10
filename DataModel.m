@@ -16,6 +16,12 @@ static NSString *CommunityArrayKey = @"Communities";
 static NSString *ShopArrayKey = @"Shops";
 static NSString *CategoryArrayKey = @"Categories";
 
+@interface DataModel ()
+
+@property dispatch_group_t retrieveGroup;
+
+@end
+
 @implementation DataModel
 
 - (id)init
@@ -23,6 +29,7 @@ static NSString *CategoryArrayKey = @"Categories";
     self = [super init];
     if (self)
     {
+        self.loadFinished = NO;
         self.httpSessionManager = [AppDelegate sharedHttpSessionManager];
     }
     return self;
@@ -59,7 +66,7 @@ static NSString *CategoryArrayKey = @"Categories";
     
     NSString *cleanString = [noEscapedString stringByReplacingOccurrencesOfString:GarbageString withString:@""];
     cleanString = [cleanString stringByReplacingOccurrencesOfString:@"\'" withString:@"\""];
-    NSLog(@"cleanString: %@", cleanString);
+    //NSLog(@"cleanString: %@", cleanString);
     
     NSData *data = [cleanString dataUsingEncoding:NSUTF8StringEncoding];
     NSError *error = nil;
@@ -95,21 +102,43 @@ static NSString *CategoryArrayKey = @"Categories";
         [self.shops addObject:storeDict];
     }
     
-    //[BFPreferenceData saveStorePreferenceDict:storeDict];
+    //NSLog(@"YYY%@", self.shops);
     [self saveDataModel];
+    
+    NSLog(@"2222222222222");
 }
 
 - (void)loadDataModelRemotely
 {
+    _retrieveGroup = dispatch_group_create();
+    /*
+    dispatch_group_enter(_retrieveGroup);
+    
     [self.httpSessionManager GET:@"myinfo/shopinfolist_json.ds"
                       parameters:nil
                          success:^(NSURLSessionDataTask *task, id responseObject) {
                              [self parseStoreJson:responseObject];
-                             //dispatch_group_leave(_retrieveGroup);
+                             dispatch_group_leave(_retrieveGroup);
                          }failure:^(NSURLSessionDataTask *task, NSError *error) {
                              NSLog(@"Error: %@", [error localizedDescription]);
-                             //dispatch_group_leave(_retrieveGroup);
+                             dispatch_group_leave(_retrieveGroup);
                          }];
+     */
+    
+    // Here we wait for all the requests to finish
+    dispatch_group_notify(_retrieveGroup, dispatch_get_main_queue(), ^{
+        [self.httpSessionManager GET:@"myinfo/shopinfolist_json.ds"
+                          parameters:nil
+                             success:^(NSURLSessionDataTask *task, id responseObject) {
+                                 [self parseStoreJson:responseObject];
+                                 //dispatch_group_leave(_retrieveGroup);
+                                 _loadFinished = YES;
+                             }failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                 NSLog(@"Error: %@", [error localizedDescription]);
+                                 //dispatch_group_leave(_retrieveGroup);
+                             }];
+    });
+    NSLog(@"11111111111111111");
 }
 
 - (void)loadDataModelLocally
