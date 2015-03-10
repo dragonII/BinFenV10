@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@class AFHTTPSessionManager;
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
++ (AFHTTPSessionManager *)sharedHttpSessionManager;
 
 @end
 

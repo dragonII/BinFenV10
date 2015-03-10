@@ -26,6 +26,10 @@
 
 //#import "DataModel.h"
 
+#import "AFNetworking.h"
+#import "AppDelegate.h"
+#import "DataModel.h"
+
 
 static NSString *CommunityTableRowCellIdentifier = @"CommunityTableRowCellIdentifier";
 static NSString *CategoryTableCellIdentifier = @"CategoryTableCellIdentifier";
@@ -58,6 +62,8 @@ static const NSInteger RefreshSectionIndex = 3;
 
 @property (assign, nonatomic) NSInteger categoryButtonIndex;
 
+@property (strong, nonatomic) AFHTTPSessionManager *httpSessionManager;
+
 @end
 
 
@@ -81,8 +87,23 @@ static const NSInteger RefreshSectionIndex = 3;
     
 }
 
+
+
 - (void)initCategoriesData
 {
+    /*
+    [self.httpSessionManager GET:@"myinfo/shopinfolist_json.ds"
+                      parameters:nil
+                         success:^(NSURLSessionDataTask *task, id responseObject) {
+                             //[self parseStoreJson:responseObject];
+                             [ApiDataProcess parseStoreJson:responseObject];
+                             //dispatch_group_leave(_retrieveGroup);
+                         }failure:^(NSURLSessionDataTask *task, NSError *error) {
+                             NSLog(@"Error: %@", [error localizedDescription]);
+                             //dispatch_group_leave(_retrieveGroup);
+                         }];
+     */
+    
     self.categoriesDataList = @[@"Cate01",
                                 @"Cate02",
                                 @"Cate03",
@@ -98,6 +119,8 @@ static const NSInteger RefreshSectionIndex = 3;
 
 - (void)initShopsData
 {
+    [self.dataModel loadDataModelRemotely];
+    
     NSMutableArray *array = [[NSMutableArray alloc] init];
     for(int i = 0; i < 51; i++)
     {
@@ -110,6 +133,9 @@ static const NSInteger RefreshSectionIndex = 3;
 
 - (void)loadAllData
 {
+    //self.httpSessionManager = [AppDelegate sharedHttpSessionManager];
+    self.dataModel = [[DataModel alloc] init];
+    
     [self initCommunitiesData];
     [self initCategoriesData];
     [self initShopsData];

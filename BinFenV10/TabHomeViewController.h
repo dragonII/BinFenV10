@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class DataModel;
+
 @interface TabHomeViewController : UIViewController
+
+@property (strong, nonatomic) DataModel *dataModel;
 
 - (IBAction)unwindToTabHome:(UIStoryboardSegue *)segue;
 

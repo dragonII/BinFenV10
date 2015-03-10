@@ -7,12 +7,26 @@
 //
 
 #import "DataModel.h"
+#import "AppDelegate.h"
+#import "AFNetworking.h"
+
+static NSString *GarbageString = @"Thread was being aborted.";
 
 static NSString *CommunityArrayKey = @"Communities";
 static NSString *ShopArrayKey = @"Shops";
 static NSString *CategoryArrayKey = @"Categories";
 
 @implementation DataModel
+
+- (id)init
+{
+    self = [super init];
+    if (self)
+    {
+        self.httpSessionManager = [AppDelegate sharedHttpSessionManager];
+    }
+    return self;
+}
 
 // Returns the path to DataModel.plist file in the app's Documents directory
 - (NSString *)dataModelPath
@@ -22,9 +36,80 @@ static NSString *CategoryArrayKey = @"Categories";
     return [documentDirectory stringByAppendingPathComponent:@"DataModel.plist"];
 }
 
+- (NSString *)stringByRemovingControlCharacters: (NSString *)inputString
+{
+    NSCharacterSet *controlChars = [NSCharacterSet controlCharacterSet];
+    NSRange range = [inputString rangeOfCharacterFromSet:controlChars];
+    if (range.location != NSNotFound) {
+        NSMutableString *mutable = [NSMutableString stringWithString:inputString];
+        while (range.location != NSNotFound) {
+            [mutable deleteCharactersInRange:range];
+            range = [mutable rangeOfCharacterFromSet:controlChars];
+        }
+        return mutable;
+    }
+    return inputString;
+}
+
+- (NSArray *)prepareForParse:(id)responseObject
+{
+    NSString *rawString = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+    
+    NSString *noEscapedString = [self stringByRemovingControlCharacters:rawString];
+    
+    NSString *cleanString = [noEscapedString stringByReplacingOccurrencesOfString:GarbageString withString:@""];
+    cleanString = [cleanString stringByReplacingOccurrencesOfString:@"\'" withString:@"\""];
+    NSLog(@"cleanString: %@", cleanString);
+    
+    NSData *data = [cleanString dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *error = nil;
+    id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+    
+    if(error)
+    {
+        NSLog(@"Error: %@", error);
+    }
+    
+    NSArray *outerArray = [json objectForKey:@"data"];
+    return outerArray;
+}
+
+- (void)parseStoreJson:(id)responseObject
+{
+    NSArray *outerArray = [self prepareForParse:responseObject];
+    self.shops = [[NSMutableArray alloc] init];
+    NSMutableDictionary *storeDict = [[NSMutableDictionary alloc] init];
+    
+    for(NSArray *innerArray in outerArray)
+    {
+        [storeDict setObject:[innerArray objectAtIndex:0] forKey:StoreIDKey];
+        [storeDict setObject:[innerArray objectAtIndex:1] forKey:StoreNameKey];
+        [storeDict setObject:[innerArray objectAtIndex:2] forKey:StoreSNameKey];
+        [storeDict setObject:[innerArray objectAtIndex:3] forKey:StoreTypeKey];
+        [storeDict setObject:[innerArray objectAtIndex:4] forKey:StoreAddrCountryKey];
+        [storeDict setObject:[innerArray objectAtIndex:5] forKey:StoreAddrProviceKey];
+        [storeDict setObject:[innerArray objectAtIndex:6] forKey:StoreAddrCityKey];
+        [storeDict setObject:[innerArray objectAtIndex:7] forKey:StoreAddrStreetKey];
+        [storeDict setObject:[innerArray objectAtIndex:8] forKey:StoreStatusKey];
+        
+        [self.shops addObject:storeDict];
+    }
+    
+    //[BFPreferenceData saveStorePreferenceDict:storeDict];
+    [self saveDataModel];
+}
+
 - (void)loadDataModelRemotely
 {
-    
+    [self.httpSessionManager GET:@"myinfo/shopinfolist_json.ds"
+                      parameters:nil
+                         success:^(NSURLSessionDataTask *task, id responseObject) {
+                             [self parseStoreJson:responseObject];
+                             //dispatch_group_leave(_retrieveGroup);
+                         }failure:^(NSURLSessionDataTask *task, NSError *error) {
+                             NSLog(@"Error: %@", [error localizedDescription]);
+                             //dispatch_group_leave(_retrieveGroup);
+                         }];
 }
 
 - (void)loadDataModelLocally

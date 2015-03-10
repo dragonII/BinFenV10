@@ -10,12 +10,29 @@
 #import "defs.h"
 
 #import "BFPreferenceData.h"
+#import "AFNetworking.h"
 
 @interface AppDelegate ()
 
 @end
 
 @implementation AppDelegate
+
++ (AFHTTPSessionManager *)sharedHttpSessionManager
+{
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"URLs" ofType:@"plist"];
+    NSArray *urlArray = [NSArray arrayWithContentsOfFile:path];
+    NSString *baseURLString = (NSString *)[[urlArray objectAtIndex:0] objectForKey:@"url"];
+    
+    static AFHTTPSessionManager *shared = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        shared = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:baseURLString]];
+        shared.responseSerializer = [AFHTTPResponseSerializer serializer];
+        shared.responseSerializer.acceptableContentTypes = [shared.responseSerializer.acceptableContentTypes setByAddingObject:@"html/text"];
+    });
+    return shared;
+}
 
 - (BOOL)detectFirstLaunch
 {
