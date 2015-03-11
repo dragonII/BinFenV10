@@ -39,8 +39,6 @@
 
 - (void)initItems
 {
-#warning 目前只涵盖屏幕宽度为320，其他宽度的屏幕尺寸待完成
-    
     CGFloat x = 0;
     
     CGFloat scrollViewWidth = self.scrollView.bounds.size.width;

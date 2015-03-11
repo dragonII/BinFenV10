@@ -7,6 +7,7 @@
 //
 
 #import "CategoriesInShopCell.h"
+#import "DeviceHardware.h"
 
 @interface CategoriesInShopCell () <UIScrollViewDelegate>
 
@@ -29,13 +30,43 @@
     NSLog(@"%ld", (long)view.tag);
 }
 
+- (CGFloat)getItemSizeByDevice
+{
+    DeviceHardwareGeneralPlatform generalPlatform = [DeviceHardware generalPlatform];
+    
+    switch (generalPlatform)
+    {
+        case DeviceHardwareGeneralPlatform_iPhone_4:
+        case DeviceHardwareGeneralPlatform_iPhone_4S:
+        case DeviceHardwareGeneralPlatform_iPhone_5:
+        case DeviceHardwareGeneralPlatform_iPhone_5C:
+        case DeviceHardwareGeneralPlatform_iPhone_5S:
+        {
+            NSLog(@"iphone 4, 4S");
+            return 80.0f;
+            
+            break;
+        }
+            
+        case DeviceHardwareGeneralPlatform_iPhone_6:
+        case DeviceHardwareGeneralPlatform_iPhone_6_Plus:
+        {
+            NSLog(@"iphone 5, 6");
+            return (24 + 44 + 24);
+            break;
+        }
+            
+        default:
+            return (24 + 44 + 24);
+            break;
+    }
+}
+
 - (void)initItems
 {
-#warning 目前只涵盖屏幕宽度为320，其他宽度的屏幕尺寸待完成
-    
     int columnsPerPage = 4;
-    CGFloat itemWidth = 80.0f;
-    CGFloat itemHeight = 80.0f;
+    CGFloat itemWidth = [self getItemSizeByDevice];  // = 80.0f;
+    CGFloat itemHeight = [self getItemSizeByDevice]; //= 80.0f;
     
     //CGFloat extraSpace = 0.0f;
     

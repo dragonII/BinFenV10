@@ -253,7 +253,7 @@ typedef struct
     }
 }
 
-- (void)initProductItemsByShopIndex:(int)shopIndex
+- (void)initProductItemsByShopIndex:(NSInteger)shopIndex
 {
     if(shopIndex < 0)
     {
@@ -275,7 +275,7 @@ typedef struct
     self.products = [NSMutableArray arrayWithArray:self.dataModel.products];
 }
 
-- (void)loadProductsByShopIndex:(int)shopIndex
+- (void)loadProductsByShopIndex:(NSInteger)shopIndex
 {
     self.dataModel = [[DataModel alloc] init];
     [self.dataModel loadDataModelLocally];

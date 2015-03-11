@@ -21,7 +21,7 @@
 
 - (void)initShopItemsByCommunityIndex:(int)communityIndex;
 //- (void)initProductItems;
-- (void)initProductItemsByShopIndex:(int)shopIndex;
+- (void)initProductItemsByShopIndex:(NSInteger)shopIndex;
 
 @property (strong, nonatomic) DataModel *dataModel;
 
