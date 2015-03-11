@@ -15,6 +15,7 @@ static NSString *GarbageString = @"Thread was being aborted.";
 static NSString *CommunityArrayKey = @"Communities";
 static NSString *ShopArrayKey = @"Shops";
 static NSString *CategoryArrayKey = @"Categories";
+static NSString *ProductArrayKey = @"Products";
 
 @interface DataModel ()
 
@@ -31,6 +32,7 @@ static NSString *CategoryArrayKey = @"Categories";
     {
         self.loadShopsFinished = NO;
         self.loadCommunitiesFinished = NO;
+        self.loadProductsFinished = NO;
         self.httpSessionManager = [AppDelegate sharedHttpSessionManager];
     }
     return self;
@@ -67,7 +69,7 @@ static NSString *CategoryArrayKey = @"Categories";
     
     NSString *cleanString = [noEscapedString stringByReplacingOccurrencesOfString:GarbageString withString:@""];
     cleanString = [cleanString stringByReplacingOccurrencesOfString:@"\'" withString:@"\""];
-    NSLog(@"cleanString: %@", cleanString);
+    //NSLog(@"cleanString: %@", cleanString);
     
     NSData *data = [cleanString dataUsingEncoding:NSUTF8StringEncoding];
     NSError *error = nil;
@@ -111,8 +113,6 @@ static NSString *CategoryArrayKey = @"Categories";
         [self.shops addObject:shopDict];
     }
     
-    NSLog(@"shop: %@", self.shops);
-    
     [self saveDataModel];
 }
 
@@ -138,9 +138,40 @@ static NSString *CategoryArrayKey = @"Categories";
         
         [self.communities addObject:communityDict];
     }
-    NSLog(@"communities: %@", self.communities);
+    
     [self saveDataModel];
 }
+
+- (void)parseProductJson:(id)responseObject
+{
+    NSArray *outerArray = [self prepareForParse:responseObject];
+    
+    self.products = [[NSMutableArray alloc] init];
+    NSMutableDictionary *productDict;
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"URLs" ofType:@"plist"];
+    NSArray *urlArray = [NSArray arrayWithContentsOfFile:path];
+    NSString *baseURLString = (NSString *)[[urlArray objectAtIndex:0] objectForKey:@"url"];
+    
+    for(NSArray *innerArray in outerArray)
+    {
+        productDict = [[NSMutableDictionary alloc] init];
+        
+        //[productDict setObject:[baseURLString stringByAppendingPathComponent:[innerArray objectAtIndex:0]] forKey:StoreImageKey];
+        [productDict setObject:[innerArray objectAtIndex:0] forKey:ProductIDKey];
+        [productDict setObject:[innerArray objectAtIndex:1] forKey:ProductNameKey];
+        [productDict setObject:[baseURLString stringByAppendingPathComponent:[innerArray objectAtIndex:2]] forKey:ProductImageKey];
+        [productDict setObject:[innerArray objectAtIndex:3] forKey:ProductBrandKey];
+        [productDict setObject:[innerArray objectAtIndex:4] forKey:ProductCategoryKey];
+        [productDict setObject:[innerArray objectAtIndex:5] forKey:ProductRefencePriceKey];
+        [productDict setObject:[innerArray objectAtIndex:6] forKey:ProductSalePrice];
+        [productDict setObject:[innerArray objectAtIndex:7] forKey:ProductShopKey];
+        
+        [self.products addObject:productDict];
+    }
+    
+    [self saveDataModel];
+}
+
 
 - (void)loadDataModelRemotely
 {
@@ -148,9 +179,30 @@ static NSString *CategoryArrayKey = @"Categories";
     
     [self loadShopsData];
     [self loadCommunitiesData];
+    [self loadProductsData];
     
     //[self saveDataModel];
 }
+
+
+- (void)loadProductsData
+{
+    {
+        dispatch_group_notify(_retrieveGroup, dispatch_get_main_queue(), ^{
+            [self.httpSessionManager GET:@"lsproduct/product_json.ds"
+                              parameters:nil
+                                 success:^(NSURLSessionDataTask *task, id responseObject) {
+                                     [self parseProductJson:responseObject];
+                                     //dispatch_group_leave(_retrieveGroup);
+                                     _loadProductsFinished = YES;
+                                 }failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                     NSLog(@"Error: %@", [error localizedDescription]);
+                                     //dispatch_group_leave(_retrieveGroup);
+                                 }];
+        });
+    }
+}
+
 
 - (void)loadShopsData
 {
@@ -204,12 +256,14 @@ static NSString *CategoryArrayKey = @"Categories";
         self.communities = [unarchiver decodeObjectForKey:CommunityArrayKey];
         self.shops = [unarchiver decodeObjectForKey:ShopArrayKey];
         self.categories = [unarchiver decodeObjectForKey:CategoryArrayKey];
+        self.products = [unarchiver decodeObjectForKey:ProductArrayKey];
         
         [unarchiver finishDecoding];
     } else {
         self.communities = [[NSMutableArray alloc] init];
         self.shops = [[NSMutableArray alloc] init];
         self.categories = [[NSMutableArray alloc] init];
+        self.products = [[NSMutableArray alloc] init];
     }
 }
 
@@ -221,6 +275,7 @@ static NSString *CategoryArrayKey = @"Categories";
     [archiver encodeObject:self.communities forKey:CommunityArrayKey];
     [archiver encodeObject:self.shops forKey:ShopArrayKey];
     [archiver encodeObject:self.categories forKey:CategoryArrayKey];
+    [archiver encodeObject:self.products forKey:ProductArrayKey];
     
     [archiver finishEncoding];
     

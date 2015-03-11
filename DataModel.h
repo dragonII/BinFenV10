@@ -26,6 +26,14 @@ static NSString *CommunityAreaKey = @"area";
 static NSString *CommunityDescKey = @"description";
 static NSString *CommunityImageKey = @"image";
 
+static NSString *ProductIDKey = @"ID";
+static NSString *ProductNameKey = @"name";
+static NSString *ProductImageKey = @"image";
+static NSString *ProductBrandKey = @"brand";
+static NSString *ProductCategoryKey = @"category";
+static NSString *ProductRefencePriceKey = @"RefPrice";
+static NSString *ProductSalePrice = @"price";
+static NSString *ProductShopKey = @"shop";
 
 @class AFHTTPSessionManager;
 
@@ -37,12 +45,14 @@ static NSString *CommunityImageKey = @"image";
 
 @property (assign, nonatomic) BOOL loadShopsFinished;
 @property (assign, nonatomic) BOOL loadCommunitiesFinished;
+@property (assign, nonatomic) BOOL loadProductsFinished;
 
 @property (strong, nonatomic) AFHTTPSessionManager *httpSessionManager;
 
 @property (strong, nonatomic) NSMutableArray *communities;
 @property (strong, nonatomic) NSMutableArray *shops;
 @property (strong, nonatomic) NSMutableArray *categories;
+@property (strong, nonatomic) NSMutableArray *products;
 
 
 - (void)loadDataModelLocally;

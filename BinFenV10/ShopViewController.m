@@ -163,7 +163,8 @@ static NSString *ShopsCellIdentifier = @"ShopsCell";
             cell = [[ShopsAndProductsCell alloc] init];
         }
         cell.segueDelegate = self;
-        [cell initProductItems];
+        //[cell initProductItems];
+        [cell initProductItemsByShopIndex:self.selectedShopIndex];
         return cell;
     }
 }

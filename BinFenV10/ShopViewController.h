@@ -13,4 +13,6 @@
 
 @property ShowViewBySourceType showShopViewFrom;
 
+@property (assign, nonatomic) NSInteger selectedShopIndex;
+
 @end

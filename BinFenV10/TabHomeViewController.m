@@ -69,6 +69,7 @@ static const NSInteger RefreshSectionIndex = 3;
 //@property (copy, nonatomic) NSString *selectedCommunityName;
 //@property (copy, nonatomic) NSString *selectedCommunityID;
 @property (assign, nonatomic) NSInteger selectedCommunityIndex;
+@property (assign, nonatomic) NSInteger selectedShopIndex;
 
 @end
 
@@ -97,19 +98,6 @@ static const NSInteger RefreshSectionIndex = 3;
 
 - (void)initCategoriesData
 {
-    /*
-    [self.httpSessionManager GET:@"myinfo/shopinfolist_json.ds"
-                      parameters:nil
-                         success:^(NSURLSessionDataTask *task, id responseObject) {
-                             //[self parseStoreJson:responseObject];
-                             [ApiDataProcess parseStoreJson:responseObject];
-                             //dispatch_group_leave(_retrieveGroup);
-                         }failure:^(NSURLSessionDataTask *task, NSError *error) {
-                             NSLog(@"Error: %@", [error localizedDescription]);
-                             //dispatch_group_leave(_retrieveGroup);
-                         }];
-     */
-    
     self.categoriesDataList = @[@"Cate01",
                                 @"Cate02",
                                 @"Cate03",
@@ -143,7 +131,7 @@ static const NSInteger RefreshSectionIndex = 3;
 
 - (void)initShopsData
 {
-    [self.dataModel loadDataModelRemotely];
+    //[self.dataModel loadDataModelRemotely];
     
     /*
     NSMutableArray *array = [[NSMutableArray alloc] init];
@@ -600,6 +588,7 @@ static const NSInteger RefreshSectionIndex = 3;
     {
         ShopViewController *shopVC = (ShopViewController *)segue.destinationViewController;
         shopVC.hidesBottomBarWhenPushed = YES;
+        shopVC.selectedShopIndex = self.selectedShopIndex;
         
         //[self showNavigationItem];
     }
@@ -623,8 +612,9 @@ static const NSInteger RefreshSectionIndex = 3;
 
 - (void)itemClickedInCell:(ShopsAndProductsCell *)cell
 {
-    NSLog(@"%@", cell.shopID);
+    NSLog(@"12345_%@", cell.shopID);
     
+    self.selectedShopIndex = cell.selectedShopIndex;
     [self performSegueWithIdentifier:@"ShowShopSegueFromTabHome" sender:self];
 }
 

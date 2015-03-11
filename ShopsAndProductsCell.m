@@ -31,6 +31,7 @@
     UIView *view = (UIView *)sender.view;
     //self.shopID = [NSString stringWithFormat:@"ShopID_%ld", (view.tag - 2000)];
     NSInteger shopIndex = view.tag - 2000;
+    self.selectedShopIndex = shopIndex;
     //self.shopID = [[self.dataModel.shops objectAtIndex:shopIndex] copy];
     self.shopID = [[[self.dataModel.shops objectAtIndex:shopIndex] objectForKey:@"ID"] copy];
     NSLog(@"xx%@", self.shopID);
@@ -160,12 +161,54 @@
     }
 }
 
-- (void)initProductItems
+- (void)initProductItemsByShopIndex:(int)shopIndex
+{
+    if(shopIndex < 0)
+    {
+        [self loadAllProducts];
+    } else {
+        [self loadProductsByShopIndex:shopIndex];
+    }
+    
+    NSLog(@"products: %@", self.products);
+    
+    [self showingProductsInView];
+}
+
+- (void)loadAllProducts
+{
+    self.dataModel = [[DataModel alloc] init];
+    [self.dataModel loadDataModelLocally];
+    
+    self.products = [NSMutableArray arrayWithArray:self.dataModel.products];
+}
+
+- (void)loadProductsByShopIndex:(int)shopIndex
+{
+    self.dataModel = [[DataModel alloc] init];
+    [self.dataModel loadDataModelLocally];
+    
+    NSLog(@"dataModel.products: %@", self.dataModel.products);
+    
+    NSString *shopID = [[self.dataModel.shops objectAtIndex:shopIndex] objectForKey:@"ID"];
+    self.products = [[NSMutableArray alloc] init];
+    
+    for(int i = 0; i < [self.dataModel.products count]; i++)
+    {
+        NSString *shopIDInProducts = [[self.dataModel.products objectAtIndex:i] objectForKey:@"shop"];
+        if([shopIDInProducts isEqualToString:shopID])
+        {
+            [self.products addObject:[self.dataModel.products objectAtIndex:i]];
+        }
+    }
+}
+
+- (void)showingProductsInView
 {
 #warning 目前只涵盖屏幕宽度为320，其他宽度的屏幕尺寸待完成
     
-    self.dataModel = [[DataModel alloc] init];
-    [self.dataModel loadDataModelLocally];
+    //self.dataModel = [[DataModel alloc] init];
+    //[self.dataModel loadDataModelLocally];
     
     NSInteger batchIndex = [[NSUserDefaults standardUserDefaults] integerForKey:LoadContentBatchIndexKey];
     NSLog(@"batchIndex#: %ld", (long)batchIndex);
@@ -179,15 +222,17 @@
     CGFloat imageViewWidth = 142.0f;
     CGFloat imageViewHeight = 142.0f;
     
-    int index = 2000;
+    int index = 3000;
     NSInteger maxIndex = 0;
     int row = 0;
     int column = 0;
     
-    if([self.dataModel.shops count] >= batchIndex * TotalItemsPerBatch)
+    //if([self.dataModel.shops count] >= batchIndex * TotalItemsPerBatch)
+    if([self.products count] >= batchIndex * TotalItemsPerBatch)
         maxIndex = batchIndex * TotalItemsPerBatch;
     else
-        maxIndex = [self.dataModel.shops count];
+        //maxIndex = [self.dataModel.shops count];
+        maxIndex = [self.products count];
     
     for(int i = 0; i < maxIndex; i++)
     {
@@ -207,13 +252,15 @@
         
         imageView.frame = CGRectMake(itemView.bounds.origin.x, itemView.bounds.origin.y, imageViewWidth, imageViewHeight);
         label.frame = CGRectMake(itemView.bounds.origin.x, itemView.bounds.origin.y + imageViewHeight, itemView.bounds.size.width, itemHeight - imageViewHeight);
-        label.text = [[self.dataModel.shops objectAtIndex:i] objectForKey:@"name"];
+        //label.text = [[self.dataModel.shops objectAtIndex:i] objectForKey:@"name"];
+        label.text = [[self.products objectAtIndex:i] objectForKey:@"name"];
         label.textAlignment = NSTextAlignmentCenter;
         
         //http://stackoverflow.com/questions/9907100/issues-with-setting-some-different-font-for-uilabel
         label.font = [UIFont fontWithName:@"STHeitiSC-Light" size:10];
         
-        NSString *imageURLString = [[self.dataModel.shops objectAtIndex:i] objectForKey:@"image"];
+        //NSString *imageURLString = [[self.dataModel.shops objectAtIndex:i] objectForKey:@"image"];
+        NSString *imageURLString = [[self.products objectAtIndex:i] objectForKey:@"image"];
         [imageView setImageWithURL:[NSURL URLWithString:imageURLString] placeholderImage:[UIImage imageNamed:@"Default_142x142"]];
         
         

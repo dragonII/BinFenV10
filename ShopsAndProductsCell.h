@@ -20,12 +20,16 @@
 @interface ShopsAndProductsCell : UITableViewCell
 
 - (void)initShopItemsByCommunityIndex:(int)communityIndex;
-- (void)initProductItems;
+//- (void)initProductItems;
+- (void)initProductItemsByShopIndex:(int)shopIndex;
 
 @property (strong, nonatomic) DataModel *dataModel;
 
 @property (copy, nonatomic) NSString *shopID;
 @property (strong, nonatomic) NSMutableArray *shops;
+@property (assign, nonatomic) NSInteger selectedShopIndex;
+
+@property (strong, nonatomic) NSMutableArray *products;
 
 @property (weak, nonatomic) id<ShopsCellSegueDelegate> segueDelegate;
 
