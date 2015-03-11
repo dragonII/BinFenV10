@@ -66,7 +66,7 @@ static NSString *CategoryArrayKey = @"Categories";
     
     NSString *cleanString = [noEscapedString stringByReplacingOccurrencesOfString:GarbageString withString:@""];
     cleanString = [cleanString stringByReplacingOccurrencesOfString:@"\'" withString:@"\""];
-    //NSLog(@"cleanString: %@", cleanString);
+    NSLog(@"cleanString: %@", cleanString);
     
     NSData *data = [cleanString dataUsingEncoding:NSUTF8StringEncoding];
     NSError *error = nil;
@@ -86,21 +86,26 @@ static NSString *CategoryArrayKey = @"Categories";
     NSArray *outerArray = [self prepareForParse:responseObject];
     self.shops = [[NSMutableArray alloc] init];
     NSMutableDictionary *storeDict;
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"URLs" ofType:@"plist"];
+    NSArray *urlArray = [NSArray arrayWithContentsOfFile:path];
+    NSString *baseURLString = (NSString *)[[urlArray objectAtIndex:0] objectForKey:@"url"];
     
     for(NSArray *innerArray in outerArray)
     {
         storeDict = [[NSMutableDictionary alloc] init];
         
-        [storeDict setObject:[innerArray objectAtIndex:0] forKey:StoreIDKey];
-        [storeDict setObject:[innerArray objectAtIndex:1] forKey:StoreNameKey];
-        [storeDict setObject:[innerArray objectAtIndex:2] forKey:StoreSNameKey];
-        [storeDict setObject:[innerArray objectAtIndex:3] forKey:StoreTypeKey];
-        [storeDict setObject:[innerArray objectAtIndex:4] forKey:StoreOfCommunityKey];
-        [storeDict setObject:[innerArray objectAtIndex:5] forKey:StoreAddrCountryKey];
-        [storeDict setObject:[innerArray objectAtIndex:6] forKey:StoreAddrProviceKey];
-        [storeDict setObject:[innerArray objectAtIndex:7] forKey:StoreAddrCityKey];
-        [storeDict setObject:[innerArray objectAtIndex:8] forKey:StoreAddrStreetKey];
-        [storeDict setObject:[innerArray objectAtIndex:9] forKey:StoreStatusKey];
+        //[storeDict setObject:[innerArray objectAtIndex:0] forKey:StoreImageKey];
+        [storeDict setObject:[baseURLString stringByAppendingPathComponent:[innerArray objectAtIndex:0]] forKey:StoreImageKey];
+        [storeDict setObject:[innerArray objectAtIndex:1] forKey:StoreIDKey];
+        [storeDict setObject:[innerArray objectAtIndex:2] forKey:StoreNameKey];
+        [storeDict setObject:[innerArray objectAtIndex:3] forKey:StoreSNameKey];
+        [storeDict setObject:[innerArray objectAtIndex:4] forKey:StoreTypeKey];
+        [storeDict setObject:[innerArray objectAtIndex:5] forKey:StoreOfCommunityKey];
+        [storeDict setObject:[innerArray objectAtIndex:6] forKey:StoreAddrCountryKey];
+        [storeDict setObject:[innerArray objectAtIndex:7] forKey:StoreAddrProviceKey];
+        [storeDict setObject:[innerArray objectAtIndex:8] forKey:StoreAddrCityKey];
+        [storeDict setObject:[innerArray objectAtIndex:9] forKey:StoreAddrStreetKey];
+        [storeDict setObject:[innerArray objectAtIndex:10] forKey:StoreStatusKey];
         
         [self.shops addObject:storeDict];
     }

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+static NSString *StoreImageKey = @"image";
 static NSString *StoreIDKey = @"ID";
 static NSString *StoreNameKey = @"name";
 static NSString *StoreSNameKey = @"shortname";

@@ -10,6 +10,7 @@
 #import "BFPreferenceData.h"
 #import "DataModel.h"
 #import "AppDelegate.h"
+#import "UIKit+AFNetworking.h"
 
 #import "defs.h"
 
@@ -35,10 +36,8 @@
 {
 #warning 目前只涵盖屏幕宽度为320，其他宽度的屏幕尺寸待完成
     
-    //NSArray *array = [BFPreferenceData loadTestDataArray];
     DataModel *dataModel = [[DataModel alloc] init];
     [dataModel loadDataModelLocally];
-    //NSLog(@"12345: %@", dataModel.shops);
     
     NSInteger batchIndex = [[NSUserDefaults standardUserDefaults] integerForKey:LoadContentBatchIndexKey];
     NSLog(@"batchIndex#: %ld", (long)batchIndex);
@@ -57,18 +56,17 @@
     int row = 0;
     int column = 0;
     
-    //if([array count] >= batchIndex * TotalItemsPerBatch)
     if([dataModel.shops count] >= batchIndex * TotalItemsPerBatch)
         maxIndex = batchIndex * TotalItemsPerBatch;
     else
-        //maxIndex = [array count];
         maxIndex = [dataModel.shops count];
     
     for(int i = 0; i < maxIndex; i++)
     {
         UIView *itemView = [[UIView alloc] init];
         itemView.frame = CGRectMake(column * (itemWidth + 12) + 12, y, itemWidth, itemHeight);
-        itemView.backgroundColor = [UIColor yellowColor];
+        itemView.layer.borderColor = [UIColor blackColor].CGColor;
+        itemView.layer.borderWidth = 0.5;
         itemView.tag = index;
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(itemClicked:)];
         //tapGesture.delegate = self;
@@ -81,14 +79,14 @@
         
         imageView.frame = CGRectMake(itemView.bounds.origin.x, itemView.bounds.origin.y, imageViewWidth, imageViewHeight);
         label.frame = CGRectMake(itemView.bounds.origin.x, itemView.bounds.origin.y + imageViewHeight, itemView.bounds.size.width, itemHeight - imageViewHeight);
-        //label.text = [array objectAtIndex:i];
         label.text = [[dataModel.shops objectAtIndex:i] objectForKey:@"name"];
         label.textAlignment = NSTextAlignmentCenter;
         
         //http://stackoverflow.com/questions/9907100/issues-with-setting-some-different-font-for-uilabel
         label.font = [UIFont fontWithName:@"STHeitiSC-Light" size:10];
         
-        imageView.image = [UIImage imageNamed:@"Default_142x142"];
+        NSString *imageURLString = [[dataModel.shops objectAtIndex:i] objectForKey:@"image"];
+        [imageView setImageWithURL:[NSURL URLWithString:imageURLString] placeholderImage:[UIImage imageNamed:@"Default_142x142"]];
         
         
         [itemView addSubview:imageView];
