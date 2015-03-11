@@ -8,6 +8,8 @@
 
 #import "ShopsAndProductsCell.h"
 #import "BFPreferenceData.h"
+#import "DataModel.h"
+#import "AppDelegate.h"
 
 #import "defs.h"
 
@@ -33,7 +35,11 @@
 {
 #warning 目前只涵盖屏幕宽度为320，其他宽度的屏幕尺寸待完成
     
-    NSArray *array = [BFPreferenceData loadTestDataArray];
+    //NSArray *array = [BFPreferenceData loadTestDataArray];
+    DataModel *dataModel = [[DataModel alloc] init];
+    [dataModel loadDataModelLocally];
+    //NSLog(@"12345: %@", dataModel.shops);
+    
     NSInteger batchIndex = [[NSUserDefaults standardUserDefaults] integerForKey:LoadContentBatchIndexKey];
     NSLog(@"batchIndex#: %ld", (long)batchIndex);
     
@@ -51,10 +57,12 @@
     int row = 0;
     int column = 0;
     
-    if([array count] >= batchIndex * TotalItemsPerBatch)
+    //if([array count] >= batchIndex * TotalItemsPerBatch)
+    if([dataModel.shops count] >= batchIndex * TotalItemsPerBatch)
         maxIndex = batchIndex * TotalItemsPerBatch;
     else
-        maxIndex = [array count];
+        //maxIndex = [array count];
+        maxIndex = [dataModel.shops count];
     
     for(int i = 0; i < maxIndex; i++)
     {
@@ -73,7 +81,8 @@
         
         imageView.frame = CGRectMake(itemView.bounds.origin.x, itemView.bounds.origin.y, imageViewWidth, imageViewHeight);
         label.frame = CGRectMake(itemView.bounds.origin.x, itemView.bounds.origin.y + imageViewHeight, itemView.bounds.size.width, itemHeight - imageViewHeight);
-        label.text = [array objectAtIndex:i];
+        //label.text = [array objectAtIndex:i];
+        label.text = [[dataModel.shops objectAtIndex:i] objectForKey:@"name"];
         label.textAlignment = NSTextAlignmentCenter;
         
         //http://stackoverflow.com/questions/9907100/issues-with-setting-some-different-font-for-uilabel

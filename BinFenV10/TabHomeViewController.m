@@ -126,10 +126,8 @@ static const NSInteger RefreshSectionIndex = 3;
         NSLog(@"xxx%@", self.dataModel.shops);
         [self.timer invalidate];
         
-        DataModel *newData = [[DataModel alloc] init];
-        NSLog(@"CCC%@", newData.shops);
-        [newData loadDataModelLocally];
-        NSLog(@"zzz%@", newData.shops);
+        NSLog(@"Reloading");
+        [self.otCoverView.tableView reloadData];
     }
 }
 
@@ -396,7 +394,7 @@ static const NSInteger RefreshSectionIndex = 3;
         case RefreshSectionIndex:
         {
             UITableViewCell *cell = [[UITableViewCell alloc] init];
-            cell.textLabel.text = @"Click to Refresh";
+            cell.textLabel.text = @"加载更多";
             return cell;
         }
     
@@ -428,19 +426,22 @@ static const NSInteger RefreshSectionIndex = 3;
         case ShopsTableSectionIndex:
         {
             NSInteger batchIndex = [[NSUserDefaults standardUserDefaults] integerForKey:LoadContentBatchIndexKey];
-            NSArray *array = [BFPreferenceData loadTestDataArray];
-            if(array == nil || [array count] == 0)
+            //NSArray *array = [BFPreferenceData loadTestDataArray];
+            //if(array == nil || [array count] == 0)
+            if([self.dataModel.shops count] == 0)
             {
                 return 0;
             }
-            if([array count] >= batchIndex * TotalItemsPerBatch)
+            //if([array count] >= batchIndex * TotalItemsPerBatch)
+            if([self.dataModel.shops count] >= batchIndex * TotalItemsPerBatch)
             {
-                //NSLog(@"TotalRows: %d", batchIndex * TotalRowsPerBatch);
+                NSLog(@"TotalRows: %d", batchIndex * TotalRowsPerBatch);
                 return batchIndex * TotalRowsPerBatch * HeightOfItemInShopsTableCell;
             }
             else // 0 < count < batchIndex * TotalItemsPerBatch
             {
-                NSInteger totalRows = ([array count] - 1) / 2 + 1;
+                //NSInteger totalRows = ([array count] - 1) / 2 + 1;
+                NSInteger totalRows = ([self.dataModel.shops count] - 1) / 2 + 1;
                 NSLog(@"TotalRows: %ld", (long)totalRows);
                 return totalRows * HeightOfItemInShopsTableCell;
             }
@@ -454,21 +455,28 @@ static const NSInteger RefreshSectionIndex = 3;
 
 - (void)loadNextBatchShops
 {
-    NSArray *array = [BFPreferenceData loadTestDataArray];
+    //NSArray *array = [BFPreferenceData loadTestDataArray];
     NSInteger batchIndex = [[NSUserDefaults standardUserDefaults] integerForKey:LoadContentBatchIndexKey];
 
-    if(batchIndex * TotalItemsPerBatch < [array count])
+    //if(batchIndex * TotalItemsPerBatch < [array count])
+    if((batchIndex * TotalItemsPerBatch) < [self.dataModel.shops count])
     {
         batchIndex++;
         [[NSUserDefaults standardUserDefaults] setInteger:batchIndex forKey:LoadContentBatchIndexKey];
         NSLog(@"batchIndex in load...: %ld", (long)batchIndex);
         [self.otCoverView.tableView reloadData];
+    } else {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:RefreshSectionIndex];
+        UITableViewCell *cell = [self.otCoverView.tableView cellForRowAtIndexPath:indexPath];
+        cell.textLabel.text = @"没有更多了";
     }
 }
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     if(indexPath.section == RefreshSectionIndex)
     {
         [self loadNextBatchShops];

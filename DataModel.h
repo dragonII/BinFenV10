@@ -12,6 +12,7 @@ static NSString *StoreIDKey = @"ID";
 static NSString *StoreNameKey = @"name";
 static NSString *StoreSNameKey = @"shortname";
 static NSString *StoreTypeKey = @"type";
+static NSString *StoreOfCommunityKey = @"community";
 static NSString *StoreAddrCountryKey = @"country";
 static NSString *StoreAddrProviceKey = @"province";
 static NSString *StoreAddrCityKey = @"city";

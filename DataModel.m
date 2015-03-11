@@ -85,45 +85,32 @@ static NSString *CategoryArrayKey = @"Categories";
 {
     NSArray *outerArray = [self prepareForParse:responseObject];
     self.shops = [[NSMutableArray alloc] init];
-    NSMutableDictionary *storeDict = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *storeDict;
     
     for(NSArray *innerArray in outerArray)
     {
+        storeDict = [[NSMutableDictionary alloc] init];
+        
         [storeDict setObject:[innerArray objectAtIndex:0] forKey:StoreIDKey];
         [storeDict setObject:[innerArray objectAtIndex:1] forKey:StoreNameKey];
         [storeDict setObject:[innerArray objectAtIndex:2] forKey:StoreSNameKey];
         [storeDict setObject:[innerArray objectAtIndex:3] forKey:StoreTypeKey];
-        [storeDict setObject:[innerArray objectAtIndex:4] forKey:StoreAddrCountryKey];
-        [storeDict setObject:[innerArray objectAtIndex:5] forKey:StoreAddrProviceKey];
-        [storeDict setObject:[innerArray objectAtIndex:6] forKey:StoreAddrCityKey];
-        [storeDict setObject:[innerArray objectAtIndex:7] forKey:StoreAddrStreetKey];
-        [storeDict setObject:[innerArray objectAtIndex:8] forKey:StoreStatusKey];
+        [storeDict setObject:[innerArray objectAtIndex:4] forKey:StoreOfCommunityKey];
+        [storeDict setObject:[innerArray objectAtIndex:5] forKey:StoreAddrCountryKey];
+        [storeDict setObject:[innerArray objectAtIndex:6] forKey:StoreAddrProviceKey];
+        [storeDict setObject:[innerArray objectAtIndex:7] forKey:StoreAddrCityKey];
+        [storeDict setObject:[innerArray objectAtIndex:8] forKey:StoreAddrStreetKey];
+        [storeDict setObject:[innerArray objectAtIndex:9] forKey:StoreStatusKey];
         
         [self.shops addObject:storeDict];
     }
     
-    //NSLog(@"YYY%@", self.shops);
     [self saveDataModel];
-    
-    NSLog(@"2222222222222");
 }
 
 - (void)loadDataModelRemotely
 {
     _retrieveGroup = dispatch_group_create();
-    /*
-    dispatch_group_enter(_retrieveGroup);
-    
-    [self.httpSessionManager GET:@"myinfo/shopinfolist_json.ds"
-                      parameters:nil
-                         success:^(NSURLSessionDataTask *task, id responseObject) {
-                             [self parseStoreJson:responseObject];
-                             dispatch_group_leave(_retrieveGroup);
-                         }failure:^(NSURLSessionDataTask *task, NSError *error) {
-                             NSLog(@"Error: %@", [error localizedDescription]);
-                             dispatch_group_leave(_retrieveGroup);
-                         }];
-     */
     
     // Here we wait for all the requests to finish
     dispatch_group_notify(_retrieveGroup, dispatch_get_main_queue(), ^{
@@ -138,7 +125,6 @@ static NSString *CategoryArrayKey = @"Categories";
                                  //dispatch_group_leave(_retrieveGroup);
                              }];
     });
-    NSLog(@"11111111111111111");
 }
 
 - (void)loadDataModelLocally

@@ -22,8 +22,8 @@
 {
     NSString *path = [[NSBundle mainBundle] pathForResource:@"URLs" ofType:@"plist"];
     NSArray *urlArray = [NSArray arrayWithContentsOfFile:path];
-    //NSString *baseURLString = (NSString *)[[urlArray objectAtIndex:0] objectForKey:@"url"];
-    NSString *baseURLString = (NSString *)[[urlArray objectAtIndex:0] objectForKey:@"backup"];
+    NSString *baseURLString = (NSString *)[[urlArray objectAtIndex:0] objectForKey:@"url"];
+    //NSString *baseURLString = (NSString *)[[urlArray objectAtIndex:0] objectForKey:@"backup"];
     
     static AFHTTPSessionManager *shared = nil;
     static dispatch_once_t onceToken;
