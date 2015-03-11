@@ -58,13 +58,17 @@ static const NSInteger RefreshSectionIndex = 3;
 @property (strong, nonatomic) NSArray *communitiesDataList;
 @property (strong, nonatomic) NSMutableArray *communitiyIndexArray; //用来记录哪个CollectionCell被选择
 @property (strong, nonatomic) NSArray *categoriesDataList;
-@property (strong, nonatomic) NSArray *shopsDataList;
+//@property (strong, nonatomic) NSArray *shopsDataList;
 
 @property (assign, nonatomic) NSInteger categoryButtonIndex;
 
 @property (strong, nonatomic) AFHTTPSessionManager *httpSessionManager;
 
 @property (strong, nonatomic) NSTimer *timer;
+
+//@property (copy, nonatomic) NSString *selectedCommunityName;
+//@property (copy, nonatomic) NSString *selectedCommunityID;
+@property (assign, nonatomic) NSInteger selectedCommunityIndex;
 
 @end
 
@@ -119,14 +123,20 @@ static const NSInteger RefreshSectionIndex = 3;
                                 @"Cate11"];
 }
 
-- (void)load
+- (void)loadingData
 {
-    if(self.dataModel.loadFinished == YES)
+    if(self.dataModel.loadShopsFinished == YES &&
+       self.dataModel.loadCommunitiesFinished == YES)
     {
-        NSLog(@"xxx%@", self.dataModel.shops);
+        //NSLog(@"xxxshops:%@", self.dataModel.shops);
+        //NSLog(@"xxxcommunities:%@", self.dataModel.communities);
         [self.timer invalidate];
         
         NSLog(@"Reloading");
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:CommunityTableSectionIndex];
+        CommunityTableViewCell *cell = (CommunityTableViewCell *)[self.otCoverView.tableView cellForRowAtIndexPath:indexPath];
+        [cell.collectionView reloadData];
+        
         [self.otCoverView.tableView reloadData];
     }
 }
@@ -135,12 +145,7 @@ static const NSInteger RefreshSectionIndex = 3;
 {
     [self.dataModel loadDataModelRemotely];
     
-    //NSLog(@"xxx%@", self.dataModel.shops);
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1
-                                                      target:self
-                                                    selector:@selector(load)
-                                                    userInfo:nil repeats:YES];
-    
+    /*
     NSMutableArray *array = [[NSMutableArray alloc] init];
     for(int i = 0; i < 51; i++)
     {
@@ -149,6 +154,7 @@ static const NSInteger RefreshSectionIndex = 3;
     
     self.shopsDataList = [NSArray arrayWithArray:array];
     [BFPreferenceData saveTestDataArray:array];
+     */
 }
 
 - (void)loadAllData
@@ -156,9 +162,18 @@ static const NSInteger RefreshSectionIndex = 3;
     //self.httpSessionManager = [AppDelegate sharedHttpSessionManager];
     self.dataModel = [[DataModel alloc] init];
     
+    
     [self initCommunitiesData];
     [self initCategoriesData];
     [self initShopsData];
+     
+    
+    [self.dataModel loadDataModelRemotely];
+    
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1
+                                                  target:self
+                                                selector:@selector(loadingData)
+                                                userInfo:nil repeats:YES];
 }
 
 - (void)initCommunityTableRow
@@ -256,7 +271,8 @@ static const NSInteger RefreshSectionIndex = 3;
 #pragma UICollectionDelegate, DataSource and Flow
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return [self.communitiesDataList count];
+    //return [self.communitiesDataList count];
+    return [self.dataModel.communities count];
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -267,13 +283,9 @@ static const NSInteger RefreshSectionIndex = 3;
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     CommunityCollectionViewCell *cell = (CommunityCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:CommunityCollectionCellIdentifier forIndexPath:indexPath];
-    if([self.communitiyIndexArray containsObject:indexPath])
-    {
-        //cell.imageView.image = [UIImage imageNamed:@"120x160_2"];
-    } else {
-        //cell.imageView.image = [UIImage imageNamed:@"CellPlaceHolder"];
-    }
-    cell.text = [self.communitiesDataList objectAtIndex:indexPath.row];
+    
+    //cell.text = [self.communitiesDataList objectAtIndex:indexPath.row];
+    cell.text = [[self.dataModel.communities objectAtIndex:indexPath.row] objectForKey:@"name"];
     return cell;
 }
 
@@ -297,14 +309,12 @@ static const NSInteger RefreshSectionIndex = 3;
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     CommunityCollectionViewCell *cell = (CommunityCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    if([self.communitiyIndexArray containsObject:indexPath])
+    if(![self.communitiyIndexArray containsObject:indexPath])
     {
-        //cell.imageView.image = [UIImage imageNamed:@"CellPlaceHolder"];
-    } else {
         [self.communitiyIndexArray addObject:indexPath];
-        //cell.imageView.image = [UIImage imageNamed:@"120x160_2"];
     }
-    
+
+    self.selectedCommunityIndex = indexPath.row;
     [self performSegueWithIdentifier:@"ShowCommunitySegue" sender:self];
 }
 
@@ -323,9 +333,8 @@ static const NSInteger RefreshSectionIndex = 3;
 
 - (void)configureCollectionViewInCommunityTableCell:(CommunityTableViewCell *)cell
 {
-    //cell.contentView.backgroundColor = [UIColor lightGrayColor];
-    cell.collectionView.delegate = self;//.collectionDelegates;
-    cell.collectionView.dataSource = self;//.collectionDelegates;
+    cell.collectionView.delegate = self;
+    cell.collectionView.dataSource = self;
     cell.collectionView.backgroundColor = [UIColor clearColor];
     cell.collectionView.showsHorizontalScrollIndicator = NO;
     
@@ -383,7 +392,7 @@ static const NSInteger RefreshSectionIndex = 3;
                 cell = [[ShopsAndProductsCell alloc] init];
             }
             
-            [cell initShopItems];
+            [cell initShopItemsByCommunityIndex:-1];
             
             cell.segueDelegate = self;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -581,6 +590,8 @@ static const NSInteger RefreshSectionIndex = 3;
     if([segue.identifier isEqualToString:@"ShowCommunitySegue"])
     {
         CommunityViewController *communityVC = (CommunityViewController *)segue.destinationViewController;
+        //communityVC.communityTitleString = [self.selectedCommunityName copy];
+        communityVC.communityIndex = self.selectedCommunityIndex;
         communityVC.hidesBottomBarWhenPushed = YES;
         communityVC.categoriesListArray = self.categoriesDataList;
         //[self showNavigationItem];

@@ -13,6 +13,7 @@
 #import "MLKMenuPopover.h"
 #import "ShopViewController.h"
 #import "defs.h"
+#import "DataModel.h"
 
 #import "DeviceHardware.h"
 
@@ -29,6 +30,10 @@ static const int SectionLoadMore = 2;
 @property (strong, nonatomic) MLKMenuPopover *categoryPopover;
 
 @property (assign, nonatomic) NSInteger categoryButtonIndex;
+
+@property (strong, nonatomic) DataModel *dataModel;
+
+@property (strong, nonatomic) NSMutableArray *shops;
 
 @end
 
@@ -78,21 +83,47 @@ static const int SectionLoadMore = 2;
     [self.view addSubview:self.tableView];
 }
 
+- (void)loadShopsOfThisCommunity
+{
+    self.shops = [[NSMutableArray alloc] init];
+    
+    
+    NSString *communityID = [[self.dataModel.communities objectAtIndex:self.communityIndex] objectForKey:@"ID"];
+    self.shops = [[NSMutableArray alloc] init];
+    
+    for(int i = 0; i < [self.dataModel.shops count]; i++)
+    {
+        NSString *communityIDInShop = [[self.dataModel.shops objectAtIndex:i] objectForKey:@"community"];
+        if([communityIDInShop isEqualToString:communityID])
+        {
+            [self.shops addObject:[self.dataModel.shops objectAtIndex:i]];
+        }
+    }
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.dataModel = [[DataModel alloc] init];
+    [self.dataModel loadDataModelLocally];
+    
+    [self loadShopsOfThisCommunity];
     
     [self initTableView];
     
     [self initTableRowWithScroll];
     
-    self.navigationItem.title = @"具体社区名称";
+    //self.navigationItem.title = @"具体社区名称";
     self.hidesBottomBarWhenPushed = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    NSString *communityTitle = [[self.dataModel.communities objectAtIndex:self.communityIndex] objectForKey:@"name"];
+    self.navigationItem.title = communityTitle;
 }
 
 - (void)initTableRowWithScroll
@@ -157,7 +188,7 @@ static const int SectionLoadMore = 2;
                 cell = [[ShopsAndProductsCell alloc] init];
             }
             
-            [cell initShopItems];
+            [cell initShopItemsByCommunityIndex:self.communityIndex];
             
             cell.segueDelegate = self;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -168,7 +199,7 @@ static const int SectionLoadMore = 2;
         case SectionLoadMore:
         {
             UITableViewCell *cell = [[UITableViewCell alloc] init];
-            cell.textLabel.text = @"Click to Refresh";
+            cell.textLabel.text = @"加载更多";
             return cell;
         }
             
@@ -179,21 +210,27 @@ static const int SectionLoadMore = 2;
 
 - (void)loadNextBatchShops
 {
-    NSArray *array = [BFPreferenceData loadTestDataArray];
+    //NSArray *array = [BFPreferenceData loadTestDataArray];
     NSInteger batchIndex = [[NSUserDefaults standardUserDefaults] integerForKey:LoadContentBatchIndexKey];
     
-    if(batchIndex * TotalItemsPerBatch < [array count])
+    if(batchIndex * TotalItemsPerBatch < [self.shops count])
     {
         batchIndex++;
         [[NSUserDefaults standardUserDefaults] setInteger:batchIndex forKey:LoadContentBatchIndexKey];
         NSLog(@"batchIndex in load...: %ld", (long)batchIndex);
         [self.tableView reloadData];
+    } else {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:SectionLoadMore];
+        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+        cell.textLabel.text = @"没有更多了";
     }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.section == 2)
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if(indexPath.section == SectionLoadMore)
     {
         [self loadNextBatchShops];
     }
@@ -210,19 +247,22 @@ static const int SectionLoadMore = 2;
         case SectionShops:
         {
             NSInteger batchIndex = [[NSUserDefaults standardUserDefaults] integerForKey:LoadContentBatchIndexKey];
-            NSArray *array = [BFPreferenceData loadTestDataArray];
-            if(array == nil || [array count] == 0)
+            //NSArray *array = [BFPreferenceData loadTestDataArray];
+            //if(array == nil || [array count] == 0)
+            if([self.shops count] == 0)
             {
                 return 0;
             }
-            if([array count] >= batchIndex * TotalItemsPerBatch)
+            //if([array count] >= batchIndex * TotalItemsPerBatch)
+            if([self.shops count] >= batchIndex * TotalItemsPerBatch)
             {
                 //NSLog(@"TotalRows: %ld", batchIndex * TotalRowsPerBatch);
                 return batchIndex * TotalRowsPerBatch * HeightOfItemInShopsTableCell;
             }
             else // 0 < count < batchIndex * TotalItemsPerBatch
             {
-                NSInteger totalRows = ([array count] - 1) / 2 + 1;
+                //NSInteger totalRows = ([array count] - 1) / 2 + 1;
+                NSInteger totalRows = ([self.shops count] - 1) / 2 + 1;
                 NSLog(@"TotalRows: %ld", (long)totalRows);
                 return totalRows * HeightOfItemInShopsTableCell;
             }

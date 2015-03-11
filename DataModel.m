@@ -29,7 +29,8 @@ static NSString *CategoryArrayKey = @"Categories";
     self = [super init];
     if (self)
     {
-        self.loadFinished = NO;
+        self.loadShopsFinished = NO;
+        self.loadCommunitiesFinished = NO;
         self.httpSessionManager = [AppDelegate sharedHttpSessionManager];
     }
     return self;
@@ -81,35 +82,63 @@ static NSString *CategoryArrayKey = @"Categories";
     return outerArray;
 }
 
-- (void)parseStoreJson:(id)responseObject
+- (void)parseShopJson:(id)responseObject
 {
     NSArray *outerArray = [self prepareForParse:responseObject];
     self.shops = [[NSMutableArray alloc] init];
-    NSMutableDictionary *storeDict;
+    NSMutableDictionary *shopDict;
     NSString *path = [[NSBundle mainBundle] pathForResource:@"URLs" ofType:@"plist"];
     NSArray *urlArray = [NSArray arrayWithContentsOfFile:path];
     NSString *baseURLString = (NSString *)[[urlArray objectAtIndex:0] objectForKey:@"url"];
     
     for(NSArray *innerArray in outerArray)
     {
-        storeDict = [[NSMutableDictionary alloc] init];
+        shopDict = [[NSMutableDictionary alloc] init];
         
         //[storeDict setObject:[innerArray objectAtIndex:0] forKey:StoreImageKey];
-        [storeDict setObject:[baseURLString stringByAppendingPathComponent:[innerArray objectAtIndex:0]] forKey:StoreImageKey];
-        [storeDict setObject:[innerArray objectAtIndex:1] forKey:StoreIDKey];
-        [storeDict setObject:[innerArray objectAtIndex:2] forKey:StoreNameKey];
-        [storeDict setObject:[innerArray objectAtIndex:3] forKey:StoreSNameKey];
-        [storeDict setObject:[innerArray objectAtIndex:4] forKey:StoreTypeKey];
-        [storeDict setObject:[innerArray objectAtIndex:5] forKey:StoreOfCommunityKey];
-        [storeDict setObject:[innerArray objectAtIndex:6] forKey:StoreAddrCountryKey];
-        [storeDict setObject:[innerArray objectAtIndex:7] forKey:StoreAddrProviceKey];
-        [storeDict setObject:[innerArray objectAtIndex:8] forKey:StoreAddrCityKey];
-        [storeDict setObject:[innerArray objectAtIndex:9] forKey:StoreAddrStreetKey];
-        [storeDict setObject:[innerArray objectAtIndex:10] forKey:StoreStatusKey];
+        [shopDict setObject:[baseURLString stringByAppendingPathComponent:[innerArray objectAtIndex:0]] forKey:StoreImageKey];
+        [shopDict setObject:[innerArray objectAtIndex:1] forKey:StoreIDKey];
+        [shopDict setObject:[innerArray objectAtIndex:2] forKey:StoreNameKey];
+        [shopDict setObject:[innerArray objectAtIndex:3] forKey:StoreSNameKey];
+        [shopDict setObject:[innerArray objectAtIndex:4] forKey:StoreTypeKey];
+        [shopDict setObject:[innerArray objectAtIndex:5] forKey:StoreOfCommunityKey];
+        [shopDict setObject:[innerArray objectAtIndex:6] forKey:StoreAddrCountryKey];
+        [shopDict setObject:[innerArray objectAtIndex:7] forKey:StoreAddrProviceKey];
+        [shopDict setObject:[innerArray objectAtIndex:8] forKey:StoreAddrCityKey];
+        [shopDict setObject:[innerArray objectAtIndex:9] forKey:StoreAddrStreetKey];
+        [shopDict setObject:[innerArray objectAtIndex:10] forKey:StoreStatusKey];
         
-        [self.shops addObject:storeDict];
+        [self.shops addObject:shopDict];
     }
     
+    NSLog(@"shop: %@", self.shops);
+    
+    [self saveDataModel];
+}
+
+- (void)parseCommunityJson:(id)responseObject
+{
+    NSArray *outerArray = [self prepareForParse:responseObject];
+    self.communities = [[NSMutableArray alloc] init];
+    NSMutableDictionary *communityDict;
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"URLs" ofType:@"plist"];
+    NSArray *urlArray = [NSArray arrayWithContentsOfFile:path];
+    NSString *baseURLString = (NSString *)[[urlArray objectAtIndex:0] objectForKey:@"url"];
+    
+    for(NSArray *innerArray in outerArray)
+    {
+        communityDict = [[NSMutableDictionary alloc] init];
+        
+        //[communityDict setObject:[baseURLString stringByAppendingPathComponent:[innerArray objectAtIndex:0]] forKey:StoreImageKey];
+        [communityDict setObject:[innerArray objectAtIndex:0] forKey:CommunityIDKey];
+        [communityDict setObject:[innerArray objectAtIndex:1] forKey:CommunityNameKey];
+        [communityDict setObject:[innerArray objectAtIndex:2] forKey:CommunityAreaKey];
+        [communityDict setObject:[innerArray objectAtIndex:3] forKey:CommunityDescKey];
+        [communityDict setObject:[innerArray objectAtIndex:4] forKey:CommunityImageKey];
+        
+        [self.communities addObject:communityDict];
+    }
+    NSLog(@"communities: %@", self.communities);
     [self saveDataModel];
 }
 
@@ -117,20 +146,45 @@ static NSString *CategoryArrayKey = @"Categories";
 {
     _retrieveGroup = dispatch_group_create();
     
-    // Here we wait for all the requests to finish
+    [self loadShopsData];
+    [self loadCommunitiesData];
+    
+    //[self saveDataModel];
+}
+
+- (void)loadShopsData
+{
     dispatch_group_notify(_retrieveGroup, dispatch_get_main_queue(), ^{
         [self.httpSessionManager GET:@"myinfo/shopinfolist_json.ds"
                           parameters:nil
                              success:^(NSURLSessionDataTask *task, id responseObject) {
-                                 [self parseStoreJson:responseObject];
+                                 [self parseShopJson:responseObject];
                                  //dispatch_group_leave(_retrieveGroup);
-                                 _loadFinished = YES;
+                                 _loadShopsFinished = YES;
                              }failure:^(NSURLSessionDataTask *task, NSError *error) {
                                  NSLog(@"Error: %@", [error localizedDescription]);
                                  //dispatch_group_leave(_retrieveGroup);
                              }];
     });
 }
+
+- (void)loadCommunitiesData
+{
+    dispatch_group_notify(_retrieveGroup, dispatch_get_main_queue(), ^{
+        [self.httpSessionManager GET:@"community/communitylist_json.ds"
+                          parameters:nil
+                             success:^(NSURLSessionDataTask *task, id responseObject) {
+                                 [self parseCommunityJson:responseObject];
+                                 //dispatch_group_leave(_retrieveGroup);
+                                 _loadCommunitiesFinished = YES;
+                             }failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                 NSLog(@"Error: %@", [error localizedDescription]);
+                                 //dispatch_group_leave(_retrieveGroup);
+                             }];
+    });
+}
+
+
 
 - (void)loadDataModelLocally
 {

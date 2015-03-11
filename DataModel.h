@@ -20,6 +20,13 @@ static NSString *StoreAddrCityKey = @"city";
 static NSString *StoreAddrStreetKey = @"street";
 static NSString *StoreStatusKey = @"status";
 
+static NSString *CommunityIDKey = @"ID";
+static NSString *CommunityNameKey = @"name";
+static NSString *CommunityAreaKey = @"area";
+static NSString *CommunityDescKey = @"description";
+static NSString *CommunityImageKey = @"image";
+
+
 @class AFHTTPSessionManager;
 
 @class CommunityData;
@@ -28,7 +35,8 @@ static NSString *StoreStatusKey = @"status";
 
 @interface DataModel : NSObject
 
-@property (assign, nonatomic) BOOL loadFinished;
+@property (assign, nonatomic) BOOL loadShopsFinished;
+@property (assign, nonatomic) BOOL loadCommunitiesFinished;
 
 @property (strong, nonatomic) AFHTTPSessionManager *httpSessionManager;
 

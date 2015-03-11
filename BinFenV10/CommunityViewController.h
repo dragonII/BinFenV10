@@ -11,5 +11,8 @@
 @interface CommunityViewController : UIViewController 
 
 @property (strong, nonatomic) NSArray *categoriesListArray;
+//@property (copy, nonatomic) NSString *communityTitleString;
+@property (assign, nonatomic) NSInteger communityIndex;
+//@property (copy, nonatomic) NSString *communityID;
 
 @end

@@ -40,12 +40,56 @@
     }
 }
 
-- (void)initShopItems
+- (void)initShopItemsByCommunityIndex:(int)communityIndex
+{
+    if(communityIndex < 0)
+    {
+        //[self loadAllShops];
+        [self loadAllShops];
+    } else {
+        [self loadShopsByCommunity:communityIndex];
+    }
+    
+    [self showingShopsInView];
+}
+
+- (void)loadAllShops
+{
+    self.dataModel = [[DataModel alloc] init];
+    [self.dataModel loadDataModelLocally];
+    
+    self.shops = [NSMutableArray arrayWithArray:self.dataModel.shops];
+    
+    //NSLog(@"self.shops (ALL): %@", self.shops);
+}
+
+- (void)loadShopsByCommunity:(int)comminityIndex
+{
+    self.dataModel = [[DataModel alloc] init];
+    [self.dataModel loadDataModelLocally];
+    
+    NSString *communityID = [[self.dataModel.communities objectAtIndex:comminityIndex] objectForKey:@"ID"];
+    self.shops = [[NSMutableArray alloc] init];
+    
+    for(int i = 0; i < [self.dataModel.shops count]; i++)
+    {
+        NSString *communityIDInShop = [[self.dataModel.shops objectAtIndex:i] objectForKey:@"community"];
+        if([communityIDInShop isEqualToString:communityID])
+        {
+            [self.shops addObject:[self.dataModel.shops objectAtIndex:i]];
+        }
+    }
+    
+    //NSLog(@"self.shops (ID): %@", self.shops);
+}
+
+//- (void)initShopItems:(int)communityIndex
+- (void)showingShopsInView
 {
 #warning 目前只涵盖屏幕宽度为320，其他宽度的屏幕尺寸待完成
     
-    self.dataModel = [[DataModel alloc] init];
-    [self.dataModel loadDataModelLocally];
+    //self.dataModel = [[DataModel alloc] init];
+    //[self.dataModel loadDataModelLocally];
     
     NSInteger batchIndex = [[NSUserDefaults standardUserDefaults] integerForKey:LoadContentBatchIndexKey];
     NSLog(@"batchIndex#: %ld", (long)batchIndex);
@@ -64,10 +108,12 @@
     int row = 0;
     int column = 0;
     
-    if([self.dataModel.shops count] >= batchIndex * TotalItemsPerBatch)
+    //if([self.dataModel.shops count] >= batchIndex * TotalItemsPerBatch)
+    if([self.shops count] >= batchIndex * TotalItemsPerBatch)
         maxIndex = batchIndex * TotalItemsPerBatch;
     else
-        maxIndex = [self.dataModel.shops count];
+        //maxIndex = [self.dataModel.shops count];
+        maxIndex = [self.shops count];
     
     for(int i = 0; i < maxIndex; i++)
     {
@@ -87,13 +133,15 @@
         
         imageView.frame = CGRectMake(itemView.bounds.origin.x, itemView.bounds.origin.y, imageViewWidth, imageViewHeight);
         label.frame = CGRectMake(itemView.bounds.origin.x, itemView.bounds.origin.y + imageViewHeight, itemView.bounds.size.width, itemHeight - imageViewHeight);
-        label.text = [[self.dataModel.shops objectAtIndex:i] objectForKey:@"name"];
+        //label.text = [[self.dataModel.shops objectAtIndex:i] objectForKey:@"name"];
+        label.text = [[self.shops objectAtIndex:i] objectForKey:@"name"];
         label.textAlignment = NSTextAlignmentCenter;
         
         //http://stackoverflow.com/questions/9907100/issues-with-setting-some-different-font-for-uilabel
         label.font = [UIFont fontWithName:@"STHeitiSC-Light" size:10];
         
-        NSString *imageURLString = [[self.dataModel.shops objectAtIndex:i] objectForKey:@"image"];
+        //NSString *imageURLString = [[self.dataModel.shops objectAtIndex:i] objectForKey:@"image"];
+        NSString *imageURLString = [[self.shops objectAtIndex:i] objectForKey:@"image"];
         [imageView setImageWithURL:[NSURL URLWithString:imageURLString] placeholderImage:[UIImage imageNamed:@"Default_142x142"]];
         
         
