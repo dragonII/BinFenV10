@@ -26,15 +26,31 @@
     //[self initItems];
 }
 
-- (void)itemClicked:(UITapGestureRecognizer*)sender
+- (void)shopItemClicked:(UITapGestureRecognizer*)sender
 {
     UIView *view = (UIView *)sender.view;
     //self.shopID = [NSString stringWithFormat:@"ShopID_%ld", (view.tag - 2000)];
     NSInteger shopIndex = view.tag - 2000;
     self.selectedShopIndex = shopIndex;
     //self.shopID = [[self.dataModel.shops objectAtIndex:shopIndex] copy];
-    self.shopID = [[[self.dataModel.shops objectAtIndex:shopIndex] objectForKey:@"ID"] copy];
+    //self.shopID = [[[self.dataModel.shops objectAtIndex:shopIndex] objectForKey:@"ID"] copy];
     NSLog(@"xx%@", self.shopID);
+    if([self.segueDelegate respondsToSelector:@selector(itemClickedInCell:)])
+    {
+        [self.segueDelegate performSelector:@selector(itemClickedInCell:) withObject:self];
+    }
+}
+
+- (void)productItemClicked:(UITapGestureRecognizer*)sender
+{
+    UIView *view = (UIView *)sender.view;
+    //self.shopID = [NSString stringWithFormat:@"ShopID_%ld", (view.tag - 2000)];
+    NSInteger productIndex = view.tag - 3000;
+    //self.selectedProductIndex = productIndex;
+    //self.shopID = [[self.dataModel.shops objectAtIndex:shopIndex] copy];
+    //self.productID = [[[self.dataModel.shops objectAtIndex:shopIndex] objectForKey:@"ID"] copy];
+    self.productID = [[[self.products objectAtIndex:productIndex] objectForKey:@"ID"] copy];
+    NSLog(@"xx%@", self.productID);
     if([self.segueDelegate respondsToSelector:@selector(itemClickedInCell:)])
     {
         [self.segueDelegate performSelector:@selector(itemClickedInCell:) withObject:self];
@@ -123,7 +139,7 @@
         itemView.layer.borderColor = [UIColor blackColor].CGColor;
         itemView.layer.borderWidth = 0.5;
         itemView.tag = index;
-        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(itemClicked:)];
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shopItemClicked:)];
         //tapGesture.delegate = self;
         tapGesture.numberOfTapsRequired = 1;
         tapGesture.numberOfTouchesRequired = 1;
@@ -241,7 +257,7 @@
         itemView.layer.borderColor = [UIColor blackColor].CGColor;
         itemView.layer.borderWidth = 0.5;
         itemView.tag = index;
-        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(itemClicked:)];
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(productItemClicked:)];
         //tapGesture.delegate = self;
         tapGesture.numberOfTapsRequired = 1;
         tapGesture.numberOfTouchesRequired = 1;

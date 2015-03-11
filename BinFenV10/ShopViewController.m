@@ -16,12 +16,16 @@
 #import "BFPreferenceData.h"
 #import "defs.h"
 
+#import "DataModel.h"
+
 static NSString *CategoryCellIdentifier = @"CategoryCell";
 static NSString *ShopsCellIdentifier = @"ShopsCell";
 
 @interface ShopViewController () <UITableViewDataSource, UITableViewDelegate, ShopsCellSegueDelegate>
 
 @property (strong, nonatomic) UITableView *tableView;
+
+@property (strong, nonatomic) DataModel *dataModel;
 
 @end
 
@@ -100,10 +104,21 @@ static NSString *ShopsCellIdentifier = @"ShopsCell";
 {
     [super viewDidLoad];
     
-    self.navigationItem.title = @"商家店名";
+    self.dataModel = [[DataModel alloc] init];
+    [self.dataModel loadDataModelLocally];
+    
+    //self.navigationItem.title = @"商家店名";
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     [self initTableView];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    NSString *shopName = [[self.dataModel.shops objectAtIndex:self.selectedShopIndex] objectForKey:@"name"];
+    self.navigationItem.title = shopName;
 }
 
 - (void)didReceiveMemoryWarning
@@ -171,6 +186,7 @@ static NSString *ShopsCellIdentifier = @"ShopsCell";
 
 - (void)itemClickedInCell:(ShopsAndProductsCell *)cell
 {
+    NSLog(@"In ShopView");
     [self performSegueWithIdentifier:@"ShowProductSegueFromShop" sender:self];
 }
 

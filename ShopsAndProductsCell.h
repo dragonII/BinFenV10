@@ -27,6 +27,7 @@
 
 @property (copy, nonatomic) NSString *shopID;
 @property (strong, nonatomic) NSMutableArray *shops;
+@property (copy, nonatomic) NSString *productID;
 @property (assign, nonatomic) NSInteger selectedShopIndex;
 
 @property (strong, nonatomic) NSMutableArray *products;
