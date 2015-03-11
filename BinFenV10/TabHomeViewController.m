@@ -383,7 +383,7 @@ static const NSInteger RefreshSectionIndex = 3;
                 cell = [[ShopsAndProductsCell alloc] init];
             }
             
-            [cell initItems];
+            [cell initShopItems];
             
             cell.segueDelegate = self;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;

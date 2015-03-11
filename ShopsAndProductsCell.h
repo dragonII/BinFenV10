@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class ShopsAndProductsCell;
+@class DataModel;
 
 @protocol ShopsCellSegueDelegate <NSObject>
 
@@ -18,7 +19,10 @@
 
 @interface ShopsAndProductsCell : UITableViewCell
 
-- (void)initItems;
+- (void)initShopItems;
+- (void)initProductItems;
+
+@property (strong, nonatomic) DataModel *dataModel;
 
 @property (copy, nonatomic) NSString *shopID;
 
