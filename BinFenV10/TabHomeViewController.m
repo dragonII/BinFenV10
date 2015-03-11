@@ -29,6 +29,7 @@
 #import "AFNetworking.h"
 #import "AppDelegate.h"
 #import "DataModel.h"
+#import "DeviceHardware.h"
 
 
 static NSString *CommunityTableRowCellIdentifier = @"CommunityTableRowCellIdentifier";
@@ -156,12 +157,15 @@ static const NSInteger RefreshSectionIndex = 3;
     [self initShopsData];
      
     
+    /*
     [self.dataModel loadDataModelRemotely];
     
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1
                                                   target:self
                                                 selector:@selector(loadingData)
                                                 userInfo:nil repeats:YES];
+     */
+    [self.dataModel loadDataModelLocally];
 }
 
 - (void)initCommunityTableRow
@@ -484,7 +488,7 @@ static const NSInteger RefreshSectionIndex = 3;
 - (void)menuPopover:(MLKMenuPopover *)menuPopover didSelectMenuItemAtIndex:(NSInteger)selectedIndex
 {
     [self.categoryPopover dismissMenuPopover];
-    NSLog(@"Category selected");
+    NSLog(@"Category selected, %d", selectedIndex);
 }
 
 - (void)scrollToTopOfShopsSection
@@ -527,42 +531,79 @@ static const NSInteger RefreshSectionIndex = 3;
     [NSTimer scheduledTimerWithTimeInterval:0.2f target:self selector:@selector(showCategoryPopover:) userInfo:nil repeats:NO];
 }
 
+- (CGFloat)getItemWidthByDevice
+{
+    DeviceHardwareGeneralPlatform generalPlatform = [DeviceHardware generalPlatform];
+    
+    switch (generalPlatform)
+    {
+        case DeviceHardwareGeneralPlatform_iPhone_4:
+        case DeviceHardwareGeneralPlatform_iPhone_4S:
+        case DeviceHardwareGeneralPlatform_iPhone_5:
+        case DeviceHardwareGeneralPlatform_iPhone_5C:
+        case DeviceHardwareGeneralPlatform_iPhone_5S:
+        {
+            NSLog(@"iphone 4, 4S");
+            return 106.0f;
+            
+            break;
+        }
+            
+        case DeviceHardwareGeneralPlatform_iPhone_6:
+        case DeviceHardwareGeneralPlatform_iPhone_6_Plus:
+        {
+            NSLog(@"iphone 6, 6Plus");
+            return 124.0f;
+            break;
+        }
+            
+        default:
+            return 124.0f;
+            break;
+    }
+}
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    CGFloat buttonWidth = 106.0f;
+    if(section == ShopsTableSectionIndex)
+    {
+        //CGFloat buttonWidth = 106.0f;
+        CGFloat buttonWidth = [self getItemWidthByDevice];
     
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 36)];
-    //imageView.backgroundColor = [UIColor lightGrayColor];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 36)];
+        //imageView.backgroundColor = [UIColor lightGrayColor];
     
-    [imageView setUserInteractionEnabled:YES];
+        [imageView setUserInteractionEnabled:YES];
     
-    UIButton *button1 = [[UIButton alloc] initWithFrame:CGRectMake(imageView.frame.origin.x,
+        UIButton *button1 = [[UIButton alloc] initWithFrame:CGRectMake(imageView.frame.origin.x,
                                                                  imageView.frame.origin.y,
                                                                   buttonWidth, 36)];
-    button1.tag = 101;
-    button1.backgroundColor = [UIColor lightGrayColor];
-    [button1 addTarget:self action:@selector(categoryButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        button1.tag = 101;
+        button1.backgroundColor = [UIColor lightGrayColor];
+        [button1 addTarget:self action:@selector(categoryButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *button2 = [[UIButton alloc] initWithFrame:CGRectMake(imageView.frame.origin.x + buttonWidth + 1,
+        UIButton *button2 = [[UIButton alloc] initWithFrame:CGRectMake(imageView.frame.origin.x + buttonWidth + 1,
                                                                   imageView.frame.origin.y,
                                                                    buttonWidth, 36)];
-    button2.tag = 102;
-    button2.backgroundColor = [UIColor lightGrayColor];
-    
-    [button2 addTarget:self action:@selector(categoryButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    UIButton *button3 = [[UIButton alloc] initWithFrame:CGRectMake(imageView.frame.origin.x + (buttonWidth + 1) * 2,
+        button2.tag = 102;
+        button2.backgroundColor = [UIColor lightGrayColor];
+        [button2 addTarget:self action:@selector(categoryButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        
+        UIButton *button3 = [[UIButton alloc] initWithFrame:CGRectMake(imageView.frame.origin.x + (buttonWidth + 1) * 2,
                                                                   imageView.frame.origin.y,
                                                                    buttonWidth, 36)];
-    button3.tag = 103;
-    button3.backgroundColor = [UIColor lightGrayColor];
-    [button3 addTarget:self action:@selector(categoryButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        button3.tag = 103;
+        button3.backgroundColor = [UIColor lightGrayColor];
+        [button3 addTarget:self action:@selector(categoryButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
-    [imageView addSubview:button1];
-    [imageView addSubview:button2];
-    [imageView addSubview:button3];
+        [imageView addSubview:button1];
+        [imageView addSubview:button2];
+        [imageView addSubview:button3];
     
-    return imageView;
+        return imageView;
+    } else {
+        return nil;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section

@@ -12,7 +12,15 @@
 #import "AppDelegate.h"
 #import "UIKit+AFNetworking.h"
 
+#import "DeviceHardware.h"
+
 #import "defs.h"
+
+typedef struct
+{
+    CGSize itemSize;
+    CGSize imageSize;
+} ItemSizeStruct;
 
 @implementation ShopsAndProductsCell
 
@@ -100,25 +108,93 @@
     //NSLog(@"self.shops (ID): %@", self.shops);
 }
 
+
+- (ItemSizeStruct)getItemSizeByDevice
+{
+    DeviceHardwareGeneralPlatform generalPlatform = [DeviceHardware generalPlatform];
+    
+    CGFloat itemWidth;
+    CGFloat itemHeight;
+    CGFloat imageWidth;
+    CGFloat imageHeight;
+    
+    ItemSizeStruct itemStruct;
+    
+    switch (generalPlatform)
+    {
+        case DeviceHardwareGeneralPlatform_iPhone_4:
+        case DeviceHardwareGeneralPlatform_iPhone_4S:
+        case DeviceHardwareGeneralPlatform_iPhone_5:
+        case DeviceHardwareGeneralPlatform_iPhone_5C:
+        case DeviceHardwareGeneralPlatform_iPhone_5S:
+        {
+            NSLog(@"iphone 4, 4S");
+            //return 106.0f;
+            itemWidth = 142.0f;
+            itemHeight = 208.0f;
+            imageWidth = 142.0f;
+            imageHeight = 142.0f;
+            
+            itemStruct.itemSize = CGSizeMake(itemWidth, itemHeight);
+            itemStruct.imageSize = CGSizeMake(imageWidth, imageHeight);
+            
+            return itemStruct;
+            break;
+        }
+            
+        case DeviceHardwareGeneralPlatform_iPhone_6:
+        case DeviceHardwareGeneralPlatform_iPhone_6_Plus:
+        {
+            NSLog(@"iphone 6, 6Plus");
+            itemWidth = 170.0f;
+            itemHeight = 246.0f;
+            imageWidth = 170.0f;
+            imageHeight = 170.0f;
+            
+            itemStruct.itemSize = CGSizeMake(itemWidth, itemHeight);
+            itemStruct.imageSize = CGSizeMake(imageWidth, imageHeight);
+            
+            return itemStruct;
+            break;
+        }
+            
+        default:
+            itemWidth = 170.0f;
+            itemHeight = 246.0f;
+            imageWidth = 170.0f;
+            imageHeight = 170.0f;
+            
+            itemStruct.itemSize = CGSizeMake(itemWidth, itemHeight);
+            itemStruct.imageSize = CGSizeMake(imageWidth, imageHeight);
+            
+            return itemStruct;
+            break;
+    }
+}
+
 //- (void)initShopItems:(int)communityIndex
 - (void)showingShopsInView
 {
-#warning 目前只涵盖屏幕宽度为320，其他宽度的屏幕尺寸待完成
-    
     //self.dataModel = [[DataModel alloc] init];
     //[self.dataModel loadDataModelLocally];
+    
+    ItemSizeStruct itemSizeStruct = [self getItemSizeByDevice];
     
     NSInteger batchIndex = [[NSUserDefaults standardUserDefaults] integerForKey:LoadContentBatchIndexKey];
     NSLog(@"batchIndex#: %ld", (long)batchIndex);
     
-    CGFloat itemWidth = 142.0f;
-    CGFloat itemHeight = 208.0f;
+    //CGFloat itemWidth = 142.0f;
+    //CGFloat itemHeight = 208.0f;
+    CGFloat itemWidth = itemSizeStruct.itemSize.width;
+    CGFloat itemHeight = itemSizeStruct.itemSize.height;
     
     CGFloat y = 10;
     //CGFloat extraSpace = 0.0f;
     
-    CGFloat imageViewWidth = 142.0f;
-    CGFloat imageViewHeight = 142.0f;
+    //CGFloat imageViewWidth = 142.0f;
+    //CGFloat imageViewHeight = 142.0f;
+    CGFloat imageViewWidth = itemSizeStruct.imageSize.width;
+    CGFloat imageViewHeight = itemSizeStruct.imageSize.height;
     
     int index = 2000;
     NSInteger maxIndex = 0;
@@ -221,22 +297,26 @@
 
 - (void)showingProductsInView
 {
-#warning 目前只涵盖屏幕宽度为320，其他宽度的屏幕尺寸待完成
-    
     //self.dataModel = [[DataModel alloc] init];
     //[self.dataModel loadDataModelLocally];
+    
+    ItemSizeStruct itemSizeStruct = [self getItemSizeByDevice];
     
     NSInteger batchIndex = [[NSUserDefaults standardUserDefaults] integerForKey:LoadContentBatchIndexKey];
     NSLog(@"batchIndex#: %ld", (long)batchIndex);
     
-    CGFloat itemWidth = 142.0f;
-    CGFloat itemHeight = 208.0f;
+    //CGFloat itemWidth = 142.0f;
+    //CGFloat itemHeight = 208.0f;
+    CGFloat itemWidth = itemSizeStruct.itemSize.width;
+    CGFloat itemHeight = itemSizeStruct.itemSize.height;
     
     CGFloat y = 10;
     //CGFloat extraSpace = 0.0f;
     
-    CGFloat imageViewWidth = 142.0f;
-    CGFloat imageViewHeight = 142.0f;
+    //CGFloat imageViewWidth = 142.0f;
+    //CGFloat imageViewHeight = 142.0f;
+    CGFloat imageViewWidth = itemSizeStruct.imageSize.width;
+    CGFloat imageViewHeight = itemSizeStruct.imageSize.height;
     
     int index = 3000;
     NSInteger maxIndex = 0;
