@@ -8,7 +8,7 @@
 
 #import "ShopViewController.h"
 #import "CategoriesInShopCell.h"
-#import "ShopsAndProductsCell.h"
+#import "ShopsCell.h"
 #import "ProductsCell.h"
 #import "ProductDetailViewController.h"
 
@@ -163,7 +163,7 @@ static NSString *ProductsCellIdentifer = @"ProductsCell";
     else
     {
         NSInteger batchIndex = [[NSUserDefaults standardUserDefaults] integerForKey:LoadContentBatchIndexKey];
-        NSArray *array = [BFPreferenceData loadTestDataArray];
+        //NSArray *array = [BFPreferenceData loadTestDataArray];
         //if(array == nil || [array count] == 0)
         if([self.products count] == 0)
         {
@@ -217,7 +217,7 @@ static NSString *ProductsCellIdentifer = @"ProductsCell";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-- (void)itemClickedInCell:(ShopsAndProductsCell *)cell
+- (void)itemClickedInCell:(ShopsCell *)cell
 {
     NSLog(@"In ShopView");
     [self performSegueWithIdentifier:@"ShowProductSegueFromShop" sender:self];

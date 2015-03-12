@@ -12,7 +12,7 @@
 #import "CommunityTableViewCell.h"
 
 #import "CategoryTableViewCell.h"
-#import "ShopsAndProductsCell.h"
+#import "ShopsCell.h"
 
 #import "BFPreferenceData.h"
 
@@ -178,7 +178,7 @@ static const NSInteger RefreshSectionIndex = 3;
 
 - (void)initShopsTableRow
 {
-    UINib *nib = [UINib nibWithNibName:@"ShopsAndProductsCell" bundle:nil];
+    UINib *nib = [UINib nibWithNibName:@"ShopsCell" bundle:nil];
     [self.otCoverView.tableView registerNib:nib forCellReuseIdentifier:ShopTableCellIdentifier];
     
     // Batch Index is start from "1"
@@ -374,10 +374,10 @@ static const NSInteger RefreshSectionIndex = 3;
             
         case ShopsTableSectionIndex:
         {
-            ShopsAndProductsCell *cell = (ShopsAndProductsCell *)[tableView dequeueReusableCellWithIdentifier:ShopTableCellIdentifier];
+            ShopsCell *cell = (ShopsCell *)[tableView dequeueReusableCellWithIdentifier:ShopTableCellIdentifier];
             if(cell == nil)
             {
-                cell = [[ShopsAndProductsCell alloc] init];
+                cell = [[ShopsCell alloc] init];
             }
             
             [cell initShopItemsByCommunityIndex:-1];
@@ -647,7 +647,7 @@ static const NSInteger RefreshSectionIndex = 3;
 
 #pragma SegueDelegate for ShopsAndProductsCell
 
-- (void)itemClickedInCell:(ShopsAndProductsCell *)cell
+- (void)itemClickedInCell:(ShopsCell *)cell
 {
     NSLog(@"12345_%@", cell.shopID);
     

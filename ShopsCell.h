@@ -8,16 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-@class ShopsAndProductsCell;
+@class ShopsCell;
 @class DataModel;
 
 @protocol ShopsCellSegueDelegate <NSObject>
 
-- (void)itemClickedInCell:(ShopsAndProductsCell *)cell;
+- (void)itemClickedInCell:(ShopsCell *)cell;
 
 @end
 
-@interface ShopsAndProductsCell : UITableViewCell
+@interface ShopsCell : UITableViewCell
 
 - (void)initShopItemsByCommunityIndex:(int)communityIndex;
 //- (void)initProductItems;

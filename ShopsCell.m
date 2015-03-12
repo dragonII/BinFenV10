@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Wang Long. All rights reserved.
 //
 
-#import "ShopsAndProductsCell.h"
+#import "ShopsCell.h"
 #import "BFPreferenceData.h"
 #import "DataModel.h"
 #import "AppDelegate.h"
@@ -22,7 +22,7 @@ typedef struct
     CGSize imageSize;
 } ItemSizeStruct;
 
-@implementation ShopsAndProductsCell
+@implementation ShopsCell
 
 - (void)awakeFromNib
 {

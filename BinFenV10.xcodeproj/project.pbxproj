@@ -15,8 +15,8 @@
 		2F01E7C61A87C2B3006BDDAB /* DescriptionTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F01E7C41A87C2B3006BDDAB /* DescriptionTableCell.xib */; };
 		2F01E7CD1A87C54C006BDDAB /* SeperatorTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F01E7CB1A87C54C006BDDAB /* SeperatorTableCell.m */; };
 		2F01E7CE1A87C54C006BDDAB /* SeperatorTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F01E7CC1A87C54C006BDDAB /* SeperatorTableCell.xib */; };
-		2F0475061A813D1B00196F0B /* ShopsAndProductsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F0475041A813D1B00196F0B /* ShopsAndProductsCell.m */; };
-		2F0475071A813D1B00196F0B /* ShopsAndProductsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F0475051A813D1B00196F0B /* ShopsAndProductsCell.xib */; };
+		2F0475061A813D1B00196F0B /* ShopsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F0475041A813D1B00196F0B /* ShopsCell.m */; };
+		2F0475071A813D1B00196F0B /* ShopsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F0475051A813D1B00196F0B /* ShopsCell.xib */; };
 		2F14CD701A8BA50E004125F6 /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F14CD6F1A8BA50E004125F6 /* UserInfoViewController.m */; };
 		2F14CD731A8BAE7C004125F6 /* EditUserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F14CD721A8BAE7C004125F6 /* EditUserInfoViewController.m */; };
 		2F1FEEB61AA5680A00E0845E /* CommunityData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F1FEEB51AA5680A00E0845E /* CommunityData.m */; };
@@ -200,9 +200,9 @@
 		2F01E7CA1A87C54C006BDDAB /* SeperatorTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeperatorTableCell.h; sourceTree = "<group>"; };
 		2F01E7CB1A87C54C006BDDAB /* SeperatorTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeperatorTableCell.m; sourceTree = "<group>"; };
 		2F01E7CC1A87C54C006BDDAB /* SeperatorTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SeperatorTableCell.xib; sourceTree = "<group>"; };
-		2F0475031A813D1B00196F0B /* ShopsAndProductsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopsAndProductsCell.h; sourceTree = "<group>"; };
-		2F0475041A813D1B00196F0B /* ShopsAndProductsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopsAndProductsCell.m; sourceTree = "<group>"; };
-		2F0475051A813D1B00196F0B /* ShopsAndProductsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShopsAndProductsCell.xib; sourceTree = "<group>"; };
+		2F0475031A813D1B00196F0B /* ShopsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopsCell.h; sourceTree = "<group>"; };
+		2F0475041A813D1B00196F0B /* ShopsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopsCell.m; sourceTree = "<group>"; };
+		2F0475051A813D1B00196F0B /* ShopsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShopsCell.xib; sourceTree = "<group>"; };
 		2F14CD6E1A8BA50E004125F6 /* UserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoViewController.h; sourceTree = "<group>"; };
 		2F14CD6F1A8BA50E004125F6 /* UserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoViewController.m; sourceTree = "<group>"; };
 		2F14CD711A8BAE7C004125F6 /* EditUserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditUserInfoViewController.h; sourceTree = "<group>"; };
@@ -497,9 +497,9 @@
 		2F0475021A813CF000196F0B /* ProductTableCell */ = {
 			isa = PBXGroup;
 			children = (
-				2F0475031A813D1B00196F0B /* ShopsAndProductsCell.h */,
-				2F0475041A813D1B00196F0B /* ShopsAndProductsCell.m */,
-				2F0475051A813D1B00196F0B /* ShopsAndProductsCell.xib */,
+				2F0475031A813D1B00196F0B /* ShopsCell.h */,
+				2F0475041A813D1B00196F0B /* ShopsCell.m */,
+				2F0475051A813D1B00196F0B /* ShopsCell.xib */,
 				2FDA6A071AB14B7900F5A5D2 /* ProductsCell.h */,
 				2FDA6A081AB14B7900F5A5D2 /* ProductsCell.m */,
 				2FDA6A091AB14B7900F5A5D2 /* ProductsCell.xib */,
@@ -1080,7 +1080,7 @@
 				2F01E7CE1A87C54C006BDDAB /* SeperatorTableCell.xib in Resources */,
 				2FDA123A1A8DD7B400A60362 /* input-field.png in Resources */,
 				2FDA122E1A8DD7B400A60362 /* bubble-square-incoming.png in Resources */,
-				2F0475071A813D1B00196F0B /* ShopsAndProductsCell.xib in Resources */,
+				2F0475071A813D1B00196F0B /* ShopsCell.xib in Resources */,
 				2FDA12261A8DD7B400A60362 /* bubble-flat-outgoing-old.png in Resources */,
 				2FDA12411A8DD7B400A60362 /* send@2x.png in Resources */,
 				2FDA12241A8DD7B400A60362 /* bubble-flat-incoming.png in Resources */,
@@ -1167,7 +1167,7 @@
 				2FDA120E1A8DD7B400A60362 /* JSBubbleMessageCell.m in Sources */,
 				2FDA12131A8DD7B400A60362 /* JSMessagesViewController.m in Sources */,
 				2F01E7C01A87C075006BDDAB /* PriceTableCell.m in Sources */,
-				2F0475061A813D1B00196F0B /* ShopsAndProductsCell.m in Sources */,
+				2F0475061A813D1B00196F0B /* ShopsCell.m in Sources */,
 				2F90609C1A8C74980087FBB3 /* FavoritesViewController.m in Sources */,
 				2F7B75D51A8B29BD00720650 /* ComposeAddrViewController.m in Sources */,
 				2F31B21C1A83D74000A2BB86 /* AFHTTPSessionManager.m in Sources */,
