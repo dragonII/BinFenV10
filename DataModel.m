@@ -191,7 +191,30 @@ static NSString *ProductArrayKey = @"Products";
         
         [self.comments addObject:commentsDict];
     }
+}
+
+- (void)parseCategoryJson:(id)responseObject
+{
+    NSArray *outerArray = [self prepareForParse:responseObject];
     
+    self.categories = [[NSMutableArray alloc] init];
+    
+    /*
+    NSMutableDictionary *commentsDict;
+    
+    
+    for(NSArray *innerArray in outerArray)
+    {
+        commentsDict = [[NSMutableDictionary alloc] init];
+        
+        [commentsDict setObject:[innerArray objectAtIndex:0] forKey:CommentProductIDKey];
+        [commentsDict setObject:[innerArray objectAtIndex:1] forKey:CommentContentKey];
+        [commentsDict setObject:[innerArray objectAtIndex:2] forKey:CommentTimeKey];
+        [commentsDict setObject:[innerArray objectAtIndex:3] forKey:CommentUserKey];
+        
+        [self.comments addObject:commentsDict];
+    }
+     */
 }
 
 
@@ -202,10 +225,28 @@ static NSString *ProductArrayKey = @"Products";
     [self loadShopsData];
     [self loadCommunitiesData];
     [self loadProductsData];
+    [self loadCategoriesData];
     
     //[self saveDataModel];
 }
 
+- (void)loadCategoriesData
+{
+    {
+        dispatch_group_notify(_retrieveGroup, dispatch_get_main_queue(), ^{
+            [self.httpSessionManager GET:@"productcatalog/cataloglist_json.ds"
+                              parameters:nil
+                                 success:^(NSURLSessionDataTask *task, id responseObject) {
+                                     [self parseCategoryJson:responseObject];
+                                     //dispatch_group_leave(_retrieveGroup);
+                                     _loadCategoriesFinished = YES;
+                                 }failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                     NSLog(@"Error: %@", [error localizedDescription]);
+                                     //dispatch_group_leave(_retrieveGroup);
+                                 }];
+        });
+    }
+}
 
 - (void)loadProductsData
 {

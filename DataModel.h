@@ -53,6 +53,7 @@ static NSString *CommentUserKey = @"UserName";
 @property (assign, nonatomic) BOOL loadCommunitiesFinished;
 @property (assign, nonatomic) BOOL loadProductsFinished;
 @property (assign, nonatomic) BOOL loadCommentsFinished;
+@property (assign, nonatomic) BOOL loadCategoriesFinished;
 
 @property (strong, nonatomic) AFHTTPSessionManager *httpSessionManager;
 
