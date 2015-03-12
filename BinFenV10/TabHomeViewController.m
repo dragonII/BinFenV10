@@ -156,16 +156,12 @@ static const NSInteger RefreshSectionIndex = 3;
     [self initCategoriesData];
     [self initShopsData];
      
-    
-    /*
     [self.dataModel loadDataModelRemotely];
     
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1
                                                   target:self
                                                 selector:@selector(loadingData)
                                                 userInfo:nil repeats:YES];
-     */
-    [self.dataModel loadDataModelLocally];
 }
 
 - (void)initCommunityTableRow

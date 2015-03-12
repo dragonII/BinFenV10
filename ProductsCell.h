@@ -1,27 +1,25 @@
 //
-//  ThirdTableViewCell.h
+//  ProductsCell.h
 //  BinFenV10
 //
-//  Created by Wang Long on 2/4/15.
+//  Created by Wang Long on 3/12/15.
 //  Copyright (c) 2015 Wang Long. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@class ShopsAndProductsCell;
+@class ProductsCell;
 @class DataModel;
 
-@protocol ShopsCellSegueDelegate <NSObject>
+@protocol ProductsCellSegueDelegate <NSObject>
 
-- (void)itemClickedInCell:(ShopsAndProductsCell *)cell;
+- (void)itemClickedInCell:(ProductsCell *)cell;
 
 @end
 
-@interface ShopsAndProductsCell : UITableViewCell
+@interface ProductsCell : UITableViewCell
 
-- (void)initShopItemsByCommunityIndex:(int)communityIndex;
-//- (void)initProductItems;
-//- (void)initProductItemsByShopIndex:(NSInteger)shopIndex;
+- (void)initProductItemsByShopIndex:(NSInteger)shopIndex;
 
 @property (strong, nonatomic) DataModel *dataModel;
 
@@ -32,6 +30,6 @@
 
 @property (strong, nonatomic) NSMutableArray *products;
 
-@property (weak, nonatomic) id<ShopsCellSegueDelegate> segueDelegate;
+@property (weak, nonatomic) id<ProductsCellSegueDelegate> segueDelegate;
 
 @end

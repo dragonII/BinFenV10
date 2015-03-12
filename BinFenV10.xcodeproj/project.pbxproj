@@ -163,6 +163,8 @@
 		2FDA12471A8DD7B400A60362 /* UIView+AnimationOptionsForCurve.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FDA120D1A8DD7B400A60362 /* UIView+AnimationOptionsForCurve.m */; };
 		2FDA124A1A8DD9A900A60362 /* MessageData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FDA12491A8DD9A900A60362 /* MessageData.m */; };
 		2FDA124C1A8DE06D00A60362 /* demo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2FDA124B1A8DE06D00A60362 /* demo.jpg */; };
+		2FDA6A0A1AB14B7900F5A5D2 /* ProductsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FDA6A081AB14B7900F5A5D2 /* ProductsCell.m */; };
+		2FDA6A0B1AB14B7900F5A5D2 /* ProductsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FDA6A091AB14B7900F5A5D2 /* ProductsCell.xib */; };
 		2FEA733A1AA97A2E00A652D2 /* LTransitionImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FEA73381AA97A2E00A652D2 /* LTransitionImageView.m */; };
 		2FEEE85C1A7E5B8E0095D8DB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FEEE85B1A7E5B8E0095D8DB /* main.m */; };
 		2FEEE85F1A7E5B8E0095D8DB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FEEE85E1A7E5B8E0095D8DB /* AppDelegate.m */; };
@@ -430,6 +432,9 @@
 		2FDA12481A8DD9A900A60362 /* MessageData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageData.h; sourceTree = "<group>"; };
 		2FDA12491A8DD9A900A60362 /* MessageData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageData.m; sourceTree = "<group>"; };
 		2FDA124B1A8DE06D00A60362 /* demo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = demo.jpg; sourceTree = "<group>"; };
+		2FDA6A071AB14B7900F5A5D2 /* ProductsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductsCell.h; sourceTree = "<group>"; };
+		2FDA6A081AB14B7900F5A5D2 /* ProductsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductsCell.m; sourceTree = "<group>"; };
+		2FDA6A091AB14B7900F5A5D2 /* ProductsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductsCell.xib; sourceTree = "<group>"; };
 		2FEA73371AA97A2E00A652D2 /* LTransitionImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LTransitionImageView.h; path = Classes/LTransitionImageView.h; sourceTree = "<group>"; };
 		2FEA73381AA97A2E00A652D2 /* LTransitionImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LTransitionImageView.m; path = Classes/LTransitionImageView.m; sourceTree = "<group>"; };
 		2FEEE8561A7E5B8E0095D8DB /* BinFenV10.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BinFenV10.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -495,6 +500,9 @@
 				2F0475031A813D1B00196F0B /* ShopsAndProductsCell.h */,
 				2F0475041A813D1B00196F0B /* ShopsAndProductsCell.m */,
 				2F0475051A813D1B00196F0B /* ShopsAndProductsCell.xib */,
+				2FDA6A071AB14B7900F5A5D2 /* ProductsCell.h */,
+				2FDA6A081AB14B7900F5A5D2 /* ProductsCell.m */,
+				2FDA6A091AB14B7900F5A5D2 /* ProductsCell.xib */,
 			);
 			name = ProductTableCell;
 			sourceTree = "<group>";
@@ -1038,6 +1046,7 @@
 				2F28A00D1A89CFB700C296D6 /* NearbyTableViewCell.xib in Resources */,
 				2F703FEA1AA6A4C000D0ED4F /* EditUserInfoCell.xib in Resources */,
 				2FDA12281A8DD7B400A60362 /* bubble-flat-outgoing-selected.png in Resources */,
+				2FDA6A0B1AB14B7900F5A5D2 /* ProductsCell.xib in Resources */,
 				2F5954BC1A7E78BB001D5DAD /* CommunityCollectionViewCell.xib in Resources */,
 				2FDA12291A8DD7B400A60362 /* bubble-flat-outgoing-selected@2x.png in Resources */,
 				2FDA122D1A8DD7B400A60362 /* bubble-square-incoming-selected@2x.png in Resources */,
@@ -1203,6 +1212,7 @@
 				2F7B75C11A8AFBFE00720650 /* BasicSettingTableCell.m in Sources */,
 				2F31B2211A83D74000A2BB86 /* AFURLResponseSerialization.m in Sources */,
 				2F9060981A8C73F90087FBB3 /* FavoriteCollectionViewCell.m in Sources */,
+				2FDA6A0A1AB14B7900F5A5D2 /* ProductsCell.m in Sources */,
 				2F14CD731A8BAE7C004125F6 /* EditUserInfoViewController.m in Sources */,
 				2F28A0191A8A057300C296D6 /* AboutMeViewController.m in Sources */,
 				2FDA12441A8DD7B400A60362 /* UIButton+JSMessagesView.m in Sources */,

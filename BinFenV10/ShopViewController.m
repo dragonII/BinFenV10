@@ -9,6 +9,7 @@
 #import "ShopViewController.h"
 #import "CategoriesInShopCell.h"
 #import "ShopsAndProductsCell.h"
+#import "ProductsCell.h"
 #import "ProductDetailViewController.h"
 
 #import "DeviceHardware.h"
@@ -19,13 +20,16 @@
 #import "DataModel.h"
 
 static NSString *CategoryCellIdentifier = @"CategoryCell";
-static NSString *ShopsCellIdentifier = @"ShopsCell";
+//static NSString *ShopsCellIdentifier = @"ShopsCell";
+static NSString *ProductsCellIdentifer = @"ProductsCell";
 
-@interface ShopViewController () <UITableViewDataSource, UITableViewDelegate, ShopsCellSegueDelegate>
+@interface ShopViewController () <UITableViewDataSource, UITableViewDelegate, ProductsCellSegueDelegate>
 
 @property (strong, nonatomic) UITableView *tableView;
 
 @property (strong, nonatomic) DataModel *dataModel;
+
+@property (strong, nonatomic) NSMutableArray *products;
 
 @end
 
@@ -92,7 +96,8 @@ static NSString *ShopsCellIdentifier = @"ShopsCell";
     UINib *nib = [UINib nibWithNibName:@"CategoriesInShopCell" bundle:nil];
     [self.tableView registerNib:nib forCellReuseIdentifier:CategoryCellIdentifier];
     
-    [self.tableView registerClass:[ShopsAndProductsCell class] forCellReuseIdentifier:ShopsCellIdentifier];
+    //[self.tableView registerClass:[ShopsAndProductsCell class] forCellReuseIdentifier:ShopsCellIdentifier];
+    //[self.tableView registerClass:[ProductsCell class] forCellReuseIdentifier:ProductsCellIdentifer];
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -113,12 +118,29 @@ static NSString *ShopsCellIdentifier = @"ShopsCell";
     [self initTableView];
 }
 
+- (void)loadProductsByShopIndex:(NSInteger)shopIndex
+{
+    NSString *shopID = [[self.dataModel.shops objectAtIndex:shopIndex] objectForKey:@"ID"];
+    self.products = [[NSMutableArray alloc] init];
+    
+    for(int i = 0; i < [self.dataModel.products count]; i++)
+    {
+        NSString *shopIDInProducts = [[self.dataModel.products objectAtIndex:i] objectForKey:@"shop"];
+        if([shopIDInProducts isEqualToString:shopID])
+        {
+            [self.products addObject:[self.dataModel.products objectAtIndex:i]];
+        }
+    }
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
     NSString *shopName = [[self.dataModel.shops objectAtIndex:self.selectedShopIndex] objectForKey:@"name"];
     self.navigationItem.title = shopName;
+    
+    [self loadProductsByShopIndex:self.selectedShopIndex];
 }
 
 - (void)didReceiveMemoryWarning
@@ -142,18 +164,21 @@ static NSString *ShopsCellIdentifier = @"ShopsCell";
     {
         NSInteger batchIndex = [[NSUserDefaults standardUserDefaults] integerForKey:LoadContentBatchIndexKey];
         NSArray *array = [BFPreferenceData loadTestDataArray];
-        if(array == nil || [array count] == 0)
+        //if(array == nil || [array count] == 0)
+        if([self.products count] == 0)
         {
             return 0;
         }
-        if([array count] >= batchIndex * TotalItemsPerBatch)
+        //if([array count] >= batchIndex * TotalItemsPerBatch)
+        if([self.products count] >= batchIndex * TotalItemsPerBatch)
         {
             //NSLog(@"TotalRows: %ld", batchIndex * TotalRowsPerBatch);
             return batchIndex * TotalRowsPerBatch * HeightOfItemInShopsTableCell;
         }
         else // 0 < count < batchIndex * TotalItemsPerBatch
         {
-            NSInteger totalRows = ([array count] - 1) / 2 + 1;
+            //NSInteger totalRows = ([array count] - 1) / 2 + 1;
+            NSInteger totalRows = ([self.products count] - 1) / 2 + 1;
             NSLog(@"TotalRows: %ld", (long)totalRows);
             return totalRows * HeightOfItemInShopsTableCell;
         }
@@ -172,16 +197,24 @@ static NSString *ShopsCellIdentifier = @"ShopsCell";
         return cell;
     }
     else {
-        ShopsAndProductsCell *cell = (ShopsAndProductsCell *)[tableView dequeueReusableCellWithIdentifier:ShopsCellIdentifier];
+        //ShopsAndProductsCell *cell = (ShopsAndProductsCell *)[tableView dequeueReusableCellWithIdentifier:ShopsCellIdentifier];
+        ProductsCell *cell = (ProductsCell *)[tableView dequeueReusableCellWithIdentifier:ProductsCellIdentifer];
         if(cell == nil)
         {
-            cell = [[ShopsAndProductsCell alloc] init];
+            //cell = [[ShopsAndProductsCell alloc] init];
+            cell = [[ProductsCell alloc] init];
         }
         cell.segueDelegate = self;
         //[cell initProductItems];
         [cell initProductItemsByShopIndex:self.selectedShopIndex];
         return cell;
     }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"Shop selected");
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (void)itemClickedInCell:(ShopsAndProductsCell *)cell
