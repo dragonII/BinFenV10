@@ -14,4 +14,6 @@
 
 @property ShowViewBySourceType showProductViewFrom;
 
+@property (copy, nonatomic) NSString *productID;
+
 @end

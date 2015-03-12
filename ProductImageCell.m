@@ -24,6 +24,7 @@
 {
     self.scrollView.delegate = self;
     self.scrollView.showsHorizontalScrollIndicator = NO;
+    self.scrollView.backgroundColor = [UIColor yellowColor];
     self.scrollView.bounces = YES;
     self.pageControl.currentPageIndicatorTintColor = [UIColor blueColor];
     self.pageControl.pageIndicatorTintColor = [UIColor colorWithRed:191/255.0f green:191/255.0f blue:191/255.0f alpha:0.8f];
@@ -43,7 +44,8 @@
     
     CGFloat scrollViewWidth = self.scrollView.bounds.size.width;
     
-    CGFloat imageViewWidth = self.scrollView.bounds.size.width;
+    CGFloat imageViewWidth = [UIScreen mainScreen].bounds.size.width;
+    
     CGFloat imageViewHeight = 200.0f;
     
     for(int i = 0; i < [self.imageNamesArray count]; i++)

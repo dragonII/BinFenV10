@@ -42,18 +42,13 @@ typedef struct
 - (void)productItemClicked:(UITapGestureRecognizer*)sender
 {
     UIView *view = (UIView *)sender.view;
-    //UIImageView *view = (UIImageView *)sender.view;
     
-    //self.shopID = [NSString stringWithFormat:@"ShopID_%ld", (view.tag - 2000)];
     NSInteger productIndex = view.tag - 3000;
-    //self.selectedProductIndex = productIndex;
-    //self.shopID = [[self.dataModel.shops objectAtIndex:shopIndex] copy];
-    //self.productID = [[[self.dataModel.shops objectAtIndex:shopIndex] objectForKey:@"ID"] copy];
     self.productID = [[[self.products objectAtIndex:productIndex] objectForKey:@"ID"] copy];
-    NSLog(@"productItemClicked xx%@", self.productID);
-    if([self.segueDelegate respondsToSelector:@selector(itemClickedInCell:)])
+    //NSLog(@"productItemClicked xx%@", self.productID);
+    if([self.segueDelegate respondsToSelector:@selector(productItemClickedInCell:)])
     {
-        [self.segueDelegate performSelector:@selector(itemClickedInCell:) withObject:self];
+        [self.segueDelegate performSelector:@selector(productItemClickedInCell:) withObject:self];
     }
 }
 

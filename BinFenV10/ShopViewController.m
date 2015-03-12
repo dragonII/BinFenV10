@@ -31,6 +31,8 @@ static NSString *ProductsCellIdentifer = @"ProductsCell";
 
 @property (strong, nonatomic) NSMutableArray *products;
 
+@property (copy, nonatomic) NSString *selectedProductID;
+
 @end
 
 @implementation ShopViewController
@@ -217,11 +219,15 @@ static NSString *ProductsCellIdentifer = @"ProductsCell";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-- (void)itemClickedInCell:(ShopsCell *)cell
+
+- (void)productItemClickedInCell:(ProductsCell *)cell
 {
-    NSLog(@"In ShopView");
+    NSLog(@"In ShopView, product_ID: %@", cell.productID);
+    self.selectedProductID = [cell.productID copy];
+    
     [self performSegueWithIdentifier:@"ShowProductSegueFromShop" sender:self];
 }
+
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -229,6 +235,7 @@ static NSString *ProductsCellIdentifer = @"ProductsCell";
     {
         ProductDetailViewController *productVC = (ProductDetailViewController *)segue.destinationViewController;
         productVC.showProductViewFrom = self.showShopViewFrom;
+        productVC.productID = [self.selectedProductID copy];
     }
         
 }

@@ -43,29 +43,14 @@ typedef struct
     //self.shopID = [[self.dataModel.shops objectAtIndex:shopIndex] copy];
     //self.shopID = [[[self.dataModel.shops objectAtIndex:shopIndex] objectForKey:@"ID"] copy];
     NSLog(@"shopItemClicked xx%@", self.shopID);
-    if([self.segueDelegate respondsToSelector:@selector(itemClickedInCell:)])
+    if([self.segueDelegate respondsToSelector:@selector(shopItemClickedInCell:)])
     {
-        [self.segueDelegate performSelector:@selector(itemClickedInCell:) withObject:self];
+        [self.segueDelegate performSelector:@selector(shopItemClickedInCell:) withObject:self];
     }
 }
 
-- (void)productItemClicked:(UITapGestureRecognizer*)sender
-{
-    UIView *view = (UIView *)sender.view;
-    //self.shopID = [NSString stringWithFormat:@"ShopID_%ld", (view.tag - 2000)];
-    NSInteger productIndex = view.tag - 3000;
-    //self.selectedProductIndex = productIndex;
-    //self.shopID = [[self.dataModel.shops objectAtIndex:shopIndex] copy];
-    //self.productID = [[[self.dataModel.shops objectAtIndex:shopIndex] objectForKey:@"ID"] copy];
-    self.productID = [[[self.products objectAtIndex:productIndex] objectForKey:@"ID"] copy];
-    NSLog(@"xx%@", self.productID);
-    if([self.segueDelegate respondsToSelector:@selector(itemClickedInCell:)])
-    {
-        [self.segueDelegate performSelector:@selector(itemClickedInCell:) withObject:self];
-    }
-}
 
-- (void)initShopItemsByCommunityIndex:(int)communityIndex
+- (void)initShopItemsByCommunityIndex:(NSInteger)communityIndex
 {
     if(communityIndex < 0)
     {
@@ -88,7 +73,7 @@ typedef struct
     //NSLog(@"self.shops (ALL): %@", self.shops);
 }
 
-- (void)loadShopsByCommunity:(int)comminityIndex
+- (void)loadShopsByCommunity:(NSInteger)comminityIndex
 {
     self.dataModel = [[DataModel alloc] init];
     [self.dataModel loadDataModelLocally];
@@ -235,128 +220,6 @@ typedef struct
         
         //NSString *imageURLString = [[self.dataModel.shops objectAtIndex:i] objectForKey:@"image"];
         NSString *imageURLString = [[self.shops objectAtIndex:i] objectForKey:@"image"];
-        [imageView setImageWithURL:[NSURL URLWithString:imageURLString] placeholderImage:[UIImage imageNamed:@"Default_142x142"]];
-        
-        
-        [itemView addSubview:imageView];
-        [itemView addSubview:label];
-        [self.contentView addSubview:itemView];
-        
-        index++;
-        column++;
-        if(column == 2)
-        {
-            column = 0;
-            row++;
-            y += itemHeight + 10;
-        }
-    }
-}
-
-- (void)initProductItemsByShopIndex:(NSInteger)shopIndex
-{
-    if(shopIndex < 0)
-    {
-        [self loadAllProducts];
-    } else {
-        [self loadProductsByShopIndex:shopIndex];
-    }
-    
-    NSLog(@"products: %@", self.products);
-    
-    [self showingProductsInView];
-}
-
-- (void)loadAllProducts
-{
-    self.dataModel = [[DataModel alloc] init];
-    [self.dataModel loadDataModelLocally];
-    
-    self.products = [NSMutableArray arrayWithArray:self.dataModel.products];
-}
-
-- (void)loadProductsByShopIndex:(NSInteger)shopIndex
-{
-    self.dataModel = [[DataModel alloc] init];
-    [self.dataModel loadDataModelLocally];
-    
-    NSLog(@"dataModel.products: %@", self.dataModel.products);
-    
-    NSString *shopID = [[self.dataModel.shops objectAtIndex:shopIndex] objectForKey:@"ID"];
-    self.products = [[NSMutableArray alloc] init];
-    
-    for(int i = 0; i < [self.dataModel.products count]; i++)
-    {
-        NSString *shopIDInProducts = [[self.dataModel.products objectAtIndex:i] objectForKey:@"shop"];
-        if([shopIDInProducts isEqualToString:shopID])
-        {
-            [self.products addObject:[self.dataModel.products objectAtIndex:i]];
-        }
-    }
-}
-
-- (void)showingProductsInView
-{
-    //self.dataModel = [[DataModel alloc] init];
-    //[self.dataModel loadDataModelLocally];
-    
-    ItemSizeStruct itemSizeStruct = [self getItemSizeByDevice];
-    
-    NSInteger batchIndex = [[NSUserDefaults standardUserDefaults] integerForKey:LoadContentBatchIndexKey];
-    NSLog(@"batchIndex#: %ld", (long)batchIndex);
-    
-    //CGFloat itemWidth = 142.0f;
-    //CGFloat itemHeight = 208.0f;
-    CGFloat itemWidth = itemSizeStruct.itemSize.width;
-    CGFloat itemHeight = itemSizeStruct.itemSize.height;
-    
-    CGFloat y = 10;
-    //CGFloat extraSpace = 0.0f;
-    
-    //CGFloat imageViewWidth = 142.0f;
-    //CGFloat imageViewHeight = 142.0f;
-    CGFloat imageViewWidth = itemSizeStruct.imageSize.width;
-    CGFloat imageViewHeight = itemSizeStruct.imageSize.height;
-    
-    int index = 3000;
-    NSInteger maxIndex = 0;
-    int row = 0;
-    int column = 0;
-    
-    //if([self.dataModel.shops count] >= batchIndex * TotalItemsPerBatch)
-    if([self.products count] >= batchIndex * TotalItemsPerBatch)
-        maxIndex = batchIndex * TotalItemsPerBatch;
-    else
-        //maxIndex = [self.dataModel.shops count];
-        maxIndex = [self.products count];
-    
-    for(int i = 0; i < maxIndex; i++)
-    {
-        UIView *itemView = [[UIView alloc] init];
-        itemView.frame = CGRectMake(column * (itemWidth + 12) + 12, y, itemWidth, itemHeight);
-        itemView.layer.borderColor = [UIColor blackColor].CGColor;
-        itemView.layer.borderWidth = 0.5;
-        itemView.tag = index;
-        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(productItemClicked:)];
-        //tapGesture.delegate = self;
-        tapGesture.numberOfTapsRequired = 1;
-        tapGesture.numberOfTouchesRequired = 1;
-        [itemView addGestureRecognizer:tapGesture];
-        
-        UIImageView *imageView = [[UIImageView alloc] init];
-        UILabel *label = [[UILabel alloc] init];
-        
-        imageView.frame = CGRectMake(itemView.bounds.origin.x, itemView.bounds.origin.y, imageViewWidth, imageViewHeight);
-        label.frame = CGRectMake(itemView.bounds.origin.x, itemView.bounds.origin.y + imageViewHeight, itemView.bounds.size.width, itemHeight - imageViewHeight);
-        //label.text = [[self.dataModel.shops objectAtIndex:i] objectForKey:@"name"];
-        label.text = [[self.products objectAtIndex:i] objectForKey:@"name"];
-        label.textAlignment = NSTextAlignmentCenter;
-        
-        //http://stackoverflow.com/questions/9907100/issues-with-setting-some-different-font-for-uilabel
-        label.font = [UIFont fontWithName:@"STHeitiSC-Light" size:10];
-        
-        //NSString *imageURLString = [[self.dataModel.shops objectAtIndex:i] objectForKey:@"image"];
-        NSString *imageURLString = [[self.products objectAtIndex:i] objectForKey:@"image"];
         [imageView setImageWithURL:[NSURL URLWithString:imageURLString] placeholderImage:[UIImage imageNamed:@"Default_142x142"]];
         
         

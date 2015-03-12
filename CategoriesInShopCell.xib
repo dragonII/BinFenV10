@@ -39,6 +39,7 @@
                 <outlet property="pageControl" destination="VSP-bl-c8Y" id="Kza-lB-fXY"/>
                 <outlet property="scrollView" destination="voA-nv-TbD" id="m5Q-gP-5Yl"/>
             </connections>
+            <point key="canvasLocation" x="36" y="207"/>
         </tableViewCell>
     </objects>
 </document>

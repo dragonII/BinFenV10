@@ -13,7 +13,7 @@
 
 @protocol ProductsCellSegueDelegate <NSObject>
 
-- (void)itemClickedInCell:(ProductsCell *)cell;
+- (void)productItemClickedInCell:(ProductsCell *)cell;
 
 @end
 

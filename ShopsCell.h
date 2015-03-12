@@ -13,15 +13,13 @@
 
 @protocol ShopsCellSegueDelegate <NSObject>
 
-- (void)itemClickedInCell:(ShopsCell *)cell;
+- (void)shopItemClickedInCell:(ShopsCell *)cell;
 
 @end
 
 @interface ShopsCell : UITableViewCell
 
-- (void)initShopItemsByCommunityIndex:(int)communityIndex;
-//- (void)initProductItems;
-//- (void)initProductItemsByShopIndex:(NSInteger)shopIndex;
+- (void)initShopItemsByCommunityIndex:(NSInteger)communityIndex;
 
 @property (strong, nonatomic) DataModel *dataModel;
 

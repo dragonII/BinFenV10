@@ -16,6 +16,9 @@
     // Initialization code
     self.scrollView.delegate = self;
     self.scrollView.showsHorizontalScrollIndicator = NO;
+    self.scrollView.bounces = YES;
+    //self.scrollView.frame = CGRectMake(0, 12, [UIScreen mainScreen].bounds.size.width, 190);
+    NSLog(@"scrollview: %f", self.scrollView.frame.size.width);
     self.pageControl.currentPageIndicatorTintColor = [UIColor blueColor];
     self.pageControl.pageIndicatorTintColor = [UIColor colorWithRed:191/255.0f green:191/255.0f blue:191/255.0f alpha:0.8f];
 }

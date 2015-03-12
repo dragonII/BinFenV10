@@ -647,12 +647,11 @@ static const NSInteger RefreshSectionIndex = 3;
 
 #pragma SegueDelegate for ShopsAndProductsCell
 
-- (void)itemClickedInCell:(ShopsCell *)cell
+- (void)shopItemClickedInCell:(ShopsCell *)cell
 {
-    NSLog(@"12345_%@", cell.shopID);
-    
     self.selectedShopIndex = cell.selectedShopIndex;
     [self performSegueWithIdentifier:@"ShowShopSegueFromTabHome" sender:self];
 }
+
 
 @end

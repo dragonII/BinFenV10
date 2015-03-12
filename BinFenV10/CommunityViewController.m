@@ -55,7 +55,8 @@ static const int SectionLoadMore = 2;
             CGFloat navigationBarHeight = self.navigationController.navigationBar.frame.size.height;
             CGFloat statusBarHeight = 20;
             tableViewFrame = CGRectMake(0, navigationBarHeight + statusBarHeight,
-                                        self.view.bounds.size.width,
+                                        //self.view.bounds.size.width,
+                                        [UIScreen mainScreen].bounds.size.width,
                                         self.view.bounds.size.height - navigationBarHeight - statusBarHeight);
             break;
         }
@@ -67,7 +68,8 @@ static const int SectionLoadMore = 2;
         {
             NSLog(@"iphone 5, 6");
             tableViewFrame = CGRectMake(0, 0,
-                                        self.view.bounds.size.width,
+                                        //self.view.bounds.size.width,
+                                        [UIScreen mainScreen].bounds.size.width,
                                         self.view.bounds.size.height);
             break;
         }
@@ -124,6 +126,8 @@ static const int SectionLoadMore = 2;
     
     NSString *communityTitle = [[self.dataModel.communities objectAtIndex:self.communityIndex] objectForKey:@"name"];
     self.navigationItem.title = communityTitle;
+    
+    NSLog(@"CommunityTableWidth: %f", self.tableView.frame.size.width);
 }
 
 - (void)initTableRowWithScroll
@@ -377,9 +381,10 @@ static const int SectionLoadMore = 2;
     }
 }
 
-- (void)itemClickedInCell:(ShopsCell *)cell
+- (void)shopItemClickedInCell:(ShopsCell *)cell
 {
     [self performSegueWithIdentifier:@"ShowShopsSegueFromCommunity" sender:self];
 }
+
 
 @end

@@ -13,6 +13,7 @@
 #import "SeperatorTableCell.h"
 #import "CommentTableViewCell.h"
 #import "ShoppingCartViewController.h"
+#import "DataModel.h"
 
 #import "DeviceHardware.h"
 
@@ -42,6 +43,10 @@ static const NSInteger SeperatorCellIndex = 3;
 @property (strong, nonatomic) UIButton *orderButton;
 
 @property (strong, nonatomic) NSArray *commentArray;
+
+@property (strong, nonatomic) DataModel *dataModel;
+
+@property (strong, nonatomic) NSMutableDictionary *product;
 
 @end
 
@@ -190,6 +195,9 @@ static const NSInteger SeperatorCellIndex = 3;
 
 - (void)initProductData
 {
+    self.dataModel = [[DataModel alloc] init];
+    [self.dataModel loadDataModelLocally];
+    
     self.commentArray = @[
                           @{@"user":@"1234", @"comment":@"jdifjidbhj"},
                           @{@"user":@"ffff", @"comment":@"HelloWorld"},
@@ -208,6 +216,27 @@ static const NSInteger SeperatorCellIndex = 3;
     [self initBottomView];
     
     [self initProductData];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    NSLog(@"%@", self.dataModel.products);
+    
+    //self.product = [[NSMutableDictionary alloc] init];
+    for(NSDictionary *dict in self.dataModel.products)
+    {
+        if([self.productID isEqualToString:[dict objectForKey:@"ID"]])
+        {
+            self.product = [NSMutableDictionary dictionaryWithDictionary:dict];
+        }
+    }
+    
+    if(self.product != nil)
+    {
+        self.navigationItem.title = [self.product objectForKey:@"name"];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
