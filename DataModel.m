@@ -69,7 +69,7 @@ static NSString *ProductArrayKey = @"Products";
     
     NSString *cleanString = [noEscapedString stringByReplacingOccurrencesOfString:GarbageString withString:@""];
     cleanString = [cleanString stringByReplacingOccurrencesOfString:@"\'" withString:@"\""];
-    //NSLog(@"cleanString: %@", cleanString);
+    NSLog(@"cleanString: %@", cleanString);
     
     NSData *data = [cleanString dataUsingEncoding:NSUTF8StringEncoding];
     NSError *error = nil;
@@ -170,6 +170,28 @@ static NSString *ProductArrayKey = @"Products";
     }
     
     [self saveDataModel];
+}
+
+- (void)parseCommentsJson:(id)responseObject
+{
+    NSArray *outerArray = [self prepareForParse:responseObject];
+    
+    self.comments = [[NSMutableArray alloc] init];
+    NSMutableDictionary *commentsDict;
+    
+    
+    for(NSArray *innerArray in outerArray)
+    {
+        commentsDict = [[NSMutableDictionary alloc] init];
+        
+        [commentsDict setObject:[innerArray objectAtIndex:0] forKey:CommentProductIDKey];
+        [commentsDict setObject:[innerArray objectAtIndex:1] forKey:CommentContentKey];
+        [commentsDict setObject:[innerArray objectAtIndex:2] forKey:CommentTimeKey];
+        [commentsDict setObject:[innerArray objectAtIndex:3] forKey:CommentUserKey];
+        
+        [self.comments addObject:commentsDict];
+    }
+    
 }
 
 
@@ -280,6 +302,24 @@ static NSString *ProductArrayKey = @"Products";
     [archiver finishEncoding];
     
     [data writeToFile:[self dataModelPath] atomically:YES];
+}
+
+- (void)loadCommentsByProductID:(NSString *)productID
+{
+    //plsp_value=00000001
+    NSDictionary *params = @{@"plsp_value":productID};
+    _loadCommentsFinished = NO;
+    
+        [self.httpSessionManager GET:@"comment/commentlist_json.ds"
+                          parameters:params
+                             success:^(NSURLSessionDataTask *task, id responseObject) {
+                                 [self parseCommentsJson:responseObject];
+                                 //dispatch_group_leave(_retrieveGroup);
+                                 _loadCommentsFinished = YES;
+                             }failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                 NSLog(@"Error: %@", [error localizedDescription]);
+                                 //dispatch_group_leave(_retrieveGroup);
+                             }];
 }
 
 @end

@@ -14,6 +14,8 @@
 #import "CommentTableViewCell.h"
 #import "ShoppingCartViewController.h"
 #import "DataModel.h"
+#import "AFNetworking.h"
+#import "AppDelegate.h"
 
 #import "DeviceHardware.h"
 
@@ -45,8 +47,15 @@ static const NSInteger SeperatorCellIndex = 3;
 @property (strong, nonatomic) NSArray *commentArray;
 
 @property (strong, nonatomic) DataModel *dataModel;
+@property (strong, nonatomic) NSMutableArray *comments;
 
 @property (strong, nonatomic) NSMutableDictionary *product;
+
+@property (strong, nonatomic) AFHTTPSessionManager *httpSessionManager;
+
+@property (assign, nonatomic) BOOL loadCommentFinished;
+
+@property (strong, nonatomic) NSTimer *timer;
 
 @end
 
@@ -206,16 +215,25 @@ static const NSInteger SeperatorCellIndex = 3;
                           @{@"user":@"TestUser", @"comment":@"Is there a good way to adjust the size of a UITextView to conform to its content? Say for instance I have a UITextView that contains one line of text:\nIs there a good way in Cocoa Touch to get the rect that will hold all of the lines in the text view so that I can adjust the parent view accordingly?\nAs another example, look at the Notes field for events in the Calendar application--note how the cell (and the UITextView it contains) expands to hold all lines of text in the notes string."}];
 }
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.navigationItem.title = @"商品详情";
     
     [self initTableView];
     [self initBottomView];
     
     [self initProductData];
+}
+
+- (void)loadingCommentData
+{
+    if(self.dataModel.loadCommentsFinished == YES)
+    {
+        [self.timer invalidate];
+        self.comments = [NSMutableArray arrayWithArray:self.dataModel.comments];
+        [self.tableView reloadData];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -237,6 +255,13 @@ static const NSInteger SeperatorCellIndex = 3;
     {
         self.navigationItem.title = [self.product objectForKey:@"name"];
     }
+    
+    [self.dataModel loadCommentsByProductID:self.productID];
+    
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1
+                                                  target:self
+                                                selector:@selector(loadingCommentData)
+                                                userInfo:nil repeats:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -262,8 +287,14 @@ static const NSInteger SeperatorCellIndex = 3;
     //具体评论信息数目根据来自服务器的信息为准，从0到N
     if(section == SectionComments)
     {
-        //NSLog(@"Comment count: %d", [self.commentArray count]);
-        return [self.commentArray count];
+        //return [self.commentArray count];
+        NSInteger num = [self.comments count];
+        if(num == 0)
+            tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        else
+            tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        
+        return num;
     }
     else
         return 0;
@@ -318,8 +349,11 @@ static const NSInteger SeperatorCellIndex = 3;
     } else // section == SectionComment
     {
         CommentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CommentCellIdentifier];
-        NSString *commentText = [[self.commentArray objectAtIndex:indexPath.row] objectForKey:@"comment"];
-        NSString *commentUser = [[self.commentArray objectAtIndex:indexPath.row] objectForKey:@"user"];
+        //NSString *commentText = [[self.commentArray objectAtIndex:indexPath.row] objectForKey:@"comment"];
+        //NSString *commentUser = [[self.commentArray objectAtIndex:indexPath.row] objectForKey:@"user"];
+        
+        NSString *commentText = [[self.comments objectAtIndex:indexPath.row] objectForKey:@"Content"];
+        NSString *commentUser = [[self.comments objectAtIndex:indexPath.row] objectForKey:@"UserName"];
         
         [cell setCommentText:commentText];
         [cell setCommentUser:commentUser];
@@ -351,7 +385,8 @@ static const NSInteger SeperatorCellIndex = 3;
         }
     } else
     {
-        NSString *commentText = [[self.commentArray objectAtIndex:indexPath.row] objectForKey:@"comment"];
+        //NSString *commentText = [[self.commentArray objectAtIndex:indexPath.row] objectForKey:@"comment"];
+        NSString *commentText = [[self.comments objectAtIndex:indexPath.row] objectForKey:@"Content"];
         CGSize textSize = [CommentTableViewCell sizeOfTextViewForText:commentText];
 
         //NSLog(@"Height: %f, width: %f", textSize.height + 40, textSize.width);

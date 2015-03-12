@@ -35,6 +35,12 @@ static NSString *ProductRefencePriceKey = @"RefPrice";
 static NSString *ProductSalePrice = @"price";
 static NSString *ProductShopKey = @"shop";
 
+static NSString *CommentProductIDKey = @"ProductID";
+static NSString *CommentContentKey = @"Content";
+static NSString *CommentTimeKey = @"Time";
+static NSString *CommentUserKey = @"UserName";
+
+
 @class AFHTTPSessionManager;
 
 @class CommunityData;
@@ -46,6 +52,7 @@ static NSString *ProductShopKey = @"shop";
 @property (assign, nonatomic) BOOL loadShopsFinished;
 @property (assign, nonatomic) BOOL loadCommunitiesFinished;
 @property (assign, nonatomic) BOOL loadProductsFinished;
+@property (assign, nonatomic) BOOL loadCommentsFinished;
 
 @property (strong, nonatomic) AFHTTPSessionManager *httpSessionManager;
 
@@ -54,9 +61,14 @@ static NSString *ProductShopKey = @"shop";
 @property (strong, nonatomic) NSMutableArray *categories;
 @property (strong, nonatomic) NSMutableArray *products;
 
+// 针对于特定ProductID的评论，不保存
+@property (strong, nonatomic) NSMutableArray *comments;
+
 
 - (void)loadDataModelLocally;
 - (void)loadDataModelRemotely;
 - (void)saveDataModel;
+
+- (void)loadCommentsByProductID:(NSString *)productID;
 
 @end
