@@ -115,19 +115,27 @@ static const NSInteger RefreshSectionIndex = 3;
 
 - (void)loadingData
 {
+    /*
     if(self.dataModel.loadShopsFinished == YES &&
        self.dataModel.loadCommunitiesFinished == YES)
+     */
+    if(self.dataModel.loadCategoriesFailed == NO &&
+       self.dataModel.loadShopsFailed == NO &&
+       self.dataModel.loadProductsFailed == NO &&
+       self.dataModel.loadCommunitiesFailed == NO)
     {
-        //NSLog(@"xxxshops:%@", self.dataModel.shops);
-        //NSLog(@"xxxcommunities:%@", self.dataModel.communities);
         [self.timer invalidate];
         
-        NSLog(@"Reloading");
+        NSLog(@"Loading Cells");
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:CommunityTableSectionIndex];
         CommunityTableViewCell *cell = (CommunityTableViewCell *)[self.otCoverView.tableView cellForRowAtIndexPath:indexPath];
         [cell.collectionView reloadData];
         
         [self.otCoverView.tableView reloadData];
+    } else {
+        NSLog(@"Reloading Data");
+        [self.dataModel loadDataModelRemotely];
+        return;
     }
 }
 
@@ -159,7 +167,7 @@ static const NSInteger RefreshSectionIndex = 3;
      
     [self.dataModel loadDataModelRemotely];
     
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:3
                                                   target:self
                                                 selector:@selector(loadingData)
                                                 userInfo:nil repeats:YES];
@@ -589,7 +597,6 @@ static const NSInteger RefreshSectionIndex = 3;
         button3.tag = 103;
         button3.backgroundColor = [UIColor lightGrayColor];
         [button3 addTarget:self action:@selector(categoryButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-        NSLog(@"Button3 x: %f", button3.frame.origin.x);
     
         [imageView addSubview:button1];
         [imageView addSubview:button2];

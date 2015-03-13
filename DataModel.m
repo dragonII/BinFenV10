@@ -78,6 +78,7 @@ static NSString *ProductArrayKey = @"Products";
     if(error)
     {
         NSLog(@"Error: %@", error);
+        return nil;
     }
     
     NSArray *outerArray = [json objectForKey:@"data"];
@@ -87,6 +88,13 @@ static NSString *ProductArrayKey = @"Products";
 - (void)parseShopJson:(id)responseObject
 {
     NSArray *outerArray = [self prepareForParse:responseObject];
+    if(outerArray == nil)
+    {
+        _loadShopsFailed = YES;
+        return;
+    } else {
+        _loadShopsFailed = NO;
+    }
     self.shops = [[NSMutableArray alloc] init];
     NSMutableDictionary *shopDict;
     NSString *path = [[NSBundle mainBundle] pathForResource:@"URLs" ofType:@"plist"];
@@ -119,6 +127,13 @@ static NSString *ProductArrayKey = @"Products";
 - (void)parseCommunityJson:(id)responseObject
 {
     NSArray *outerArray = [self prepareForParse:responseObject];
+    if(outerArray == nil)
+    {
+        _loadCommunitiesFailed = YES;
+        return;
+    } else {
+        _loadCommunitiesFailed = NO;
+    }
     self.communities = [[NSMutableArray alloc] init];
     NSMutableDictionary *communityDict;
     NSString *path = [[NSBundle mainBundle] pathForResource:@"URLs" ofType:@"plist"];
@@ -145,6 +160,14 @@ static NSString *ProductArrayKey = @"Products";
 - (void)parseProductJson:(id)responseObject
 {
     NSArray *outerArray = [self prepareForParse:responseObject];
+    
+    if(outerArray == nil)
+    {
+        _loadProductsFailed = YES;
+        return;
+    } else {
+        _loadProductsFailed = NO;
+    }
     
     self.products = [[NSMutableArray alloc] init];
     NSMutableDictionary *productDict;
@@ -176,6 +199,11 @@ static NSString *ProductArrayKey = @"Products";
 {
     NSArray *outerArray = [self prepareForParse:responseObject];
     
+    if(outerArray == nil)
+    {
+        return;
+    }
+    
     self.comments = [[NSMutableArray alloc] init];
     NSMutableDictionary *commentsDict;
     
@@ -196,6 +224,14 @@ static NSString *ProductArrayKey = @"Products";
 - (void)parseCategoryJson:(id)responseObject
 {
     NSArray *outerArray = [self prepareForParse:responseObject];
+    
+    if(outerArray == nil)
+    {
+        _loadCategoriesFailed = YES;
+        return;
+    } else {
+        _loadCategoriesFailed = NO;
+    }
     
     self.categories = [[NSMutableArray alloc] init];
     
@@ -221,6 +257,11 @@ static NSString *ProductArrayKey = @"Products";
 - (void)loadDataModelRemotely
 {
     _retrieveGroup = dispatch_group_create();
+    
+    self.loadCommunitiesFailed = YES;
+    self.loadShopsFailed = YES;
+    self.loadProductsFailed = YES;
+    self.loadCategoriesFailed = YES;
     
     [self loadShopsData];
     [self loadCommunitiesData];
