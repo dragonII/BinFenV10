@@ -7,13 +7,12 @@
 //
 
 #import "ProductImageCell.h"
+#import "UIKit+AFNetworking.h"
 
 @interface ProductImageCell() <UIScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
-
-@property (strong, nonatomic) NSArray *imageNamesArray;
 
 @end
 
@@ -28,14 +27,42 @@
     self.scrollView.bounces = YES;
     self.pageControl.currentPageIndicatorTintColor = [UIColor blueColor];
     self.pageControl.pageIndicatorTintColor = [UIColor colorWithRed:191/255.0f green:191/255.0f blue:191/255.0f alpha:0.8f];
+    [self.pageControl setHidesForSinglePage:YES];
     
-    [self initImages];
+    //[self setImages];
     [self initItems];
 }
 
-- (void)initImages
+/*
+- (void)setImages
 {
     self.imageNamesArray = @[@"Default_320x200"];
+}
+ */
+
+- (void)setImageNamesArray:(NSArray *)imageNamesArray
+{
+    _imageNamesArray = [NSArray arrayWithArray:imageNamesArray];
+    
+    [self loadImages];
+}
+
+- (void)loadImages
+{
+    CGFloat x = 0;
+    CGFloat imageViewWidth = [UIScreen mainScreen].bounds.size.width;
+    CGFloat imageViewHeight = 200.0f;
+    
+    NSLog(@"Before setting images");
+    for(int i = 0; i < [self.imageNamesArray count]; i++)
+    {
+        NSLog(@"imageName: %@", [self.imageNamesArray objectAtIndex:i]);
+        UIImageView *imageView = [[UIImageView alloc] init];
+        imageView.frame = CGRectMake(x + (imageViewWidth * i), 0, imageViewWidth, imageViewHeight);
+        [imageView setImageWithURL:[NSURL URLWithString:[self.imageNamesArray objectAtIndex:i]] placeholderImage:[UIImage imageNamed:@"Default_320x200"]];
+        
+        [self.scrollView addSubview:imageView];
+    }
 }
 
 - (void)initItems
@@ -48,21 +75,15 @@
     
     CGFloat imageViewHeight = 200.0f;
     
+    NSLog(@"Before setting images");
     for(int i = 0; i < [self.imageNamesArray count]; i++)
     {
-        //UIView *itemView = [[UIView alloc] init];
         UIImageView *imageView = [[UIImageView alloc] init];
-        //itemView.tag = index;
         imageView.frame = CGRectMake(x + (imageViewWidth * i), 0, imageViewWidth, imageViewHeight);
-        imageView.image = [UIImage imageNamed:[self.imageNamesArray objectAtIndex:i]];
+        [imageView setImageWithURL:[NSURL URLWithString:[self.imageNamesArray objectAtIndex:i]] placeholderImage:[UIImage imageNamed:@"Default_320x200"]];
         
         [self.scrollView addSubview:imageView];
     }
-    if([self.imageNamesArray count] <= 1)
-        [self.pageControl setHidden:YES];
-    
-    //int tilesPerPage = columnsPerPage * 2;
-    //int numPages = ceilf([self.categoriesListArray count] / (float)tilesPerPage);
     
     self.scrollView.contentSize = CGSizeMake([self.imageNamesArray count] * scrollViewWidth, self.scrollView.frame.size.height);
     

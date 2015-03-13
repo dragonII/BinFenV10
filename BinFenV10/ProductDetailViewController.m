@@ -242,7 +242,7 @@ static const NSInteger SeperatorCellIndex = 3;
 {
     [super viewWillAppear:animated];
     
-    NSLog(@"%@", self.dataModel.products);
+    //NSLog(@"%@", self.dataModel.products);
     
     //self.product = [[NSMutableDictionary alloc] init];
     for(NSDictionary *dict in self.dataModel.products)
@@ -315,6 +315,8 @@ static const NSInteger SeperatorCellIndex = 3;
                 {
                     cell = [[ProductImageCell alloc] init];
                 }
+                
+                cell.imageNamesArray = @[[self.product objectForKey:@"image"]];
                 return cell;
             }
             case ProductPriceCellIndex:

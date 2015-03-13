@@ -73,6 +73,8 @@ static const NSInteger RefreshSectionIndex = 3;
 @property (assign, nonatomic) NSInteger selectedCommunityIndex;
 @property (assign, nonatomic) NSInteger selectedShopIndex;
 
+@property (assign, nonatomic) NSInteger networkLoadingTimes;
+
 @end
 
 
@@ -132,8 +134,17 @@ static const NSInteger RefreshSectionIndex = 3;
         [cell.collectionView reloadData];
         
         [self.otCoverView.tableView reloadData];
+        
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     } else {
         NSLog(@"Reloading Data");
+        if(self.networkLoadingTimes >= 5)
+        {
+            NSLog(@"网络链接失败，请稍后加载");
+            [self.timer invalidate];
+            return;
+        }
+        self.networkLoadingTimes++;
         [self.dataModel loadDataModelRemotely];
         return;
     }
@@ -160,10 +171,13 @@ static const NSInteger RefreshSectionIndex = 3;
     //self.httpSessionManager = [AppDelegate sharedHttpSessionManager];
     self.dataModel = [[DataModel alloc] init];
     
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
     [self initCommunitiesData];
     [self initCategoriesData];
     [self initShopsData];
+    
+    self.networkLoadingTimes = 0;
      
     [self.dataModel loadDataModelRemotely];
     
@@ -412,11 +426,40 @@ static const NSInteger RefreshSectionIndex = 3;
     }
 }
 
-
+- (CGFloat)getHeightOfItemRow
+{
+    DeviceHardwareGeneralPlatform generalPlatform = [DeviceHardware generalPlatform];
+    
+    switch (generalPlatform)
+    {
+        case DeviceHardwareGeneralPlatform_iPhone_4:
+        case DeviceHardwareGeneralPlatform_iPhone_4S:
+        {
+            return 208 + 10;
+            break;
+        }
+        case DeviceHardwareGeneralPlatform_iPhone_5:
+        case DeviceHardwareGeneralPlatform_iPhone_5C:
+        case DeviceHardwareGeneralPlatform_iPhone_5S:
+        case DeviceHardwareGeneralPlatform_iPhone_6:
+        case DeviceHardwareGeneralPlatform_iPhone_6_Plus:
+        {
+            return 246 + 10;
+            break;
+        }
+            
+        default:
+            // For iphone 6 simulator
+            return 246 + 10;
+            break;
+    }
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSInteger sectionNumber = indexPath.section;
+    CGFloat heightOfItemInShopsCell = [self getHeightOfItemRow];
+    
     switch (sectionNumber)
     {
         case CommunityTableSectionIndex:
@@ -440,15 +483,17 @@ static const NSInteger RefreshSectionIndex = 3;
             //if([array count] >= batchIndex * TotalItemsPerBatch)
             if([self.dataModel.shops count] >= batchIndex * TotalItemsPerBatch)
             {
-                NSLog(@"TotalRows: %d", batchIndex * TotalRowsPerBatch);
-                return batchIndex * TotalRowsPerBatch * HeightOfItemInShopsTableCell;
+                //NSLog(@"TotalRows: %d", batchIndex * TotalRowsPerBatch);
+                //return batchIndex * TotalRowsPerBatch * HeightOfItemInShopsTableCell;
+                return batchIndex * TotalRowsPerBatch * heightOfItemInShopsCell;
             }
             else // 0 < count < batchIndex * TotalItemsPerBatch
             {
                 //NSInteger totalRows = ([array count] - 1) / 2 + 1;
                 NSInteger totalRows = ([self.dataModel.shops count] - 1) / 2 + 1;
-                NSLog(@"TotalRows: %ld", (long)totalRows);
-                return totalRows * HeightOfItemInShopsTableCell;
+                //NSLog(@"TotalRows: %ld", (long)totalRows);
+                //return totalRows * HeightOfItemInShopsTableCell;
+                return totalRows * heightOfItemInShopsCell;
             }
         }
             

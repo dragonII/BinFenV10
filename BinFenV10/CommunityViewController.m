@@ -385,40 +385,44 @@ static const int SectionLoadMore = 2;
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    //CGFloat buttonWidth = 106.0f;
-    CGFloat buttonWidth = [self getItemWidthByDevice];
+    if(section == SectionShops)
+    {
+        CGFloat buttonWidth = [self getItemWidthByDevice];
     
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 36)];
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 36)];
     //imageView.backgroundColor = [UIColor lightGrayColor];
     
     //[view setUserInteractionEnabled:YES];
     
-    UIButton *button1 = [[UIButton alloc] initWithFrame:CGRectMake(view.frame.origin.x,
+        UIButton *button1 = [[UIButton alloc] initWithFrame:CGRectMake(view.frame.origin.x,
                                                                    view.frame.origin.y,
                                                                    buttonWidth, 36)];
-    button1.tag = 201;
-    button1.backgroundColor = [UIColor redColor];
-    [button1 addTarget:self action:@selector(categoryButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        button1.tag = 201;
+        button1.backgroundColor = [UIColor redColor];
+        [button1 addTarget:self action:@selector(categoryButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *button2 = [[UIButton alloc] initWithFrame:CGRectMake(view.frame.origin.x + buttonWidth + 1,
+        UIButton *button2 = [[UIButton alloc] initWithFrame:CGRectMake(view.frame.origin.x + buttonWidth + 1,
                                                                    view.frame.origin.y,
                                                                    buttonWidth, 36)];
-    button2.tag = 202;
-    button2.backgroundColor = [UIColor yellowColor];
-    [button2 addTarget:self action:@selector(categoryButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        button2.tag = 202;
+        button2.backgroundColor = [UIColor yellowColor];
+        [button2 addTarget:self action:@selector(categoryButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *button3 = [[UIButton alloc] initWithFrame:CGRectMake(view.frame.origin.x + (buttonWidth + 1) * 2,
+        UIButton *button3 = [[UIButton alloc] initWithFrame:CGRectMake(view.frame.origin.x + (buttonWidth + 1) * 2,
                                                                    view.frame.origin.y,
                                                                    buttonWidth + 1, 36)];
-    button3.tag = 203;
-    button3.backgroundColor = [UIColor blackColor];
-    [button3 addTarget:self action:@selector(categoryButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        button3.tag = 203;
+        button3.backgroundColor = [UIColor blackColor];
+        [button3 addTarget:self action:@selector(categoryButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
-    [view addSubview:button1];
-    [view addSubview:button2];
-    [view addSubview:button3];
+        [view addSubview:button1];
+        [view addSubview:button2];
+        [view addSubview:button3];
     
-    return view;
+        return view;
+    } else {
+        return nil;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section

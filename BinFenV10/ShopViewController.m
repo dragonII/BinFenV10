@@ -162,8 +162,41 @@ static NSString *ProductsCellIdentifer = @"ProductsCell";
     return 2;
 }
 
+- (CGFloat)getHeightOfItemRow
+{
+    DeviceHardwareGeneralPlatform generalPlatform = [DeviceHardware generalPlatform];
+    
+    switch (generalPlatform)
+    {
+        case DeviceHardwareGeneralPlatform_iPhone_4:
+        case DeviceHardwareGeneralPlatform_iPhone_4S:
+        {
+            return 208 + 10;
+            break;
+        }
+        case DeviceHardwareGeneralPlatform_iPhone_5:
+        case DeviceHardwareGeneralPlatform_iPhone_5C:
+        case DeviceHardwareGeneralPlatform_iPhone_5S:
+        case DeviceHardwareGeneralPlatform_iPhone_6:
+        case DeviceHardwareGeneralPlatform_iPhone_6_Plus:
+        {
+            return 246 + 10;
+            break;
+        }
+            
+        default:
+            // For iphone 6 simulator
+            return 246 + 10;
+            break;
+    }
+    
+}
+
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    CGFloat heightOfItemInShopsCell = [self getHeightOfItemRow];
+    
     if(indexPath.row == 0)
         return 110;
     else
@@ -179,14 +212,16 @@ static NSString *ProductsCellIdentifer = @"ProductsCell";
         if([self.products count] >= batchIndex * TotalItemsPerBatch)
         {
             //NSLog(@"TotalRows: %ld", batchIndex * TotalRowsPerBatch);
-            return batchIndex * TotalRowsPerBatch * HeightOfItemInShopsTableCell;
+            //return batchIndex * TotalRowsPerBatch * HeightOfItemInShopsTableCell;
+            return batchIndex * TotalRowsPerBatch * heightOfItemInShopsCell;
         }
         else // 0 < count < batchIndex * TotalItemsPerBatch
         {
             //NSInteger totalRows = ([array count] - 1) / 2 + 1;
             NSInteger totalRows = ([self.products count] - 1) / 2 + 1;
             NSLog(@"TotalRows: %ld", (long)totalRows);
-            return totalRows * HeightOfItemInShopsTableCell;
+            //return totalRows * HeightOfItemInShopsTableCell;
+            return totalRows * heightOfItemInShopsCell;
         }
     }
 }

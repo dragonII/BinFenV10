@@ -10,4 +10,6 @@
 
 @interface ProductImageCell : UITableViewCell
 
+@property (strong, nonatomic) NSArray *imageNamesArray;
+
 @end
