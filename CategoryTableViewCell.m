@@ -32,7 +32,6 @@
         topViewSeparator.backgroundColor = BGColor;
         
         self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 12, width, 190)];
-        self.scrollView.backgroundColor = [UIColor yellowColor];
         self.scrollView.delegate = self;
         self.scrollView.showsHorizontalScrollIndicator = NO;
         self.scrollView.bounces = YES;

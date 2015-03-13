@@ -50,7 +50,6 @@ static NSString *ProductsCellIdentifer = @"ProductsCell";
         case DeviceHardwareGeneralPlatform_iPhone_4:
         case DeviceHardwareGeneralPlatform_iPhone_4S:
         {
-            NSLog(@"iphone 4, 4S");
             CGFloat navigationBarHeight = self.navigationController.navigationBar.frame.size.height;
             CGFloat statusBarHeight = 20;
             if(self.showShopViewFrom == ShowViewFromHome)
@@ -71,7 +70,6 @@ static NSString *ProductsCellIdentifer = @"ProductsCell";
         case DeviceHardwareGeneralPlatform_iPhone_6:
         case DeviceHardwareGeneralPlatform_iPhone_6_Plus:
         {
-            NSLog(@"iphone 5, 6");
             /*
             tableViewFrame = CGRectMake(0, 0,
                                         self.view.bounds.size.width,
@@ -86,7 +84,13 @@ static NSString *ProductsCellIdentifer = @"ProductsCell";
         }
             
         default:
-            tableViewFrame = CGRectZero;
+        {
+            CGFloat navigationBarHeight = self.navigationController.navigationBar.frame.size.height;
+            CGFloat statusBarHeight = 20;
+            tableViewFrame = CGRectMake(0, navigationBarHeight + statusBarHeight,
+                                        self.view.bounds.size.width,
+                                        self.view.bounds.size.height - navigationBarHeight - statusBarHeight);
+        }
             break;
     }
     

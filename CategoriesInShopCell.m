@@ -30,7 +30,38 @@
     NSLog(@"%ld", (long)view.tag);
 }
 
-- (CGFloat)getItemSizeByDevice
+- (CGSize)getItemSizeByDevice
+{
+    DeviceHardwareGeneralPlatform generalPlatform = [DeviceHardware generalPlatform];
+    
+    CGSize size;
+    
+    switch (generalPlatform)
+    {
+        case DeviceHardwareGeneralPlatform_iPhone_4:
+        case DeviceHardwareGeneralPlatform_iPhone_4S:
+        case DeviceHardwareGeneralPlatform_iPhone_5:
+        case DeviceHardwareGeneralPlatform_iPhone_5C:
+        case DeviceHardwareGeneralPlatform_iPhone_5S:
+        {
+            size = CGSizeMake(80.0f, 80.0f);
+            return size;
+        }
+            
+        case DeviceHardwareGeneralPlatform_iPhone_6:
+        case DeviceHardwareGeneralPlatform_iPhone_6_Plus:
+        {
+            size = CGSizeMake(24 + 44 + 24, 80.0f);
+            return size;
+        }
+            
+        default:
+            size = CGSizeMake(24 + 44 + 24, 80.0f);
+            return size;
+    }
+}
+
+- (CGFloat)getHorizentalSpace
 {
     DeviceHardwareGeneralPlatform generalPlatform = [DeviceHardware generalPlatform];
     
@@ -42,31 +73,28 @@
         case DeviceHardwareGeneralPlatform_iPhone_5C:
         case DeviceHardwareGeneralPlatform_iPhone_5S:
         {
-            NSLog(@"iphone 4, 4S");
-            return 80.0f;
-            
-            break;
+            return 18.0f;
         }
             
         case DeviceHardwareGeneralPlatform_iPhone_6:
         case DeviceHardwareGeneralPlatform_iPhone_6_Plus:
         {
-            NSLog(@"iphone 5, 6");
-            return (24 + 44 + 24);
-            break;
+            return 24.0f;
         }
             
+            // iPhone 6 simulator
         default:
-            return (24 + 44 + 24);
-            break;
+            return 24.0f;
     }
 }
 
 - (void)initItems
 {
     int columnsPerPage = 4;
-    CGFloat itemWidth = [self getItemSizeByDevice];  // = 80.0f;
-    CGFloat itemHeight = [self getItemSizeByDevice]; //= 80.0f;
+    CGFloat itemWidth = [self getItemSizeByDevice].width;  // = 80.0f;
+    CGFloat itemHeight = [self getItemSizeByDevice].height; //= 80.0f;
+    
+    CGFloat startingPoint = [self getHorizentalSpace];
     
     //CGFloat extraSpace = 0.0f;
     
@@ -95,8 +123,13 @@
         UILabel *label = [[UILabel alloc] init];
         
         
-        imageView.frame = CGRectMake(itemView.bounds.origin.x + 18, itemView.bounds.origin.y + 12, imageViewWidth, imageViewHeight);
-        label.frame = CGRectMake(itemView.bounds.origin.x, itemView.bounds.origin.y + 12 + imageViewHeight, itemView.bounds.size.width, itemHeight - imageViewHeight);
+        imageView.frame = CGRectMake(itemView.bounds.origin.x + startingPoint,
+                                     itemView.bounds.origin.y + 12,
+                                     imageViewWidth, imageViewHeight);
+        label.frame = CGRectMake(itemView.bounds.origin.x,
+                                 itemView.bounds.origin.y + 12 + imageViewHeight,
+                                 itemWidth,
+                                 itemHeight - imageViewHeight);
         label.text = itemString;
         label.textAlignment = NSTextAlignmentCenter;
         

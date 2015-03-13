@@ -56,7 +56,6 @@ typedef enum
         case DeviceHardwareGeneralPlatform_iPhone_4:
         case DeviceHardwareGeneralPlatform_iPhone_4S:
         {
-            //NSLog(@"iphone 4, 4S");
             CGFloat navigationBarHeight = self.navigationController.navigationBar.frame.size.height;
             CGFloat statusBarHeight = 20;
             if(self.showShoppingCartViewFrom == ShowViewFromHome)
@@ -77,7 +76,6 @@ typedef enum
         case DeviceHardwareGeneralPlatform_iPhone_6:
         case DeviceHardwareGeneralPlatform_iPhone_6_Plus:
         {
-            NSLog(@"iphone 5, 6");
             tableViewFrame = CGRectMake(0, 0,
                                         self.view.bounds.size.width,
                                         self.view.bounds.size.height - bottomViewHeight);
@@ -85,7 +83,9 @@ typedef enum
         }
             
         default:
-            tableViewFrame = CGRectZero;
+            tableViewFrame = CGRectMake(0, 0,
+                                        self.view.bounds.size.width,
+                                        self.view.bounds.size.height - bottomViewHeight);
             break;
     }
     
@@ -349,7 +349,7 @@ typedef enum
         return 44;
     else
     {
-        int index = indexPath.section - 1;
+        NSInteger index = indexPath.section - 1;
         if(indexPath.row != [[self.sortCartItemArray objectAtIndex:index] count])
             return 125;
         else
@@ -370,7 +370,7 @@ typedef enum
 
 -(void)shopSelected:(UITapGestureRecognizer *)sender
 {
-    int tag = sender.view.tag - 50;
+    NSInteger tag = sender.view.tag - 50;
     UIImageView *checkImage = (UIImageView *)sender.view;
     NSInteger checkedStatus = [[[self.shopsArray objectAtIndex:tag] objectForKey:@"shopChecked"] integerValue];
     if(checkedStatus == 0)
@@ -425,7 +425,7 @@ typedef enum
 
 -(void)itemSelected:(UITapGestureRecognizer *)sender
 {
-    int tag = sender.view.tag - 50;
+    NSInteger tag = sender.view.tag - 50;
     UIImageView *checkImage = (UIImageView *)sender.view;
     NSInteger checkedStatus = [[[self.shopsArray objectAtIndex:tag] objectForKey:@"shopChecked"] integerValue];
     if(checkedStatus == 0)
@@ -495,8 +495,8 @@ typedef enum
 - (void)editClicked:(CommentCartCell *)cell
 {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    NSLog(@"Editting: %d", indexPath.section - 1);
-    int sectionIndex = indexPath.section - 1;
+    NSLog(@"Editting: %ld", indexPath.section - 1);
+    NSInteger sectionIndex = indexPath.section - 1;
     [[self.shopsArray objectAtIndex:sectionIndex] setObject:cell.commentTextField.text forKey:@"comment"];
 }
 
@@ -504,7 +504,7 @@ typedef enum
 {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     NSString *productID = [[self.sortCartItemArray objectAtIndex:indexPath.section - 1] objectForKey:@"productID"];
-    int checkedStatus = [[self.itemCheckedDict objectForKey:productID] integerValue];
+    NSInteger checkedStatus = [[self.itemCheckedDict objectForKey:productID] integerValue];
     if(checkedStatus == 0)
     {
         [self.itemCheckedDict setObject:@1 forKey:productID];
@@ -521,7 +521,7 @@ typedef enum
     
     NSString *productID = [[[self.sortCartItemArray objectAtIndex:indexPath.section - 1] objectAtIndex:indexPath.row] objectForKey:@"productID"];
 
-    int checkedStatus = [[self.itemCheckedDict objectForKey:productID] integerValue];
+    NSInteger checkedStatus = [[self.itemCheckedDict objectForKey:productID] integerValue];
     if(checkedStatus == 0)
     {
         [self.itemCheckedDict setObject:@1 forKey:productID];
