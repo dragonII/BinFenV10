@@ -1,34 +1,80 @@
 //
-//  MiddleTableViewCell.m
+//  CategoryTableViewCell_New.m
 //  BinFenV10
 //
-//  Created by Wang Long on 2/3/15.
+//  Created by Wang Long on 3/13/15.
 //  Copyright (c) 2015 Wang Long. All rights reserved.
 //
 
 #import "CategoryTableViewCell.h"
+
 #import "DeviceHardware.h"
 
+
+@interface CategoryTableViewCell () <UIScrollViewDelegate>
+
+@property (strong, nonatomic) UIScrollView *scrollView;
+@property (strong, nonatomic) UIPageControl *pageControl;
+
+@end
+
 @implementation CategoryTableViewCell
+
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+    UIColor *BGColor = [UIColor colorWithRed:225/255.0f green:225/255.0f blue:225/255.0f alpha:1.0f];
+    UIColor *pageControlTintColor = [UIColor colorWithRed:191/255.0f green:191/255.0f blue:191/255.0f alpha:0.8f];
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self)
+    {
+        UIView *topViewSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width, 12)];
+        topViewSeparator.backgroundColor = BGColor;
+        
+        self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 12, width, 190)];
+        self.scrollView.backgroundColor = [UIColor yellowColor];
+        self.scrollView.delegate = self;
+        self.scrollView.showsHorizontalScrollIndicator = NO;
+        self.scrollView.bounces = YES;
+        
+        self.pageControl = [[UIPageControl alloc] init];
+        self.pageControl.currentPageIndicatorTintColor = [UIColor blueColor];
+        self.pageControl.pageIndicatorTintColor = pageControlTintColor;
+        
+        UIView *bottomViewSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, 12 + 190, width, 12)];
+        bottomViewSeparator.backgroundColor = BGColor;
+        
+        [self.contentView addSubview:topViewSeparator];
+        [self.contentView addSubview:self.scrollView];
+        [self.contentView addSubview:self.pageControl];
+        [self.contentView addSubview:bottomViewSeparator];
+        
+        __weak UIPageControl *pageControl = self.pageControl;
+        [self.pageControl setTranslatesAutoresizingMaskIntoConstraints:NO];
+        
+        [self.contentView addConstraints:[NSLayoutConstraint
+                                          constraintsWithVisualFormat:@"H:|-0-[pageControl]-0-|"
+                                          options:0
+                                          metrics:nil
+                                          views:NSDictionaryOfVariableBindings(pageControl)]];
+        [self.contentView addConstraints:[NSLayoutConstraint
+                                          constraintsWithVisualFormat:@"V:[pageControl]-12-|"
+                                          options:0
+                                          metrics:nil
+                                          views:NSDictionaryOfVariableBindings(pageControl)]];
+    }
+    return self;
+}
 
 - (void)awakeFromNib
 {
     // Initialization code
-    self.scrollView.delegate = self;
-    self.scrollView.showsHorizontalScrollIndicator = NO;
-    self.scrollView.bounces = YES;
-    //self.scrollView.frame = CGRectMake(0, 12, [UIScreen mainScreen].bounds.size.width, 190);
-    NSLog(@"scrollview: %f", self.scrollView.frame.size.width);
-    self.pageControl.currentPageIndicatorTintColor = [UIColor blueColor];
-    self.pageControl.pageIndicatorTintColor = [UIColor colorWithRed:191/255.0f green:191/255.0f blue:191/255.0f alpha:0.8f];
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    //NSLog(@"scrollViewDidScroll");
-    CGFloat width = self.scrollView.bounds.size.width;
-    int currentPage = (self.scrollView.contentOffset.x + width) / width - 1;
-    self.pageControl.currentPage = currentPage;
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
+
+    // Configure the view for the selected state
 }
 
 - (void)setCategoriesListArray:(NSArray *)categoriesListArray
@@ -36,18 +82,43 @@
     if(![_categoriesListArray isEqualToArray:categoriesListArray])
     {
         _categoriesListArray = [NSArray arrayWithArray:categoriesListArray];
-        [self initItems];
+        [self drawCategoryItems];
     }
 }
 
-
-- (void)itemClicked:(UITapGestureRecognizer*)sender
+- (CGSize)getItemSizeByDevice
 {
-    UIView *view = sender.view;
-    NSLog(@"%ld", (long)view.tag);
+    DeviceHardwareGeneralPlatform generalPlatform = [DeviceHardware generalPlatform];
+    
+    CGSize size;
+    
+    switch (generalPlatform)
+    {
+        case DeviceHardwareGeneralPlatform_iPhone_4:
+        case DeviceHardwareGeneralPlatform_iPhone_4S:
+        case DeviceHardwareGeneralPlatform_iPhone_5:
+        case DeviceHardwareGeneralPlatform_iPhone_5C:
+        case DeviceHardwareGeneralPlatform_iPhone_5S:
+        {
+            size = CGSizeMake(80.0f, 80.0f);
+            return size;
+        }
+            
+        case DeviceHardwareGeneralPlatform_iPhone_6:
+        case DeviceHardwareGeneralPlatform_iPhone_6_Plus:
+        {
+            size = CGSizeMake(24 + 44 + 24, 80);
+            return size;
+        }
+        
+        // iPhone 6 simulator
+        default:
+            size = CGSizeMake(24 + 44 + 24, 80);
+            return size;
+    }
 }
 
-- (CGFloat)getItemSizeByDevice
+- (CGFloat)getHorizentalSpace
 {
     DeviceHardwareGeneralPlatform generalPlatform = [DeviceHardware generalPlatform];
     
@@ -59,36 +130,33 @@
         case DeviceHardwareGeneralPlatform_iPhone_5C:
         case DeviceHardwareGeneralPlatform_iPhone_5S:
         {
-            NSLog(@"iphone 4, 4S");
-            return 80.0f;
-            
-            break;
+            return 18.0f;
         }
-
+            
         case DeviceHardwareGeneralPlatform_iPhone_6:
         case DeviceHardwareGeneralPlatform_iPhone_6_Plus:
         {
-            NSLog(@"iphone 5, 6");
-            return (24 + 44 + 24);
-            break;
+            return 24.0f;
         }
             
+            // iPhone 6 simulator
         default:
-            return (24 + 44 + 24);
-            break;
+            return 24.0f;
     }
 }
 
-- (void)initItems
+- (void)categoryItemClicked:(UITapGestureRecognizer*)sender
 {
-//#warning 目前只涵盖屏幕宽度为320，其他宽度的屏幕尺寸待完成
+    UIView *view = sender.view;
+    NSLog(@"%ld", (long)view.tag);
+}
 
+- (void)drawCategoryItems
+{
     int columnsPerPage = 4;
-    //CGFloat itemWidth = 80.0f;
-    //CGFloat itemHeight = 80.0f;
-    CGFloat itemWidth = [self getItemSizeByDevice];
-    CGFloat itemHeight = [self getItemSizeByDevice];
-
+    CGFloat itemWidth = [self getItemSizeByDevice].width;
+    CGFloat itemHeight = [self getItemSizeByDevice].height;
+    
     CGFloat x = 0;
     //CGFloat extraSpace = 0.0f;
     
@@ -96,6 +164,7 @@
     
     CGFloat imageViewWidth = 44.0f;
     CGFloat imageViewHeight = 44.0f;
+    CGFloat startingPoint = [self getHorizentalSpace];
     
     int index = 1000;
     int row = 0;
@@ -107,18 +176,22 @@
         itemView.tag = index;
         itemView.frame = CGRectMake(x, row * itemHeight, itemWidth, itemHeight);
         
-        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(itemClicked:)];
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(categoryItemClicked:)];
         tapGesture.numberOfTapsRequired = 1;
         tapGesture.numberOfTouchesRequired = 1;
         [itemView addGestureRecognizer:tapGesture];
-         
+        
         
         UIImageView *imageView = [[UIImageView alloc] init];
         UILabel *label = [[UILabel alloc] init];
         
+        imageView.frame = CGRectMake(itemView.bounds.origin.x + startingPoint,
+                                     itemView.bounds.origin.y + 12,
+                                     imageViewWidth, imageViewHeight);
         
-        imageView.frame = CGRectMake(itemView.bounds.origin.x + 18, itemView.bounds.origin.y + 12, imageViewWidth, imageViewHeight);
-        label.frame = CGRectMake(itemView.bounds.origin.x, itemView.bounds.origin.y + 12 + imageViewHeight, itemView.bounds.size.width, itemHeight - imageViewHeight);
+        label.frame = CGRectMake(itemView.bounds.origin.x,
+                                 itemView.bounds.origin.y + 12 + imageViewHeight,
+                                 itemWidth, itemHeight - imageViewHeight);
         label.text = itemString;
         label.textAlignment = NSTextAlignmentCenter;
         
@@ -139,7 +212,7 @@
         imageView.layer.borderColor = [UIColor whiteColor].CGColor;
         imageView.clipsToBounds = YES;
         imageView.alpha = 0.8f;
-
+        
         
         [itemView addSubview:imageView];
         [itemView addSubview:label];
@@ -171,10 +244,13 @@
     //NSLog(@"ContentSize: %f, %f", self.scrollView.contentSize.width, self.scrollView.contentSize.height);
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+#pragma mark - ScrollViewDelegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    //NSLog(@"scrollViewDidScroll");
+    CGFloat width = self.scrollView.bounds.size.width;
+    int currentPage = (self.scrollView.contentOffset.x + width) / width - 1;
+    self.pageControl.currentPage = currentPage;
 }
 
 @end

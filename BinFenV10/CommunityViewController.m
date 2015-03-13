@@ -8,7 +8,6 @@
 
 #import "CommunityViewController.h"
 #import "CategoryTableViewCell.h"
-#import "CategoryTableViewCell_New.h"
 #import "ShopsCell.h"
 #import "BFPreferenceData.h"
 #import "MLKMenuPopover.h"
@@ -87,7 +86,7 @@ static const int SectionLoadMore = 2;
 
     self.tableView = [[UITableView alloc] initWithFrame:tableViewFrame];
     
-    [self.tableView registerClass:[CategoryTableViewCell_New class] forCellReuseIdentifier:CategoryCellIdentifier];
+    [self.tableView registerClass:[CategoryTableViewCell class] forCellReuseIdentifier:CategoryCellIdentifier];
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -124,9 +123,6 @@ static const int SectionLoadMore = 2;
     
     [self initTableView];
     
-    //[self initTableRowWithScroll];
-    
-    //self.navigationItem.title = @"具体社区名称";
     self.hidesBottomBarWhenPushed = YES;
 }
 
@@ -140,14 +136,6 @@ static const int SectionLoadMore = 2;
     NSLog(@"CommunityTableWidth: %f", self.tableView.frame.size.width);
 }
 
-- (void)initTableRowWithScroll
-{
-    //UINib *nib = [UINib nibWithNibName:@"CategoryCell" bundle:nil];
-    //[self.tableView registerNib:nib forCellReuseIdentifier:CategoryCellIdentifier];
-    
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
-}
 
 - (void)didReceiveMemoryWarning
 {
@@ -183,12 +171,10 @@ static const int SectionLoadMore = 2;
     {
         case SectionCategory:
         {
-            //CategoryTableViewCell *cell = (CategoryTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CategoryCellIdentifier];
-            CategoryTableViewCell_New *cell = (CategoryTableViewCell_New *)[tableView dequeueReusableCellWithIdentifier:CategoryCellIdentifier];
+            CategoryTableViewCell *cell = (CategoryTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CategoryCellIdentifier];
             if(cell == nil)
             {
-                //cell = [[CategoryTableViewCell alloc] init];
-                cell = [[CategoryTableViewCell_New alloc] init];
+                cell = [[CategoryTableViewCell alloc] init];
             }
             
             cell.categoriesListArray = self.categoriesListArray;

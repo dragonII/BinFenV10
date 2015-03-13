@@ -12,7 +12,6 @@
 #import "CommunityTableViewCell.h"
 
 #import "CategoryTableViewCell.h"
-#import "CategoryTableViewCell_New.h"
 
 #import "ShopsCell.h"
 
@@ -174,11 +173,7 @@ static const NSInteger RefreshSectionIndex = 3;
 
 - (void)initCategoryTableRow
 {
-    /*
-    UINib *nib = [UINib nibWithNibName:@"CategoryTableViewCell" bundle:nil];
-    [self.otCoverView.tableView registerNib:nib forCellReuseIdentifier:CategoryTableCellIdentifier];
-     */
-    [self.otCoverView.tableView registerClass:[CategoryTableViewCell_New class] forCellReuseIdentifier:CategoryTableCellIdentifier];
+    [self.otCoverView.tableView registerClass:[CategoryTableViewCell class] forCellReuseIdentifier:CategoryTableCellIdentifier];
 }
 
 - (void)initShopsTableRow
@@ -366,12 +361,10 @@ static const NSInteger RefreshSectionIndex = 3;
             
         case CategoryTableSectionIndex:
         {
-            //CategoryTableViewCell *cell = (CategoryTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CategoryTableCellIdentifier];
-            CategoryTableViewCell_New *cell = (CategoryTableViewCell_New *)[tableView dequeueReusableCellWithIdentifier:CategoryTableCellIdentifier];
+            CategoryTableViewCell *cell = (CategoryTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CategoryTableCellIdentifier];
             if(cell == nil)
             {
-                //cell = [[CategoryTableViewCell alloc] init];
-                cell = [[CategoryTableViewCell_New alloc] init];
+                cell = [[CategoryTableViewCell alloc] init];
             }
             
             cell.categoriesListArray = self.categoriesDataList;
