@@ -539,7 +539,6 @@ static const NSInteger RefreshSectionIndex = 3;
         case DeviceHardwareGeneralPlatform_iPhone_5C:
         case DeviceHardwareGeneralPlatform_iPhone_5S:
         {
-            NSLog(@"iphone 4, 4S");
             return 106.0f;
             
             break;
@@ -548,7 +547,6 @@ static const NSInteger RefreshSectionIndex = 3;
         case DeviceHardwareGeneralPlatform_iPhone_6:
         case DeviceHardwareGeneralPlatform_iPhone_6_Plus:
         {
-            NSLog(@"iphone 6, 6Plus");
             return 124.0f;
             break;
         }
@@ -587,10 +585,11 @@ static const NSInteger RefreshSectionIndex = 3;
         
         UIButton *button3 = [[UIButton alloc] initWithFrame:CGRectMake(imageView.frame.origin.x + (buttonWidth + 1) * 2,
                                                                   imageView.frame.origin.y,
-                                                                   buttonWidth, 36)];
+                                                                   buttonWidth + 1, 36)];
         button3.tag = 103;
         button3.backgroundColor = [UIColor lightGrayColor];
         [button3 addTarget:self action:@selector(categoryButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        NSLog(@"Button3 x: %f", button3.frame.origin.x);
     
         [imageView addSubview:button1];
         [imageView addSubview:button2];

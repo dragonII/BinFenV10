@@ -353,41 +353,72 @@ static const int SectionLoadMore = 2;
     [NSTimer scheduledTimerWithTimeInterval:0.2f target:self selector:@selector(showCategoryPopover:) userInfo:nil repeats:NO];
 }
 
+- (CGFloat)getItemWidthByDevice
+{
+    DeviceHardwareGeneralPlatform generalPlatform = [DeviceHardware generalPlatform];
+    
+    switch (generalPlatform)
+    {
+        case DeviceHardwareGeneralPlatform_iPhone_4:
+        case DeviceHardwareGeneralPlatform_iPhone_4S:
+        case DeviceHardwareGeneralPlatform_iPhone_5:
+        case DeviceHardwareGeneralPlatform_iPhone_5C:
+        case DeviceHardwareGeneralPlatform_iPhone_5S:
+        {
+            return 106.0f;
+            
+            break;
+        }
+            
+        case DeviceHardwareGeneralPlatform_iPhone_6:
+        case DeviceHardwareGeneralPlatform_iPhone_6_Plus:
+        {
+            return 124.0f;
+            break;
+        }
+            
+        default:
+            return 124.0f;
+            break;
+    }
+}
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    CGFloat buttonWidth = 106.0f;
+    //CGFloat buttonWidth = 106.0f;
+    CGFloat buttonWidth = [self getItemWidthByDevice];
     
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 36)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 36)];
     //imageView.backgroundColor = [UIColor lightGrayColor];
     
-    [imageView setUserInteractionEnabled:YES];
+    //[view setUserInteractionEnabled:YES];
     
-    UIButton *button1 = [[UIButton alloc] initWithFrame:CGRectMake(imageView.frame.origin.x,
-                                                                   imageView.frame.origin.y,
+    UIButton *button1 = [[UIButton alloc] initWithFrame:CGRectMake(view.frame.origin.x,
+                                                                   view.frame.origin.y,
                                                                    buttonWidth, 36)];
     button1.tag = 201;
-    button1.backgroundColor = [UIColor lightGrayColor];
+    button1.backgroundColor = [UIColor redColor];
     [button1 addTarget:self action:@selector(categoryButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *button2 = [[UIButton alloc] initWithFrame:CGRectMake(imageView.frame.origin.x + buttonWidth + 1,
-                                                                   imageView.frame.origin.y,
+    UIButton *button2 = [[UIButton alloc] initWithFrame:CGRectMake(view.frame.origin.x + buttonWidth + 1,
+                                                                   view.frame.origin.y,
                                                                    buttonWidth, 36)];
     button2.tag = 202;
-    button2.backgroundColor = [UIColor lightGrayColor];
-    
+    button2.backgroundColor = [UIColor yellowColor];
     [button2 addTarget:self action:@selector(categoryButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    UIButton *button3 = [[UIButton alloc] initWithFrame:CGRectMake(imageView.frame.origin.x + (buttonWidth + 1) * 2,
-                                                                   imageView.frame.origin.y,
-                                                                   buttonWidth, 36)];
+    
+    UIButton *button3 = [[UIButton alloc] initWithFrame:CGRectMake(view.frame.origin.x + (buttonWidth + 1) * 2,
+                                                                   view.frame.origin.y,
+                                                                   buttonWidth + 1, 36)];
     button3.tag = 203;
-    button3.backgroundColor = [UIColor lightGrayColor];
+    button3.backgroundColor = [UIColor blackColor];
     [button3 addTarget:self action:@selector(categoryButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
-    [imageView addSubview:button1];
-    [imageView addSubview:button2];
-    [imageView addSubview:button3];
+    [view addSubview:button1];
+    [view addSubview:button2];
+    [view addSubview:button3];
     
-    return imageView;
+    return view;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
