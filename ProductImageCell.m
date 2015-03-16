@@ -23,7 +23,6 @@
 {
     self.scrollView.delegate = self;
     self.scrollView.showsHorizontalScrollIndicator = NO;
-    self.scrollView.backgroundColor = [UIColor yellowColor];
     self.scrollView.bounces = YES;
     self.pageControl.currentPageIndicatorTintColor = [UIColor blueColor];
     self.pageControl.pageIndicatorTintColor = [UIColor colorWithRed:191/255.0f green:191/255.0f blue:191/255.0f alpha:0.8f];
@@ -59,6 +58,7 @@
         NSLog(@"imageName: %@", [self.imageNamesArray objectAtIndex:i]);
         UIImageView *imageView = [[UIImageView alloc] init];
         imageView.frame = CGRectMake(x + (imageViewWidth * i), 0, imageViewWidth, imageViewHeight);
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
         [imageView setImageWithURL:[NSURL URLWithString:[self.imageNamesArray objectAtIndex:i]] placeholderImage:[UIImage imageNamed:@"Default_320x200"]];
         
         [self.scrollView addSubview:imageView];
