@@ -64,8 +64,6 @@ static const NSInteger RefreshSectionIndex = 3;
 
 @property (assign, nonatomic) NSInteger categoryButtonIndex;
 
-@property (strong, nonatomic) AFHTTPSessionManager *httpSessionManager;
-
 @property (strong, nonatomic) NSTimer *timer;
 
 //@property (copy, nonatomic) NSString *selectedCommunityName;
@@ -168,7 +166,6 @@ static const NSInteger RefreshSectionIndex = 3;
 
 - (void)loadAllData
 {
-    //self.httpSessionManager = [AppDelegate sharedHttpSessionManager];
     self.dataModel = [[DataModel alloc] init];
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
@@ -178,7 +175,7 @@ static const NSInteger RefreshSectionIndex = 3;
     [self initShopsData];
     
     self.networkLoadingTimes = 0;
-     
+    
     [self.dataModel loadDataModelRemotely];
     
     self.timer = [NSTimer scheduledTimerWithTimeInterval:3
