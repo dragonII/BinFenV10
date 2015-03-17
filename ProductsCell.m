@@ -88,9 +88,7 @@ typedef struct
         }
             
         case DeviceHardwareGeneralPlatform_iPhone_6:
-        case DeviceHardwareGeneralPlatform_iPhone_6_Plus:
         {
-            NSLog(@"iphone 6, 6Plus");
             itemWidth = 170.0f;
             itemHeight = 246.0f;
             imageWidth = 170.0f;
@@ -102,12 +100,12 @@ typedef struct
             return itemStruct;
             break;
         }
-            
+        case DeviceHardwareGeneralPlatform_iPhone_6_Plus:
         default:
-            itemWidth = 170.0f;
-            itemHeight = 246.0f;
-            imageWidth = 170.0f;
-            imageHeight = 170.0f;
+            itemWidth = 190.0f;
+            itemHeight = 274.0f;
+            imageWidth = 188.0f;
+            imageHeight = 188.0f;
             
             itemStruct.itemSize = CGSizeMake(itemWidth, itemHeight);
             itemStruct.imageSize = CGSizeMake(imageWidth, imageHeight);
@@ -127,8 +125,6 @@ typedef struct
         [self loadProductsByShopIndex:shopIndex];
     }
     
-    //NSLog(@"products: %@", self.products);
-    
     [self showingProductsInView];
 }
 
@@ -144,8 +140,6 @@ typedef struct
 {
     self.dataModel = [[DataModel alloc] init];
     [self.dataModel loadDataModelLocally];
-    
-    //NSLog(@"dataModel.products: %@", self.dataModel.products);
     
     NSString *shopID = [[self.dataModel.shops objectAtIndex:shopIndex] objectForKey:@"ID"];
     self.products = [[NSMutableArray alloc] init];
@@ -170,16 +164,12 @@ typedef struct
     NSInteger batchIndex = [[NSUserDefaults standardUserDefaults] integerForKey:LoadContentBatchIndexKey];
     NSLog(@"batchIndex#: %ld", (long)batchIndex);
     
-    //CGFloat itemWidth = 142.0f;
-    //CGFloat itemHeight = 208.0f;
     CGFloat itemWidth = itemSizeStruct.itemSize.width;
     CGFloat itemHeight = itemSizeStruct.itemSize.height;
     
     CGFloat y = 10;
     //CGFloat extraSpace = 0.0f;
     
-    //CGFloat imageViewWidth = 142.0f;
-    //CGFloat imageViewHeight = 142.0f;
     CGFloat imageViewWidth = itemSizeStruct.imageSize.width;
     CGFloat imageViewHeight = itemSizeStruct.imageSize.height;
     
@@ -188,11 +178,9 @@ typedef struct
     int row = 0;
     int column = 0;
     
-    //if([self.dataModel.shops count] >= batchIndex * TotalItemsPerBatch)
     if([self.products count] >= batchIndex * TotalItemsPerBatch)
         maxIndex = batchIndex * TotalItemsPerBatch;
     else
-        //maxIndex = [self.dataModel.shops count];
         maxIndex = [self.products count];
     
     for(int i = 0; i < maxIndex; i++)

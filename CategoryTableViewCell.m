@@ -144,6 +144,29 @@
     }
 }
 
+- (CGFloat)getColumnPadding
+{
+    DeviceHardwareGeneralPlatform generalPlatform = [DeviceHardware generalPlatform];
+    
+    switch (generalPlatform)
+    {
+        case DeviceHardwareGeneralPlatform_iPhone_4:
+        case DeviceHardwareGeneralPlatform_iPhone_4S:
+        case DeviceHardwareGeneralPlatform_iPhone_5:
+        case DeviceHardwareGeneralPlatform_iPhone_5C:
+        case DeviceHardwareGeneralPlatform_iPhone_5S:
+        case DeviceHardwareGeneralPlatform_iPhone_6:
+        {
+            return 0.0f;
+        }
+            
+        case DeviceHardwareGeneralPlatform_iPhone_6_Plus:
+        default:
+            return 15.0f;
+    }
+}
+
+
 - (void)categoryItemClicked:(UITapGestureRecognizer*)sender
 {
     UIView *view = sender.view;
@@ -164,6 +187,7 @@
     CGFloat imageViewWidth = 44.0f;
     CGFloat imageViewHeight = 44.0f;
     CGFloat startingPoint = [self getHorizentalSpace];
+    CGFloat colPadding = [self getColumnPadding];
     
     int index = 1000;
     int row = 0;
@@ -173,7 +197,7 @@
     {
         UIView *itemView = [[UIView alloc] init];
         itemView.tag = index;
-        itemView.frame = CGRectMake(x, row * itemHeight, itemWidth, itemHeight);
+        itemView.frame = CGRectMake(x + column * colPadding, row * itemHeight, itemWidth, itemHeight);
         
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(categoryItemClicked:)];
         tapGesture.numberOfTapsRequired = 1;
@@ -228,6 +252,7 @@
             if(column == columnsPerPage)
             {
                 column = 0;
+                x = [UIScreen mainScreen].bounds.size.width;
             }
         }
     }

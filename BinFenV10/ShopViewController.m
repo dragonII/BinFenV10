@@ -170,23 +170,23 @@ static NSString *ProductsCellIdentifer = @"ProductsCell";
     {
         case DeviceHardwareGeneralPlatform_iPhone_4:
         case DeviceHardwareGeneralPlatform_iPhone_4S:
+        case DeviceHardwareGeneralPlatform_iPhone_5:
+        case DeviceHardwareGeneralPlatform_iPhone_5C:
+        case DeviceHardwareGeneralPlatform_iPhone_5S:
         {
             return 208 + 10;
             break;
         }
-        case DeviceHardwareGeneralPlatform_iPhone_5:
-        case DeviceHardwareGeneralPlatform_iPhone_5C:
-        case DeviceHardwareGeneralPlatform_iPhone_5S:
+
         case DeviceHardwareGeneralPlatform_iPhone_6:
-        case DeviceHardwareGeneralPlatform_iPhone_6_Plus:
         {
             return 246 + 10;
             break;
         }
-            
+        case DeviceHardwareGeneralPlatform_iPhone_6_Plus:
         default:
-            // For iphone 6 simulator
-            return 246 + 10;
+            // For iphone 6 plus simulator
+            return 274 + 10;
             break;
     }
     
@@ -198,29 +198,23 @@ static NSString *ProductsCellIdentifer = @"ProductsCell";
     CGFloat heightOfItemInShopsCell = [self getHeightOfItemRow];
     
     if(indexPath.row == 0)
-        return 110;
+        return 111;
     else
     {
         NSInteger batchIndex = [[NSUserDefaults standardUserDefaults] integerForKey:LoadContentBatchIndexKey];
-        //NSArray *array = [BFPreferenceData loadTestDataArray];
-        //if(array == nil || [array count] == 0)
+    
         if([self.products count] == 0)
         {
             return 0;
         }
-        //if([array count] >= batchIndex * TotalItemsPerBatch)
+
         if([self.products count] >= batchIndex * TotalItemsPerBatch)
         {
-            //NSLog(@"TotalRows: %ld", batchIndex * TotalRowsPerBatch);
-            //return batchIndex * TotalRowsPerBatch * HeightOfItemInShopsTableCell;
             return batchIndex * TotalRowsPerBatch * heightOfItemInShopsCell;
         }
         else // 0 < count < batchIndex * TotalItemsPerBatch
         {
-            //NSInteger totalRows = ([array count] - 1) / 2 + 1;
             NSInteger totalRows = ([self.products count] - 1) / 2 + 1;
-            NSLog(@"TotalRows: %ld", (long)totalRows);
-            //return totalRows * HeightOfItemInShopsTableCell;
             return totalRows * heightOfItemInShopsCell;
         }
     }
@@ -236,9 +230,7 @@ static NSString *ProductsCellIdentifer = @"ProductsCell";
             cell = [[CategoriesInShopCell alloc] init];
         }
         return cell;
-    }
-    else {
-        //ShopsAndProductsCell *cell = (ShopsAndProductsCell *)[tableView dequeueReusableCellWithIdentifier:ShopsCellIdentifier];
+    } else {
         ProductsCell *cell = (ProductsCell *)[tableView dequeueReusableCellWithIdentifier:ProductsCellIdentifer];
         if(cell == nil)
         {
@@ -246,7 +238,6 @@ static NSString *ProductsCellIdentifer = @"ProductsCell";
             cell = [[ProductsCell alloc] init];
         }
         cell.segueDelegate = self;
-        //[cell initProductItems];
         [cell initProductItemsByShopIndex:self.selectedShopIndex];
         return cell;
     }

@@ -431,23 +431,24 @@ static const NSInteger RefreshSectionIndex = 3;
     {
         case DeviceHardwareGeneralPlatform_iPhone_4:
         case DeviceHardwareGeneralPlatform_iPhone_4S:
+        case DeviceHardwareGeneralPlatform_iPhone_5:
+        case DeviceHardwareGeneralPlatform_iPhone_5C:
+        case DeviceHardwareGeneralPlatform_iPhone_5S:
         {
             return 208 + 10;
             break;
         }
-        case DeviceHardwareGeneralPlatform_iPhone_5:
-        case DeviceHardwareGeneralPlatform_iPhone_5C:
-        case DeviceHardwareGeneralPlatform_iPhone_5S:
+
         case DeviceHardwareGeneralPlatform_iPhone_6:
-        case DeviceHardwareGeneralPlatform_iPhone_6_Plus:
         {
             return 246 + 10;
             break;
         }
             
+        case DeviceHardwareGeneralPlatform_iPhone_6_Plus:
         default:
-            // For iphone 6 simulator
-            return 246 + 10;
+            // For iphone 6 plus simulator
+            return 274 + 10;
             break;
     }
 }
@@ -471,25 +472,18 @@ static const NSInteger RefreshSectionIndex = 3;
         case ShopsTableSectionIndex:
         {
             NSInteger batchIndex = [[NSUserDefaults standardUserDefaults] integerForKey:LoadContentBatchIndexKey];
-            //NSArray *array = [BFPreferenceData loadTestDataArray];
-            //if(array == nil || [array count] == 0)
             if([self.dataModel.shops count] == 0)
             {
                 return 0;
             }
-            //if([array count] >= batchIndex * TotalItemsPerBatch)
+            
             if([self.dataModel.shops count] >= batchIndex * TotalItemsPerBatch)
             {
-                //NSLog(@"TotalRows: %d", batchIndex * TotalRowsPerBatch);
-                //return batchIndex * TotalRowsPerBatch * HeightOfItemInShopsTableCell;
                 return batchIndex * TotalRowsPerBatch * heightOfItemInShopsCell;
             }
             else // 0 < count < batchIndex * TotalItemsPerBatch
             {
-                //NSInteger totalRows = ([array count] - 1) / 2 + 1;
                 NSInteger totalRows = ([self.dataModel.shops count] - 1) / 2 + 1;
-                //NSLog(@"TotalRows: %ld", (long)totalRows);
-                //return totalRows * HeightOfItemInShopsTableCell;
                 return totalRows * heightOfItemInShopsCell;
             }
         }
@@ -590,19 +584,21 @@ static const NSInteger RefreshSectionIndex = 3;
         case DeviceHardwareGeneralPlatform_iPhone_5S:
         {
             return 106.0f;
-            
             break;
         }
             
         case DeviceHardwareGeneralPlatform_iPhone_6:
+            return 124.0f;
+            
         case DeviceHardwareGeneralPlatform_iPhone_6_Plus:
         {
-            return 124.0f;
+            return 138.0f;
             break;
         }
             
         default:
-            return 124.0f;
+            NSLog(@"Width: %f", self.view.bounds.size.width);
+            return 138.0f;
             break;
     }
 }

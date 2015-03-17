@@ -1,15 +1,15 @@
 //
-//  FavoriteCollectionViewCell.m
+//  FavoriteCollectionCell_New.m
 //  BinFenV10
 //
-//  Created by Wang Long on 2/12/15.
+//  Created by Wang Long on 3/17/15.
 //  Copyright (c) 2015 Wang Long. All rights reserved.
 //
 
-#import "FavoriteCollectionViewCell.h"
+#import "FavoriteCollectionCell_New.h"
 #import "DeviceHardware.h"
 
-@implementation FavoriteCollectionViewCell
+@implementation FavoriteCollectionCell_New
 
 - (CGSize)getImageViewSizeByDevice
 {
@@ -73,7 +73,17 @@
     }
 }
 
-- (void)awakeFromNib
+- (id)init
+{
+    self = [super init];
+    if (self)
+    {
+        [self initialize];
+    }
+    return self;
+}
+
+- (void)initialize
 {
     CGSize imageViewSize = [self getImageViewSizeByDevice];
     CGSize textViewSize = [self getTextViewSizeByDevice];
@@ -81,8 +91,11 @@
     CGRect imageViewFrame = CGRectMake(1, 1, imageViewSize.width, imageViewSize.height);
     CGRect textViewFrame = CGRectMake(1, 1 + imageViewSize.height, textViewSize.width, textViewSize.height);
     
-    self.imageView.frame = imageViewFrame;
-    self.descriptionTextView.frame = textViewFrame;
+    self.imageView = [[UIImageView alloc] initWithFrame:imageViewFrame];
+    self.descriptionTextView = [[UITextView alloc] initWithFrame:textViewFrame];
+    
+    [self.contentView addSubview:self.imageView];
+    [self.contentView addSubview:self.descriptionTextView];
 }
 
 @end

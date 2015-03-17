@@ -241,11 +241,24 @@
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="总计：¥ 38.00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u4r-S5-V5e">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="B2u-9V-qpC"/>
+                                            <constraint firstAttribute="width" constant="174" id="WHo-0I-ybF"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.95686274510000002" green="0.1934357324" blue="0.27796586699999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
-                                        <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                            <rect key="frame" x="36" y="14" width="174" height="21"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="B2u-9V-qpC"/>
+                                                <exclude reference="WHo-0I-ybF"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="B2u-9V-qpC"/>
+                                                <include reference="WHo-0I-ybF"/>
+                                            </mask>
                                         </variation>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dgI-Kj-QDw">
@@ -294,12 +307,14 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="u4r-S5-V5e" firstAttribute="leading" secondItem="3pa-Bl-e3L" secondAttribute="leading" constant="36" id="1Vl-ui-Eqe"/>
                                     <constraint firstAttribute="height" constant="49" id="8Dm-gt-YXA"/>
                                     <constraint firstAttribute="trailing" secondItem="dgI-Kj-QDw" secondAttribute="trailing" constant="16" id="99b-LE-N4y"/>
                                     <constraint firstItem="bkt-xE-JUI" firstAttribute="top" secondItem="3pa-Bl-e3L" secondAttribute="top" constant="1" id="9AL-W5-n2M">
                                         <variation key="heightClass=regular-widthClass=compact" constant="3"/>
                                     </constraint>
                                     <constraint firstAttribute="trailing" secondItem="bkt-xE-JUI" secondAttribute="trailing" id="9QT-Hq-nLo"/>
+                                    <constraint firstAttribute="bottom" secondItem="u4r-S5-V5e" secondAttribute="bottom" constant="14" id="Gny-eh-wYJ"/>
                                     <constraint firstAttribute="bottom" secondItem="dgI-Kj-QDw" secondAttribute="bottom" constant="7" id="Ykw-lN-qBR">
                                         <variation key="heightClass=regular-widthClass=compact" constant="5"/>
                                     </constraint>
@@ -313,11 +328,13 @@
                                     </mask>
                                     <mask key="constraints">
                                         <exclude reference="8Dm-gt-YXA"/>
-                                        <exclude reference="99b-LE-N4y"/>
-                                        <exclude reference="Ykw-lN-qBR"/>
                                         <exclude reference="9AL-W5-n2M"/>
                                         <exclude reference="9QT-Hq-nLo"/>
                                         <exclude reference="bpn-Ai-Pes"/>
+                                        <exclude reference="1Vl-ui-Eqe"/>
+                                        <exclude reference="Gny-eh-wYJ"/>
+                                        <exclude reference="99b-LE-N4y"/>
+                                        <exclude reference="Ykw-lN-qBR"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
@@ -328,11 +345,13 @@
                                     </mask>
                                     <mask key="constraints">
                                         <include reference="8Dm-gt-YXA"/>
-                                        <include reference="99b-LE-N4y"/>
-                                        <include reference="Ykw-lN-qBR"/>
                                         <include reference="9AL-W5-n2M"/>
                                         <include reference="9QT-Hq-nLo"/>
                                         <include reference="bpn-Ai-Pes"/>
+                                        <include reference="1Vl-ui-Eqe"/>
+                                        <include reference="Gny-eh-wYJ"/>
+                                        <include reference="99b-LE-N4y"/>
+                                        <include reference="Ykw-lN-qBR"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -749,7 +768,7 @@
                                     <constraint firstAttribute="height" constant="21" id="qJA-eE-Wx6"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="STHeitiSC-Light" family="Heiti SC" pointSize="15"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -771,7 +790,7 @@
                                     <constraint firstAttribute="width" constant="64" id="fv3-Lm-3GL"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="STHeitiSC-Light" family="Heiti SC" pointSize="16"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -793,7 +812,7 @@
                                     <constraint firstAttribute="width" constant="64" id="Y1l-f0-3pm"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="STHeitiSC-Light" family="Heiti SC" pointSize="15"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -963,7 +982,7 @@
                                     <constraint firstAttribute="height" constant="21" id="l5b-LC-wEv"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -985,7 +1004,7 @@
                                     <constraint firstAttribute="height" constant="21" id="a8W-Ev-G3z"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -1007,7 +1026,7 @@
                                     <constraint firstAttribute="height" constant="21" id="djo-Cd-xI5"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -1262,7 +1281,7 @@
                                     <constraint firstAttribute="width" constant="191" id="UYv-dj-mnp"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="STHeitiSC-Light" family="Heiti SC" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="default">
                                     <mask key="constraints">

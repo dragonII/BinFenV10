@@ -8,7 +8,9 @@
 
 #import "FavoritesViewController.h"
 #import "FavoriteCollectionViewCell.h"
+//#import "FavoriteCollectionCell_New.h"
 #import "ShopViewController.h"
+#import "DeviceHardware.h"
 
 static NSString *FavoriteCellIdentifier = @"FavoriteCell";
 
@@ -21,11 +23,43 @@ static NSString *FavoriteCellIdentifier = @"FavoriteCell";
 
 @implementation FavoritesViewController
 
+- (CGSize)getItemSizeByDevice
+{
+    DeviceHardwareGeneralPlatform generalPlatform = [DeviceHardware generalPlatform];
+    
+    CGSize size;
+    
+    switch (generalPlatform)
+    {
+        case DeviceHardwareGeneralPlatform_iPhone_4:
+        case DeviceHardwareGeneralPlatform_iPhone_4S:
+        case DeviceHardwareGeneralPlatform_iPhone_5:
+        case DeviceHardwareGeneralPlatform_iPhone_5C:
+        case DeviceHardwareGeneralPlatform_iPhone_5S:
+        {
+            size = CGSizeMake(144.0f, 208.0f);
+            return size;
+        }
+            
+        case DeviceHardwareGeneralPlatform_iPhone_6:
+        {
+            size = CGSizeMake(170.0f, 246.0f);
+            return size;
+        }
+            
+        case DeviceHardwareGeneralPlatform_iPhone_6_Plus:
+        default:
+            size = CGSizeMake(190.0f, 274.0f);
+            return size;
+    }
+}
+
 - (void)initCollectionView
 {
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-    layout.itemSize = CGSizeMake(144, 208);
+    //layout.itemSize = CGSizeMake(144, 208);
+    layout.itemSize = [self getItemSizeByDevice];
     
     CGRect collectionFrame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height - 64);
     self.collectionView = [[UICollectionView alloc] initWithFrame:collectionFrame collectionViewLayout:layout];
@@ -34,6 +68,8 @@ static NSString *FavoriteCellIdentifier = @"FavoriteCell";
     UINib *nib = [UINib nibWithNibName:@"FavoriteCollectionViewCell" bundle:nil];
     [self.collectionView registerNib:nib forCellWithReuseIdentifier:FavoriteCellIdentifier];
     
+    //[self.collectionView registerClass:[FavoriteCollectionCell_New class] forCellWithReuseIdentifier:FavoriteCellIdentifier];
+    
     
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
@@ -41,18 +77,6 @@ static NSString *FavoriteCellIdentifier = @"FavoriteCell";
     [self.view addSubview:self.collectionView];
 }
 
-- (void)testCollection
-{
-    UICollectionViewFlowLayout *myLayout = [[UICollectionViewFlowLayout alloc]init];
-    
-    self.collectionView = [[UICollectionView alloc]initWithFrame:self.view.frame];
-    [myLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
-    [myLayout setMinimumInteritemSpacing:0.0f];
-    [myLayout setMinimumLineSpacing:0.0f];
-    [self.collectionView setCollectionViewLayout:myLayout];
-    
-    [self.view addSubview:self.collectionView];
-}
 
 - (void)loadFavoriteListArrayData
 {
@@ -77,7 +101,6 @@ static NSString *FavoriteCellIdentifier = @"FavoriteCell";
     [self loadFavoriteListArrayData];
     
     [self initCollectionView];
-    //[self testCollection];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -102,12 +125,17 @@ static NSString *FavoriteCellIdentifier = @"FavoriteCell";
 {
     FavoriteCollectionViewCell *cell = (FavoriteCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:FavoriteCellIdentifier forIndexPath:indexPath];
     cell.descriptionTextView.text = [self.favoriteListArray objectAtIndex:indexPath.row];
+    /*
+    FavoriteCollectionCell_New *cell = (FavoriteCollectionCell_New *)[collectionView dequeueReusableCellWithReuseIdentifier:FavoriteCellIdentifier forIndexPath:indexPath];
+    cell.descriptionTextView.text = [self.favoriteListArray objectAtIndex:indexPath.row];
+     */
     return cell;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(144, 208);
+    //return CGSizeMake(144, 208);
+    return [self getItemSizeByDevice];
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section

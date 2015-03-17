@@ -49,12 +49,11 @@
         }
             
         case DeviceHardwareGeneralPlatform_iPhone_6:
-        case DeviceHardwareGeneralPlatform_iPhone_6_Plus:
         {
             size = CGSizeMake(24 + 44 + 24, 80.0f);
             return size;
         }
-            
+        case DeviceHardwareGeneralPlatform_iPhone_6_Plus:
         default:
             size = CGSizeMake(24 + 44 + 24, 80.0f);
             return size;
@@ -88,6 +87,26 @@
     }
 }
 
+- (CGFloat)getColumnPadding
+{
+    DeviceHardwareGeneralPlatform generalPlatform = [DeviceHardware generalPlatform];
+    
+    switch (generalPlatform)
+    {
+        case DeviceHardwareGeneralPlatform_iPhone_4:
+        case DeviceHardwareGeneralPlatform_iPhone_4S:
+        case DeviceHardwareGeneralPlatform_iPhone_5:
+        case DeviceHardwareGeneralPlatform_iPhone_5C:
+        case DeviceHardwareGeneralPlatform_iPhone_5S:
+        case DeviceHardwareGeneralPlatform_iPhone_6:
+            return 0.0f;
+            
+        case DeviceHardwareGeneralPlatform_iPhone_6_Plus:
+        default:
+            return 15.0f;
+    }
+}
+
 - (void)initItems
 {
     int columnsPerPage = 4;
@@ -102,6 +121,8 @@
     
     CGFloat imageViewWidth = 44.0f;
     CGFloat imageViewHeight = 44.0f;
+    CGFloat colPadding = [self getColumnPadding];
+
     
     int index = 1000;
     int column = 0;
@@ -111,7 +132,7 @@
     {
         UIView *itemView = [[UIView alloc] init];
         itemView.tag = index;
-        itemView.frame = CGRectMake(x, 0, itemWidth, itemHeight);
+        itemView.frame = CGRectMake(x + column * colPadding, 0, itemWidth, itemHeight);
         
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(itemClicked:)];
         tapGesture.numberOfTapsRequired = 1;
@@ -163,6 +184,7 @@
         if(column == columnsPerPage)
         {
             column = 0;
+            x = [UIScreen mainScreen].bounds.size.width;
         }
     }
     

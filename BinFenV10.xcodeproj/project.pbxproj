@@ -98,6 +98,7 @@
 		2FCAC8C51AA4549C0050BC56 /* TextInfoCartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FCAC8C31AA4549C0050BC56 /* TextInfoCartCell.xib */; };
 		2FCAC8C91AA457C90050BC56 /* CommentCartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FCAC8C71AA457C90050BC56 /* CommentCartCell.m */; };
 		2FCAC8CA1AA457C90050BC56 /* CommentCartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FCAC8C81AA457C90050BC56 /* CommentCartCell.xib */; };
+		2FD7FC161AB7DDFA009B6FA8 /* FavoriteCollectionCell_New.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FD7FC151AB7DDFA009B6FA8 /* FavoriteCollectionCell_New.m */; };
 		2FDA11BF1A8DC5AB00A60362 /* ConversationListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FDA11BD1A8DC5AB00A60362 /* ConversationListCell.m */; };
 		2FDA11C01A8DC5AB00A60362 /* ConversationListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FDA11BE1A8DC5AB00A60362 /* ConversationListCell.xib */; };
 		2FDA11C31A8DCB9400A60362 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FDA11C21A8DCB9400A60362 /* ChatViewController.m */; };
@@ -350,6 +351,8 @@
 		2FCAC8C61AA457C90050BC56 /* CommentCartCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentCartCell.h; sourceTree = "<group>"; };
 		2FCAC8C71AA457C90050BC56 /* CommentCartCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentCartCell.m; sourceTree = "<group>"; };
 		2FCAC8C81AA457C90050BC56 /* CommentCartCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentCartCell.xib; sourceTree = "<group>"; };
+		2FD7FC141AB7DDFA009B6FA8 /* FavoriteCollectionCell_New.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteCollectionCell_New.h; sourceTree = "<group>"; };
+		2FD7FC151AB7DDFA009B6FA8 /* FavoriteCollectionCell_New.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteCollectionCell_New.m; sourceTree = "<group>"; };
 		2FDA11BC1A8DC5AB00A60362 /* ConversationListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConversationListCell.h; sourceTree = "<group>"; };
 		2FDA11BD1A8DC5AB00A60362 /* ConversationListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConversationListCell.m; sourceTree = "<group>"; };
 		2FDA11BE1A8DC5AB00A60362 /* ConversationListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConversationListCell.xib; sourceTree = "<group>"; };
@@ -604,6 +607,8 @@
 				2F9060951A8C73F90087FBB3 /* FavoriteCollectionViewCell.h */,
 				2F9060961A8C73F90087FBB3 /* FavoriteCollectionViewCell.m */,
 				2F9060971A8C73F90087FBB3 /* FavoriteCollectionViewCell.xib */,
+				2FD7FC141AB7DDFA009B6FA8 /* FavoriteCollectionCell_New.h */,
+				2FD7FC151AB7DDFA009B6FA8 /* FavoriteCollectionCell_New.m */,
 			);
 			name = CollectionViewCell;
 			sourceTree = "<group>";
@@ -1179,6 +1184,7 @@
 				2FDA12141A8DD7B400A60362 /* JSMessageTextView.m in Sources */,
 				2FC5A2981A7F1BB900DD0E63 /* OTCover.m in Sources */,
 				2F31B2391A83D74D00A2BB86 /* UIImageView+AFNetworking.m in Sources */,
+				2FD7FC161AB7DDFA009B6FA8 /* FavoriteCollectionCell_New.m in Sources */,
 				2F31B21D1A83D74000A2BB86 /* AFNetworkReachabilityManager.m in Sources */,
 				2F28A0071A89BC6500C296D6 /* NearbyViewController.m in Sources */,
 				2F7B75C81A8B210100720650 /* AddrListViewController.m in Sources */,
