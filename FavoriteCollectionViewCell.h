@@ -1,8 +1,8 @@
 //
-//  FavoriteCollectionViewCell.h
+//  FavoriteCollectionViewCell_New.h
 //  BinFenV10
 //
-//  Created by Wang Long on 2/12/15.
+//  Created by Wang Long on 3/17/15.
 //  Copyright (c) 2015 Wang Long. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 
 @interface FavoriteCollectionViewCell : UICollectionViewCell
 
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
-@property (weak, nonatomic) IBOutlet UITextView *descriptionTextView;
+@property (strong, nonatomic) UIImageView *imageView;
+@property (strong, nonatomic) UITextView *descriptionTextView;
 
 @end

@@ -107,15 +107,14 @@ static const int SectionLoadMore = 2;
         case DeviceHardwareGeneralPlatform_iPhone_5C:
         case DeviceHardwareGeneralPlatform_iPhone_5S:
         case DeviceHardwareGeneralPlatform_iPhone_6:
-        case DeviceHardwareGeneralPlatform_iPhone_6_Plus:
         {
             return 246 + 10;
             break;
         }
-            
+        case DeviceHardwareGeneralPlatform_iPhone_6_Plus:
         default:
             // For iphone 6 simulator
-            return 246 + 10;
+            return 274 + 10;
             break;
     }
     
@@ -277,24 +276,18 @@ static const int SectionLoadMore = 2;
         case SectionShops:
         {
             NSInteger batchIndex = [[NSUserDefaults standardUserDefaults] integerForKey:LoadContentBatchIndexKey];
-            //NSArray *array = [BFPreferenceData loadTestDataArray];
-            //if(array == nil || [array count] == 0)
             if([self.shops count] == 0)
             {
                 return 0;
             }
-            //if([array count] >= batchIndex * TotalItemsPerBatch)
+
             if([self.shops count] >= batchIndex * TotalItemsPerBatch)
             {
-                //NSLog(@"TotalRows: %ld", batchIndex * TotalRowsPerBatch);
-                //return batchIndex * TotalRowsPerBatch * HeightOfItemInShopsTableCell;
                 return batchIndex * TotalRowsPerBatch * heightOfItemInShopTableCell;
             }
             else // 0 < count < batchIndex * TotalItemsPerBatch
             {
-                //NSInteger totalRows = ([array count] - 1) / 2 + 1;
                 NSInteger totalRows = ([self.shops count] - 1) / 2 + 1;
-                //return totalRows * HeightOfItemInShopsTableCell;
                 return totalRows * heightOfItemInShopTableCell;
             }
         }
@@ -371,14 +364,13 @@ static const int SectionLoadMore = 2;
         }
             
         case DeviceHardwareGeneralPlatform_iPhone_6:
-        case DeviceHardwareGeneralPlatform_iPhone_6_Plus:
         {
             return 124.0f;
             break;
         }
-            
+        case DeviceHardwareGeneralPlatform_iPhone_6_Plus:
         default:
-            return 124.0f;
+            return 138.0f;
             break;
     }
 }
@@ -390,9 +382,6 @@ static const int SectionLoadMore = 2;
         CGFloat buttonWidth = [self getItemWidthByDevice];
     
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 36)];
-    //imageView.backgroundColor = [UIColor lightGrayColor];
-    
-    //[view setUserInteractionEnabled:YES];
     
         UIButton *button1 = [[UIButton alloc] initWithFrame:CGRectMake(view.frame.origin.x,
                                                                    view.frame.origin.y,

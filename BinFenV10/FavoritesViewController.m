@@ -7,8 +7,8 @@
 //
 
 #import "FavoritesViewController.h"
+//#import "FavoriteCollectionViewCell.h"
 #import "FavoriteCollectionViewCell.h"
-//#import "FavoriteCollectionCell_New.h"
 #import "ShopViewController.h"
 #import "DeviceHardware.h"
 
@@ -38,20 +38,21 @@ static NSString *FavoriteCellIdentifier = @"FavoriteCell";
         case DeviceHardwareGeneralPlatform_iPhone_5S:
         {
             size = CGSizeMake(144.0f, 208.0f);
-            return size;
+            break;
         }
             
         case DeviceHardwareGeneralPlatform_iPhone_6:
         {
             size = CGSizeMake(170.0f, 246.0f);
-            return size;
+            break;
         }
             
         case DeviceHardwareGeneralPlatform_iPhone_6_Plus:
         default:
             size = CGSizeMake(190.0f, 274.0f);
-            return size;
+            break;
     }
+    return size;
 }
 
 - (void)initCollectionView
@@ -65,11 +66,11 @@ static NSString *FavoriteCellIdentifier = @"FavoriteCell";
     self.collectionView = [[UICollectionView alloc] initWithFrame:collectionFrame collectionViewLayout:layout];
     self.collectionView.backgroundColor = [UIColor lightGrayColor];
     
+    /*
     UINib *nib = [UINib nibWithNibName:@"FavoriteCollectionViewCell" bundle:nil];
     [self.collectionView registerNib:nib forCellWithReuseIdentifier:FavoriteCellIdentifier];
-    
-    //[self.collectionView registerClass:[FavoriteCollectionCell_New class] forCellWithReuseIdentifier:FavoriteCellIdentifier];
-    
+     */
+    [self.collectionView registerClass:[FavoriteCollectionViewCell class] forCellWithReuseIdentifier:FavoriteCellIdentifier];
     
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
@@ -123,12 +124,14 @@ static NSString *FavoriteCellIdentifier = @"FavoriteCell";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    FavoriteCollectionViewCell *cell = (FavoriteCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:FavoriteCellIdentifier forIndexPath:indexPath];
-    cell.descriptionTextView.text = [self.favoriteListArray objectAtIndex:indexPath.row];
     /*
-    FavoriteCollectionCell_New *cell = (FavoriteCollectionCell_New *)[collectionView dequeueReusableCellWithReuseIdentifier:FavoriteCellIdentifier forIndexPath:indexPath];
-    cell.descriptionTextView.text = [self.favoriteListArray objectAtIndex:indexPath.row];
+    FavoriteCollectionViewCell *cell = (FavoriteCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:FavoriteCellIdentifier forIndexPath:indexPath];
      */
+    FavoriteCollectionViewCell *cell = (FavoriteCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:FavoriteCellIdentifier forIndexPath:indexPath];
+    if(cell == nil)
+        cell = [[FavoriteCollectionViewCell alloc] init];
+    cell.descriptionTextView.text = [self.favoriteListArray objectAtIndex:indexPath.row];
+    
     return cell;
 }
 
