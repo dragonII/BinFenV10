@@ -52,10 +52,10 @@
     CGFloat imageViewWidth = [UIScreen mainScreen].bounds.size.width;
     CGFloat imageViewHeight = 200.0f;
     
-    NSLog(@"Before setting images");
+    //NSLog(@"Before setting images");
     for(int i = 0; i < [self.imageNamesArray count]; i++)
     {
-        NSLog(@"imageName: %@", [self.imageNamesArray objectAtIndex:i]);
+        //NSLog(@"imageName: %@", [self.imageNamesArray objectAtIndex:i]);
         UIImageView *imageView = [[UIImageView alloc] init];
         imageView.frame = CGRectMake(x + (imageViewWidth * i), 0, imageViewWidth, imageViewHeight);
         imageView.contentMode = UIViewContentModeScaleAspectFit;
@@ -75,7 +75,7 @@
     
     CGFloat imageViewHeight = 200.0f;
     
-    NSLog(@"Before setting images");
+    //NSLog(@"Before setting images");
     for(int i = 0; i < [self.imageNamesArray count]; i++)
     {
         UIImageView *imageView = [[UIImageView alloc] init];

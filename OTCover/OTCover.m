@@ -12,6 +12,8 @@
 
 #import "defs.h"
 
+#import "DeviceHardware.h"
+
 @interface OTCover()
 
 @property (nonatomic, strong) NSMutableArray *blurImages;
@@ -27,8 +29,36 @@
 
 @implementation OTCover
 
+- (NSString *)getImageNameByDevice
+{
+    DeviceHardwareGeneralPlatform generalPlatform = [DeviceHardware generalPlatform];
+    
+    NSString *imageName;
+    
+    switch (generalPlatform)
+    {
+        case DeviceHardwareGeneralPlatform_iPhone_4:
+        case DeviceHardwareGeneralPlatform_iPhone_4S:
+        case DeviceHardwareGeneralPlatform_iPhone_5:
+        case DeviceHardwareGeneralPlatform_iPhone_5C:
+        case DeviceHardwareGeneralPlatform_iPhone_5S:
+            imageName = @"SearchBarInHome320";
+            break;
+        
 
--(void)tapDetected
+        case DeviceHardwareGeneralPlatform_iPhone_6:
+            imageName = @"SearchBarInHome375";
+            break;
+
+        case DeviceHardwareGeneralPlatform_iPhone_6_Plus:           
+        default:
+            imageName = @"SearchBarInHome413";
+            break;
+    }
+    return imageName;
+}
+
+- (void)tapDetected
 {
     NSLog(@"single Tap on imageview");
     if([self.segueDelegate respondsToSelector:@selector(searchClickedInView:)])
@@ -39,8 +69,9 @@
 
 - (void)initSearchView
 {
-    self.searchView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, 64)];
-    self.searchView.image = [UIImage imageNamed:@"SearchBarInHome"];
+    self.searchView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 64)];
+    //self.searchView.image = [UIImage imageNamed:@"SearchBarInHome"];
+    self.searchView.image = [UIImage imageNamed:[self getImageNameByDevice]];
     
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDetected)];
     singleTap.numberOfTapsRequired = 1;
@@ -137,7 +168,8 @@
     {
         self.searchViewContentsInsetsDone = YES;
         
-        self.searchView.frame = CGRectMake(0, 0, self.bounds.size.width, 64);
+        //self.searchView.frame = CGRectMake(0, 0, self.bounds.size.width, 64);
+        self.searchView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 64);
         
         UIEdgeInsets insets = self.tableView.contentInset;
         insets.top = self.searchView.bounds.size.height;
@@ -169,7 +201,7 @@
             [self showSearchView];
             
             CGFloat delta = offset - 64; // 0 <= delta <= 50
-            self.searchView.frame = CGRectMake((delta - 50) / 2.0f, 0, 320 + (50 - delta), 64);
+            self.searchView.frame = CGRectMake((delta - 50) / 2.0f, 0, [UIScreen mainScreen].bounds.size.width + (50 - delta), 64);
             self.searchView.alpha = delta / 50;
         }
         if(offset > 114)
@@ -204,7 +236,6 @@
 
 @end
 
-//from https://github.com/cyndibaby905/TwitterCover
 
 @implementation UIImage (Blur)
 

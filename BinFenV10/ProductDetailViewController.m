@@ -110,9 +110,11 @@ static const NSInteger SeperatorCellIndex = 3;
     self.quantityInCartLabel.text = @"0";
     [bottomView addSubview:self.quantityInCartLabel];
     
+    /*
     self.shareButton = [[UIButton alloc] initWithFrame:CGRectMake(98, 12, 20, 20)];
     [self.shareButton setBackgroundImage:[UIImage imageNamed:@"Share"] forState:UIControlStateNormal];
     [bottomView addSubview:self.shareButton];
+     */
     
     CGFloat orderButtonWidth = 80.0f;
     CGFloat orderButtonHeight = 30.0f;

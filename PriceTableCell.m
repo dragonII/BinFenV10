@@ -12,20 +12,41 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *upLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *addToFavoriteImage;
+
+@property (assign, nonatomic) BOOL favoriteAdded;
 
 
 @end
 
 @implementation PriceTableCell
 
-- (void)awakeFromNib {
-    // Initialization code
+- (void)addToFavorite:(UITapGestureRecognizer*)sender
+{
+    if(self.favoriteAdded == NO)
+    {
+        self.addToFavoriteImage.image = [UIImage imageNamed:@"AddedToFavorite"];
+        self.favoriteAdded = YES;
+    } else {
+        self.addToFavoriteImage.image = [UIImage imageNamed:@"AddToFavorite"];
+        self.favoriteAdded = NO;
+    }
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
+- (void)awakeFromNib
+{
+    self.favoriteAdded = NO;
+    
+    [self.addToFavoriteImage setUserInteractionEnabled:YES];
+    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addToFavorite:)];
+    tapRecognizer.numberOfTapsRequired = 1;
+    tapRecognizer.numberOfTouchesRequired = 1;
+    [self.addToFavoriteImage addGestureRecognizer:tapRecognizer];
+}
 
-    // Configure the view for the selected state
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+{
+    [super setSelected:selected animated:animated];
 }
 
 @end

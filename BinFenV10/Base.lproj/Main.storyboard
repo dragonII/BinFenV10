@@ -328,13 +328,13 @@
                                     </mask>
                                     <mask key="constraints">
                                         <exclude reference="8Dm-gt-YXA"/>
-                                        <exclude reference="9AL-W5-n2M"/>
-                                        <exclude reference="9QT-Hq-nLo"/>
-                                        <exclude reference="bpn-Ai-Pes"/>
                                         <exclude reference="1Vl-ui-Eqe"/>
                                         <exclude reference="Gny-eh-wYJ"/>
                                         <exclude reference="99b-LE-N4y"/>
                                         <exclude reference="Ykw-lN-qBR"/>
+                                        <exclude reference="9AL-W5-n2M"/>
+                                        <exclude reference="9QT-Hq-nLo"/>
+                                        <exclude reference="bpn-Ai-Pes"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
@@ -345,13 +345,13 @@
                                     </mask>
                                     <mask key="constraints">
                                         <include reference="8Dm-gt-YXA"/>
-                                        <include reference="9AL-W5-n2M"/>
-                                        <include reference="9QT-Hq-nLo"/>
-                                        <include reference="bpn-Ai-Pes"/>
                                         <include reference="1Vl-ui-Eqe"/>
                                         <include reference="Gny-eh-wYJ"/>
                                         <include reference="99b-LE-N4y"/>
                                         <include reference="Ykw-lN-qBR"/>
+                                        <include reference="9AL-W5-n2M"/>
+                                        <include reference="9QT-Hq-nLo"/>
+                                        <include reference="bpn-Ai-Pes"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -2175,6 +2175,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="ppH-wg-Xq7"/>
-        <segue reference="sh7-5c-V5V"/>
+        <segue reference="RvF-dV-8Mx"/>
     </inferredMetricsTieBreakers>
 </document>
