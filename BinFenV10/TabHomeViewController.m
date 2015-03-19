@@ -204,10 +204,39 @@ static const NSInteger RefreshSectionIndex = 3;
     [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:LoadContentBatchIndexKey];
 }
 
+- (NSString *)getHeaderImageNameByDevice
+{
+    DeviceHardwareGeneralPlatform generalPlatform = [DeviceHardware generalPlatform];
+    
+    switch (generalPlatform)
+    {
+        case DeviceHardwareGeneralPlatform_iPhone_4:
+        case DeviceHardwareGeneralPlatform_iPhone_4S:
+        case DeviceHardwareGeneralPlatform_iPhone_5:
+        case DeviceHardwareGeneralPlatform_iPhone_5C:
+        case DeviceHardwareGeneralPlatform_iPhone_5S:
+        {
+            return @"Header320.png";
+        }
+
+        case DeviceHardwareGeneralPlatform_iPhone_6:
+        {
+            return @"Header375.png";
+        }
+        case DeviceHardwareGeneralPlatform_iPhone_6_Plus:
+        default:
+            // For iphone 6 simulator
+            return @"Header414.png";
+    }
+}
+
 
 - (void)initViews
 {
-    self.otCoverView = [[OTCover alloc] initWithTableViewWithHeaderImage:[UIImage imageNamed:@"Default_170×320"] withOTCoverHeight:170];
+    NSString *headerImageName = [self getHeaderImageNameByDevice];
+    
+    //self.otCoverView = [[OTCover alloc] initWithTableViewWithHeaderImage:[UIImage imageNamed:@"Default_170×320"] withOTCoverHeight:170];
+    self.otCoverView = [[OTCover alloc] initWithTableViewWithHeaderImage:[UIImage imageNamed:headerImageName] withOTCoverHeight:170];
     
     self.otCoverView.tableView.delegate = self;
     self.otCoverView.tableView.dataSource = self;
