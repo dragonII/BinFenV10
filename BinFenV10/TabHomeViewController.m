@@ -119,7 +119,7 @@ static const NSInteger RefreshSectionIndex = 3;
     if(self.dataModel.loadShopsFinished == YES &&
        self.dataModel.loadCommunitiesFinished == YES)
      */
-    if(self.dataModel.loadCategoriesFailed == NO &&
+    if(//self.dataModel.loadCategoriesFailed == NO &&
        self.dataModel.loadShopsFailed == NO &&
        self.dataModel.loadProductsFailed == NO &&
        self.dataModel.loadCommunitiesFailed == NO)
@@ -178,7 +178,7 @@ static const NSInteger RefreshSectionIndex = 3;
     
     [self.dataModel loadDataModelRemotely];
     
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:3
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:5
                                                   target:self
                                                 selector:@selector(loadingData)
                                                 userInfo:nil repeats:YES];
@@ -285,9 +285,17 @@ static const NSInteger RefreshSectionIndex = 3;
     [self initViews];
 }
 
+/*
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    
+    [self showNavigationItem];
+}
+ */
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
     
     [self showNavigationItem];
 }

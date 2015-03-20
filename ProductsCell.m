@@ -144,6 +144,9 @@ typedef struct
     NSString *shopID = [[self.dataModel.shops objectAtIndex:shopIndex] objectForKey:@"ID"];
     self.products = [[NSMutableArray alloc] init];
     
+    NSLog(@"%s", __func__);
+    NSLog(@"%@", self.dataModel.products);
+    
     for(int i = 0; i < [self.dataModel.products count]; i++)
     {
         NSString *shopIDInProducts = [[self.dataModel.products objectAtIndex:i] objectForKey:@"shop"];

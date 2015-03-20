@@ -58,6 +58,52 @@
     return imageName;
 }
 
+- (NSString *)getSearchImageNameByDevice
+{
+    DeviceHardwareGeneralPlatform generalPlatform = [DeviceHardware generalPlatform];
+    
+    switch (generalPlatform)
+    {
+        case DeviceHardwareGeneralPlatform_iPhone_4:
+        case DeviceHardwareGeneralPlatform_iPhone_4S:
+        case DeviceHardwareGeneralPlatform_iPhone_5:
+        case DeviceHardwareGeneralPlatform_iPhone_5C:
+        case DeviceHardwareGeneralPlatform_iPhone_5S:
+            return @"SearchBox45.png";
+            
+            
+        case DeviceHardwareGeneralPlatform_iPhone_6:
+            return @"SearchBox6.png";
+            
+        case DeviceHardwareGeneralPlatform_iPhone_6_Plus:
+        default:
+            return @"SearchBox6P.png";
+    }
+}
+
+- (CGSize)getSearchImageViewSizeByDevice
+{
+    DeviceHardwareGeneralPlatform generalPlatform = [DeviceHardware generalPlatform];
+    
+    switch (generalPlatform)
+    {
+        case DeviceHardwareGeneralPlatform_iPhone_4:
+        case DeviceHardwareGeneralPlatform_iPhone_4S:
+        case DeviceHardwareGeneralPlatform_iPhone_5:
+        case DeviceHardwareGeneralPlatform_iPhone_5C:
+        case DeviceHardwareGeneralPlatform_iPhone_5S:
+            return CGSizeMake(240, 40);
+            
+            
+        case DeviceHardwareGeneralPlatform_iPhone_6:
+            return CGSizeMake(294, 40);
+            
+        case DeviceHardwareGeneralPlatform_iPhone_6_Plus:
+        default:
+            return CGSizeMake(320, 40);
+    }
+}
+
 - (void)tapDetected
 {
     NSLog(@"single Tap on imageview");
@@ -94,6 +140,7 @@
     
     self.headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, bounds.size.width, height)];
     [self.headerImageView setImage:headerImage];
+    
     [self addSubview:self.headerImageView];
     
     self.OTCoverHeight = height;
@@ -104,6 +151,20 @@
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, bounds.size.width, height)];
     self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.showsVerticalScrollIndicator = NO;
+    
+    CGSize searchSize = [self getSearchImageViewSizeByDevice];
+    
+    UIImageView *searchViewInHeader = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMidX(self.bounds) - searchSize.width / 2, 120, searchSize.width, searchSize.height)];
+
+    searchViewInHeader.image = [UIImage imageNamed:[self getSearchImageNameByDevice]];
+    
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDetected)];
+    singleTap.numberOfTapsRequired = 1;
+    [searchViewInHeader setUserInteractionEnabled:YES];
+    [searchViewInHeader addGestureRecognizer:singleTap];
+    
+    [self.tableView addSubview:searchViewInHeader];
+    
     [self addSubview:self.tableView];
     
     [self.tableView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
@@ -121,6 +182,8 @@
     [self.headerImageView setImage:headerImage];
     [self.blurImages removeAllObjects];
     [self prepareForBlurImages];
+    
+
 }
 
 - (void)prepareForBlurImages

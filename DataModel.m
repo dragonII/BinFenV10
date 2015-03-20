@@ -69,7 +69,7 @@ static NSString *ProductArrayKey = @"Products";
     
     NSString *cleanString = [noEscapedString stringByReplacingOccurrencesOfString:GarbageString withString:@""];
     cleanString = [cleanString stringByReplacingOccurrencesOfString:@"\'" withString:@"\""];
-    //NSLog(@"cleanString: %@", cleanString);
+    NSLog(@"cleanString: %@", cleanString);
     
     NSData *data = [cleanString dataUsingEncoding:NSUTF8StringEncoding];
     NSError *error = nil;
@@ -130,9 +130,11 @@ static NSString *ProductArrayKey = @"Products";
     if(outerArray == nil)
     {
         _loadCommunitiesFailed = YES;
+        _loadCommentsFinished = NO;
         return;
     } else {
         _loadCommunitiesFailed = NO;
+        _loadCommentsFinished = YES;
     }
     self.communities = [[NSMutableArray alloc] init];
     NSMutableDictionary *communityDict;
@@ -153,6 +155,8 @@ static NSString *ProductArrayKey = @"Products";
         
         [self.communities addObject:communityDict];
     }
+    
+    //NSLog(@"%s, community: %@", __func__, self.communities);
     
     [self saveDataModel];
 }
@@ -258,15 +262,15 @@ static NSString *ProductArrayKey = @"Products";
 {
     _retrieveGroup = dispatch_group_create();
     
-    self.loadCommunitiesFailed = YES;
-    self.loadShopsFailed = YES;
-    self.loadProductsFailed = YES;
+    //self.loadCommunitiesFailed = YES;
+    //self.loadShopsFailed = YES;
+    //self.loadProductsFailed = YES;
     self.loadCategoriesFailed = YES;
     
     [self loadShopsData];
     [self loadCommunitiesData];
     [self loadProductsData];
-    [self loadCategoriesData];
+    //[self loadCategoriesData];
     
     //[self saveDataModel];
 }
@@ -275,7 +279,7 @@ static NSString *ProductArrayKey = @"Products";
 {
     {
         dispatch_group_notify(_retrieveGroup, dispatch_get_main_queue(), ^{
-            [self.httpSessionManager GET:@"productcatalog/cataloglist_json.ds"
+            [self.httpSessionManager GET:@"API/cataloglist_json.ds"
                               parameters:nil
                                  success:^(NSURLSessionDataTask *task, id responseObject) {
                                      [self parseCategoryJson:responseObject];
@@ -291,9 +295,11 @@ static NSString *ProductArrayKey = @"Products";
 
 - (void)loadProductsData
 {
-    {
+    _loadProductsFailed = YES;
+    _loadProductsFinished = NO;
+    
         dispatch_group_notify(_retrieveGroup, dispatch_get_main_queue(), ^{
-            [self.httpSessionManager GET:@"lsproduct/product_json.ds"
+            [self.httpSessionManager GET:@"API/goodslist_json.ds"
                               parameters:nil
                                  success:^(NSURLSessionDataTask *task, id responseObject) {
                                      [self parseProductJson:responseObject];
@@ -304,19 +310,22 @@ static NSString *ProductArrayKey = @"Products";
                                      //dispatch_group_leave(_retrieveGroup);
                                  }];
         });
-    }
 }
 
 
 - (void)loadShopsData
 {
+    _loadShopsFailed = YES;
+    _loadShopsFinished = NO;
+    
     dispatch_group_notify(_retrieveGroup, dispatch_get_main_queue(), ^{
-        [self.httpSessionManager GET:@"myinfo/shopinfolist_json.ds"
+        [self.httpSessionManager GET:@"API/shoplist_json.ds"
                           parameters:nil
                              success:^(NSURLSessionDataTask *task, id responseObject) {
                                  [self parseShopJson:responseObject];
                                  //dispatch_group_leave(_retrieveGroup);
                                  _loadShopsFinished = YES;
+                                 _loadShopsFailed = NO;
                              }failure:^(NSURLSessionDataTask *task, NSError *error) {
                                  NSLog(@"Error: %@", [error localizedDescription]);
                                  //dispatch_group_leave(_retrieveGroup);
@@ -326,8 +335,10 @@ static NSString *ProductArrayKey = @"Products";
 
 - (void)loadCommunitiesData
 {
+    _loadCommunitiesFailed = YES;
+    _loadCommunitiesFinished = NO;
     dispatch_group_notify(_retrieveGroup, dispatch_get_main_queue(), ^{
-        [self.httpSessionManager GET:@"community/communitylist_json.ds"
+        [self.httpSessionManager GET:@"API/communitylist_json.ds"
                           parameters:nil
                              success:^(NSURLSessionDataTask *task, id responseObject) {
                                  [self parseCommunityJson:responseObject];
@@ -392,7 +403,7 @@ static NSString *ProductArrayKey = @"Products";
     NSDictionary *params = @{@"plsp_value":productID};
     _loadCommentsFinished = NO;
     
-        [self.httpSessionManager GET:@"comment/commentlist_json.ds"
+        [self.httpSessionManager GET:@"API/commentlist_json.ds"
                           parameters:params
                              success:^(NSURLSessionDataTask *task, id responseObject) {
                                  [self parseCommentsJson:responseObject];

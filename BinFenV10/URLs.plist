@@ -6,7 +6,7 @@
 		<key>backup</key>
 		<string>http://mixmb.syslive.cn</string>
 		<key>url</key>
-		<string>http://192.168.1.250:81</string>
+		<string>http://192.168.1.250:88</string>
 		<key>description</key>
 		<string>shops</string>
 	</dict>
