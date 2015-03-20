@@ -10,11 +10,17 @@
 
 #import "DeviceHardware.h"
 
+#import "DataModel.h"
+
+#import "UIKit+AFNetworking.h"
+
 
 @interface CategoryTableViewCell () <UIScrollViewDelegate>
 
 @property (strong, nonatomic) UIScrollView *scrollView;
 @property (strong, nonatomic) UIPageControl *pageControl;
+
+@property (strong, nonatomic) DataModel *dataModel;
 
 @end
 
@@ -40,6 +46,7 @@
         self.pageControl = [[UIPageControl alloc] init];
         self.pageControl.currentPageIndicatorTintColor = [UIColor blueColor];
         self.pageControl.pageIndicatorTintColor = pageControlTintColor;
+        self.pageControl.hidesForSinglePage = YES;
         
         UIView *bottomViewSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, 12 + 190, width, 12)];
         bottomViewSeparator.backgroundColor = BGColor;
@@ -194,7 +201,8 @@
     int row = 0;
     int column = 0;
     
-    for(NSString *itemString in self.categoriesListArray)
+    //for(NSString *itemString in self.categoriesListArray)
+    for(NSDictionary *categoryDict in self.categoriesListArray)
     {
         UIView *itemView = [[UIView alloc] init];
         itemView.tag = index;
@@ -216,13 +224,15 @@
         label.frame = CGRectMake(itemView.bounds.origin.x,
                                  itemView.bounds.origin.y + 12 + imageViewHeight,
                                  itemWidth, itemHeight - imageViewHeight);
-        label.text = itemString;
+        //label.text = itemString;
+        label.text = [categoryDict objectForKey:CategoryNameKey];
         label.textAlignment = NSTextAlignmentCenter;
         
         //http://stackoverflow.com/questions/9907100/issues-with-setting-some-different-font-for-uilabel
         label.font = [UIFont fontWithName:@"STHeitiSC-Light" size:10];
         
-        imageView.image = [UIImage imageNamed:@"Default_44x44"];
+        //imageView.image = [UIImage imageNamed:@"Default_44x44"];
+        [imageView setImageWithURL:[NSURL URLWithString:[categoryDict objectForKey:CategoryImageKey]] placeholderImage:[UIImage imageNamed:@"Default_44x44"]];
         //imageView.contentMode = UIViewContentModeScaleAspectFill;
         /////
         // Performance

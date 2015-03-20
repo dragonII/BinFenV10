@@ -239,22 +239,26 @@ static NSString *ProductArrayKey = @"Products";
     
     self.categories = [[NSMutableArray alloc] init];
     
-    /*
-    NSMutableDictionary *commentsDict;
-    
+    NSMutableDictionary *categoryDict;
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"URLs" ofType:@"plist"];
+    NSArray *urlArray = [NSArray arrayWithContentsOfFile:path];
+    NSString *baseURLString = (NSString *)[[urlArray objectAtIndex:0] objectForKey:@"url"];
     
     for(NSArray *innerArray in outerArray)
     {
-        commentsDict = [[NSMutableDictionary alloc] init];
+        categoryDict = [[NSMutableDictionary alloc] init];
         
-        [commentsDict setObject:[innerArray objectAtIndex:0] forKey:CommentProductIDKey];
-        [commentsDict setObject:[innerArray objectAtIndex:1] forKey:CommentContentKey];
-        [commentsDict setObject:[innerArray objectAtIndex:2] forKey:CommentTimeKey];
-        [commentsDict setObject:[innerArray objectAtIndex:3] forKey:CommentUserKey];
+        NSString *imageURLString = [baseURLString stringByAppendingPathComponent:[innerArray objectAtIndex:3]];
         
-        [self.comments addObject:commentsDict];
+        [categoryDict setObject:[innerArray objectAtIndex:0] forKey:CategoryIDKey];
+        [categoryDict setObject:[innerArray objectAtIndex:1] forKey:CategoryNameKey];
+        [categoryDict setObject:[innerArray objectAtIndex:2] forKey:CategoryDescKey];
+        [categoryDict setObject:imageURLString forKey:CategoryImageKey];
+        
+        [self.categories addObject:categoryDict];
     }
-     */
+    
+    [self saveDataModel];
 }
 
 
@@ -270,7 +274,7 @@ static NSString *ProductArrayKey = @"Products";
     [self loadShopsData];
     [self loadCommunitiesData];
     [self loadProductsData];
-    //[self loadCategoriesData];
+    [self loadCategoriesData];
     
     //[self saveDataModel];
 }

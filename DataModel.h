@@ -35,6 +35,11 @@ static NSString *ProductRefencePriceKey = @"RefPrice";
 static NSString *ProductSalePrice = @"price";
 static NSString *ProductShopKey = @"shop";
 
+static NSString *CategoryIDKey = @"ID";
+static NSString *CategoryNameKey = @"name";
+static NSString *CategoryImageKey = @"image";
+static NSString *CategoryDescKey = @"description";
+
 static NSString *CommentProductIDKey = @"ProductID";
 static NSString *CommentContentKey = @"Content";
 static NSString *CommentTimeKey = @"Time";

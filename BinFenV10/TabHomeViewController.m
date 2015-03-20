@@ -423,7 +423,8 @@ static const NSInteger RefreshSectionIndex = 3;
                 cell = [[CategoryTableViewCell alloc] init];
             }
             
-            cell.categoriesListArray = self.categoriesDataList;
+            //cell.categoriesListArray = self.categoriesDataList;
+            cell.categoriesListArray = self.dataModel.categories;
             
             return cell;
         }
