@@ -12,7 +12,7 @@
 #define RGBA(a, b, c, d) [UIColor colorWithRed:(a / 255.0f) green:(b / 255.0f) blue:(c / 255.0f) alpha:d]
 
 #define MENU_ITEM_HEIGHT        44
-#define FONT_SIZE               15
+#define FONT_SIZE               12
 #define CELL_IDENTIGIER         @"MenuPopoverCell"
 #define MENU_TABLE_VIEW_FRAME   CGRectMake(0, 0, frame.size.width, frame.size.height)
 #define SEPERATOR_LINE_RECT     CGRectMake(10, MENU_ITEM_HEIGHT - 1, self.frame.size.width - 20, 1)
@@ -64,12 +64,12 @@
         
         // Adding Menu Options Pointer
         UIImageView *menuPointerView = [[UIImageView alloc] initWithFrame:MENU_POINTER_RECT];
-        menuPointerView.image = [UIImage imageNamed:@"options_pointer"];
+        menuPointerView.image = [UIImage imageNamed:@"MenuPointer"];
         menuPointerView.tag = MENU_POINTER_TAG;
         [self.containerButton addSubview:menuPointerView];
         
         // Adding menu Items table
-        UITableView *menuItemsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 11, frame.size.width, frame.size.height)];
+        UITableView *menuItemsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 11 - 1, frame.size.width, frame.size.height)];
         
         menuItemsTableView.dataSource = self;
         menuItemsTableView.delegate = self;
@@ -78,8 +78,14 @@
         menuItemsTableView.backgroundColor = [UIColor clearColor];
         menuItemsTableView.tag = MENU_TABLE_VIEW_TAG;
         
-        UIImageView *bgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Menu_PopOver_BG"]];
+        //UIImageView *bgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Menu_PopOver_BG"]];
+        UIView *bgView = [[UIView alloc] init];
+        bgView.backgroundColor = [UIColor colorWithRed:239/255.0f
+                                                 green:239/255.0f
+                                                  blue:244/255.0f
+                                                 alpha:1.0f];
         menuItemsTableView.backgroundView = bgView;
+        menuItemsTableView.layer.cornerRadius = 5.0f;
         
         [self addSubview:menuItemsTableView];
         
@@ -112,7 +118,10 @@
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         [cell.textLabel setFont:[UIFont boldSystemFontOfSize:FONT_SIZE]];
-        [cell.textLabel setTextColor:[UIColor whiteColor]];
+        [cell.textLabel setTextColor:[UIColor colorWithRed:49/255.0f
+                                                     green:49/255.0f
+                                                      blue:49/255.0f
+                                                     alpha:1.0f]];
         [cell setSelectionStyle:UITableViewCellSelectionStyleGray];
         [cell setBackgroundColor:[UIColor clearColor]];
     }
@@ -174,10 +183,19 @@
 
 - (void)addSeparatorImageToCell:(UITableViewCell *)cell
 {
+    /*
     UIImageView *separatorImageView = [[UIImageView alloc] initWithFrame:SEPERATOR_LINE_RECT];
     [separatorImageView setImage:[UIImage imageNamed:@"DefaultLine"]];
     separatorImageView.opaque = YES;
     [cell.contentView addSubview:separatorImageView];
+     */
+    UIView *separatorView = [[UIView alloc] initWithFrame:SEPERATOR_LINE_RECT];
+    separatorView.backgroundColor = [UIColor colorWithRed:227/255.0f
+                                                    green:227/255.0f
+                                                     blue:227/255.0f
+                                                    alpha:1.0f];
+    separatorView.opaque = YES;
+    [cell.contentView addSubview:separatorView];
 }
 
 #pragma mark -

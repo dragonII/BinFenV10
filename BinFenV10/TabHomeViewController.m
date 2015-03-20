@@ -59,7 +59,7 @@ static const NSInteger RefreshSectionIndex = 3;
 
 @property (strong, nonatomic) NSArray *communitiesDataList;
 @property (strong, nonatomic) NSMutableArray *communitiyIndexArray; //用来记录哪个CollectionCell被选择
-@property (strong, nonatomic) NSArray *categoriesDataList;
+//@property (strong, nonatomic) NSArray *categoriesDataList;
 //@property (strong, nonatomic) NSArray *shopsDataList;
 
 @property (assign, nonatomic) NSInteger categoryButtonIndex;
@@ -100,6 +100,7 @@ static const NSInteger RefreshSectionIndex = 3;
 
 - (void)initCategoriesData
 {
+    /*
     self.categoriesDataList = @[@"Cate01",
                                 @"Cate02",
                                 @"Cate03",
@@ -111,6 +112,7 @@ static const NSInteger RefreshSectionIndex = 3;
                                 @"Cate09",
                                 @"Cate10",
                                 @"Cate11"];
+     */
 }
 
 - (void)loadingData
@@ -119,7 +121,7 @@ static const NSInteger RefreshSectionIndex = 3;
     if(self.dataModel.loadShopsFinished == YES &&
        self.dataModel.loadCommunitiesFinished == YES)
      */
-    if(//self.dataModel.loadCategoriesFailed == NO &&
+    if(self.dataModel.loadCategoriesFailed == NO &&
        self.dataModel.loadShopsFailed == NO &&
        self.dataModel.loadProductsFailed == NO &&
        self.dataModel.loadCommunitiesFailed == NO)
@@ -352,13 +354,14 @@ static const NSInteger RefreshSectionIndex = 3;
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    CommunityCollectionViewCell *cell = (CommunityCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    //CommunityCollectionViewCell *cell = (CommunityCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     if(![self.communitiyIndexArray containsObject:indexPath])
     {
         [self.communitiyIndexArray addObject:indexPath];
     }
 
     self.selectedCommunityIndex = indexPath.row;
+
     [self performSegueWithIdentifier:@"ShowCommunitySegue" sender:self];
 }
 
@@ -586,17 +589,61 @@ static const NSInteger RefreshSectionIndex = 3;
     CGFloat topImageViewHeight = 64.0f;
     CGFloat buttonWidth = 106.0f;
     
-    CGRect popoverFrame = CGRectMake(5 + (buttonWidth * self.categoryButtonIndex),
-                                     topImageViewHeight + buttonHeight,
-                                     self.view.bounds.size.width - 10,
-                                     44 * 7);// Only display 7 lines most
+    CGFloat itemWidth = self.view.bounds.size.width - 10;
+    CGFloat itemHeight;
+    
+    CGRect popoverFrame;
+    
     // Hide already showing popover
     if(self.categoryPopover)
     {
         [self.categoryPopover dismissMenuPopover];
     }
     
-    self.categoryPopover = [[MLKMenuPopover alloc] initWithFrame:popoverFrame menuItems:self.categoriesDataList];
+    switch (self.categoryButtonIndex)
+    {
+        case 0:  // 区域选择
+        {
+            NSArray *array = @[@"福田", @"罗湖", @"南山", @"龙岗"];
+            popoverFrame  = CGRectMake(5 + (buttonWidth * self.categoryButtonIndex),
+                                         topImageViewHeight + buttonHeight,
+                                         itemWidth,
+                                         44 * [array count]);// Only display 7 lines most
+            self.categoryPopover = [[MLKMenuPopover alloc] initWithFrame:popoverFrame menuItems:array];
+            break;
+        }
+        case 1:  // 分类选择
+        {
+            NSMutableArray *array = [[NSMutableArray alloc] init];
+            for(int i = 0; i < [self.dataModel.categories count]; i++)
+            {
+                [array addObject:[[self.dataModel.categories objectAtIndex:i] objectForKey:CategoryNameKey]];
+            }
+            if([self.dataModel.categories count] >= 7)
+                itemHeight = 44 * 7;
+            else
+                itemHeight = 44 * [array count];
+            popoverFrame = CGRectMake(5 + (buttonWidth * self.categoryButtonIndex), topImageViewHeight + buttonHeight,
+                                      itemWidth, itemHeight);
+            self.categoryPopover = [[MLKMenuPopover alloc] initWithFrame:popoverFrame menuItems:array];
+            break;
+        }
+            
+        case 2:  // 排序方式选择
+        {
+            NSArray *array = @[@"发布时间"];
+            popoverFrame = CGRectMake(5 + (buttonWidth * self.categoryButtonIndex), topImageViewHeight + buttonHeight,
+                                      itemWidth, 44 * [array count]);
+            self.categoryPopover = [[MLKMenuPopover alloc] initWithFrame:popoverFrame menuItems:array];
+            break;
+        }
+            
+        default:
+            break;
+    }
+    
+    //self.categoryPopover = [[MLKMenuPopover alloc] initWithFrame:popoverFrame menuItems:self.categoriesDataList];
+    //self.categoryPopover = [[MLKMenuPopover alloc] initWithFrame:popoverFrame menuItems:@[@"1", @"2", @"3"]];
     self.categoryPopover.menuPopoverDelegate = self;
     [self.categoryPopover showInView:self.view];
 }
@@ -641,8 +688,18 @@ static const NSInteger RefreshSectionIndex = 3;
     }
 }
 
+- (void)setButtonTitleColor:(UIButton *)button
+{
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
+}
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
+    UIColor *buttonColor = [UIColor colorWithRed:255/255.0f
+                                           green:255/255.0f
+                                            blue:255/255.0f
+                                           alpha:1.0f];
     if(section == ShopsTableSectionIndex)
     {
         //CGFloat buttonWidth = 106.0f;
@@ -657,22 +714,38 @@ static const NSInteger RefreshSectionIndex = 3;
                                                                  imageView.frame.origin.y,
                                                                   buttonWidth, 36)];
         button1.tag = 101;
-        button1.backgroundColor = [UIColor lightGrayColor];
+        button1.backgroundColor = buttonColor;
+        [self setButtonTitleColor:button1];
         [button1 addTarget:self action:@selector(categoryButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [button1 setTitle:@"区域" forState:UIControlStateNormal];
+        [button1 setTitle:@"区域" forState:UIControlStateSelected];
+        [button1.titleLabel setFont:[UIFont systemFontOfSize:15]];
+        button1.layer.borderWidth = 0.5f;
+        button1.layer.borderColor = [UIColor colorWithRed:227/255.0f green:227/255.0f blue:227/255.0f alpha:1.0f].CGColor;
     
         UIButton *button2 = [[UIButton alloc] initWithFrame:CGRectMake(imageView.frame.origin.x + buttonWidth + 1,
                                                                   imageView.frame.origin.y,
                                                                    buttonWidth, 36)];
         button2.tag = 102;
-        button2.backgroundColor = [UIColor lightGrayColor];
+        button2.backgroundColor = buttonColor;
+        [self setButtonTitleColor:button2];
         [button2 addTarget:self action:@selector(categoryButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [button2 setTitle:@"分类" forState:UIControlStateNormal];
+        [button2 setTitle:@"分类" forState:UIControlStateSelected];
+        [button2.titleLabel setFont:[UIFont systemFontOfSize:15]];
+        button2.layer.borderWidth = 0.5f;
+        button2.layer.borderColor = [UIColor colorWithRed:227/255.0f green:227/255.0f blue:227/255.0f alpha:1.0f].CGColor;
         
         UIButton *button3 = [[UIButton alloc] initWithFrame:CGRectMake(imageView.frame.origin.x + (buttonWidth + 1) * 2,
                                                                   imageView.frame.origin.y,
                                                                    buttonWidth + 1, 36)];
         button3.tag = 103;
-        button3.backgroundColor = [UIColor lightGrayColor];
+        button3.backgroundColor = buttonColor;
+        [self setButtonTitleColor:button3];
         [button3 addTarget:self action:@selector(categoryButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [button3 setTitle:@"排序" forState:UIControlStateNormal];
+        [button3 setTitle:@"排序" forState:UIControlStateSelected];
+        [button3.titleLabel setFont:[UIFont systemFontOfSize:15]];
     
         [imageView addSubview:button1];
         [imageView addSubview:button2];
@@ -697,19 +770,15 @@ static const NSInteger RefreshSectionIndex = 3;
     if([segue.identifier isEqualToString:@"ShowCommunitySegue"])
     {
         CommunityViewController *communityVC = (CommunityViewController *)segue.destinationViewController;
-        //communityVC.communityTitleString = [self.selectedCommunityName copy];
         communityVC.communityIndex = self.selectedCommunityIndex;
         communityVC.hidesBottomBarWhenPushed = YES;
-        communityVC.categoriesListArray = self.categoriesDataList;
-        //[self showNavigationItem];
+        communityVC.categoriesListArray = self.dataModel.categories;
     }
     if([segue.identifier isEqualToString:@"ShowShopSegueFromTabHome"])
     {
         ShopViewController *shopVC = (ShopViewController *)segue.destinationViewController;
         shopVC.hidesBottomBarWhenPushed = YES;
         shopVC.selectedShopIndex = self.selectedShopIndex;
-        
-        //[self showNavigationItem];
     }
 }
 
