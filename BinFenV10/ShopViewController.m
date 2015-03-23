@@ -29,7 +29,7 @@ static NSString *ProductsCellIdentifer = @"ProductsCell";
 
 @property (strong, nonatomic) DataModel *dataModel;
 
-@property (strong, nonatomic) NSMutableArray *products;
+@property (strong, nonatomic) NSArray *products;
 
 @property (copy, nonatomic) NSString *selectedProductID;
 
@@ -124,6 +124,7 @@ static NSString *ProductsCellIdentifer = @"ProductsCell";
     [self initTableView];
 }
 
+/*
 - (void)loadProductsByShopIndex:(NSInteger)shopIndex
 {
     NSString *shopID = [[self.dataModel.shops objectAtIndex:shopIndex] objectForKey:@"ID"];
@@ -138,6 +139,7 @@ static NSString *ProductsCellIdentifer = @"ProductsCell";
         }
     }
 }
+ */
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -146,7 +148,9 @@ static NSString *ProductsCellIdentifer = @"ProductsCell";
     NSString *shopName = [[self.dataModel.shops objectAtIndex:self.selectedShopIndex] objectForKey:@"name"];
     self.navigationItem.title = shopName;
     
-    [self loadProductsByShopIndex:self.selectedShopIndex];
+    //[self loadProductsByShopIndex:self.selectedShopIndex];
+    [self.dataModel loadDataModelLocally];
+    self.products = [self.dataModel getProductsByShopIndex:self.selectedShopIndex];
 }
 
 - (void)didReceiveMemoryWarning
@@ -240,7 +244,9 @@ static NSString *ProductsCellIdentifer = @"ProductsCell";
             cell = [[ProductsCell alloc] init];
         }
         cell.segueDelegate = self;
-        [cell initProductItemsByShopIndex:self.selectedShopIndex];
+        //[cell initProductItemsByShopIndex:self.selectedShopIndex];
+        cell.products = self.products;
+        [cell showingProductsInView:self.products];
         return cell;
     }
 }
@@ -275,6 +281,15 @@ static NSString *ProductsCellIdentifer = @"ProductsCell";
 - (void)categoryClickedInCell:(CategoriesInShopCell *)cell
 {
     NSLog(@"SelectedCategoryID: %@", cell.selectedCategoryID);
+    //NSArray *products = [self.dataModel getProductsByCategoryID:cell.selectedCategoryID];
+    self.products = [self.dataModel getProductsByCategoryID:cell.selectedCategoryID];
+    
+    [self.tableView reloadData];
+    
+    //NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+    //ProductsCell *productsCell = (ProductsCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+    //[productsCell showingProductsInView:self.products];
+    //[self.tableView reloadData];
 }
 
 

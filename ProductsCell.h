@@ -19,7 +19,8 @@
 
 @interface ProductsCell : UITableViewCell
 
-- (void)initProductItemsByShopIndex:(NSInteger)shopIndex;
+//- (void)initProductItemsByShopIndex:(NSInteger)shopIndex;
+- (void)showingProductsInView:(NSArray *)products;
 
 @property (strong, nonatomic) DataModel *dataModel;
 
@@ -28,7 +29,7 @@
 @property (copy, nonatomic) NSString *productID;
 @property (assign, nonatomic) NSInteger selectedShopIndex;
 
-@property (strong, nonatomic) NSMutableArray *products;
+@property (strong, nonatomic) NSArray *products;
 
 @property (weak, nonatomic) id<ProductsCellSegueDelegate> segueDelegate;
 

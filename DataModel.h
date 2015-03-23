@@ -82,4 +82,7 @@ static NSString *CommentUserKey = @"UserName";
 
 - (void)loadCommentsByProductID:(NSString *)productID;
 
+- (NSArray *)getProductsByCategoryID:(NSString *)categoryID;
+- (NSArray *)getProductsByShopIndex:(NSInteger)shopIndex;
+
 @end

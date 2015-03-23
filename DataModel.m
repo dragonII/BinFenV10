@@ -419,4 +419,34 @@ static NSString *ProductArrayKey = @"Products";
                              }];
 }
 
+- (NSArray *)getProductsByCategoryID:(NSString *)categoryID
+{
+    NSMutableArray *products = [[NSMutableArray alloc] init];
+    for(int i = 0; i < [self.products count]; i++)
+    {
+        if([categoryID isEqualToString:[[self.products objectAtIndex:i] objectForKey:ProductCategoryKey]])
+        {
+            [products addObject:[self.products objectAtIndex:i]];
+        }
+    }
+    
+    return products;
+}
+
+- (NSArray *)getProductsByShopIndex:(NSInteger)shopIndex
+{
+    NSString *shopID = [[self.shops objectAtIndex:shopIndex] objectForKey:StoreIDKey];
+    NSMutableArray *products = [[NSMutableArray alloc] init];
+    
+    for(int i = 0; i < [self.products count]; i++)
+    {
+        NSString *shopIDInProducts = [[self.products objectAtIndex:i] objectForKey:ProductShopKey];
+        if([shopIDInProducts isEqualToString:shopID])
+        {
+            [products addObject:[self.products objectAtIndex:i]];
+        }
+    }
+    return products;
+}
+
 @end

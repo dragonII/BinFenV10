@@ -115,7 +115,7 @@ typedef struct
     }
 }
 
-
+/*
 - (void)initProductItemsByShopIndex:(NSInteger)shopIndex
 {
     if(shopIndex < 0)
@@ -125,15 +125,16 @@ typedef struct
         [self loadProductsByShopIndex:shopIndex];
     }
     
-    [self showingProductsInView];
+    [self showingProductsInView:self.products];
 }
+
 
 - (void)loadAllProducts
 {
     self.dataModel = [[DataModel alloc] init];
     [self.dataModel loadDataModelLocally];
     
-    self.products = [NSMutableArray arrayWithArray:self.dataModel.products];
+    self.products = [NSArray arrayWithArray:self.dataModel.products];
 }
 
 - (void)loadProductsByShopIndex:(NSInteger)shopIndex
@@ -156,9 +157,16 @@ typedef struct
         }
     }
 }
+ */
 
-- (void)showingProductsInView
+- (void)showingProductsInView:(NSArray *)products
 {
+    /*
+    for(UIView *subView in self.contentView.subviews)
+    {
+        [subView removeFromSuperview];
+    }
+     */
     //self.dataModel = [[DataModel alloc] init];
     //[self.dataModel loadDataModelLocally];
     
@@ -181,10 +189,12 @@ typedef struct
     int row = 0;
     int column = 0;
     
-    if([self.products count] >= batchIndex * TotalItemsPerBatch)
+    //if([self.products count] >= batchIndex * TotalItemsPerBatch)
+    if([products count] >= batchIndex * TotalItemsPerBatch)
         maxIndex = batchIndex * TotalItemsPerBatch;
     else
-        maxIndex = [self.products count];
+        //maxIndex = [self.products count];
+        maxIndex = [products count];
     
     for(int i = 0; i < maxIndex; i++)
     {
@@ -209,14 +219,16 @@ typedef struct
         imageView.frame = CGRectMake(itemView.bounds.origin.x, itemView.bounds.origin.y, imageViewWidth, imageViewHeight);
         label.frame = CGRectMake(itemView.bounds.origin.x, itemView.bounds.origin.y + imageViewHeight, itemView.bounds.size.width, itemHeight - imageViewHeight);
         
-        label.text = [[self.products objectAtIndex:i] objectForKey:@"name"];
+        //label.text = [[self.products objectAtIndex:i] objectForKey:@"name"];
+        label.text = [[products objectAtIndex:i] objectForKey:ProductNameKey];
         label.textAlignment = NSTextAlignmentCenter;
         
         //http://stackoverflow.com/questions/9907100/issues-with-setting-some-different-font-for-uilabel
         label.font = [UIFont fontWithName:@"STHeitiSC-Light" size:10];
         
         //NSString *imageURLString = [[self.dataModel.shops objectAtIndex:i] objectForKey:@"image"];
-        NSString *imageURLString = [[self.products objectAtIndex:i] objectForKey:@"image"];
+        //NSString *imageURLString = [[self.products objectAtIndex:i] objectForKey:@"image"];
+        NSString *imageURLString = [[products objectAtIndex:i] objectForKey:ProductImageKey];
         [imageView setImageWithURL:[NSURL URLWithString:imageURLString] placeholderImage:[UIImage imageNamed:@"Default_142x142"]];
         
         
