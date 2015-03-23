@@ -23,7 +23,7 @@ static NSString *CategoryCellIdentifier = @"CategoryCell";
 //static NSString *ShopsCellIdentifier = @"ShopsCell";
 static NSString *ProductsCellIdentifer = @"ProductsCell";
 
-@interface ShopViewController () <UITableViewDataSource, UITableViewDelegate, ProductsCellSegueDelegate>
+@interface ShopViewController () <UITableViewDataSource, UITableViewDelegate, ProductsCellSegueDelegate, CategoryItemClickedDelegate>
 
 @property (strong, nonatomic) UITableView *tableView;
 
@@ -229,6 +229,8 @@ static NSString *ProductsCellIdentifer = @"ProductsCell";
         {
             cell = [[CategoriesInShopCell alloc] init];
         }
+        cell.selectedShopIndex = self.selectedShopIndex;
+        cell.categoryClickedDelegate = self;
         return cell;
     } else {
         ProductsCell *cell = (ProductsCell *)[tableView dequeueReusableCellWithIdentifier:ProductsCellIdentifer];
@@ -268,6 +270,11 @@ static NSString *ProductsCellIdentifer = @"ProductsCell";
         productVC.productID = [self.selectedProductID copy];
     }
         
+}
+
+- (void)categoryClickedInCell:(CategoriesInShopCell *)cell
+{
+    NSLog(@"SelectedCategoryID: %@", cell.selectedCategoryID);
 }
 
 

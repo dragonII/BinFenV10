@@ -10,9 +10,21 @@
 
 @class CategoriesInShopCell;
 
+@protocol CategoryItemClickedDelegate <NSObject>
+
+- (void)categoryClickedInCell:(CategoriesInShopCell *)cell;
+
+@end
+
 @interface CategoriesInShopCell : UITableViewCell
+
+@property (weak, nonatomic) id<CategoryItemClickedDelegate> categoryClickedDelegate;
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
+
+@property (assign, nonatomic) NSInteger selectedShopIndex;
+
+@property (copy, nonatomic) NSString *selectedCategoryID;
 
 @end
