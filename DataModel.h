@@ -32,7 +32,7 @@ static NSString *ProductImageKey = @"image";
 static NSString *ProductBrandKey = @"brand";
 static NSString *ProductCategoryKey = @"category";
 static NSString *ProductRefencePriceKey = @"RefPrice";
-static NSString *ProductSalePrice = @"price";
+static NSString *ProductSalePriceKey = @"price";
 static NSString *ProductShopKey = @"shop";
 
 static NSString *CategoryIDKey = @"ID";

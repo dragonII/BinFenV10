@@ -10,4 +10,6 @@
 
 @interface PriceTableCell : UITableViewCell
 
+@property (copy, nonatomic) NSString *priceString;
+
 @end

@@ -42,11 +42,22 @@
     tapRecognizer.numberOfTapsRequired = 1;
     tapRecognizer.numberOfTouchesRequired = 1;
     [self.addToFavoriteImage addGestureRecognizer:tapRecognizer];
+    self.priceString = @"0.00";
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
+}
+
+- (void)setPriceString:(NSString *)priceString
+{
+    if([priceString length] == 0)
+    {
+        _priceLabel.text = @"暂无售价";
+    } else {
+        _priceLabel.text = [priceString copy];
+    }
 }
 
 @end

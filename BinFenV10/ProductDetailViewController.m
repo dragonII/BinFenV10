@@ -318,7 +318,7 @@ static const NSInteger SeperatorCellIndex = 3;
                     cell = [[ProductImageCell alloc] init];
                 }
                 
-                cell.imageNamesArray = @[[self.product objectForKey:@"image"]];
+                cell.imageNamesArray = @[[self.product objectForKey:ProductImageKey]];
                 return cell;
             }
             case ProductPriceCellIndex:
@@ -329,6 +329,7 @@ static const NSInteger SeperatorCellIndex = 3;
                     cell = [[PriceTableCell alloc] init];
                 }
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.priceString = [self.product objectForKey:ProductSalePriceKey];
                 return cell;
             }
             case ProductDescriptionCellIndex:

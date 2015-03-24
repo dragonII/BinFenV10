@@ -190,7 +190,7 @@ static NSString *ProductArrayKey = @"Products";
         [productDict setObject:[innerArray objectAtIndex:3] forKey:ProductBrandKey];
         [productDict setObject:[innerArray objectAtIndex:4] forKey:ProductCategoryKey];
         [productDict setObject:[innerArray objectAtIndex:5] forKey:ProductRefencePriceKey];
-        [productDict setObject:[innerArray objectAtIndex:6] forKey:ProductSalePrice];
+        [productDict setObject:[innerArray objectAtIndex:6] forKey:ProductSalePriceKey];
         [productDict setObject:[innerArray objectAtIndex:7] forKey:ProductShopKey];
         
         [self.products addObject:productDict];
