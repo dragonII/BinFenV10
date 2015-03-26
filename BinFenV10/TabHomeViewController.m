@@ -284,7 +284,14 @@ static const NSInteger RefreshSectionIndex = 3;
     
     //[self hideNavigationItem];
     
+    //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
     [self initViews];
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
 }
 
 /*
