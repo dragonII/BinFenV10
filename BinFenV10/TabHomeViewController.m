@@ -32,6 +32,8 @@
 #import "DataModel.h"
 #import "DeviceHardware.h"
 
+#import "NetworkLoadingViewController.h"
+
 
 static NSString *CommunityTableRowCellIdentifier = @"CommunityTableRowCellIdentifier";
 static NSString *CategoryTableCellIdentifier = @"CategoryTableCellIdentifier";
@@ -72,6 +74,8 @@ static const NSInteger RefreshSectionIndex = 3;
 @property (assign, nonatomic) NSInteger selectedShopIndex;
 
 @property (assign, nonatomic) NSInteger networkLoadingTimes;
+
+@property (strong, nonatomic) NetworkLoadingViewController *networkLoadingViewController;
 
 @end
 
@@ -277,6 +281,14 @@ static const NSInteger RefreshSectionIndex = 3;
 }
  */
 
+- (void)showLoadingView
+{
+    self.networkLoadingViewController = [[NetworkLoadingViewController alloc] init];
+    
+    [self.view addSubview:self.networkLoadingViewController.view];
+    [self addChildViewController:self.networkLoadingViewController];
+    [self.networkLoadingViewController didMoveToParentViewController:self];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -290,6 +302,9 @@ static const NSInteger RefreshSectionIndex = 3;
     //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
     [self initViews];
+    
+    // 由showLoadingView来控制NetworkingLoadingView的显示与否
+    //[self showLoadingView];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle

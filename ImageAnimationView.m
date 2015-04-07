@@ -27,7 +27,7 @@
         [self addSubview:self.imageView];
         
         self.animation = [CATransition animation];
-        self.animation.duration = 0.5f;
+        self.animation.duration = 0.8f;
         self.animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
         self.animation.type = kCATransitionPush;
         self.animationSubType = arc4random() % 4;
@@ -41,7 +41,7 @@
 {
     [self.animationTimer invalidate];
     
-    self.animationTimer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(startImageAnimation) userInfo:nil repeats:YES];
+    self.animationTimer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(startImageAnimation) userInfo:nil repeats:YES];
 }
 
 - (void)setImageNamesArray:(NSArray *)imageNamesArray
