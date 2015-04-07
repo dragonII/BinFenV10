@@ -178,12 +178,15 @@ static const NSInteger RefreshSectionIndex = 3;
     
     self.networkLoadingTimes = 0;
     
+    /*
     [self.dataModel loadDataModelRemotely];
     
     self.timer = [NSTimer scheduledTimerWithTimeInterval:5
                                                   target:self
                                                 selector:@selector(loadingData)
                                                 userInfo:nil repeats:YES];
+     */
+    [self.dataModel loadDataModelLocally];
 }
 
 - (void)initCommunityTableRow
