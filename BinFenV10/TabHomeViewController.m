@@ -294,7 +294,9 @@ static const NSInteger RefreshSectionIndex = 3;
 
 - (void)showLoadingView
 {
-    self.networkLoadingViewController = [[NetworkLoadingViewController alloc] init];
+    if(self.networkLoadingViewController == nil)
+        self.networkLoadingViewController = [[NetworkLoadingViewController alloc] init];
+
     self.networkLoadingViewController.delegate = self;
     
     [self.view addSubview:self.networkLoadingViewController.view];
@@ -324,6 +326,7 @@ static const NSInteger RefreshSectionIndex = 3;
     
     [self initViews];
     
+    self.networkLoadingViewController = nil;
     [self loadAllData];
 }
 
