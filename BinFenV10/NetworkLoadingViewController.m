@@ -47,7 +47,9 @@
 - (void)refreshClicked
 {
     NSLog(@"Refresh Clicked");
-    [self showLoadingView];
+    
+    if ([self.delegate respondsToSelector:@selector(retryRequest)])
+        [self.delegate retryRequest];
 }
 
 - (void)setupErrorView
@@ -102,7 +104,7 @@
     [self.activityIndicatorView startAnimating];
     
     [self.timer invalidate];
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(showErrorView) userInfo:nil repeats:NO];
+    //self.timer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(showErrorView) userInfo:nil repeats:NO];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -119,7 +121,7 @@
     [self.activityIndicatorView startAnimating];
     
     [self.timer invalidate];
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(showErrorView) userInfo:nil repeats:NO];
+    //self.timer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(showErrorView) userInfo:nil repeats:NO];
 }
 
 - (void)showErrorView

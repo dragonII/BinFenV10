@@ -52,6 +52,8 @@ static NSString *CommentUserKey = @"UserName";
 @class ProductData;
 @class ShopData;
 
+typedef void (^NetworkDataModelCompletionCompletionBlock)(NSArray* data, NSString* errorString);
+
 @interface DataModel : NSObject
 
 @property (assign, nonatomic) BOOL loadShopsFinished;

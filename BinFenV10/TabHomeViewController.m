@@ -49,7 +49,7 @@ static const NSInteger RefreshSectionIndex = 3;
 
 
 
-@interface TabHomeViewController () <UITableViewDataSource, UITableViewDelegate, MLKMenuPopoverDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, OTCoverSegueDelegate, ShopsCellSegueDelegate>
+@interface TabHomeViewController () <UITableViewDataSource, UITableViewDelegate, MLKMenuPopoverDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, OTCoverSegueDelegate, ShopsCellSegueDelegate, NetworkLoadingViewDelegate>
 
 @property (strong, nonatomic) OTCover *otCoverView;
 
@@ -73,7 +73,7 @@ static const NSInteger RefreshSectionIndex = 3;
 @property (assign, nonatomic) NSInteger selectedCommunityIndex;
 @property (assign, nonatomic) NSInteger selectedShopIndex;
 
-@property (assign, nonatomic) NSInteger networkLoadingTimes;
+@property (assign, nonatomic) NSInteger networkLoadingCounts;
 
 @property (strong, nonatomic) NetworkLoadingViewController *networkLoadingViewController;
 
@@ -132,6 +132,8 @@ static const NSInteger RefreshSectionIndex = 3;
     {
         [self.timer invalidate];
         
+        [self hideLoadingView];
+        
         NSLog(@"Loading Cells");
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:CommunityTableSectionIndex];
         CommunityTableViewCell *cell = (CommunityTableViewCell *)[self.otCoverView.tableView cellForRowAtIndexPath:indexPath];
@@ -142,16 +144,24 @@ static const NSInteger RefreshSectionIndex = 3;
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     } else {
         NSLog(@"Reloading Data");
-        if(self.networkLoadingTimes >= 5)
+        if(self.networkLoadingCounts >= 4)
         {
-            NSLog(@"网络链接失败，请稍后加载");
+            NSLog(@"网络链接失败，请重新加载");
+            [self.networkLoadingViewController showErrorView];
             [self.timer invalidate];
             return;
         }
-        self.networkLoadingTimes++;
+        self.networkLoadingCounts++;
         [self.dataModel loadDataModelRemotely];
         return;
     }
+}
+
+#pragma - NetworkLoadingViewDelegate
+- (void)retryRequest
+{
+    NSLog(@"Retrying loading all data again");
+    [self loadAllData];
 }
 
 - (void)initShopsData
@@ -172,6 +182,9 @@ static const NSInteger RefreshSectionIndex = 3;
 
 - (void)loadAllData
 {
+    // 由showLoadingView来控制NetworkingLoadingView的显示与否
+    [self showLoadingView];
+    
     self.dataModel = [[DataModel alloc] init];
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
@@ -180,17 +193,16 @@ static const NSInteger RefreshSectionIndex = 3;
     [self initCategoriesData];
     [self initShopsData];
     
-    self.networkLoadingTimes = 0;
+    self.networkLoadingCounts = 0;
     
-    /*
+    
     [self.dataModel loadDataModelRemotely];
     
     self.timer = [NSTimer scheduledTimerWithTimeInterval:5
                                                   target:self
                                                 selector:@selector(loadingData)
                                                 userInfo:nil repeats:YES];
-     */
-    [self.dataModel loadDataModelLocally];
+    //[self.dataModel loadDataModelLocally];
 }
 
 - (void)initCommunityTableRow
@@ -264,7 +276,6 @@ static const NSInteger RefreshSectionIndex = 3;
 
 - (void)hideNavigationItem
 {
-    //self.navigationController.title = @"首页";
     self.navigationItem.title = @"首页";
     self.navigationController.navigationBarHidden = YES;
 }
@@ -284,16 +295,26 @@ static const NSInteger RefreshSectionIndex = 3;
 - (void)showLoadingView
 {
     self.networkLoadingViewController = [[NetworkLoadingViewController alloc] init];
+    self.networkLoadingViewController.delegate = self;
     
     [self.view addSubview:self.networkLoadingViewController.view];
     [self addChildViewController:self.networkLoadingViewController];
     [self.networkLoadingViewController didMoveToParentViewController:self];
 }
 
+- (void)hideLoadingView
+{
+    [self.networkLoadingViewController willMoveToParentViewController:nil];
+    [self.networkLoadingViewController.view removeFromSuperview];
+    [self.networkLoadingViewController removeFromParentViewController];
+    
+    self.networkLoadingViewController = nil;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self loadAllData];
+    //[self loadAllData];
     
     self.hideCommunityRowCell = NO;
     
@@ -303,8 +324,7 @@ static const NSInteger RefreshSectionIndex = 3;
     
     [self initViews];
     
-    // 由showLoadingView来控制NetworkingLoadingView的显示与否
-    //[self showLoadingView];
+    [self loadAllData];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle
