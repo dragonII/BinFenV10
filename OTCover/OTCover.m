@@ -165,6 +165,8 @@
     
     [self.tableView addSubview:searchViewInHeader];
     
+    [self setupRefreshControl];
+    
     [self addSubview:self.tableView];
     
     [self.tableView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
@@ -175,6 +177,28 @@
     [self initSearchView];
     
     return self;
+}
+
+- (void)setupRefreshControl
+{
+    UIView *refreshView = [[UIView alloc] initWithFrame:CGRectZero];
+    [self.tableView insertSubview:refreshView atIndex:0];
+    
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(pullToRefresh) forControlEvents:UIControlEventValueChanged];
+    self.refreshControl.tintColor = [UIColor colorWithRed:253/255.0f green:130/255.0f blue:69/255.0f alpha:1.0f];
+    
+    [refreshView addSubview:self.refreshControl];
+}
+
+- (void)pullToRefresh
+{
+    if([self.segueDelegate respondsToSelector:@selector(refreshData)])
+    {
+        [self.segueDelegate performSelector:@selector(refreshData) withObject:self];
+    }
+    
+    //[self.refreshControl endRefreshing];
 }
 
 

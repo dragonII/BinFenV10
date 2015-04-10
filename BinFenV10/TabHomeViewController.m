@@ -132,6 +132,7 @@ static const NSInteger RefreshSectionIndex = 3;
     {
         [self.timer invalidate];
         
+        [self.otCoverView.refreshControl endRefreshing];
         [self hideLoadingView];
         
         NSLog(@"Loading Cells");
@@ -149,6 +150,7 @@ static const NSInteger RefreshSectionIndex = 3;
             NSLog(@"网络链接失败，请重新加载");
             [self.networkLoadingViewController showErrorView];
             [self.timer invalidate];
+            [self.otCoverView.refreshControl endRefreshing];
             return;
         }
         self.networkLoadingCounts++;
@@ -161,7 +163,7 @@ static const NSInteger RefreshSectionIndex = 3;
 - (void)retryRequest
 {
     NSLog(@"Retrying loading all data again");
-    [self loadAllData];
+    [self loadAllDataWithLoadingView:YES];
 }
 
 - (void)initShopsData
@@ -180,10 +182,11 @@ static const NSInteger RefreshSectionIndex = 3;
      */
 }
 
-- (void)loadAllData
+- (void)loadAllDataWithLoadingView:(BOOL)boolValue
 {
     // 由showLoadingView来控制NetworkingLoadingView的显示与否
-    [self showLoadingView];
+    if(boolValue == YES)
+        [self showLoadingView];
     
     self.dataModel = [[DataModel alloc] init];
     
@@ -299,6 +302,8 @@ static const NSInteger RefreshSectionIndex = 3;
 
     self.networkLoadingViewController.delegate = self;
     
+    [self.networkLoadingViewController showLoadingView];
+    
     [self.view addSubview:self.networkLoadingViewController.view];
     [self addChildViewController:self.networkLoadingViewController];
     [self.networkLoadingViewController didMoveToParentViewController:self];
@@ -327,7 +332,7 @@ static const NSInteger RefreshSectionIndex = 3;
     [self initViews];
     
     self.networkLoadingViewController = nil;
-    [self loadAllData];
+    [self loadAllDataWithLoadingView:YES];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle
@@ -835,6 +840,12 @@ static const NSInteger RefreshSectionIndex = 3;
 - (void)searchClickedInView:(OTCover *)view
 {
     [self performSegueWithIdentifier:@"SelectCommunitySegue" sender:self];
+}
+
+- (void)refreshData
+{
+    NSLog(@"Refreshing by pulling");
+    [self loadAllDataWithLoadingView:NO];
 }
 
 #pragma unwind segue

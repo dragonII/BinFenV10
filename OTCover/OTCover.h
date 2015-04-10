@@ -13,6 +13,7 @@
 @protocol OTCoverSegueDelegate <NSObject>
 
 - (void)searchClickedInView:(OTCover *)view;
+- (void)refreshData;
 
 @end
 
@@ -21,6 +22,7 @@
 @property (nonatomic, strong) UIView* scrollContentView;
 @property (nonatomic, strong) UIImageView* headerImageView;
 @property (nonatomic, strong) UITableView* tableView;
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
 
 @property (weak, nonatomic) id<OTCoverSegueDelegate> segueDelegate;
 
