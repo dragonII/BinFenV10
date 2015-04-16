@@ -622,7 +622,7 @@ static const NSInteger RefreshSectionIndex = 3;
 - (void)menuPopover:(MLKMenuPopover *)menuPopover didSelectMenuItemAtIndex:(NSInteger)selectedIndex
 {
     [self.categoryPopover dismissMenuPopover];
-    NSLog(@"Category selected, %d", selectedIndex);
+    NSLog(@"Category selected, %ld", (long)selectedIndex);
 }
 
 - (void)scrollToTopOfShopsSection
